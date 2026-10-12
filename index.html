@@ -2,1407 +2,1297 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>악프다 2: 퇴근까지 180초</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RUNWAY | Elias-Clarke Publications</title>
+<meta name="description" content="영화 《악마는 프라다를 입는다》에서 영감을 받은 전시용 가상 홈페이지 · 악프다 2: 퇴근까지 180초">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
-   🎨 색상 설정 — 여기 색 코드를 바꾸면 게임 전체 색이 바뀝니다
+   🎨 색상 설정 — 여기 색 코드를 바꾸면 홈페이지 전체 색이 바뀝니다
    ========================================================= */
 :root{
-  --ivory:#fbf6ee; --paper:#ffffff; --ink:#1d1a1c; --muted:#7b7076; --line:#e8ddd0;
+  --ivory:#fbf6ee; --paper:#fff; --ink:#1d1a1c; --muted:#7b7076; --line:#e8ddd0;
   --red:#c8102e; --red-d:#9a0c23; --red-soft:#fbe3e7;
-  --blue:#3f7fd9; --blue-soft:#e4eefc;          /* 그림 속 파란색 + 세룰리안 블루 */
-  --pink:#f7d3da; --gold:#c99a3b; --green:#2e9a5a;
+  --blue:#3f7fd9; --cerulean:#2a6fc9; --blue-soft:#e4eefc;
+  --pink:#f7d3da; --gold:#c99a3b; --green:#2e9a5a; --newsprint:#f4efe2;
   --serif:'Playfair Display','Noto Serif KR',Georgia,serif;
   --kserif:'Noto Serif KR','Batang',serif;
   --sans:'Noto Sans KR','Malgun Gothic',system-ui,sans-serif;
-  --pixel:'Press Start 2P',monospace;
+  --gothic:'UnifrakturMaguntia','Playfair Display',serif;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0}
-body{background:var(--ivory);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;overflow-x:hidden;min-height:100vh}
-button{font-family:inherit;cursor:pointer;border:none;color:inherit;background:none;transition:transform .08s,filter .15s,background .15s,box-shadow .15s}
-button:active{transform:scale(.95)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+button:active{transform:scale(.97)}
+img,svg{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
 .hidden{display:none!important}
-.spr{display:block;width:100%;height:auto;image-rendering:pixelated}
-
-/* ---------- 공용 버튼 ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:12px 26px;font-weight:700;font-size:17px;border-radius:999px}
-.btn-red{background:var(--red);color:#fff;box-shadow:0 5px 0 var(--red-d)}
-.btn-red:hover{filter:brightness(1.08)}
-.btn-red:active{box-shadow:0 1px 0 var(--red-d);transform:translateY(4px)}
-.btn-line{background:#fff;border:2px solid var(--ink);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 24px;font-weight:700;font-size:15.5px;letter-spacing:.02em;text-decoration:none;border-radius:999px;transition:.15s}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-d)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:#000}
+.btn-line{border:1.5px solid var(--ink);color:var(--ink);background:transparent}
 .btn-line:hover{background:var(--ink);color:#fff}
+.btn-sm{min-height:38px;padding:6px 16px;font-size:14px}
+.kicker{font:900 12px var(--sans);letter-spacing:.32em;color:var(--red);text-transform:uppercase}
+.h-serif{font-family:var(--serif)}
+.sec{padding:72px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:28px;border-bottom:1px solid var(--ink);padding-bottom:12px;flex-wrap:wrap}
+.sec-head h2{margin:4px 0 0;font:900 clamp(28px,4.4vw,44px)/1.1 var(--serif);letter-spacing:-.01em}
+.sec-head h2 em{font-style:italic;color:var(--red)}
+.more{font-weight:700;font-size:14px;text-decoration:none;border-bottom:1.5px solid}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
 
-/* ---------- 화면 전환 ---------- */
-.screen{display:none;min-height:100vh}
-.screen.active{display:block;animation:fadeIn .4s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* ---------- 상단 띠 / 헤더 ---------- */
+.topbar{background:var(--ink);color:#d9d2d5;font-size:12.5px}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:36px}
+.topbar .clocks{display:flex;gap:16px;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.topbar .clocks b{color:#fff;font-weight:700}
+.topbar .tb-r{display:flex;gap:4px;align-items:center}
+.topbar .tb-r button,.topbar .tb-r a{color:#d9d2d5;font-size:12.5px;padding:6px 8px;text-decoration:none}
+.topbar .tb-r button:hover,.topbar .tb-r a:hover{color:#fff}
+.ticker{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;font-size:13.5px;font-weight:700}
+.ticker .tk{display:inline-block;padding:7px 0;animation:tick 40s linear infinite}
+.ticker .tk span{margin:0 28px}
+.ticker .tk span::before{content:"◆";margin-right:10px;font-size:9px;vertical-align:2px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+header.site{position:sticky;top:0;z-index:40;background:rgba(251,246,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:86px;gap:12px}
+.logo{font:900 clamp(38px,6vw,58px)/1 var(--serif);color:var(--ink);text-decoration:none;letter-spacing:.06em;text-align:center;user-select:none;cursor:pointer}
+.logo small{display:block;font:700 9.5px var(--sans);letter-spacing:.5em;color:var(--muted);margin-top:4px}
+.hd-l,.hd-r{display:flex;align-items:center;gap:6px}
+.hd-r{justify-content:flex-end}
+.ico{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:18px}
+.ico:hover{background:#efe6da}
+.who{display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border:1.5px solid var(--ink);border-radius:999px;font-size:13.5px;font-weight:700;position:relative}
+.who .av{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:13px}
+.menu-dd{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1.5px solid var(--ink);border-radius:14px;min-width:200px;padding:6px;box-shadow:6px 6px 0 var(--ink);text-align:left;z-index:5}
+.menu-dd a,.menu-dd button{display:block;width:100%;text-align:left;padding:10px 12px;border-radius:8px;text-decoration:none;font-weight:500;font-size:14px}
+.menu-dd a:hover,.menu-dd button:hover{background:var(--ivory)}
+nav.gnb{border-top:1px solid var(--line)}
+nav.gnb ul{list-style:none;margin:0;padding:0;display:flex;justify-content:center;gap:clamp(10px,3vw,40px)}
+nav.gnb a{display:block;padding:12px 4px;text-decoration:none;font:700 13px var(--sans);letter-spacing:.2em;position:relative}
+nav.gnb a::after{content:"";position:absolute;left:0;right:100%;bottom:6px;height:2px;background:var(--red);transition:right .25s}
+nav.gnb a:hover::after,nav.gnb a.on::after{right:0}
+nav.gnb a.on{color:var(--red)}
+nav.gnb .hot{color:var(--red)}
+.burger{display:none}
 
-/* ---------- 시작 화면 (매거진 표지) ---------- */
-#scr-start{padding:24px 16px 40px}
-.cover{max-width:860px;margin:0 auto;background:#fff;border:2px solid var(--ink);box-shadow:10px 10px 0 var(--red);padding:22px clamp(16px,4vw,40px) 30px;position:relative;overflow:hidden}
-.mast{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px double var(--ink);padding-bottom:6px}
-.mast h1{margin:0;font:900 clamp(46px,12vw,104px)/0.85 var(--serif);color:var(--red);letter-spacing:.02em}
-.mast .issue{text-align:right;font-size:12px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
-.cover-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:20px;align-items:center}
-.kicker{font:900 12px var(--sans);letter-spacing:.3em;color:var(--red)}
-.title{font:900 clamp(34px,6.8vw,58px)/1.08 var(--kserif);margin:8px 0 6px;letter-spacing:-.03em}
-.title em{font-style:normal;color:var(--red)}
-.subtitle{font:italic 700 clamp(17px,3.4vw,22px) var(--serif);color:var(--blue);margin:0 0 14px}
-.story{background:var(--ivory);border-left:5px solid var(--red);padding:14px 16px;font-family:var(--kserif);font-size:15.5px;line-height:1.85}
-.story b{color:var(--red)}
-.hero{position:relative;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0 38%,var(--pink) 39% 100%);display:flex;align-items:flex-end;justify-content:center;gap:4%;padding-bottom:16%}
-.hero .who{width:30%}
-.hero .who.big{width:36%}
-.hero .clock{position:absolute;top:10%;left:50%;transform:translateX(-50%);font:16px var(--pixel);color:var(--red);background:#fff;border:2px solid var(--ink);padding:6px 10px;animation:blink 1.2s infinite}
-@keyframes blink{50%{opacity:.45}}
-.pick{margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
-.pick h3{margin:0 0 10px;font:900 15px var(--sans);letter-spacing:.06em}
-.pick-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.pick-card{display:flex;align-items:center;gap:12px;padding:10px 14px;border:2px solid var(--line);border-radius:14px;background:#fff;text-align:left;min-height:84px}
-.pick-card .pv{width:52px;flex:none}
-.pick-card b{display:block;font-size:17px}
-.pick-card small{color:var(--muted)}
-.pick-card.on{border-color:var(--red);background:var(--red-soft);box-shadow:0 0 0 3px rgba(200,16,46,.15)}
-.start-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
-.start-btns .btn{min-width:160px}
+/* ---------- 홈 ---------- */
+.hero{padding:48px 0 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font:900 clamp(38px,6.2vw,74px)/1.04 var(--kserif);letter-spacing:-.04em;margin:14px 0 16px}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero h1 .blue{color:var(--cerulean)}
+.hero p.lead{font-size:clamp(16px,1.9vw,19px);color:#4a4246;max-width:540px;margin:0 0 26px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:10px}
+.hero .issue-meta{display:flex;gap:22px;margin-top:30px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.hero .issue-meta b{display:block;font:900 26px var(--serif);color:var(--ink)}
+.cover{position:relative;aspect-ratio:3/4;max-width:430px;margin:0 auto;width:100%;background:linear-gradient(160deg,#3f7fd9,#2a6fc9 55%,#1f57a4);box-shadow:24px 24px 0 var(--red),0 30px 60px rgba(0,0,0,.18);overflow:hidden;transform:rotate(1.5deg);transition:transform .4s;container-type:inline-size}
+.cover:hover{transform:rotate(0) scale(1.01)}
+.cover .mast{position:absolute;top:3%;left:0;right:0;text-align:center;font:900 20cqw/1 var(--serif);color:#fff;letter-spacing:.02em}
+.cover .who-c{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60%}
+.cover .cl{position:absolute;color:#fff;font:900 4.2cqw/1.25 var(--sans);text-shadow:0 2px 0 rgba(0,0,0,.25);z-index:2}
+.cover .cl small{display:block;font-weight:500;font-size:.78em;opacity:.95}
+.cover .cl.c1{left:5%;top:29%;max-width:28%}
+.cover .cl.c2{right:5%;top:29%;max-width:28%;text-align:right}
+.cover .cl.c3{left:5%;bottom:5%;font:italic 900 7cqw var(--serif);color:#ffe7a0}
+.cover .price{position:absolute;right:4%;bottom:3%;color:#fff;font-size:10px;letter-spacing:.2em}
+.cover .bar{position:absolute;right:5%;bottom:10%;width:58px;height:34px;background:repeating-linear-gradient(90deg,#fff 0 2px,transparent 2px 4px,#fff 4px 5px,transparent 5px 8px);border:3px solid #fff}
+.press-strip{background:#fff;border-bottom:1px solid var(--line);padding:26px 0}
+.press-strip .wrap{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.nym{font:400 clamp(24px,3.2vw,34px)/1 var(--gothic);color:var(--ink);white-space:nowrap}
+.nym small{display:block;font:700 10px var(--sans);letter-spacing:.3em;color:var(--muted);margin-top:4px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.quotes a{text-decoration:none;font:600 14.5px/1.55 var(--kserif);border-left:3px solid var(--red);padding-left:12px;color:#3a3236}
+.quotes a:hover{color:var(--red)}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.fcard{background:#fff;border:1px solid var(--line);text-decoration:none;display:flex;flex-direction:column;transition:.2s;position:relative}
+.fcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(29,26,28,.12)}
+.fcard .ph{aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden;position:relative}
+.fcard .bd{padding:18px 20px 22px}
+.fcard h3{font:900 21px/1.35 var(--kserif);margin:6px 0}
+.fcard p{margin:0;color:var(--muted);font-size:14.5px}
+.tag{display:inline-block;font:900 10.5px var(--sans);letter-spacing:.18em;padding:3px 9px;border-radius:999px;background:var(--ink);color:#fff;text-transform:uppercase}
+.tag.red{background:var(--red)}
+.tag.blue{background:var(--cerulean)}
+.tag.line{background:transparent;border:1px solid var(--ink);color:var(--ink)}
+.tag.gold{background:var(--gold)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.stat{padding:30px 18px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat b{display:block;font:900 clamp(40px,5.6vw,64px)/1 var(--serif);color:var(--red)}
+.stat span{display:block;font-weight:700;margin-top:8px}
+.stat small{color:var(--muted);font-size:12.5px}
+.quote-big{background:var(--ink);color:#fff;padding:80px 0;text-align:center;position:relative;overflow:hidden}
+.quote-big blockquote{margin:0 auto;max-width:860px;font:italic 700 clamp(24px,3.6vw,40px)/1.4 var(--kserif)}
+.quote-big cite{display:block;margin-top:22px;font:700 13px var(--sans);letter-spacing:.3em;color:var(--gold);font-style:normal}
+.quote-big .qm{position:absolute;font:900 320px/1 var(--serif);color:rgba(255,255,255,.05);top:-40px;left:4%}
+.mood{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.widget{background:#fff;border:1px solid var(--line);padding:22px 24px}
+.widget h4{margin:0 0 10px;font:900 12px var(--sans);letter-spacing:.25em;color:var(--muted)}
+.mood-face{display:flex;align-items:center;gap:16px}
+.mood-face .big{font-size:52px}
+.mood-face b{display:block;font:900 22px var(--kserif)}
+.meter{height:10px;background:#efe6da;border-radius:99px;overflow:hidden;margin-top:12px}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--red));border-radius:99px}
 
-/* ---------- HUD (상단 정보창) ---------- */
-#hud{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-bottom:2px solid var(--ink);backdrop-filter:blur(6px)}
-.hud-in{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto auto;gap:8px 16px;align-items:center;padding:8px 16px}
-.hud-time{text-align:center;min-width:92px;border:2px solid var(--ink);border-radius:10px;padding:2px 8px;background:#fff}
-.hud-time small,.hud-lab{display:block;font-size:11px;color:var(--muted);letter-spacing:.06em;font-weight:700}
-#h-time{font:900 30px/1.1 var(--serif);font-variant-numeric:tabular-nums}
-.hud-bars{display:flex;flex-direction:column;gap:5px;min-width:0}
-.bar-row{display:grid;grid-template-columns:22px 52px minmax(0,1fr) 30px;align-items:center;gap:6px;font-size:12.5px;font-weight:700}
-.bar-row .face{width:22px}
-.bar{height:13px;background:#f1e9df;border:2px solid var(--ink);border-radius:99px;position:relative;overflow:hidden}
-.bar i{position:absolute;inset:0 auto 0 0;width:100%;background:var(--blue);transition:width .35s ease;border-radius:99px}
-.bar-row.boss .bar i{background:var(--red)}
-.bar-row em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums}
-.bar-row.low .bar i{background:#ff6b6b;animation:blink .6s infinite}
-.hud-mid{display:flex;gap:14px;align-items:center}
-.digits{display:flex;gap:4px}
-.digit{width:32px;height:38px;display:grid;place-items:center;background:#f4ede3;border:2px solid var(--ink);border-radius:6px;font:900 21px var(--serif)}
-.digit.got{background:var(--red);color:#fff;animation:pop .5s}
-.digit.sealed{background:var(--ink);color:var(--gold);font-size:15px}
-.inv{display:flex;gap:4px}
-.inv span{width:32px;height:38px;display:grid;place-items:center;border:2px dashed #cfc3b5;border-radius:6px;font-size:18px;background:#fff}
-.inv span.has{border:2px solid var(--blue);background:var(--blue-soft);animation:pop .5s}
-.hud-actions{display:flex;gap:6px}
-.hud-actions button{white-space:nowrap;min-height:44px;padding:6px 12px;background:#fff;border:2px solid var(--ink);border-radius:10px;font-weight:700;font-size:14px}
-.hud-actions button:hover{background:var(--ink);color:#fff}
-.hud-actions small{color:var(--red);font-size:11px}
-.hud-actions button:hover small{color:#ffb3c1}
-.quest{grid-column:1/-1;display:flex;justify-content:space-between;gap:4px 12px;flex-wrap:wrap;font-size:13.5px;border-top:1px solid var(--line);padding-top:6px}
-.quest b{color:var(--red)}
-#combo-tag{font:900 14px var(--serif);color:var(--gold)}
-body.danger #h-time{color:var(--red);animation:blink .9s infinite}
-body.danger .hud-time{border-color:var(--red);background:var(--red-soft)}
-body.danger #game-main{box-shadow:inset 0 0 0 4px rgba(200,16,46,.35)}
-body.critical #game-main{animation:pulseRed .7s infinite}
-@keyframes pulseRed{50%{box-shadow:inset 0 0 0 10px rgba(200,16,46,.45)}}
+/* ---------- 하위 페이지 공통 ---------- */
+.page-hero{padding:56px 0 40px;border-bottom:1px solid var(--line);background:#fff}
+.page-hero h1{font:900 clamp(34px,5.4vw,60px)/1.08 var(--serif);margin:10px 0 12px;letter-spacing:-.01em}
+.page-hero h1 em{color:var(--red);font-style:italic}
+.page-hero p{max-width:680px;color:#4a4246;margin:0;font-size:17px}
+.crumb{font-size:13px;color:var(--muted)}
+.crumb a{text-decoration:none}
+.crumb a:hover{color:var(--red)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
 
-/* ---------- 방 (방탈출 메인 화면) ---------- */
-#game-main{max-width:1100px;margin:0 auto;padding:14px 14px 50px}
-.room{position:relative;width:100%;aspect-ratio:16/10;border:2px solid var(--ink);border-radius:14px;overflow:hidden;
-  background:
-    repeating-linear-gradient(90deg,#fdf1ef 0 22px,#f9e4e3 22px 24px);
-  box-shadow:0 10px 0 rgba(29,26,28,.08)}
-.wainscot{position:absolute;left:0;right:0;top:46%;height:16%;background:linear-gradient(#fff,#f3e9e2);border-top:3px solid #e2cfc6;border-bottom:3px solid #d6c0b5}
-.floor{position:absolute;left:0;right:0;top:62%;bottom:0;background:
-  repeating-linear-gradient(45deg,#e7c9a3 0 14px,#dcb98f 14px 28px)}
-.floor::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.08),transparent 40%)}
-.rug{position:absolute;left:24%;top:72%;width:44%;height:20%;border-radius:50%;background:var(--red);box-shadow:inset 0 0 0 6px #e8475f,inset 0 0 0 9px #fff}
-.window{position:absolute;left:28%;top:7%;width:26%;height:34%;border:6px solid #fff;outline:2px solid var(--ink);background:linear-gradient(#ffb48a,#ffd8b0 55%,#fde9d0);overflow:hidden}
-.window::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:5px;margin-left:-2px;background:#fff;z-index:2}
-.window .sun{position:absolute;left:62%;top:38%;width:18%;aspect-ratio:1;border-radius:50%;background:#ff7a59}
-.window .city{position:absolute;left:0;right:0;bottom:0;height:46%;background:
-  linear-gradient(#8a7fa8,#8a7fa8) 4% 100%/10% 70% no-repeat,
-  linear-gradient(#a397c0,#a397c0) 16% 100%/8% 95% no-repeat,
-  linear-gradient(#7c7199,#7c7199) 27% 100%/12% 55% no-repeat,
-  linear-gradient(#9b8fb8,#9b8fb8) 42% 100%/7% 100% no-repeat,
-  linear-gradient(#8a7fa8,#8a7fa8) 54% 100%/12% 75% no-repeat,
-  linear-gradient(#a397c0,#a397c0) 70% 100%/9% 60% no-repeat,
-  linear-gradient(#7c7199,#7c7199) 82% 100%/14% 85% no-repeat}
-.frames{position:absolute;left:58%;top:9%;display:flex;gap:1.4%;width:24%}
-.frame{flex:1;aspect-ratio:3/4;background:#fff;border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:4% 2%;font:900 clamp(5px,1vw,10px) var(--serif);color:var(--red)}
-.frame i{display:block;width:60%;flex:1;margin:6% 0;border-radius:40% 40% 10% 10%;background:var(--blue)}
-.frame:nth-child(2) i{background:var(--ink)}
-.frame:nth-child(3) i{background:var(--pink)}
-.desk{position:absolute;left:27%;top:58%;width:34%;height:16%}
-.desk::before{content:"";position:absolute;left:0;right:0;top:0;height:28%;background:#fff;border:2px solid var(--ink);border-radius:4px}
-.desk::after{content:"";position:absolute;left:6%;right:6%;top:28%;bottom:0;background:
-  linear-gradient(var(--ink),var(--ink)) 0 0/4% 100% no-repeat,linear-gradient(var(--ink),var(--ink)) 100% 0/4% 100% no-repeat}
-.side{position:absolute;left:71%;top:59%;width:12%;height:13%}
-.side::before{content:"";position:absolute;left:0;right:0;top:0;height:26%;background:var(--blue);border:2px solid var(--ink);border-radius:4px}
-.side::after{content:"";position:absolute;left:44%;width:12%;top:26%;bottom:0;background:var(--ink)}
-.paper-sheet{position:absolute;left:71.5%;top:55.6%;width:5%;height:4.6%;background:#fff;border:1.5px solid var(--ink);transform:rotate(-6deg)}
-.lamp{position:absolute;left:62%;top:44%;width:5%}
-.obj{position:absolute;display:block;padding:0;z-index:3}
-.obj:hover .spr{filter:drop-shadow(0 0 0 #fff) drop-shadow(0 0 6px rgba(63,127,217,.9))}
-.obj .tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:3px;white-space:nowrap;background:#fff;border:1.5px solid var(--ink);border-radius:99px;
-  padding:1px 8px;font:700 clamp(9px,1.2vw,12.5px) var(--sans);pointer-events:none}
-.obj.done .tag{background:#e7f6ec;border-color:var(--green);color:var(--green)}
-.obj.locked .spr{filter:saturate(.6)}
-.obj.target .spr{animation:glow 1.1s ease-in-out infinite}
-.obj.target::before{content:"▼";position:absolute;left:50%;bottom:100%;transform:translateX(-50%);color:var(--red);font-size:clamp(12px,2vw,22px);animation:bounce .8s infinite}
-@keyframes glow{50%{filter:drop-shadow(0 0 8px rgba(200,16,46,.9)) drop-shadow(0 0 2px #fff)}}
-@keyframes bounce{50%{transform:translate(-50%,-6px)}}
-.obj.nope{animation:shake .4s}
-.me-spr{position:absolute;left:41%;top:66%;width:8.5%;z-index:4;animation:idle 1.6s steps(2) infinite}
-@keyframes idle{50%{transform:translateY(-3%)}}
-.room-sign{position:absolute;left:2%;top:4%;background:var(--ink);color:#fff;font:900 clamp(8px,1.3vw,13px) var(--serif);letter-spacing:.2em;padding:4px 10px;z-index:2}
-/* 대화창 */
-.dialog{display:flex;gap:12px;align-items:center;margin-top:12px;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:10px 14px;min-height:76px;box-shadow:4px 4px 0 var(--ink)}
-.dialog .av{width:46px;flex:none}
-.dialog p{margin:0;font-family:var(--kserif);font-size:15.5px}
-.dialog p b{color:var(--red)}
-.dialog.typing p{animation:fadeIn .3s}
-/* 방 물건 목록 (휴대전화에서 누르기 쉽게) */
-.objlist{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
-.objlist button{min-height:56px;border:2px solid var(--ink);border-radius:12px;background:#fff;font-weight:700;font-size:13px;line-height:1.2;padding:6px 4px}
-.objlist button span{display:block;font-size:18px}
-.objlist button.target{background:var(--red);color:#fff;border-color:var(--red);animation:glowBtn 1.1s infinite}
-.objlist button.done{background:#e7f6ec;border-color:var(--green);color:var(--green)}
-@keyframes glowBtn{50%{box-shadow:0 0 0 4px rgba(200,16,46,.25)}}
+/* ---------- 회사 소개 ---------- */
+.letter{background:#fff;border:1px solid var(--line);padding:36px;display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:start}
+.letter .sig{font:italic 700 34px var(--serif);color:var(--red);margin-top:12px}
+.letter p{font-family:var(--kserif);font-size:16.5px;line-height:1.95;margin:0 0 14px}
+.values{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.value{background:#fff;border-top:4px solid var(--red);padding:22px}
+.value b{display:block;font:900 22px var(--serif)}
+.value small{color:var(--muted)}
+.org{display:flex;flex-direction:column;align-items:center;gap:0}
+.org .lvl{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;padding:14px 0}
+.org .lvl+.lvl::before{content:"";position:absolute;top:0;left:50%;width:1px;height:14px;background:var(--ink)}
+.node{background:#fff;border:1.5px solid var(--ink);padding:10px 18px;text-align:center;min-width:150px;border-radius:10px}
+.node b{display:block;font-size:15px}
+.node small{color:var(--muted);font-size:12px}
+.node.boss{background:var(--ink);color:#fff}
+.node.boss small{color:#cfc6ca}
+.node.sec{border-color:var(--red);background:var(--red-soft)}
+.offices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.office{background:#fff;border:1px solid var(--line);padding:22px}
+.office b{font:900 22px var(--serif)}
+.office .t{font:700 28px var(--serif);color:var(--red);font-variant-numeric:tabular-nums}
 
-/* ---------- 클로즈업 (퍼즐 창) ---------- */
-.cu{position:fixed;inset:0;z-index:40;background:rgba(29,26,28,.55);display:flex;align-items:center;justify-content:center;padding:14px}
-.cu-box{background:var(--ivory);width:100%;max-width:880px;max-height:92vh;overflow:auto;border:2px solid var(--ink);border-radius:18px;box-shadow:10px 10px 0 var(--red);animation:zoomIn .3s cubic-bezier(.2,1.3,.4,1)}
-@keyframes zoomIn{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
-.cu-top{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:10px 14px}
-.cu-top .lt{background:var(--red);font:900 11px var(--sans);letter-spacing:.25em;padding:4px 9px;border-radius:4px}
-.cu-top h2{margin:0;font:900 clamp(17px,3.6vw,22px) var(--kserif);flex:1}
-.cu-top button{min-width:44px;min-height:44px;background:#fff;color:var(--ink);border-radius:10px;font-weight:900;font-size:14px;padding:0 10px}
-.cu-time{font:700 13px var(--sans);white-space:nowrap;background:rgba(255,255,255,.12);border-radius:8px;padding:4px 8px}
-.cu-time b{font-variant-numeric:tabular-nums}
-body.danger .cu-time{background:var(--red);animation:blink .9s infinite}
-.cu-body{padding:16px clamp(12px,3vw,24px) 24px}
-.lead{margin:0 0 14px;font-size:15.5px}
-.lead b{color:var(--red)}
-.alink{color:var(--blue);font-weight:700;text-decoration:underline;padding:0;font-size:inherit}
+/* ---------- 언론 보도 ---------- */
+.press-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.clip{background:var(--newsprint);border:1px solid #d9cfb9;padding:22px 22px 18px;text-decoration:none;position:relative;transform:rotate(var(--r,0deg));transition:.25s;box-shadow:0 2px 0 #e3d9c3,0 10px 24px rgba(0,0,0,.06)}
+.clip:hover{transform:rotate(0) translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.14)}
+.clip::before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:20px;margin-left:-35px;background:rgba(201,154,59,.35);transform:rotate(-3deg)}
+.clip .nym{font-size:22px;text-align:center;border-bottom:2px solid var(--ink);padding-bottom:6px}
+.clip .nym small{font-size:8.5px;letter-spacing:.25em;border-top:1px solid var(--ink);padding-top:3px;margin-top:5px}
+.clip .dt{font-size:11.5px;color:#6d6458;margin:8px 0 4px;display:flex;justify-content:space-between}
+.clip h3{font:900 18.5px/1.4 var(--kserif);margin:4px 0 8px}
+.clip p{font:14px/1.7 var(--kserif);color:#4d453c;margin:0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.clip .rd{display:inline-block;margin-top:12px;font-weight:900;font-size:13px;color:var(--red)}
+.paper{background:var(--newsprint);border:1px solid #d9cfb9;max-width:860px;margin:0 auto;padding:30px clamp(18px,4vw,48px) 40px;box-shadow:0 20px 50px rgba(0,0,0,.1)}
+.paper .pm{text-align:center;border-bottom:3px double var(--ink);padding-bottom:8px}
+.paper .pm .nym{font-size:clamp(34px,6vw,56px)}
+.paper .pm .ln{display:flex;justify-content:space-between;font-size:11.5px;color:#5d554a;border-top:1px solid var(--ink);margin-top:8px;padding-top:4px;letter-spacing:.06em}
+.paper h1{font:900 clamp(26px,3.8vw,38px)/1.3 var(--kserif);margin:22px 0 6px;letter-spacing:-.02em}
+.paper .sub{font:600 17px var(--kserif);color:#4d453c;margin:0 0 10px}
+.paper .by{font-size:13px;color:#6d6458;border-bottom:1px solid #cfc4ad;padding-bottom:12px;margin-bottom:18px}
+.paper .body{font:16.5px/2 var(--kserif);column-count:2;column-gap:36px}
+.paper .body p{margin:0 0 14px;text-indent:1em}
+.paper .body p:first-child::first-letter{font:900 3.4em/0.9 var(--serif);float:left;margin:4px 8px 0 0;color:var(--red)}
+.paper .body p.q{text-indent:0;font-weight:900}
+.paper table{width:100%;border-collapse:collapse;font:14px var(--sans);margin:18px 0;background:#fff}
+.paper th{background:var(--ink);color:#fff;padding:8px}
+.paper td{border:1px solid #d9cfb9;padding:8px 12px;line-height:1.9;vertical-align:top}
+.paper .tools{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin-top:24px;border-top:1px solid #cfc4ad;padding-top:16px}
 
-/* 잠금 1 — 업무 분배 */
-.trays{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.tray{border:2px solid var(--ink);border-radius:14px;padding:10px;min-height:96px;background:#fff}
-.tray h4{margin:0 0 6px;font-size:15px;display:flex;align-items:center;gap:6px}
-.tray.ai{background:var(--blue-soft)}
-.tray.me{background:var(--red-soft)}
-.chips{display:flex;flex-wrap:wrap;gap:5px}
-.chip{background:#fff;border:1.5px solid var(--ink);border-radius:99px;padding:2px 10px;font-size:12.5px;font-weight:700;animation:pop .4s}
-.tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.task{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;box-shadow:3px 3px 0 var(--ink)}
-.task b{font-size:15.5px}
-.task span{font-size:13.5px;color:var(--muted)}
-.task .tb{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.task .tb button{min-height:44px;border-radius:10px;font-weight:700;font-size:14px;border:2px solid var(--ink)}
-.task .tb .to-ai{background:var(--blue-soft)}
-.task .tb .to-me{background:var(--red-soft)}
-.task .tb button:hover{filter:brightness(.95)}
-.task.wrong{animation:shake .4s;border-color:var(--red)}
+/* ---------- 채용 ---------- */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1.5px solid var(--ink);border-radius:999px;padding:7px 16px;font-weight:700;font-size:14px;background:#fff}
+.chip.on{background:var(--ink);color:#fff}
+.jobs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.job{background:#fff;border:1px solid var(--line);padding:24px;text-decoration:none;display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:center;transition:.2s}
+.job:hover{border-color:var(--ink);box-shadow:6px 6px 0 var(--ink);transform:translate(-3px,-3px)}
+.job .ji{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;font-size:30px;background:var(--ivory)}
+.job h3{margin:4px 0 4px;font:900 19px var(--kserif)}
+.job p{margin:0;color:var(--muted);font-size:14px}
+.job .go{font-size:22px}
+.job.featured{grid-column:1/-1;background:linear-gradient(110deg,#fff 55%,var(--red-soft));border:2px solid var(--red)}
+.job.featured .ji{background:var(--red);color:#fff}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.step{padding:22px 18px;border-top:3px solid var(--ink);position:relative}
+.step::before{counter-increment:s;content:"0" counter(s);font:900 34px var(--serif);color:var(--red);display:block}
+.step b{display:block;font-size:17px;margin:4px 0}
+.step small{color:var(--muted)}
+.jd{display:grid;grid-template-columns:1fr 320px;gap:36px;align-items:start}
+.jd-side{position:sticky;top:150px;background:#fff;border:1.5px solid var(--ink);padding:22px;box-shadow:8px 8px 0 var(--red)}
+.jd-side dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0 0 18px;font-size:14px}
+.jd-side dt{color:var(--muted)}
+.jd-side dd{margin:0;font-weight:700}
+.jd h3{font:900 24px var(--kserif);margin:36px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+.jd h3:first-child{margin-top:0}
+.jd ul.chk{list-style:none;padding:0;margin:0}
+.jd ul.chk li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed var(--line)}
+.jd ul.chk li::before{content:"✓";position:absolute;left:4px;color:var(--red);font-weight:900}
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--red),var(--cerulean))}
+.tl{position:relative;padding:0 0 18px}
+.tl::before{content:"";position:absolute;left:-23px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--red)}
+.tl b{font:900 15px var(--serif);color:var(--red)}
+.tl strong{display:block;font-size:16px}
+.tl span{color:#5a5155;font-size:14.5px}
+.tl .ai{display:inline-block;margin-top:4px;font-size:12px;font-weight:700;background:var(--blue-soft);color:var(--cerulean);padding:2px 8px;border-radius:99px}
+.tl .me{display:inline-block;margin-top:4px;font-size:12px;font-weight:700;background:var(--red-soft);color:var(--red);padding:2px 8px;border-radius:99px}
+.vs-table{width:100%;border-collapse:collapse;background:#fff}
+.vs-table th{padding:12px;font-size:15px}
+.vs-table th.ai{background:var(--cerulean);color:#fff}
+.vs-table th.me{background:var(--red);color:#fff}
+.vs-table td{border:1px solid var(--line);padding:9px 14px;font-size:14.5px;width:50%}
+.skillbars{display:grid;gap:12px}
+.sb{display:grid;grid-template-columns:150px 1fr 44px;gap:12px;align-items:center;font-size:14.5px;font-weight:700}
+.sb .meter{margin:0;height:12px}
+.sb .meter i{width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.rules{counter-reset:r;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rule{background:#fff;border:1px solid var(--line);padding:16px 18px 16px 62px;position:relative;font-size:14.5px}
+.rule::before{counter-increment:r;content:counter(r);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:900 15px var(--serif)}
+.rule b{display:block;font-size:15.5px}
+.tabs-1{display:flex;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.tabs-1 button{padding:12px 20px;font-weight:900;font-size:15px;border-bottom:4px solid transparent;margin-bottom:-3px}
+.tabs-1 button.on{border-color:var(--red);color:var(--red)}
+.interview{background:#fff;border:1px solid var(--line);padding:24px}
+.interview .qq{font-weight:900;margin:0 0 8px}
+.interview .aa{font:16px/1.95 var(--kserif);margin:0 0 18px;color:#3a3236}
+.quiz{background:var(--ink);color:#fff;padding:32px;border-radius:18px;position:relative;overflow:hidden}
+.quiz h4{margin:0 0 4px;font:900 22px var(--kserif)}
+.quiz .qn{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.2em}
+.quiz .qt{font:600 19px/1.6 var(--kserif);margin:12px 0 16px}
+.quiz .opts{display:grid;gap:10px}
+.quiz .opts button{text-align:left;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.25);color:#fff;padding:14px 16px;border-radius:12px;font-size:15px}
+.quiz .opts button:hover{background:rgba(255,255,255,.18);border-color:#fff}
+.quiz .prog{height:6px;background:rgba(255,255,255,.15);border-radius:99px;margin-top:18px;overflow:hidden}
+.quiz .prog i{display:block;height:100%;background:var(--gold);transition:width .3s}
+.quiz .res b{display:block;font:900 30px var(--kserif);color:var(--gold);margin:6px 0}
+.faq details{background:#fff;border:1px solid var(--line);margin-bottom:8px}
+.faq summary{padding:16px 20px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+.faq summary::after{content:"+";font-size:22px;line-height:1;color:var(--red)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin:0;padding:0 20px 18px;color:#4a4246}
 
-/* 잠금 2 — 프롬프트 */
-.screen-pc{background:#1f2433;border:3px solid var(--ink);border-radius:14px;padding:12px;color:#fff;margin-bottom:14px;position:relative}
-.screen-pc .bar-top{display:flex;gap:6px;align-items:center;margin-bottom:10px;font:10px var(--pixel);color:#9fc2ff}
-.screen-pc .bar-top i{width:10px;height:10px;border-radius:50%;background:#ff6b6b;display:inline-block}
-.screen-pc .bar-top i:nth-child(2){background:#ffd166}.screen-pc .bar-top i:nth-child(3){background:#5ad19a}
-.pslots{display:flex;flex-direction:column;gap:7px}
-.pslot{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:center;text-align:left;background:#2b3247;border:2px dashed #5b6788;border-radius:10px;padding:8px 10px;min-height:52px;color:#dfe7ff}
-.pslot .lab{font:900 14px var(--sans);color:#ffd166;text-align:center;border-right:1px solid #4a5675;padding-right:8px}
-.pslot .val{font-size:14px;color:#8d98b8}
-.pslot.armed{border-color:#ffd166;background:#323a52}
-.pslot.filled{border-style:solid;border-color:#5ad19a;background:#24402f}
-.pslot.filled .val{color:#fff;font-family:var(--kserif)}
-.pslot.wrong{animation:shake .4s;border-color:#ff6b6b}
-.run{margin-top:10px;font:12px/1.8 var(--pixel);color:#5ad19a;min-height:22px}
-.frags{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.frag{text-align:left;background:#fff;border:2px solid var(--ink);border-radius:12px;padding:10px 12px;font-family:var(--kserif);font-size:14.5px;box-shadow:3px 3px 0 var(--ink);min-height:60px}
-.frag.sel{background:#fff6d6;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold);transform:translateY(-3px)}
-.frag.used{display:none}
-.frag.rejected{background:#f3e6e8;color:#a08a90;text-decoration:line-through;box-shadow:none;border-color:#d8b7be}
+/* ---------- 게임 ---------- */
+.game-frame{border:2px solid var(--ink);border-radius:18px;overflow:hidden;background:#fff;box-shadow:12px 12px 0 var(--red)}
+.game-frame .gf-top{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:8px 14px;font-size:13px;flex-wrap:wrap}
+.game-frame .dots i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;background:#ff6b6b}
+.game-frame .dots i:nth-child(2){background:#ffd166}.game-frame .dots i:nth-child(3){background:#5ad19a}
+.game-frame iframe{display:block;width:100%;height:min(86vh,880px);border:0}
 
-/* 잠금 3 — 검증 */
-.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.tool{min-height:66px;border:2px solid var(--ink);border-radius:12px;background:#fff;font-weight:700;font-size:14.5px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px}
-.tool span{font-size:22px;line-height:1.1}
-.tool small{font-weight:500;color:var(--muted);font-size:11.5px}
-.tool.on{background:var(--ink);color:#fff;box-shadow:0 0 0 3px var(--gold)}
-.tool.on small{color:#ddd}
-.draft{background:#fff;border:2px solid var(--ink);padding:16px;position:relative;overflow:hidden;box-shadow:6px 6px 0 var(--blue)}
-.draft-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px double var(--ink);padding-bottom:6px;margin-bottom:6px}
-.draft-head b{font:900 20px var(--serif);color:var(--red);letter-spacing:.06em}
-.draft-head small{font-size:11px;color:var(--muted)}
-.dline{display:block;width:100%;text-align:left;padding:9px 8px;font-family:var(--kserif);font-size:15px;border-bottom:1px dotted #d8ccbe;min-height:44px;border-radius:6px}
-.dline:hover{background:var(--blue-soft)}
-.dline.title-line{font-size:19px;font-weight:900}
-.dline.fixed{cursor:default;background:transparent}
-.dline.wrong{animation:shake .4s;background:var(--red-soft)}
-.mask{background:var(--ink);color:var(--ink);border-radius:3px;padding:0 3px}
-.stampmini{display:inline-block;margin-left:6px;border:2px solid var(--red);color:var(--red);font:900 11.5px var(--sans);padding:1px 7px;transform:rotate(-3deg);animation:stampIn .4s cubic-bezier(.2,1.6,.4,1) both;vertical-align:middle;background:#fff}
-.stampmini.blue{border-color:var(--blue);color:var(--blue)}
-.stampmini.black{border-color:var(--ink);color:var(--ink)}
-@keyframes stampIn{from{transform:scale(2.4) rotate(-12deg);opacity:0}to{transform:scale(1) rotate(-3deg);opacity:1}}
-.approved{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-.approved div{border:6px double var(--green);color:var(--green);font:900 clamp(30px,7vw,54px)/1.1 var(--serif);padding:6px 24px;transform:rotate(-10deg);background:rgba(255,255,255,.8);animation:stampBig .6s cubic-bezier(.2,1.6,.4,1) both;text-align:center}
-.approved small{display:block;font:700 14px var(--sans);letter-spacing:.2em}
-@keyframes stampBig{from{transform:scale(3) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(-10deg);opacity:1}}
-.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
-.codebox{margin-top:18px;background:#fff;border:2px solid var(--red);border-radius:14px;padding:16px;text-align:center;animation:fadeIn .5s}
-.codebox h3{margin:0 0 6px;font:900 20px var(--kserif)}
-.codebox p{margin:0 0 12px}
-.keypad{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:380px;margin:0 auto}
-.key{min-height:56px;background:#fff;border:2px solid var(--ink);border-radius:12px;font:900 24px var(--serif);box-shadow:0 4px 0 var(--ink)}
-.key:active{box-shadow:none;transform:translateY(4px)}
-.key.wrong{animation:shake .4s;background:var(--red-soft)}
+/* ---------- 인트라넷 / 관리자 ---------- */
+.dash{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}
+.side-nav{background:var(--ink);color:#fff;border-radius:16px;padding:18px;position:sticky;top:150px}
+.side-nav .me{display:flex;gap:10px;align-items:center;padding-bottom:14px;border-bottom:1px solid #3a3437;margin-bottom:10px}
+.side-nav .me .av{width:44px;height:44px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-weight:900}
+.side-nav .me small{display:block;color:#b8aeb2;font-size:12px}
+.side-nav button{display:flex;gap:10px;width:100%;text-align:left;padding:10px 12px;border-radius:10px;color:#ddd3d7;font-size:14.5px}
+.side-nav button:hover,.side-nav button.on{background:#2f2a2d;color:#fff}
+.side-nav button.on{box-shadow:inset 3px 0 0 var(--red)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:20px}
+.panel h3{margin:0 0 14px;font:900 18px var(--kserif);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.kpi small{color:var(--muted);font-weight:700;font-size:12.5px}
+.kpi b{display:block;font:900 32px var(--serif)}
+.kpi em{font-style:normal;font-size:12.5px;font-weight:700}
+.kpi em.up{color:var(--green)}.kpi em.dn{color:var(--red)}
+.chart{display:flex;align-items:flex-end;gap:10px;height:200px;padding-top:10px;border-bottom:1px solid var(--line)}
+.chart .c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px}
+.chart .c i{display:block;width:100%;max-width:44px;background:linear-gradient(var(--red),#e8475f);border-radius:8px 8px 0 0;height:0;transition:height 1s cubic-bezier(.2,.8,.2,1)}
+.chart .c span{font-size:12px;color:var(--muted)}
+.chart .c b{font-size:12px}
+table.tb{width:100%;border-collapse:collapse;font-size:14px}
+table.tb th{text-align:left;color:var(--muted);font-weight:700;font-size:12.5px;padding:8px 10px;border-bottom:1px solid var(--line)}
+table.tb td{padding:10px;border-bottom:1px solid var(--line)}
+.st{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:700}
+.st.g{background:#e7f6ec;color:var(--green)}.st.r{background:var(--red-soft);color:var(--red)}.st.y{background:#fff3d6;color:#a3720b}
+.notice-list li{padding:12px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}
+.notice-list{list-style:none;margin:0;padding:0}
+.notice-list .pin{color:var(--red);font-weight:900}
+.msg{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start}
+.msg .av{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:900;color:#fff;font-size:13px}
+.msg .bb{background:var(--ivory);border-radius:4px 14px 14px 14px;padding:8px 12px;font-size:14.5px}
+.msg .bb small{display:block;color:var(--muted);font-size:11.5px}
+.todo label{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.todo input{width:18px;height:18px;accent-color:var(--red)}
+.todo label.done span{text-decoration:line-through;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field label{font-weight:700;font-size:13.5px}
+.field input,.field textarea,.field select{font:inherit;padding:11px 14px;border:1.5px solid #cfc3b5;border-radius:10px;background:#fff}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ink)}
+.log{font:12.5px/1.9 ui-monospace,Consolas,monospace;background:#151214;color:#9be3b5;border-radius:12px;padding:14px;max-height:220px;overflow:auto}
+.denied{text-align:center;padding:70px 20px}
+.denied .lock{font-size:64px}
+.denied h2{font:900 34px var(--serif);margin:10px 0}
 
-/* 보상 */
-.reward{text-align:center;padding:10px 0 4px;animation:fadeIn .4s}
-.padlock{width:96px;height:116px;margin:4px auto 12px;position:relative}
-.shackle{position:absolute;left:20px;top:0;width:56px;height:62px;border:11px solid var(--ink);border-bottom:none;border-radius:36px 36px 0 0;animation:unlock .8s .3s cubic-bezier(.3,1.6,.5,1) forwards;transform-origin:right bottom}
-.lbody{position:absolute;left:0;right:0;bottom:0;height:68px;background:var(--red);border:3px solid var(--ink);border-radius:12px;display:grid;place-items:center;font:900 38px var(--serif);color:#fff}
-@keyframes unlock{to{transform:translateY(-20px) rotate(26deg)}}
-.reward h3{font:900 clamp(26px,6vw,40px) var(--serif);margin:0;letter-spacing:.03em}
-.perfect{display:inline-block;font:900 20px var(--serif);color:var(--gold);letter-spacing:.2em;animation:pop .6s .5s both}
-.gains{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 16px}
-.gains span{background:#fff;border:2px solid var(--ink);border-radius:99px;padding:5px 14px;font-weight:700;font-size:14px;animation:pop .5s .7s both}
-.gains span.d{background:var(--red);color:#fff;border-color:var(--red)}
+/* ---------- 모달 ---------- */
+.modal{position:fixed;inset:0;z-index:90;background:rgba(29,26,28,.6);display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px)}
+.mbox{background:#fff;width:100%;max-width:440px;max-height:92vh;overflow:auto;border-radius:20px;position:relative;animation:pop .3s cubic-bezier(.2,1.3,.4,1)}
+.mbox.wide{max-width:920px}
+.mx{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:var(--ivory);font-size:18px;z-index:2}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:none;opacity:1}}
+.login-top{background:var(--ink);color:#fff;text-align:center;padding:30px 20px 22px}
+.login-top .logo{color:#fff;font-size:42px}
+.login-top p{margin:6px 0 0;font-size:13px;color:#cfc6ca}
+.login-bd{padding:22px 24px 26px}
+.demo{background:var(--ivory);border:1px dashed var(--gold);border-radius:12px;padding:12px 14px;font-size:13px;margin-bottom:14px}
+.demo b{color:var(--red)}
+.demo .acc{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.demo .acc button{background:#fff;border:1px solid var(--line);border-radius:99px;padding:5px 11px;font-size:12.5px;font-weight:700}
+.demo .acc button:hover{border-color:var(--ink)}
+.err{color:var(--red);font-size:13.5px;font-weight:700;min-height:20px}
+.shake{animation:shk .4s}
+@keyframes shk{20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.search-box{padding:26px}
+.search-box input{width:100%;font:700 22px var(--sans);border:none;border-bottom:2px solid var(--ink);padding:10px 0;outline:none}
+.sr a{display:block;padding:12px 4px;border-bottom:1px solid var(--line);text-decoration:none}
+.sr a:hover{color:var(--red)}
+.sr small{display:block;color:var(--muted)}
 
-/* ---------- 보스전 ---------- */
-.arena{border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:#fff}
-.stage-top{position:relative;background:linear-gradient(#3a1520,#7a1328);padding:14px;display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:10px;min-height:190px}
-.stage-top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22px;background:repeating-linear-gradient(45deg,#e7c9a3 0 10px,#dcb98f 10px 20px)}
-.fighter{position:relative;z-index:2;text-align:center}
-.fighter .spr{width:min(110px,24vw);margin:0 auto}
-.fighter.miranda .spr{width:min(140px,30vw)}
-.fighter .nm{font:900 12px var(--sans);color:#fff;letter-spacing:.2em;margin-top:2px;text-shadow:0 1px 0 #000}
-.fighter.hurt{animation:shake .45s;filter:drop-shadow(0 0 10px #fff)}
-.fighter.me{animation:idle 1.6s steps(2) infinite}
-.vs{font:900 30px var(--serif);color:var(--gold);z-index:2;align-self:center}
-.say{position:relative;z-index:2;background:#fff;border:2px solid var(--ink);border-radius:12px;padding:8px 12px;font-family:var(--kserif);font-size:14.5px;margin-bottom:8px;text-align:left;min-height:48px}
-.wave-wrap{padding:14px}
-.wave-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
-.wave-head h3{margin:0;font:900 22px var(--kserif)}
-.wave-head small{color:var(--muted)}
-.wavebar{height:10px;background:#f1e9df;border:2px solid var(--ink);border-radius:99px;margin:8px 0 12px;overflow:hidden}
-.wavebar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--red));width:100%}
-.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;min-height:100px}
-.bitem{text-align:left;background:#fff;border:2px solid var(--ink);border-radius:12px;padding:10px 12px;min-height:80px;box-shadow:3px 3px 0 var(--ink);display:flex;flex-direction:column;gap:5px;animation:dropIn .35s ease both}
-.bitem .tg{font:900 11px var(--sans);letter-spacing:.06em;color:#fff;align-self:flex-start;padding:2px 8px;border-radius:99px;background:#777}
-.bitem.t-routine .tg{background:var(--blue)}
-.bitem.t-human .tg{background:#d97a00}
-.bitem.t-connect .tg{background:#6b4fc8}
-.bitem.t-block .tg{background:var(--red)}
-.bitem.t-block{background:var(--red-soft);animation:dropIn .35s ease both,ring 1s .4s infinite}
-.bitem .tx{font-family:var(--kserif);font-size:14.5px;line-height:1.45}
-.bitem.done{background:#eef7f1;border-color:#9fd2b2;box-shadow:none;color:#5f7a69;animation:none;cursor:default}
-.bitem.done .tg{background:var(--green)}
-.bitem.wrong{animation:shake .4s}
-@keyframes ring{0%,100%{transform:rotate(0)}10%{transform:rotate(-1.2deg)}20%{transform:rotate(1.2deg)}30%{transform:rotate(0)}}
-@keyframes dropIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
-.tip{font-size:13.5px;color:var(--muted);margin:10px 0 0}
-.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;position:sticky;bottom:8px;z-index:5}
-.skill{min-height:76px;background:#fff;border:2px solid var(--ink);border-radius:14px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;box-shadow:0 4px 0 var(--ink)}
-.skill span{font-size:24px;line-height:1.1}
-.skill b{font-size:14px}
-.skill small{font-size:11px;color:var(--muted)}
-.skill.on{background:var(--red);color:#fff;border-color:var(--ink);transform:translateY(-4px);box-shadow:0 8px 0 var(--ink)}
-.skill.on small{color:#ffe}
+/* ---------- 크레딧 (이스터에그) ---------- */
+.credit-wrap{background:radial-gradient(circle at 50% 0,#3a1520,#120c0e 70%);color:#fff;border-radius:20px;padding:34px 24px 30px;text-align:center;position:relative;overflow:hidden}
+.credit-wrap .k{font:900 12px var(--sans);letter-spacing:.4em;color:var(--gold)}
+.credit-wrap h2{font:900 clamp(30px,5vw,48px) var(--serif);margin:6px 0 4px}
+.credit-wrap p.s{color:#cfc6ca;margin:0 0 20px}
+.toons{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.toon-card{background:linear-gradient(#fff,#fbe9ec);color:var(--ink);border-radius:18px;padding:16px 10px 14px;opacity:0;animation:rise .7s cubic-bezier(.2,1.4,.4,1) forwards;position:relative}
+.toon-card svg{width:82%;max-width:130px;display:block;margin:0 auto;animation:bob 2.4s ease-in-out infinite}
+.toon-card:nth-child(2) svg{animation-delay:.3s}.toon-card:nth-child(3) svg{animation-delay:.6s}.toon-card:nth-child(4) svg{animation-delay:.9s}
+.toon-card b{display:block;font:900 22px var(--kserif);margin-top:6px}
+.toon-card small{color:var(--muted);font-size:12.5px}
+.toon-card .say{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);font-size:11.5px;font-weight:900;padding:3px 10px;border-radius:99px;white-space:nowrap}
+@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.8)}to{opacity:1;transform:none}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.spark{position:absolute;color:var(--gold);animation:tw 1.6s infinite;font-size:14px}
+@keyframes tw{50%{opacity:.2;transform:scale(.6)}}
 
-/* ---------- 결과 화면 ---------- */
-#scr-fail,#scr-win{padding:28px 16px;text-align:center;position:relative;overflow:hidden}
-.result{max-width:700px;margin:0 auto;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:24px clamp(14px,4vw,34px) 28px;position:relative;z-index:2}
-.result.win-box{box-shadow:10px 10px 0 var(--gold)}
-.result.fail-box{box-shadow:10px 10px 0 var(--red)}
-.badge{display:inline-block;background:var(--ink);color:#fff;font:900 12px var(--sans);letter-spacing:.3em;padding:5px 12px;border-radius:4px}
-.result h1{font:900 clamp(38px,10vw,72px)/1 var(--serif);margin:10px 0}
-.fail-box h1{color:var(--red)}
-.win-box h1{background:linear-gradient(90deg,var(--red),var(--gold),var(--red));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:shine 2.5s linear infinite,zoomBig .8s cubic-bezier(.2,1.5,.4,1)}
-@keyframes shine{to{background-position:200% 0}}
-@keyframes zoomBig{from{transform:scale(2.2);opacity:0}to{transform:none;opacity:1}}
-.res-chars{display:flex;justify-content:center;align-items:flex-end;gap:18px;margin:6px 0}
-.res-chars .spr{width:80px}
-.res-chars .mir .spr{width:96px}
-.quote{font:600 clamp(16px,3.8vw,20px)/1.6 var(--kserif);background:var(--ivory);border-left:5px solid var(--red);padding:12px 16px;text-align:left;margin:12px 0}
-.bigcode{display:flex;justify-content:center;align-items:center;gap:clamp(8px,3vw,20px);margin:20px 0 14px}
-.bigcode .n{width:clamp(76px,19vw,120px);height:clamp(98px,25vw,150px);display:grid;place-items:center;background:var(--red);color:#fff;border:3px solid var(--ink);border-radius:16px;
-  font:900 clamp(54px,14vw,98px) var(--serif);box-shadow:0 8px 0 var(--ink);opacity:0;animation:flipIn .7s cubic-bezier(.2,1.4,.4,1) forwards}
-.bigcode .n:nth-of-type(1){animation-delay:.6s}.bigcode .n:nth-of-type(2){animation-delay:1.1s}.bigcode .n:nth-of-type(3){animation-delay:1.6s}
-.bigcode .sl{font:900 clamp(28px,7vw,50px) var(--serif);color:var(--muted)}
-@keyframes flipIn{from{opacity:0;transform:rotateX(90deg) scale(.6)}to{opacity:1;transform:none}}
-.notice{font-size:clamp(16px,3.8vw,19px);font-weight:900;color:var(--red);margin:6px 0 10px}
-.front{border:2px solid var(--ink);padding:10px 14px;margin:14px 0;text-align:left;background:var(--ivory)}
-.front .fm{font:900 22px var(--serif);color:var(--red);border-bottom:3px double var(--ink);display:flex;justify-content:space-between;align-items:baseline}
-.front .fm small{font:500 11px var(--sans);color:var(--muted)}
-.front h4{margin:8px 0 2px;font:900 18px var(--kserif)}
-.front p{margin:0;font-size:13.5px;color:var(--muted)}
-.stats{color:var(--muted);font-size:14px;margin:6px 0 16px}
-/* 만든 사람들 */
-.credits{margin:18px 0 6px;background:var(--ink);border-radius:16px;padding:14px 12px 16px;color:#fff}
-.cr-title{font:900 13px var(--sans);letter-spacing:.3em;color:var(--gold);margin-bottom:10px}
-.cr-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.cr{background:linear-gradient(#fdf1ef,#f9e4e3);border:2px solid var(--gold);border-radius:12px;padding:10px 6px 8px;color:var(--ink);opacity:0;animation:crIn .6s cubic-bezier(.2,1.4,.4,1) forwards}
-@keyframes crIn{from{opacity:0;transform:translateY(20px) scale(.6)}to{opacity:1;transform:none}}
-.cr .spr{width:64%;margin:0 auto;animation:idle 1.6s steps(2) infinite}
-.cr b{display:block;font:900 17px var(--kserif);margin-top:6px}
-.cr small{display:block;font-size:11.5px;color:var(--muted)}
-@media (max-width:760px){.cr-row{grid-template-columns:repeat(2,1fr)}}
-.result .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.confetti{position:fixed;top:-20px;width:10px;height:14px;z-index:1;animation:fall linear forwards;pointer-events:none}
-@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+/* ---------- 광고 영상 ---------- */
+#ad{position:fixed;inset:0;z-index:200;background:#000;color:#fff;overflow:hidden}
+#ad .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;opacity:0;transition:opacity .6s}
+#ad .scene.on{opacity:1}
+#ad .s1 small{font:700 13px var(--sans);letter-spacing:.6em;color:#bbb}
+#ad .s1 b{font:italic 400 clamp(22px,4vw,36px) var(--serif);margin-top:12px;display:block}
+#ad .s2{background:#fff;color:var(--ink)}
+#ad .s2 .big{font:900 clamp(56px,15vw,200px)/1 var(--serif);letter-spacing:.04em}
+#ad .s2.on .big{animation:zoomOut 2.6s ease-out both}
+@keyframes zoomOut{from{transform:scale(2.4);letter-spacing:.5em;opacity:0}to{transform:none;opacity:1}}
+#ad .s3 .clock{font:900 clamp(80px,20vw,200px)/1 var(--serif);color:var(--red);font-variant-numeric:tabular-nums}
+#ad .s3 p{font:700 clamp(18px,3vw,28px) var(--kserif);margin:10px 0 0}
+#ad .s4{background:var(--ink)}
+#ad .s4 svg{width:min(260px,52vw)}
+#ad .s4 .line{font:italic 700 clamp(24px,4.6vw,46px) var(--serif);margin-top:12px}
+#ad .s4 .line small{display:block;font:500 15px var(--sans);font-style:normal;color:#bbb;margin-top:6px}
+#ad .s5{background:var(--cerulean)}
+#ad .s5.on{animation:wipe .9s ease both}
+@keyframes wipe{from{clip-path:circle(0 at 50% 50%)}to{clip-path:circle(150% at 50% 50%)}}
+#ad .s5 b{font:900 clamp(30px,6vw,64px)/1.25 var(--kserif)}
+#ad .s5 small{display:block;font:700 13px var(--sans);letter-spacing:.4em;margin-top:16px;opacity:.85}
+#ad .s6{background:var(--ivory);color:var(--ink)}
+#ad .s6 .k{font:900 13px var(--sans);letter-spacing:.4em;color:var(--red)}
+#ad .s6 h2{font:900 clamp(40px,8vw,90px)/1.05 var(--kserif);margin:12px 0 8px;letter-spacing:-.03em}
+#ad .s6 h2 em{font-style:normal;color:var(--red)}
+#ad .s6 p{margin:0 0 22px;font-size:clamp(15px,2vw,19px)}
+#ad .chrome{position:absolute;left:0;right:0;bottom:0;padding:14px 18px 16px;background:linear-gradient(transparent,rgba(0,0,0,.7));display:flex;align-items:center;gap:14px;z-index:3}
+#ad .chrome button{color:#fff;font-size:18px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12)}
+#ad .pg{flex:1;height:5px;background:rgba(255,255,255,.3);border-radius:99px;overflow:hidden}
+#ad .pg i{display:block;height:100%;width:0;background:var(--red)}
+#ad .tm{font-size:12.5px;font-variant-numeric:tabular-nums;color:#ddd}
+#ad .adlab{position:absolute;top:16px;left:16px;z-index:3;background:#ffcc00;color:#000;font:900 12px var(--sans);padding:3px 9px;border-radius:4px}
+#ad .adlab span{font-weight:500;margin-left:6px}
+#ad .skip{position:absolute;right:0;bottom:84px;z-index:3;background:rgba(0,0,0,.75);color:#fff;border:1px solid rgba(255,255,255,.4);border-right:none;padding:12px 18px;font-size:15px;font-weight:700;min-width:170px;text-align:left}
+#ad .skip:disabled{opacity:.85;cursor:default}
 
-/* ---------- 팝업창 ---------- */
-.modal{position:fixed;inset:0;z-index:60;background:rgba(29,26,28,.55);display:flex;align-items:center;justify-content:center;padding:14px}
-.modal-box{background:#fff;max-width:760px;width:100%;max-height:90vh;overflow:auto;border:2px solid var(--ink);border-radius:18px;box-shadow:10px 10px 0 var(--blue);padding:0 0 22px;animation:zoomIn .25s}
-.modal-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;background:#fff;border-bottom:2px solid var(--ink);padding:10px 16px}
-.modal-top .mt{font:900 22px var(--serif);color:var(--red);letter-spacing:.04em}
-.modal-top button{width:44px;height:44px;border-radius:10px;background:var(--ink);color:#fff;font-size:18px}
-.modal-in{padding:14px 18px 0}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.tab{min-height:42px;padding:6px 12px;border:2px solid var(--ink);border-radius:99px;font-weight:700;font-size:13.5px;background:#fff}
-.tab.on{background:var(--ink);color:#fff}
-.news{font-family:var(--kserif);font-size:15.5px;line-height:1.9}
-.news h3{font:900 21px/1.4 var(--kserif);margin:0 0 4px;border-bottom:3px double var(--ink);padding-bottom:8px}
-.news .meta{font:12px var(--sans);color:var(--muted);margin-bottom:10px}
-.news p{margin:0 0 12px}
-.news mark{background:linear-gradient(transparent 55%,rgba(200,16,46,.22) 55%);color:inherit;font-weight:700}
-.news table{width:100%;border-collapse:collapse;font:14px var(--sans);margin:6px 0 12px}
-.news th{background:var(--ink);color:#fff;padding:6px}
-.news td{border:1px solid var(--line);padding:6px 10px;vertical-align:top;line-height:1.8}
-.news .src{font:12px var(--sans);color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
-.hint-box{font:600 17px/1.8 var(--kserif)}
-.hint-box b{color:var(--red)}
+/* ---------- 쿠키 / 토스트 / 기타 ---------- */
+.cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:80;max-width:560px;background:#fff;border:1.5px solid var(--ink);border-radius:16px;padding:18px 20px;box-shadow:8px 8px 0 var(--ink);animation:pop .4s}
+.cookie p{margin:0 0 12px;font-size:14px}
+.cookie .row{display:flex;gap:8px;flex-wrap:wrap}
+#toasts{position:fixed;left:50%;top:20px;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:min(92vw,480px)}
+.toast{background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-size:14.5px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:toast 2.8s forwards;text-align:center}
+@keyframes toast{0%{opacity:0;transform:translateY(-10px)}10%,85%{opacity:1;transform:none}100%{opacity:0}}
+.totop{position:fixed;right:18px;bottom:18px;z-index:70;width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;font-size:18px;opacity:0;pointer-events:none;transition:.3s}
+.totop.show{opacity:1;pointer-events:auto}
+footer{background:var(--ink);color:#bdb3b7;padding:56px 0 28px;margin-top:40px;font-size:14px}
+.ft{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px}
+footer .logo{color:#fff;text-align:left;font-size:44px}
+footer h5{color:#fff;margin:0 0 12px;font-size:12px;letter-spacing:.25em}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{margin:6px 0}
+footer a{text-decoration:none}
+footer a:hover{color:#fff}
+.nl{display:flex;gap:6px;margin-top:14px}
+.nl input{flex:1;min-width:0;padding:10px 14px;border-radius:99px;border:1px solid #4a4245;background:#2a2527;color:#fff;font:inherit}
+.fb{border-top:1px solid #3a3437;margin-top:36px;padding-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12.5px}
+.social{display:flex;gap:8px;margin-top:14px}
+.social a{width:38px;height:38px;border-radius:50%;border:1px solid #4a4245;display:grid;place-items:center;font-size:13px;font-weight:900}
+.social a:hover{background:#fff;color:var(--ink)}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:3px;background:var(--cerulean);vertical-align:-2px;cursor:help}
+.nf{text-align:center;padding:90px 20px}
+.nf b{font:900 clamp(90px,20vw,180px)/1 var(--serif);color:var(--red);display:block}
 
-/* ---------- 효과 ---------- */
-#toasts{position:fixed;left:50%;top:150px;transform:translateX(-50%);z-index:80;display:flex;flex-direction:column;gap:6px;align-items:center;width:min(92vw,540px);pointer-events:none}
-.toast{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:12px;padding:9px 16px;font-weight:700;font-size:15px;box-shadow:4px 4px 0 var(--ink);animation:toastIn 2.4s ease forwards;text-align:center}
-.toast.bad{background:var(--red);color:#fff}
-.toast.good{border-color:var(--green);box-shadow:4px 4px 0 var(--green)}
-@keyframes toastIn{0%{opacity:0;transform:translateY(-8px)}10%,80%{opacity:1;transform:none}100%{opacity:0}}
-#flash{position:fixed;inset:0;pointer-events:none;z-index:75}
-#flash.on{animation:flash .45s}
-@keyframes flash{0%{background:rgba(200,16,46,.35)}100%{background:rgba(200,16,46,0)}}
-body.shake #game-main,body.shake .cu-box{animation:shake .4s}
-@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
-@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.15);opacity:1}100%{transform:scale(1)}}
-#bigfx{position:fixed;left:50%;top:44%;transform:translate(-50%,-50%);z-index:85;pointer-events:none;font:900 clamp(38px,10vw,72px) var(--serif);color:var(--gold);
-  -webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--ink);white-space:nowrap;opacity:0}
-#bigfx.go{animation:bigfx 1s ease forwards}
-@keyframes bigfx{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}25%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}60%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-70%)}}
-.pile{position:fixed;left:0;right:0;top:0;z-index:70;pointer-events:none;text-align:center;background:linear-gradient(rgba(200,16,46,.92),transparent);color:#fff;padding:130px 10px 50px;font:900 21px var(--sans);animation:pileIn 1.8s ease forwards}
-@keyframes pileIn{0%{opacity:0}15%,70%{opacity:1}100%{opacity:0}}
-.float{position:fixed;z-index:82;font:900 22px var(--serif);pointer-events:none;animation:floatUp 1s ease forwards;-webkit-text-stroke:1px #fff}
-@keyframes floatUp{to{transform:translateY(-50px);opacity:0}}
-/* 보스 등장 */
-.intro{position:fixed;inset:0;z-index:55;background:rgba(58,21,32,.92);display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;color:#fff}
-.intro-box{max-width:520px;animation:fadeIn .4s}
-.intro-box .spr{width:150px;margin:0 auto;animation:bossIn .9s cubic-bezier(.2,1.4,.4,1)}
-@keyframes bossIn{from{transform:translateY(-60px) scale(.5);opacity:0}to{transform:none;opacity:1}}
-.intro-box h2{font:900 clamp(30px,8vw,48px) var(--serif);margin:6px 0;letter-spacing:.08em;color:var(--gold)}
-.intro-box .say{color:var(--ink);font-size:17px;margin:12px 0}
-.intro-box p{color:#f3dfe3}
-
-/* ---------- 휴대전화 화면 ---------- */
-@media (max-width:760px){
-  .cover-grid{grid-template-columns:1fr}
-  .hero{max-width:260px;margin:0 auto;width:100%}
-  .mast .issue{display:none}
-  .hud-in{grid-template-columns:auto minmax(0,1fr);padding:6px 10px;gap:6px 10px}
-  #h-time{font-size:24px}
-  .hud-time{min-width:74px}
-  .bar-row{grid-template-columns:18px 44px minmax(0,1fr) 26px;font-size:11.5px}
-  .bar-row .face{width:18px}
-  .hud-mid{gap:8px}
-  .hud-lab{display:none!important}
-  .digit,.inv span{width:26px;height:32px;font-size:16px}
-  .hud-actions{justify-content:flex-end}
-  .hud-actions{gap:4px}
-  .hud-actions button{padding:4px 7px;font-size:12.5px}
-  .hud-actions small{display:none}
-  .digits,.inv{gap:3px}
-  .objlist{grid-template-columns:repeat(3,1fr)}
-  .obj .tag{display:none}
-  .room-sign{display:none}
-  .trays{grid-template-columns:1fr 1fr}
-  .pslot{grid-template-columns:72px 1fr}
-  .pslot .lab{font-size:12.5px}
-  .tool{font-size:12.5px}
-  .stage-top{min-height:150px;padding:10px}
-  .say{font-size:13px}
-  .skills{gap:5px;bottom:4px}
-  .skill{min-height:62px}
-  .skill span{font-size:20px}
-  .skill b{font-size:12px;text-align:center;line-height:1.2}
-  .skill small{display:none}
-  .cu{padding:0}
-  .cu-top{flex-wrap:wrap;gap:6px 8px;padding:8px 10px}
-  .cu-top h2{font-size:16px;flex:1 1 100%;order:-1}
-  .cu-top .lt{display:none}
-  .cu-time{margin-right:auto}
-  .tasks{grid-template-columns:1fr 1fr;gap:8px}
-  .task{padding:8px;gap:4px}
-  .task b{font-size:14px;line-height:1.3}
-  .task span{font-size:12px;line-height:1.35}
-  .task .tb{grid-template-columns:1fr;gap:4px}
-  .task .tb button{min-height:40px;font-size:13px}
-  .cu-box{max-height:100vh;height:100%;border-radius:0;box-shadow:none}
-  #toasts{top:130px}
+/* ---------- 휴대전화 ---------- */
+@media (max-width:900px){
+  .hero-grid,.two,.jd,.dash,.letter{grid-template-columns:1fr}
+  .feat,.press-grid,.offices{grid-template-columns:1fr 1fr}
+  .stats,.values,.kpis{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:none}
+  .quotes{grid-template-columns:1fr}
+  .press-strip .wrap{grid-template-columns:1fr}
+  .jobs{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .ft{grid-template-columns:1fr 1fr}
+  .jd-side,.side-nav{position:static}
+  .paper .body{column-count:1}
+  .burger{display:grid}
+  nav.gnb{display:none}
+  nav.gnb.open{display:block}
+  nav.gnb ul{flex-direction:column;gap:0;padding:6px 0}
+  nav.gnb a{padding:12px 20px}
+  .hd{min-height:70px}
+  .topbar .clocks span:nth-child(n+2){display:none}
+  .toons{grid-template-columns:repeat(4,1fr);gap:8px}
+  .toon-card .say{font-size:10px;padding:2px 7px}
+  .rules{grid-template-columns:1fr}
+  .side-nav{display:flex;flex-wrap:wrap;gap:4px}
+  .side-nav .me{width:100%}
+  .side-nav button{width:auto}
+}
+@media (max-width:560px){
+  .feat,.press-grid,.offices,.mood{grid-template-columns:1fr}
+  .sec{padding:52px 0}
+  .who span.nm{display:none}
+  .sb{grid-template-columns:110px 1fr 38px;font-size:13px}
+  .job{grid-template-columns:48px 1fr;padding:18px}
+  .job .ji{width:48px;height:48px;font-size:22px}
+  .job .go{display:none}
+  .ft{grid-template-columns:1fr}
+  .hd-l .ico.s{display:none}
+  .toons{grid-template-columns:1fr 1fr}
+  .topbar .tb-r a,#tb-lang{display:none}
+  .topbar .clocks span{white-space:nowrap}
 }
 </style>
 </head>
 <body>
 
-<!-- ================= 화면 1: 시작 화면 ================= -->
-<section id="scr-start" class="screen active">
-  <div class="cover">
-    <div class="mast"><h1>RUNWAY</h1><div class="issue">Special Issue · Vol.2<br>The Devil's Office</div></div>
-    <div class="cover-grid">
+<!-- ============ 광고 영상 (처음 들어오면 재생) ============ -->
+<div id="ad" class="hidden" aria-label="광고 영상">
+  <div class="adlab">AD<span>RUNWAY × 악프다 2</span></div>
+  <div class="scene s1"><small>ELIAS-CLARKE PUBLICATIONS</small><b>presents</b></div>
+  <div class="scene s2"><div class="big">RUNWAY</div></div>
+  <div class="scene s3"><div class="clock" id="ad-clock">17:57</div><p>퇴근까지 3분.</p></div>
+  <div class="scene s4"><div id="ad-miranda"></div><div class="line">“그게 최선인가?”<small>— Miranda Priestly, Editor-in-Chief</small></div></div>
+  <div class="scene s5"><b>AI가 일을 대신하는 시대,<br>당신은 어떤 비서입니까?</b><small>THE CERULEAN ISSUE · FALL 2026</small></div>
+  <div class="scene s6"><div class="k">NOW PLAYING</div><h2>악프다 2<br><em>퇴근까지 180초</em></h2><p>신문기사를 읽고, 잠금을 풀고, 미란다를 이겨라.</p><button class="btn btn-red" id="ad-play">▶ 지금 플레이</button></div>
+  <button class="skip" id="ad-skip" disabled>5초 후 건너뛰기</button>
+  <div class="chrome">
+    <button id="ad-pause" aria-label="일시정지">⏸</button>
+    <button id="ad-mute" aria-label="소리">🔇</button>
+    <div class="pg"><i id="ad-pg"></i></div>
+    <span class="tm" id="ad-tm">0:00 / 0:16</span>
+  </div>
+</div>
+
+<!-- ============ 상단 ============ -->
+<div class="topbar"><div class="wrap">
+  <div class="clocks"><span>NEW YORK <b id="ck-ny">--:--</b></span><span>PARIS <b id="ck-pa">--:--</b></span><span>SEOUL <b id="ck-se">--:--</b></span></div>
+  <div class="tb-r"><a href="#/careers">채용</a><a href="#/press">보도자료</a><button id="tb-sub">구독하기</button><button id="tb-lang">KOR / ENG</button></div>
+</div></div>
+<div class="ticker"><div class="tk" id="ticker"></div></div>
+<header class="site">
+  <div class="wrap hd">
+    <div class="hd-l"><button class="ico burger" id="burger" aria-label="메뉴">☰</button><button class="ico" id="btn-search" aria-label="검색">🔍</button><a class="ico s" href="#/press" aria-label="뉴스">📰</a></div>
+    <a class="logo" id="logo" href="#/">RUNWAY<small>ELIAS-CLARKE PUBLICATIONS</small></a>
+    <div class="hd-r" id="hd-r"></div>
+  </div>
+  <nav class="gnb" id="gnb"><ul>
+    <li><a href="#/" data-nav="">HOME</a></li>
+    <li><a href="#/about" data-nav="about">ABOUT</a></li>
+    <li><a href="#/press" data-nav="press">PRESS</a></li>
+    <li><a href="#/careers" data-nav="careers">CAREERS</a></li>
+    <li><a href="#/game" data-nav="game" class="hot">GAME ★</a></li>
+    <li><a href="#/intranet" data-nav="intranet">STAFF ONLY</a></li>
+  </ul></nav>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="ft">
       <div>
-        <div class="kicker">OFFICE ESCAPE · 방탈출</div>
-        <div class="title">악프다 2<br><em>퇴근까지 180초</em></div>
-        <p class="subtitle">AI보다 먼저 퇴근할 수 있을까?</p>
-        <div class="story">
-          현재 시각 <b>17:57</b>. 퇴근까지 3분.<br>
-          미란다의 사무실에 갇혔다. 책상에는 처리하지 못한 업무와 수상한 신문기사가 쌓여 있다.<br>
-          미란다가 돌아오기 전까지 <b>세 개의 잠금장치</b>를 풀고 비밀번호를 완성하라.<br>
-          실패하면 내일도 출근이다.
-        </div>
+        <div class="logo">RUNWAY</div>
+        <p style="margin:6px 0 0">Elias-Clarke Publications · New York</p>
+        <p style="margin:4px 0 0">오늘의 컬러는 <span class="swatch" id="swatch" title="?"></span> 세룰리안.</p>
+        <div class="nl"><input id="nl-in" placeholder="뉴스레터 구독 (데모)" aria-label="뉴스레터"><button class="btn btn-red btn-sm" id="nl-btn">구독</button></div>
+        <div class="social"><a href="#/" aria-label="인스타그램">IG</a><a href="#/" aria-label="엑스">X</a><a href="#/" aria-label="유튜브">YT</a><a href="#/" aria-label="핀터레스트">P</a></div>
       </div>
-      <div class="hero" id="hero"></div>
+      <div><h5>COMPANY</h5><ul><li><a href="#/about">회사 소개</a></li><li><a href="#/about">편집장 인사말</a></li><li><a href="#/about">조직도</a></li><li><a href="#/about">오피스</a></li></ul></div>
+      <div><h5>CAREERS</h5><ul><li><a href="#/careers/secretary">편집장 비서 ★</a></li><li><a href="#/careers/fashion">패션 디렉터실</a></li><li><a href="#/careers/editor">피처 에디터</a></li><li><a href="#/careers">전체 채용 공고</a></li></ul></div>
+      <div><h5>MORE</h5><ul><li><a href="#/press">언론 보도</a></li><li><a href="#/game">악프다 2 게임</a></li><li><a href="#/intranet">임직원 인트라넷</a></li><li><button id="replay-ad" style="color:inherit;font-size:14px;padding:0">광고 다시 보기 ▶</button></li></ul></div>
     </div>
-    <div class="pick">
-      <h3>👤 나의 비서 캐릭터를 골라 주세요</h3>
-      <div class="pick-row">
-        <button class="pick-card on" data-g="f"><div class="pv" id="pv-f"></div><div><b>여자 비서</b><small>꼼꼼한 신입 비서</small></div></button>
-        <button class="pick-card" data-g="m"><div class="pv" id="pv-m"></div><div><b>남자 비서</b><small>센스 있는 신입 비서</small></div></button>
-      </div>
-    </div>
-    <div class="start-btns">
-      <button class="btn btn-red" id="btn-start">▶ 게임 시작</button>
-      <button class="btn btn-line" id="btn-howto">게임 방법</button>
-      <button class="btn btn-line" id="btn-news">📰 신문기사 열람</button>
+    <div class="fb">
+      <span>© 2026 Elias-Clarke Publications. All rights reserved<button id="heart" aria-label="?" style="color:#6d6266;padding:0 4px">♥</button></span>
+      <span>이 사이트는 영화 《악마는 프라다를 입는다》에서 영감을 받은 <b>전시용 가상 홈페이지</b>입니다. 실제 회사·인물과 관련이 없습니다.</span>
     </div>
   </div>
-</section>
+</footer>
 
-<!-- ================= 게임 화면 ================= -->
-<section id="scr-game" class="screen">
-  <header id="hud"><div class="hud-in">
-    <div class="hud-time"><small>남은 시간</small><b id="h-time">03:00</b></div>
-    <div class="hud-bars">
-      <div class="bar-row" id="row-hp"><span class="face" id="face-me"></span><span>내 멘탈</span><div class="bar"><i id="h-hp"></i></div><em id="h-hp-n">100</em></div>
-      <div class="bar-row boss"><span class="face" id="face-mir"></span><span>미란다</span><div class="bar"><i id="h-boss"></i></div><em id="h-boss-n">100</em></div>
-    </div>
-    <div class="hud-mid">
-      <div><span class="hud-lab">금고 숫자</span><div class="digits" id="h-digits"></div></div>
-      <div><span class="hud-lab">아이템</span><div class="inv" id="h-inv"></div></div>
-    </div>
-    <div class="hud-actions">
-      <button id="b-article">📰 기사</button>
-      <button id="b-hint">💡 힌트 <small>-10초</small></button>
-      <button id="b-sound" aria-label="소리 켜기/끄기">🔊</button>
-    </div>
-    <div class="quest"><span>🎯 <b id="h-stage">-</b></span><span id="combo-tag"></span></div>
-  </div></header>
-  <main id="game-main"></main>
-</section>
-
-<!-- ================= 실패 화면 ================= -->
-<section id="scr-fail" class="screen">
-  <div class="result fail-box">
-    <div class="badge">GAME OVER</div>
-    <h1 id="fail-title">야근 확정</h1>
-    <div class="res-chars" id="fail-chars"></div>
-    <div class="quote" id="fail-quote"></div>
-    <p class="stats" id="fail-stats"></p>
-    <div class="btns">
-      <button class="btn btn-red" id="btn-retry">↻ 처음부터 다시 도전</button>
-      <button class="btn btn-line" id="btn-home1">시작 화면</button>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 승리 화면 ================= -->
-<section id="scr-win" class="screen">
-  <div class="result win-box">
-    <div class="badge">BOSS DEFEATED</div>
-    <h1>MIRANDA DEFEATED!</h1>
-    <div class="res-chars" id="win-chars"></div>
-    <div class="quote">“흥미롭군. 자네, 생각보다 쓸 만한 비서였어.”</div>
-    <div class="bigcode" id="bigcode"></div>
-    <p class="notice">탈출 성공! 획득한 비밀번호를 실제 전시회 금고에 입력하고 상품을 획득하세요.</p>
-    <div class="credits"><div class="cr-title">MADE BY · 만든 사람들</div><div class="cr-row" id="credits"></div></div>
-    <div class="front"><div class="fm">RUNWAY DAILY <small>특집 · 오늘의 1면</small></div>
-      <h4>“AI 시대, 결과를 걸러내는 비서가 살아남는다”</h4>
-      <p>반복 업무는 AI에게, 판단·소통·검증은 사람에게. 당신이 완성한 특집 기사가 내일 아침 1면에 실립니다.</p></div>
-    <p class="stats" id="win-stats"></p>
-    <div class="btns"><button class="btn btn-line" id="btn-home2">처음 화면으로 (다음 참가자)</button></div>
-  </div>
-</section>
-
-<!-- 팝업창, 퍼즐창, 효과 -->
-<div id="cu" class="cu hidden"><div class="cu-box">
-  <div class="cu-top"><span class="lt" id="cu-lt">LOCK</span><h2 id="cu-title"></h2><span class="cu-time">⏱ <b id="cu-time">03:00</b> · ❤️ <b id="cu-hp">100</b></span><button id="cu-hint" aria-label="힌트">💡 힌트</button><button id="cu-x">✕ 방으로</button></div>
-  <div class="cu-body" id="cu-body"></div>
-</div></div>
-<div id="modal" class="modal hidden"><div class="modal-box">
-  <div class="modal-top"><span class="mt" id="modal-title">RUNWAY DAILY</span><button id="modal-x" aria-label="닫기">✕</button></div>
-  <div class="modal-in" id="modal-body"></div>
-</div></div>
-<div id="intro" class="intro hidden"></div>
+<button class="totop" id="totop" aria-label="맨 위로">↑</button>
+<div id="modal" class="modal hidden"><div class="mbox" id="mbox"><button class="mx" id="mx" aria-label="닫기">✕</button><div id="mbody"></div></div></div>
+<div id="cookie" class="cookie hidden">
+  <p>🍪 <b>RUNWAY는 쿠키를 사용합니다.</b> 미란다의 취향(그리고 여러분의 사이트 이용 기록)을 기억하기 위해서요. 이 사이트는 데모라 정보를 어디에도 보내지 않아요.</p>
+  <div class="row"><button class="btn btn-ink btn-sm" data-ck="all">모두 허용</button><button class="btn btn-line btn-sm" data-ck="min">필수만 허용</button></div>
+</div>
 <div id="toasts"></div>
-<div id="flash"></div>
-<div id="bigfx"></div>
 
 <script>
 /* =====================================================================
-   📰 신문기사 내용 (첨부 PDF 원문에서 가져옴)
-   <mark> ... </mark> 로 감싼 문장은 빨간 형광펜으로 강조돼요.
+   ✏️ 내용 바꾸기 안내
+   - 언론 보도 기사: ARTICLES
+   - 채용 직무:      JOBS
+   - 만든 사람들:    TEAM   (로고 5번 클릭 → 이스터에그)
+   - 로그인 계정:    ACCOUNTS
    ===================================================================== */
+
+/* ---------- 만든 사람들 (이스터에그) ---------- */
+const TEAM = [
+  { name:'예주', desc:'긴 생머리 · 검은 정장', say:'That’s all!', hair:'#2a2226', style:'long' },
+  { name:'은빈', desc:'단발머리 · 검은 정장',   say:'커피 주문 완료!', hair:'#7a4a2e', style:'bob' },
+  { name:'은채', desc:'리본 똥머리 · 검은 정장', say:'팩트체크 끝!', hair:'#4a2c22', style:'bun', ribbon:'#c8102e' },
+  { name:'시현', desc:'막내 · 양갈래 리본',       say:'막내 출근했어요!', hair:'#2a2226', style:'twin', ribbon:'#ff8fb1', young:true }
+];
+
+/* ---------- 언론 보도 (THE NEW YORK MIRROR) — 팀이 쓴 신문기사 ---------- */
 const ARTICLES = [
-  { tab:'③ 비서의 역할', title:'AI 시대에 비서라는 직업은 어떻게 살아남나?', meta:'RUNWAY DAILY · 특집',
-    body:`
-    <p>인공지능(AI)이 처음 등장했을 때만 해도, 비서는 가장 먼저 사라질 대표적인 직업으로 꼽혔다. 하지만 실제 현장에서 일어난 변화는 직업이 사라지는 것이 아니라 <mark>‘역할이 바뀌는 과정’</mark>이었다. AI가 반복적인 행정 업무를 대신해 주면서, 인간 비서의 역할은 <mark>판단과 소통 중심</mark>으로 이동했다.</p>
-    <p>실제로 <mark>AI는 일정 관리나 반복 행정, 문서 초안 작성, 회의록 정리, 데이터 통합처럼 정형화된 업무</mark>를 빠르고 정확하게 자동화하는 데 특화되어 있다. 반면 <mark>인간 비서는 조직 내 커뮤니케이션을 조율하고 예외적인 돌발 상황에 유연하게 대응하며, AI가 내놓은 결과물을 검토하고 수정</mark>하는 고차원적 역할을 수행한다.</p>
-    <p>AI가 정형화된 데이터를 빠르게 검색하고 요약하는 ‘기능적 보조자’라면, 인간 비서는 복잡한 맥락을 이해하고 정서를 다루는 ‘관계적·판단적 주체’다. <mark>상사의 미세한 의도를 파악하고 부서 간 감정을 조율하는 일</mark>, 규정만으로는 해결할 수 없는 돌발 상황에 대응하는 것은 오직 인간 비서만이 수행할 수 있는 고유한 영역이다.</p>
-    <table><tr><th>AI의 역할</th><th>인간 비서의 역할</th></tr>
-      <tr><td>일정 관리<br>반복적인 행정업무<br>문서 초안 작성<br>자료 검색<br>회의록 작성/요약<br>데이터 처리<br>정보 통합</td>
-          <td>맥락 이해<br>상황 판단<br>감정 조율<br>대인관계 관리<br>조직 내 커뮤니케이션<br>예외적인 상황 대응<br>AI 결과물 검토 및 수정</td></tr></table>
-    <p>이제 비서에게는 AI를 다루는 <mark>프롬프트 작성 능력</mark>과 데이터 리터러시는 물론, <mark>AI가 제시한 결과물의 오류를 검증하고 수정하는 정교한 안목</mark>이 필수가 되었다. 결국 AI 시대의 비서는 단순한 ‘행정 보조자’에서 최종 판단을 내리는 <mark>‘의사결정 지원 파트너’</mark>로 전환을 이루어냈다.</p>` },
-  { tab:'④ 프롬프트·검증', title:'“AI에게 시키면 끝?” … 결과를 걸러내는 사람이 경쟁력을 갖는다', meta:'앤드리아 삭스(Andrea Sachs) · 프리랜스저널리스트',
-    body:`
-    <p>AI를 효과적으로 활용하기 위해서는 먼저 프롬프트를 구체적으로 작성해야 한다. 좋은 프롬프트는 크게 <mark>다섯 가지 요소</mark>로 구성된다.
-    AI에게 어떤 역할을 맡길 것인지 정하는 <mark>‘역할’</mark>, 업무의 상황을 설명하는 <mark>‘배경’</mark>, 원하는 작업을 구체적으로 제시하는 <mark>‘지시’</mark>, 결과물에서 지켜야 할 조건을 정하는 <mark>‘제약’</mark>, 그리고 원하는 결과의 형태를 알려주는 <mark>‘출력 형식’</mark>이다. 단순히 “광고 문구를 만들어줘”라고 하는 것보다 대상과 목적, 글자 수, 결과물의 형식까지 <mark>구체적으로 제시할수록</mark> AI의 결과를 원하는 방향으로 이끌 수 있다.</p>
-    <p>구체적인 프롬프트를 사용해도 AI가 항상 정확한 답을 내놓는 것은 아니다. AI는 사실이 아닌 내용을 사실처럼 제시하는 <mark>‘환각(hallucination)’</mark> 현상을 보일 수 있기 때문이다. 따라서 원문 출처와 수치·정보를 확인해야 한다. <mark>AI에게 같은 질문을 반복하는 것만으로는 검증이 되지 않으며, 최종적으로 1차 출처를 확인해야 한다.</mark></p>
-    <p>또한 AI를 업무에 활용할 때는 <mark>개인정보와 기밀정보를 그대로 입력해서도 안 된다.</mark> 고객의 이름이나 전화번호, 주민등록번호, 내부 계약서, 인사정보, 비밀번호와 같은 정보는 <mark>비식별화한 뒤 활용</mark>해야 한다.</p>
-    <p>최근에는 AI를 업무 도구와 직접 연결해 쓰는 방식이 주목받고 있다. <mark>MCP(Model Context Protocol)</mark>는 AI가 일정표나 메일함, 사내 문서함 같은 실제 업무 도구에 직접 접근하도록 연결해 주는 ‘공통 규격’이다. 예를 들어 일정표가 연결되어 있으면 <mark>“다음 주 임원 일정 중 겹치는 건을 찾아 대안을 정리해 달라”</mark>는 요청을 한 번에 처리할 수 있다. 다만 <mark>AI의 접근 권한은 업무에 꼭 필요한 범위로만 설정하고, 인사·계약 정보처럼 공개가 제한된 자료는 연결 대상에서 제외</mark>해야 한다. 이 기능은 클로드(Claude)에서는 ‘커넥터’, 챗GPT에서는 ‘플러그인’으로 불린다.</p>
-    <p>가장 중요한 것은 AI가 만들어낸 결과를 그대로 믿지 않는 태도다. 확인되지 않은 내용은 <mark>‘검증되지 않음’으로 표시</mark>하는 방식이다. 결국 AI를 가장 잘 활용하는 사람은 답을 가장 빨리 받아들이는 사람이 아니라, <mark>그 답을 한 번 더 의심하고 확인할 수 있는 사람</mark>일 것이다.</p>` },
-  { tab:'② AI 연표', title:'“AI는 하루아침에 오지 않았다”', meta:'— 알고리즘 추천에서 생성형 AI까지, 15년에 걸친 업무 환경의 이동 · 크리스티안 톰슨',
-    body:`
-    <p>기술 도입 연표를 따라가 보면, 현재의 변화는 돌발 사태가 아니라 15년 넘게 축적된 흐름의 결과였다.</p>
-    <p>출발점은 <mark>2010년</mark>이었다. 알고리즘 기반 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 이어 <mark>2017년부터 2022년까지</mark>는 기업 단위의 AI 도입이 본격적으로 증가한 시기로 분류된다.</p>
-    <p>분기점은 <mark>2022년</mark>이었다. 챗지피티(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 일반 대중의 도구로 단숨에 옮겨왔다. 이후 <mark>2023년</mark>은 생성형 AI가 실제 업무에 본격적으로 진입한 해로 평가되며, <mark>2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로</mark> 활용 범위가 빠르게 확대됐다.</p>
-    <p>전문가들은 이 연표가 보여주는 핵심이 <mark>‘대체’가 아닌 ‘재배치’</mark>라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다.</p>` },
-  { tab:'⑤ 인터뷰', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다', meta:'마커스 벨(Marcus Bell)',
-    body:`
-    <p><b>Q. 비서가 AI시대에 밀려나지 않으려면 무엇을 갖춰야 할까요?</b></p>
-    <p>A. 요즘 상사들이 어떤 비서를 우수하다고 평가하는지 아세요? <mark>하나하나 지시하지 않아도 상사의 니즈에 맞게 능동적으로 움직이는 비서</mark>예요. 상사들도 잘 알고 있어요. <mark>전표처리나 계산 같은 단순 복잡 업무는 AI가 훨씬 빠르고 정확하게 처리</mark>한다는 걸요. 하지만 <mark>사람과 직접 대면하고 교감하며 상황을 이해하고 해결하는 건 AI가 할 수 없는 사람만의 영역</mark>이죠. 결국 AI기술을 발판삼아 판단력을 보이는 비서가 되는 것이 중요하죠. AI는 도구일 뿐 본질이 변하지는 않으니까요.</p>` }
-];
-
-/* =====================================================================
-   ⚙️ 게임 기본 설정 — 숫자만 바꾸면 난이도를 조절할 수 있어요
-   ===================================================================== */
-const CONFIG = {
-  totalSeconds: 180,     // 전체 제한 시간(초)
-  hintCost: 10,          // 힌트를 누르면 줄어드는 시간(초)
-  code: ['2','5','4'],   // 금고 비밀번호 세 자리
-  pileFirst: 45,         // 한 잠금장치에서 이 시간(초) 이상 지나면 '업무 폭주' 경고
-  pileEvery: 20          // 그 뒤로 이 간격마다 다시 경고
-};
-
-/* ---------------- 잠금 1: 업무 분배 (기사 ③ 표) ---------------- */
-const TASKS = [
-  { k:'일정 관리',            d:'다음 주 미팅 일정표 정리',         to:'ai' },
-  { k:'문서 초안 작성',        d:'특집호 보도자료 초안 쓰기',         to:'ai' },
-  { k:'회의록 작성/요약',      d:'오전 편집회의 녹취 요약하기',        to:'ai' },
-  { k:'데이터 처리',          d:'샘플 반납 목록 정리·통합',          to:'ai' },
-  { k:'감정 조율',            d:'화가 난 디자이너 달래기',           to:'me' },
-  { k:'예외적인 상황 대응',     d:'촬영 당일 모델이 갑자기 불참!',      to:'me' },
-  { k:'AI 결과물 검토 및 수정', d:'AI가 쓴 기사 초안 확인하기',         to:'me' },
-  { k:'조직 내 커뮤니케이션',   d:'편집부와 디자인팀 의견 조율',        to:'me' }
-];
-
-/* ---------------- 잠금 2: 프롬프트 5요소 (기사 ④) ---------------- */
-const P_SLOTS = ['역할','배경','지시','제약','출력 형식'];
-const FRAGS = [
-  { t:'너는 패션 매거진의 베테랑 편집 기자야.', slot:0 },
-  { t:'런웨이가 ‘AI 시대의 비서’ 특집호를 준비하고 있어.', slot:1 },
-  { t:'AI와 인간 비서의 역할 차이를 설명하는 기사를 써 줘.', slot:2 },
-  { t:'1,000자 이내로, 확인된 사실만 사용해 줘.', slot:3 },
-  { t:'제목 1개와 본문 3문단 형식으로 보여 줘.', slot:4 },
-  { t:'알아서 잘 써 줘.', slot:-1, why:'너무 막연해요! 기사: 구체적으로 제시할수록 원하는 결과가 나와요' },
-  { t:'고객 명단(이름·전화번호)도 그대로 넣어서 참고해.', slot:-1, why:'개인정보는 그대로 입력하면 안 돼요! 비식별화가 먼저예요' }
-];
-
-/* ---------------- 잠금 3: AI 초안 검증 (기사 ④) — 인물·연락처는 모두 가상 ---------------- */
-const DRAFT = [
-  { t:'AI 시대, 비서는 사라지지 않는다', title:true },
-  { t:'2022년 챗지피티 공개 이후, AI는 전문가의 도구에서 일반 대중의 도구로 옮겨왔다.' },
-  { t:'인터뷰에 응한 VIP 고객 김가명(010-0000-0000)은 “AI 덕분에 편해졌다”고 말했다.', ok:['mask'],
-    fixed:'인터뷰에 응한 VIP 고객 <span class="mask">김가명(010-0000-0000)</span>은 “AI 덕분에 편해졌다”고 말했다.', stamp:['black','비식별화 완료'] },
-  { t:'한 조사에 따르면 3년 안에 비서의 99%가 AI로 대체된다.', ok:['flag','source'], stamp:['','검증되지 않음'] },
-  { t:'AI는 반복 업무를, 인간 비서는 판단과 소통을 맡는 구조로 일터가 재편되고 있다.' },
-  { t:'※ 팩트체크: AI에게 같은 질문을 세 번 해서 같은 답을 받았으므로 사실로 확인함.', ok:['source'], stamp:['blue','1차 출처 확인 필요'],
-    whyFlag:'같은 질문 반복은 검증이 아니에요! 🔍 1차 출처를 확인해야 해요' },
-  { t:'첨부: 런웨이 내부 계약서·인사정보 원문', ok:['mask'], fixed:'첨부: <span class="mask">런웨이 내부 계약서·인사정보 원문</span>', stamp:['black','기밀 비식별화'] }
-];
-const TOOLS = [
-  { k:'mask',   icon:'🖍️', name:'비식별화',     sub:'개인정보·기밀 가리기' },
-  { k:'flag',   icon:'🏷️', name:'검증되지 않음', sub:'근거 없는 주장 표시' },
-  { k:'source', icon:'🔍', name:'1차 출처 확인', sub:'원문 출처로 재검증' }
-];
-
-/* ---------------- 보스전 ---------------- */
-const SKILLS = [
-  { k:'auto',    icon:'⚙️', name:'AI 자동화',    from:'반복 업무 처리' },
-  { k:'judge',   icon:'🤝', name:'비서의 판단',   from:'조율·돌발 대응' },
-  { k:'connect', icon:'🔌', name:'커넥터 연결',   from:'일정표·메일함(MCP)' },
-  { k:'shield',  icon:'🛡️', name:'팩트체크 실드', from:'검증·정보 보호' }
-];
-const TAGS = { routine:'반복 업무', human:'사람의 일', connect:'도구 연결', block:'위험 지시' };
-const NEED = { routine:'auto', human:'judge', connect:'connect', block:'shield' };
-const WRONG = {
-  routine:['정형화된 반복 업무는 ⚙️ AI 자동화에 맡기세요!', 6],
-  human:  ['감정 조율·돌발 상황은 AI가 대신 못 해요! 🤝 비서의 판단으로', 8],
-  connect:['일정표·메일함은 🔌 커넥터로 AI에 연결하면 한 번에 처리돼요!', 6],
-  block:  ['이건 따르면 안 되는 지시예요! 🛡️ 팩트체크 실드로 막으세요', 10]
-};
-const WAVES = [
-  { name:'업무 폭탄', time:17, line:'이 많은 일을 언제 다 할 건가? 당장 처리해!',
-    tip:'반복 업무는 ⚙️ 한 번에! 사람 마음을 다루는 일은 🤝 직접!',
-    items:[
-      { type:'routine', tx:'전표 처리 30건', dmg:3 },
-      { type:'human',   tx:'화가 난 디자이너가 쇼 불참을 선언했다!', dmg:7 },
-      { type:'routine', tx:'오전 회의록 정리', dmg:3 },
-      { type:'human',   tx:'편집팀과 광고팀이 표지 문제로 대립 중', dmg:6 },
-      { type:'routine', tx:'촬영 참고 자료 검색', dmg:2 }
+  { id:'ai-timeline', date:'2026. 3. 4', sec:'TECHNOLOGY', title:'“AI는 하루아침에 오지 않았다”', sub:'알고리즘 추천에서 생성형 AI까지, 15년에 걸친 업무 환경의 이동', by:'크리스티안 톰슨 (Christian Thompson) · 프리랜스 저널리스트', featured:true,
+    body:[
+      '런웨이 미디어 그룹의 인력 교체 논란이 이어지는 가운데, 정작 주목해야 할 것은 ‘AI의 등장’이 아니라 ‘AI가 업무에 들어온 속도’라는 지적이 나온다. 기술 도입 연표를 따라가 보면, 현재의 변화는 돌발 사태가 아니라 15년 넘게 축적된 흐름의 결과였다.',
+      '출발점은 2010년이었다. 알고리즘 기반 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 이어 2017년부터 2022년까지는 기업 단위의 AI 도입이 본격적으로 증가한 시기로 분류된다. 다만 이 단계까지의 AI는 대중이 체감하기 어려운 ‘배후 기술’에 머물렀다.',
+      '분기점은 2022년이었다. 챗지피티(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 일반 대중의 도구로 단숨에 옮겨왔다. 이후 2023년은 생성형 AI가 실제 업무에 본격적으로 진입한 해로 평가되며, 2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로 활용 범위가 빠르게 확대됐다.',
+      '전문가들은 이 연표가 보여주는 핵심이 ‘대체’가 아닌 ‘재배치’라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다. 15년의 흐름을 놓친 조직이 기술을 인력 감축의 명분으로만 읽는 순간, 가장 먼저 사라지는 것은 비용이 아니라 조직의 축적된 경험이라는 지적이 뒤따른다.'
     ]},
-  { name:'일정 지옥', time:16, line:'다음 주 내 일정, 왜 이렇게 겹쳐 있지?',
-    tip:'일정표·메일함은 🔌 커넥터로! 단, 공개가 제한된 자료는 연결하면 안 돼요.',
-    items:[
-      { type:'connect', tx:'다음 주 임원 일정 중 겹치는 건을 찾아 대안 정리', dmg:8, ok:'📅 일정표 연결! 겹친 일정 3건과 대안 정리 완료' },
-      { type:'block',   tx:'미란다: “인사·계약 폴더도 AI에 전부 연결해!”', dmg:6, ok:'🛡️ 접근 권한은 꼭 필요한 범위만! 인사·계약 정보는 연결 제외' },
-      { type:'connect', tx:'메일함에 흩어진 촬영 일정 모으기', dmg:7, ok:'📧 메일함 연결! 촬영 일정 자동 정리' }
+  { id:'secretary-survive', date:'2026. 3. 6', sec:'CAREER', title:'AI 시대에 비서라는 직업은 어떻게 살아남나?', sub:'‘행정 보조자’에서 ‘의사결정 지원 파트너’로', by:'THE NEW YORK MIRROR 편집부', featured:true, table:true,
+    body:[
+      '인공지능(AI)이 처음 등장했을 때만 해도, 비서는 가장 먼저 사라질 대표적인 직업으로 꼽혔다. 일정 관리부터 문서 작성, 자료 검색과 회의록 요약까지 비서가 하던 일들을 AI가 순식간에 처리해 버렸기 때문이다. 하지만 실제 현장에서 일어난 변화는 직업이 사라지는 것이 아니라 ‘역할이 바뀌는 과정’이었다. AI가 반복적인 행정 업무를 대신해 주면서, 인간 비서의 역할은 판단과 소통 중심으로 이동했다.',
+      '실제로 AI는 일정 관리나 반복 행정, 문서 초안 작성, 회의록 정리, 데이터 통합처럼 정형화된 업무를 빠르고 정확하게 자동화하는 데 특화되어 있다. 반면 인간 비서는 조직 내 커뮤니케이션을 조율하고 예외적인 돌발 상황에 유연하게 대응하며, AI가 내놓은 결과물을 검토하고 수정하는 고차원적 역할을 수행한다.',
+      'AI가 정형화된 데이터를 빠르게 검색하고 요약하는 ‘기능적 보조자’라면, 인간 비서는 복잡한 맥락을 이해하고 정서를 다루는 ‘관계적·판단적 주체’다. 상사의 미세한 의도를 파악하고 부서 간 감정을 조율하는 일, 대인관계를 관리하며 규정만으로는 해결할 수 없는 돌발 상황에 대응하는 것은 오직 인간 비서만이 수행할 수 있는 고유한 영역이다.',
+      '이제 비서에게는 AI를 다루는 프롬프트 작성 능력과 데이터 리터러시는 물론, AI가 제시한 결과물의 오류를 검증하고 수정하는 정교한 안목이 필수가 되었다. AI의 빠른 자료 정리에 무비판적으로 의존하기보다 정확한 정보를 가려내고, 이를 바탕으로 리더와 조직 사이를 매끄럽게 잇는 전략적 커뮤니케이션 능력이 핵심 경쟁력으로 떠오른 것이다.',
+      '결국 AI 시대의 비서는 단순한 ‘행정 보조자’에서 AI 도구를 자유롭게 활용하고 최종 판단을 내리는 ‘의사결정 지원 파트너’로 전환을 이루어냈다. AI라는 강력한 도구를 지휘하며 판단과 책임의 몫을 지켜낸 비서직은, 기술 변화 속에서 직업의 미래를 스스로 재정의한 대표적인 사례다.'
     ]},
-  { name:'갑질 모드', time:16, line:'출처? 그런 건 필요 없어. 이 보고서 지금 당장 제출해!',
-    tip:'출처 없는 보고서·개인정보 입력은 🛡️ 실드로 막고, 상사의 속뜻은 🤝 직접 파악!',
-    items:[
-      { type:'block', tx:'출처 확인 안 된 AI 통계 보고서를 그대로 제출하라!', dmg:8, ok:'🛡️ 1차 출처 확인 전엔 제출 불가! ‘검증되지 않음’ 표시' },
-      { type:'block', tx:'고객 이름·전화번호를 그대로 AI에 넣고 요약시켜라!', dmg:7, ok:'🛡️ 개인정보는 비식별화한 뒤에만!' },
-      { type:'human', tx:'미란다가 말하지 않은 진짜 의도 파악하기', dmg:6 }
+  { id:'prompt-check', date:'2026. 3. 9', sec:'BUSINESS', title:'“AI에게 시키면 끝?” … 결과를 걸러내는 사람이 경쟁력을 갖는다', sub:'좋은 프롬프트의 5요소, 환각 검증, 개인정보 보호, 그리고 MCP', by:'앤드리아 삭스 (Andrea Sachs) · 프리랜스 저널리스트', featured:true,
+    body:[
+      'AI가 문서 작성과 자료 조사, 정보 정리 등 다양한 업무에 활용되면서 직장인들의 업무 방식도 빠르게 달라지고 있다. 하지만 AI를 단순히 사용하는 것만으로는 원하는 결과를 얻기 어렵다는 지적이 나온다. AI에게 정확하게 지시하고, 결과를 검토하는 능력까지 갖추는 것이 중요해지고 있기 때문이다.',
+      'AI를 효과적으로 활용하기 위해서는 먼저 프롬프트를 구체적으로 작성해야 한다. 좋은 프롬프트는 크게 다섯 가지 요소로 구성된다. AI에게 어떤 역할을 맡길 것인지 정하는 ‘역할’, 업무의 상황을 설명하는 ‘배경’, 원하는 작업을 구체적으로 제시하는 ‘지시’, 결과물에서 지켜야 할 조건을 정하는 ‘제약’, 그리고 원하는 결과의 형태를 알려주는 ‘출력 형식’이다.',
+      '구체적인 프롬프트를 사용해도 AI가 항상 정확한 답을 내놓는 것은 아니다. AI는 사실이 아닌 내용을 사실처럼 제시하는 ‘환각(hallucination)’ 현상을 보일 수 있기 때문이다. 따라서 원문 출처와 수치·정보를 확인하고, 조사 대상·연도·표본 등을 검토하는 과정이 필요하다. AI에게 같은 질문을 반복하는 것만으로는 검증이 되지 않으며, 최종적으로 1차 출처를 확인해야 한다.',
+      '또한 AI를 업무에 활용할 때는 개인정보와 기밀정보를 그대로 입력해서도 안 된다. 고객의 이름이나 전화번호, 주민등록번호, 내부 계약서, 인사정보, 비밀번호와 같은 정보는 비식별화한 뒤 활용해야 한다.',
+      '최근에는 AI를 업무 도구와 직접 연결해 쓰는 방식이 주목받고 있다. MCP(Model Context Protocol)는 AI가 일정표나 메일함, 사내 문서함 같은 실제 업무 도구에 직접 접근하도록 연결해 주는 ‘공통 규격’으로, 서로 다른 기기를 하나의 USB 단자로 잇듯 여러 업무 프로그램을 AI에 같은 방식으로 연결해 준다. 다만 AI의 접근 권한은 업무에 꼭 필요한 범위로만 설정하고, 인사·계약 정보처럼 공개가 제한된 자료는 연결 대상에서 제외해야 한다. 이 기능은 클로드(Claude)에서는 ‘커넥터’, 챗GPT에서는 ‘플러그인’으로 불린다.',
+      '결국 가장 중요한 것은 AI가 만들어낸 결과를 그대로 믿지 않는 태도다. 확인되지 않은 내용은 ‘검증되지 않음’으로 표시하는 방식이다. AI를 가장 잘 활용하는 사람은 답을 가장 빨리 받아들이는 사람이 아니라, 그 답을 한 번 더 의심하고 확인할 수 있는 사람일 것이다.'
+    ]},
+  { id:'interview-amari', date:'2026. 3. 11', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 정체성은 어떻게 변하는가?', sub:'AI 도입에 따른 비서 직무의 시사점 — 현직 비서 아마리', by:'올리비아 첸 (Olivia Chen)', interview:true,
+    body:[
+      'Q. 최근 기업 현장에 AI 바람이 거세게 불고 있습니다. 상사를 보좌하며 업무를 조율해온 비서 직무에 실제로 어떤 변화가 일어나고 있나요?',
+      'A. 사실 현장에서는 기대와 걱정이 동시에 존재해요. AI는 인공지능 기술을 기반으로 명령을 이해하고 일을 돕는 시스템이고, 저희 같은 인간 비서는 상사의 일정이나 소통을 챙기며 전체 업무 흐름을 조율하는 사람이에요. AI와 인간 비서 사이에 확실한 역할 분담이 생기고 있어요. 쉬운 사무 업무를 AI에게 맡기는 대신 저희는 관계적인 역할을 맡아서 서로 부족한 점을 보완하는 관계가 됩니다.',
+      'Q. 앞으로 비서에게 필요한 가장 중요한 능력은 무엇일까요?',
+      'A. AI 협업은 직무에 대한 불안감을 주죠. 하지만 동시에 비서라는 직업의 전문성을 끌어올리기도 합니다. 이제는 단순히 일처리가 빠르다고 인정받는 시대가 아니에요. 얼마나 AI를 잘 다루고 윤리적인 문제까지 감지해내는 민첩성이 새로운 무기가 되어야 합니다. 앞으로의 비서는 기술 뒤에 숨는 것이 아닌 본질을 상기시키는 자리가 되어야 한다고 생각합니다.'
+    ]},
+  { id:'interview-emily', date:'2026. 3. 13', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다', sub:'업무 시 AI 사용은 자기주도성에 영향을 미칠까?', by:'마커스 벨 (Marcus Bell)', interview:true,
+    body:[
+      'Q. 직장 내에서 AI나 디지털 업무 환경을 활용하는 일들이 늘어났습니다. 이러한 도구들이 비서의 미래에 영향을 미친다고 보시나요?',
+      'A. 당연히 엄청난 영향을 미치죠! 생성형 AI는 목표를 세우거나 실행, 평가하는 능력을 끌어올려줘요. 일터에서 능동적으로 문제를 해결하도록 자극을 주는 거죠. 이렇게 배운 자기주도성이 발판이 되어 자연스럽게 직무 성과로 이어집니다. 다만 비대면 텍스트 소통이 늘어나면서 오프라인에서의 대응이나 달라진 환경에 대한 적응 등의 문제점 또한 존재하지요.',
+      'Q. 비서가 AI시대에 밀려나지 않고 자신의 경력을 만들어가려면 무엇을 갖춰야 할까요?',
+      'A. 요즘 상사들이 어떤 비서를 우수하다고 평가하는지 아세요? 하나하나 지시하지 않아도 상사의 니즈에 맞게 능동적으로 움직이는 비서예요. 전표처리나 계산 같은 단순 복잡 업무는 AI가 훨씬 빠르고 정확하게 처리한다는 걸 상사들도 잘 알고 있어요. 하지만 사람과 직접 대면하고 교감하며 상황을 이해하고 해결하는 건 AI가 할 수 없는 사람만의 영역이죠. AI는 도구일 뿐 본질이 변하지는 않으니까요.'
+    ]},
+  { id:'chairman', date:'2026. 3. 2', sec:'MEDIA', title:'“낡은 방식에 매달리는 조직에는 미래가 없다”', sub:'런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', by:'크리스티안 톰슨 (Christian Thompson) · 프리랜스 저널리스트',
+    body:[
+      '런웨이 미디어 그룹 신임 회장 제이가 또다시 논란의 중심에 섰다. 제이 회장은 지난주 조직을 20년 넘게 지탱해온 시니어 비서진과 편집 보조 인력 상당수를 한꺼번에 해고하며 “낡은 방식에 매달리는 조직에는 미래가 없다”고 밝혔다. 그는 해당 자리를 생성형 AI 도구로 대체하겠다는 계획도 함께 발표했다.',
+      '그러나 현장의 흐름은 회장의 판단과 다른 방향으로 나타나고 있다. AI를 도입한 조직에서 비서직은 사라지기보다 ‘조정자’ 및 ‘판단 파트너’로 재편되는 추세다. 생성형 AI를 적극적으로 활용하는 직원일수록 자기주도적 학습 역량이 높아지고 실제 업무 성과도 함께 향상된다는 분석도 제기됐다. AI가 사람을 대체하는 도구가 아니라, 숙련도를 끌어올리는 도구로 기능하고 있다는 해석이다.',
+      '전문가들은 문제의 본질이 AI 도입 자체가 아니라, 신기술을 명분으로 책임을 회피하는 태도에 있다고 지적한다. 기존 체계를 정비하는 일과, 오래됐다는 이유만으로 검증된 신뢰를 폐기하는 일은 전혀 다른 문제라는 것이다.'
     ]}
 ];
 
-/* ---------------- 힌트 (간접 힌트) ---------------- */
-const HINTS = {
-  1:  '기사 <b>③ 비서의 역할</b> 속 <b>표</b>를 보세요.<br>왼쪽 칸(AI의 역할)은 반복·정형화된 일, 오른쪽 칸(인간 비서)은 <b>사람의 마음과 판단</b>이 필요한 일이에요.',
-  2:  '기사 <b>④</b>에서 좋은 프롬프트의 <b>다섯 가지 요소</b>를 찾아보세요.<br>‘역할’은 AI에게 맡길 역할, ‘배경’은 상황, ‘지시’는 할 일, ‘제약’은 지킬 조건, ‘출력 형식’은 결과의 모양!<br>막연한 말이나 개인정보가 든 문장은 넣으면 안 돼요.',
-  3:  '기사 <b>④</b>를 떠올려 보세요.<br>개인정보·기밀 → <b>가리기</b> / 근거 없는 숫자 → <b>표시</b> / “같은 질문 반복”은 검증이 아니에요 → <b>원문 출처</b>!<br>문제 있는 문장은 <b>4개</b>예요.',
-  '3b':'기사 <b>② AI 연표</b>에서 ‘<b>사무 업무 전반</b>’이라는 표현이 나오는 해를 찾아보세요.',
-  door:'모든 잠금을 풀었어요! 오른쪽 <b>출구(빨간 문)</b>를 눌러 미란다에게 기사를 제출하세요.',
-  4:  '스킬을 먼저 누르고 → 업무 카드를 누르세요.<br>반복 업무 ⚙️ / 사람의 일 🤝 / 일정표·메일함 🔌 / 위험한 지시 🛡️<br>⚙️ 자동화는 반복 업무를 <b>한 번에</b> 처리해요!'
-};
-
-/* =====================================================================
-   🧍 픽셀 캐릭터 그림 — 글자 하나가 네모 한 칸이에요 (. 은 빈칸)
-   ===================================================================== */
-const SPR = {
-  fem: { pal:{K:'#2a2226',S:'#ffe0cc',E:'#2a2226',P:'#ffb3c1',M:'#d64561',J:'#3f7fd9',W:'#ffffff',R:'#c8102e',D:'#2a2226',L:'#3a3035',k:'#c8102e'}, rows:[
-    "....KKKKKKKK....",
-    "..KKKKKKKKKKKK..",
-    ".KKKKKKKKKKKKKK.",
-    ".KKKKKKKKKKKKKK.",
-    ".KKKSSSSSSSSKKK.",
-    ".KKSSSSSSSSSSKK.",
-    ".KKSSEESSEESSKK.",
-    ".KKSSEESSEESSKK.",
-    ".KKSPSSSSSSPSKK.",
-    ".KKSSSSMMSSSSKK.",
-    ".KKKSSSSSSSSKKK.",
-    ".KKK..SSSS..KKK.",
-    ".KKJJJWWWWJJJKK.",
-    "..JJJJWRRWJJJJ..",
-    ".SJJJJWWRWJJJJS.",
-    ".SJJJJWWWWJJJJS.",
-    "..JJJJJJJJJJJJ..",
-    "...DDDDDDDDDD...",
-    "....LL....LL....",
-    "....kk....kk...."]},
-  male: { pal:{K:'#2a2226',S:'#ffe0cc',E:'#2a2226',P:'#ffc2b0',M:'#b8475b',J:'#3f7fd9',W:'#ffffff',R:'#c8102e',D:'#2a2226',k:'#2a2226'}, rows:[
-    "................",
-    "...KKKKKKKKKK...",
-    "..KKKKKKKKKKKK..",
-    "..KKKKKKKKKKKK..",
-    "..KKSSSSSSSSKK..",
-    "..KSSSSSSSSSSK..",
-    "..SSSEESSEESSS..",
-    "..SSSEESSEESSS..",
-    "..SSPSSSSSSPSS..",
-    "..SSSSSMMSSSSS..",
-    "...SSSSSSSSSS...",
-    "......SSSS......",
-    "..JJJJWRRWJJJJ..",
-    ".JJJJJWRRWJJJJJ.",
-    ".SJJJJWRRWJJJJS.",
-    ".SJJJJWWRWJJJJS.",
-    "..JJJJJJJJJJJJ..",
-    "...DDDDDDDDDD...",
-    "....DD....DD....",
-    "....kk....kk...."]},
-  miranda: { pal:{H:'#f4f1f7',h:'#b9b1c4',S:'#fbe3d6',G:'#121012',M:'#c8102e',C:'#1d1a1c',W:'#ffffff',R:'#c8102e',L:'#1d1a1c',r:'#c8102e'}, rows:[
-    "................",
-    "................",
-    "...HHHHHHHHHH...",
-    "..HHHHHHHhHHHH..",
-    ".HHHHHHHHhHHHHH.",
-    ".HHHSSSSShSSSHH.",
-    ".HHSSSSSSSSSSSH.",
-    ".HSGGGGSSGGGGSH.",
-    ".HSGGGGGGGGGGSH.",
-    ".HSSSSSSSSSSSSH.",
-    ".HSSSSSMMMSSSSH.",
-    "..HSSSSSSSSSSH..",
-    "..HHSSSSSSSSHH..",
-    "...CWWSSSSWWC...",
-    "..CCCWWWWWWCCC..",
-    ".CCCCCCRRCCCCCC.",
-    ".SCCCCCCCCCCCCS.",
-    "..CCCCCCCCCCCC..",
-    "..CCCCCCCCCCCC..",
-    "...LL......LL...",
-    "...rr......rr..."]},
-  cabinet: { pal:{k:'#1d1a1c',g:'#cfd8e8',w:'#ffffff',y:'#c99a3b'}, rows:[
-    "kkkkkkkkkkkk","kggggggggggk","kgkkkkkkkkgk","kgkwwwwwwkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kggggggggggk","kgkkkkkkkkgk",
-    "kgkwwwwwwkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kggggggggggk","kgkkkkkkkkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kkkkkkkkkkkk"]},
-  pc: { pal:{k:'#1d1a1c',g:'#f1ece6',b:'#3f7fd9',w:'#cfe2ff',r:'#c8102e'}, rows:[
-    "kkkkkkkkkkkkkk","kggggggggggggk","kgbbbbbbbbbbgk","kgbwwbbbbbbbgk","kgbbbwwwwbbbgk","kgbwwwbbbbbbgk","kgbbbbbbbrrbgk","kggggggggggggk",
-    "kkkkkkkkkkkkkk","......kk......","....kkkkkk....","..kggggggggk.."]},
-  news: { pal:{k:'#1d1a1c',w:'#ffffff',g:'#b9b1c4',r:'#c8102e'}, rows:[
-    "kkkkkkkkkkk.","kwrrrrrrrwk.","kwkkkwgggwk.","kwgggwgggwkk","kwkkkwgggwwk","kwgggwwwwwwk","kkkkkkkkkkwk",".kkkkkkkkkkk"]},
-  coffee: { pal:{k:'#1d1a1c',w:'#ffffff',s:'#d6cfd8',r:'#c8102e'}, rows:[
-    "..s.s...","...s.s..","kkkkkk..","kwwwwkkk","krrrrk.k","kwwwwkkk","kwwwwk..",".kkkk..."]},
-  magnifier: { pal:{k:'#1d1a1c',s:'#cfe8ff',w:'#ffffff',y:'#c99a3b'}, rows:[
-    "..kkkk....",".kssssk...","ksswsssk..","kswssssk..","kssssssk..",".kssssk...","..kkkkyy..","......yy..",".......yy.","........yy"]},
-  door: { pal:{k:'#1d1a1c',r:'#c8102e',d:'#9a0c23',w:'#fde9d0',y:'#e0b252'}, rows:[
-    "kkkkkkkkkk","krrrrrrrrk","krkkkkkkrk","krkwwwwkrk","krkwwwwkrk","krkkkkkkrk","krrrrrrrrk","krrrrrryrk","krrrrrryrk",
-    "krrrrrrrrk","krkkkkkkrk","krkddddkrk","krkddddkrk","krkddddkrk","krkkkkkkrk","krrrrrrrrk","krrrrrrrrk","kkkkkkkkkk"]},
-  plant: { pal:{L:'#3d7a4a',l:'#5fae6e',n:'#ffffff',N:'#3f7fd9'}, rows:[
-    "...LL...",".L.LL.L.",".LLlLLL.","LLlLLlLL",".LlLLlL.","..LLLL..","...ll...","..nnnn..",".nNNNNn.",".nnnnnn.",".nNNNNn.","..nnnn.."]}
-};
-function spr(name, opt = {}) {
-  const s = SPR[name], pal = Object.assign({}, s.pal, opt.pal || {});
-  const rows = opt.rows || s.rows, h = rows.length, w = rows[0].length;
-  let r = '';
-  rows.forEach((row, y) => { for (let x = 0; x < w; x++) { const c = pal[row[x]]; if (c) r += `<rect x="${x}" y="${y}" width="1.05" height="1.05" fill="${c}"/>`; } });
-  return `<svg class="spr" viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
-}
-// 보스 모드 미란다: 그림처럼 빨간 뿔이 생겨요
-const HORNS = ["..X..........X..", "..XX........XX.."];
-function mirandaSpr(boss) {
-  const rows = SPR.miranda.rows.slice();
-  if (boss) { rows[0] = HORNS[0]; rows[1] = HORNS[1]; rows[2] = "..XHHHHHHHHHHX.."; }
-  return spr('miranda', { rows, pal: { X: '#c8102e' } });
-}
-function headOnly(name) { return spr(name, { rows: SPR[name].rows.slice(0, 11) }); }
-/* =====================================================================
-   👥 만든 사람들 — 이름(name)과 소개(role)를 바꾸면 승리 화면에 반영돼요
-   모두 검은 정장을 입은 비서 모습이고, 머리 모양만 달라요
-   ===================================================================== */
-const SUIT = [
-  "..CCCCWRRWCCCC..",
-  ".CCCCCWRRWCCCCC.",
-  ".SCCCCWRRWCCCCS.",
-  ".SCCCCCWWCCCCCS.",
-  "..CCCCCCCCCCCC..",
-  "...CCCCCCCCCC...",
-  "....CC....CC....",
-  "....kk....kk...."];
-const TEAM_PAL = { S:'#ffe0cc', E:'#2a2226', P:'#ffb3c1', M:'#d64561', C:'#1d1a1c', W:'#ffffff', R:'#c8102e', k:'#1d1a1c',
-  K:'#2a2226', B:'#7a4a2e', D:'#4a2c22', g:'#c99a3b', p:'#ff8fb1' };
-const TEAM = [
-  { name:'예주', role:'긴 생머리 비서', head:[
-    "....KKKKKKKK....","..KKKKKKKKKKKK..",".KKKKKKKKKKKKKK.",".KKKKKKKKKKKKKK.",".KKKSSSSSSSSKKK.",".KKSSSSSSSSSSKK.",
-    ".KKSSEESSEESSKK.",".KKSSEESSEESSKK.",".KKSPSSSSSSPSKK.",".KKSSSSMMSSSSKK.",".KKKSSSSSSSSKKK.",".KKK..SSSS..KKK."] },
-  { name:'은빈', role:'단발머리 비서', head:[
-    "................","...BBBBBBBBBB...","..BBBBBBBBBBBB..",".BBBBBBBBBBBBBB.",".BBBBBBSSSSSBBB.",".BBSSSSSSSSSSBB.",
-    ".BBSSEESSEESSBB.",".BBSSEESSEESSBB.",".BBSPSSSSSSPSBB.",".BBSSSSMMSSSSBB.","..BBSSSSSSSSBB..","......SSSS......"] },
-  { name:'은채', role:'리본 똥머리 비서', head:[
-    "......DDDD......",".....DRDDRD.....","...DDDDDDDDDD...","..DDDDDDDDDDDD..","..DDSSSSSSSSDD..","..DSSSSSSSSSSD..",
-    "..DSSEESSEESSD..","..DSSEESSEESSD..","..DSPSSSSSSPSD..","..SSSSSMMSSSSS..","...SSSSSSSSSS...","......SSSS......"] },
-  { name:'시현', role:'막내 · 양갈래 리본 비서', head:[
-    "................","....KKKKKKKK....","..pKKKKKKKKKKp..",".ppKKKKKKKKKKpp.",".KKKSSKSSKSSKKK.","KK.SSSSSSSSSS.KK",
-    "KK.SSWESSWESS.KK","KK.SSEESSEESS.KK","KK.SPPSSSSPPS.KK","KK.SSSSMMSSSS.KK",".K..SSSSSSSS..K.","......SSSS......"] }
+/* ---------- 채용 직무 ---------- */
+const JOBS = [
+  { id:'secretary', icon:'☕', dept:'편집장실', title:'편집장 비서 (1st · 2nd Assistant)', short:'미란다 프리슬리 편집장의 하루를 설계하는 사람. AI를 지휘하고, 최종 판단을 책임집니다.', tags:['신입','정규직','AI 역량 우대'], featured:true },
+  { id:'fashion', icon:'👗', dept:'패션 디렉터실', title:'패션 디렉터 어시스턴트', short:'컬렉션 리서치, 화보 기획, 스타일 보드 제작을 돕습니다.', tags:['경력 1년+','정규직'],
+    does:['시즌 컬렉션 리서치와 트렌드 리포트 작성','화보 촬영 기획안·무드보드 제작','디자이너·브랜드와의 일정 조율'],
+    need:['패션에 대한 깊은 이해와 안목','AI 이미지·리서치 도구 활용 능력','빠른 판단과 꼼꼼한 마무리'],
+    ai:'트렌드 자료 수집과 요약은 AI가 빠르게 돕지만, “이번 시즌의 감각”을 고르는 건 사람의 안목입니다.', boss:'벨트 두 개가 똑같아 보인다고? 자네는 아직 멀었군.' },
+  { id:'editor', icon:'✍️', dept:'편집부', title:'피처 에디터', short:'커버 스토리와 인터뷰 기사를 기획·취재·작성합니다.', tags:['경력 2년+','정규직'],
+    does:['특집 기사 기획과 인터뷰 진행','AI 초안 검토와 팩트체크','편집 일정 관리와 교정'],
+    need:['탄탄한 글쓰기 실력','1차 출처를 확인하는 검증 습관','프롬프트 작성 능력'],
+    ai:'AI는 초안을 빠르게 쓰지만 ‘환각’을 일으킬 수 있습니다. 출처를 확인하고 ‘검증되지 않음’을 표시하는 건 에디터의 일입니다.', boss:'출처 없는 문장은 런웨이에 실리지 않아.' },
+  { id:'closet', icon:'👠', dept:'스타일링팀', title:'더 클로젯 (스타일링 어시스턴트)', short:'수천 벌의 샘플이 모이는 런웨이의 보물창고를 관리합니다.', tags:['신입','계약직'],
+    does:['샘플 입고·반납 관리와 데이터 정리','촬영용 의상 피팅 준비','브랜드별 대여 기록 관리'],
+    need:['정리·정돈 능력','데이터 처리 도구 활용','체력과 센스'],
+    ai:'샘플 목록 정리·통합 같은 반복 업무는 AI로 자동화하고, 촬영 현장의 돌발 상황 대응은 사람이 맡습니다.', boss:'그 구두, 지금 여기 있어야 하는 거 아닌가?' },
+  { id:'ai', icon:'🤖', dept:'디지털 혁신팀', title:'AI 업무혁신 매니저', short:'사내 AI 도구와 커넥터(MCP)를 설계하고, 안전한 사용 규칙을 만듭니다.', tags:['경력 3년+','정규직','NEW'],
+    does:['일정표·메일함·문서함과 AI 연결(MCP) 설계','사내 AI 사용 가이드와 보안 정책 수립','직원 대상 프롬프트 교육'],
+    need:['AI 서비스와 업무 도구에 대한 이해','개인정보·기밀 보호 감각','쉽게 설명하는 커뮤니케이션 능력'],
+    ai:'접근 권한은 업무에 꼭 필요한 범위로만! 인사·계약 정보처럼 공개가 제한된 자료는 연결 대상에서 제외합니다.', boss:'편리함 때문에 회사 기밀을 넘기는 실수는 단 한 번도 용납하지 않아.' },
+  { id:'marketing', icon:'📣', dept:'마케팅팀', title:'브랜드 마케팅 매니저', short:'RUNWAY의 디지털 채널과 광고 캠페인을 운영합니다.', tags:['경력 2년+','정규직'],
+    does:['SNS 콘텐츠 기획과 운영','광고 캠페인 성과 분석','이벤트·전시 기획'],
+    need:['데이터 리터러시','트렌드 감각','협업과 조율 능력'],
+    ai:'성과 데이터 요약은 AI가, 브랜드의 목소리를 지키는 판단은 사람이 합니다.', boss:'숫자만 보고 런웨이를 안다고 하지 마.' }
 ];
-TEAM.forEach((t, i) => SPR['team' + i] = { pal: TEAM_PAL, rows: t.head.concat(SUIT) });
-function renderCredits() {
-  $('#credits').innerHTML = TEAM.map((t, i) =>
-    `<div class="cr" style="animation-delay:${2.1 + i * 0.25}s">${spr('team' + i)}<b>${t.name}</b><small>${t.role}</small></div>`).join('');
-}
 
-let GENDER = 'f';
-const meName = () => GENDER === 'f' ? 'fem' : 'male';
+/* ---------- 로그인 계정 (체험용 데모 계정) ---------- */
+const ACCOUNTS = {
+  andy:    { pw:'cerulean', name:'앤디 삭스',      role:'2nd 어시스턴트', color:'#3f7fd9' },
+  emily:   { pw:'paris',    name:'에밀리',         role:'1st 어시스턴트', color:'#c8102e' },
+  nigel:   { pw:'gucci',    name:'나이젤',         role:'아트 디렉터',   color:'#c99a3b' },
+  miranda: { pw:'thatsall', name:'미란다 프리슬리', role:'편집장 · 관리자', color:'#1d1a1c', admin:true }
+};
 
 /* =====================================================================
-   아래부터는 게임이 움직이는 부분입니다 (보통은 고칠 필요 없어요)
+   아래부터는 홈페이지가 움직이는 부분입니다 (보통은 고칠 필요 없어요)
    ===================================================================== */
-const $ = s => document.querySelector(s);
-const main = $('#game-main');
-const S = { runId: 0 };
-let timerId = null, soundOn = true, audioCtx = null;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const app = $('#app');
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  raw(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+};
+const sess = {
+  get() { try { return sessionStorage.getItem('rw_user'); } catch (e) { return S.user; } },
+  set(v) { S.user = v; try { v ? sessionStorage.setItem('rw_user', v) : sessionStorage.removeItem('rw_user'); } catch (e) {} }
+};
+const S = { user: null };
+function toast(m) { const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = m; $('#toasts').appendChild(t); setTimeout(() => t.remove(), 2900); }
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-/* ---------- 소리 (외부 파일 없이 브라우저에서 직접 만들어요) ---------- */
-function beep(freqs, dur = 0.09, type = 'square', vol = 0.05) {
-  if (!soundOn) return;
+/* ---------- 캐릭터 그림 (픽셀 아님, 귀여운 일러스트) ---------- */
+function toon(o) {
+  const H = o.hair, skin = '#ffe3d3';
+  let back = '', bang = '', acc = '';
+  if (o.style === 'long') back = `<path d="M20 64 Q16 22 60 18 Q104 22 100 64 L106 146 Q60 156 14 146Z" fill="${H}"/>`;
+  if (o.style === 'bob') back = `<path d="M18 66 Q16 20 60 18 Q104 20 102 66 L104 106 Q92 112 80 104 L40 104 Q28 112 16 106Z" fill="${H}"/>`;
+  if (o.style === 'bun') back = `<circle cx="60" cy="18" r="17" fill="${H}"/><path d="M24 66 Q22 26 60 24 Q98 26 96 66 L96 82 Q60 90 24 82Z" fill="${H}"/>`;
+  if (o.style === 'twin') back = `<path d="M22 54 Q2 70 8 108 Q12 128 26 132 Q20 100 30 70Z" fill="${H}"/><path d="M98 54 Q118 70 112 108 Q108 128 94 132 Q100 100 90 70Z" fill="${H}"/><path d="M24 66 Q22 24 60 22 Q98 24 96 66 L96 78 Q60 86 24 78Z" fill="${H}"/>`;
+  if (o.style === 'miranda') back = `<path d="M14 74 Q6 18 60 14 Q114 16 106 72 Q110 100 96 106 L24 106 Q8 100 14 74Z" fill="#f4f1f7" stroke="#d6cfdc" stroke-width="1.5"/>`;
+  if (o.style === 'bob') bang = `<path d="M24 70 Q20 24 64 24 Q100 28 96 70 Q90 48 76 42 Q58 58 28 54Z" fill="${H}"/>`;
+  else if (o.style === 'miranda') bang = `<path d="M24 66 Q24 24 66 22 Q100 26 98 64 Q92 40 70 36 Q48 40 34 58Z" fill="#f4f1f7" stroke="#d6cfdc" stroke-width="1.5"/>`;
+  else bang = `<path d="M25 66 Q24 26 60 26 Q96 26 95 66 Q92 50 84 46 Q72 56 60 48 Q48 56 36 46 Q28 50 25 66Z" fill="${H}"/>`;
+  const bow = (x, y, c, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 0 L-13 -8 L-13 8Z M0 0 L13 -8 L13 8Z" fill="${c}"/><circle r="4" fill="${c}"/><circle r="1.6" fill="#fff" opacity=".6"/></g>`;
+  if (o.style === 'bun') acc += bow(60, 34, o.ribbon);
+  if (o.style === 'twin') acc += bow(24, 54, o.ribbon, .9) + bow(96, 54, o.ribbon, .9);
+  const eyeRy = o.young ? 8 : 6.5;
+  const eyes = o.style === 'miranda'
+    ? `<rect x="34" y="62" width="22" height="14" rx="6" fill="#111"/><rect x="64" y="62" width="22" height="14" rx="6" fill="#111"/><rect x="55" y="66" width="10" height="3" fill="#111"/><path d="M38 65 L44 65" stroke="#fff" stroke-width="2" opacity=".5"/>`
+    : `<ellipse cx="46" cy="70" rx="5.4" ry="${eyeRy}" fill="#2a2226"/><ellipse cx="74" cy="70" rx="5.4" ry="${eyeRy}" fill="#2a2226"/><circle cx="48" cy="67" r="2" fill="#fff"/><circle cx="76" cy="67" r="2" fill="#fff"/>${o.young ? '<circle cx="44.5" cy="73" r="1" fill="#fff"/><circle cx="72.5" cy="73" r="1" fill="#fff"/>' : ''}
+       <path d="M39 59 Q46 55 52 58" stroke="#2a2226" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M68 58 Q74 55 81 59" stroke="#2a2226" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+  const mouth = o.style === 'miranda' ? `<path d="M52 89 Q60 86 68 89 Q60 93 52 89Z" fill="#c8102e"/>` : `<path d="M54 86 Q60 ${o.young ? 94 : 91} 66 86" stroke="#c8435a" stroke-width="2.6" fill="${o.young ? '#ff8fa3' : 'none'}" stroke-linecap="round"/>`;
+  const body = o.style === 'miranda'
+    ? `<path d="M18 168 Q20 116 60 110 Q100 116 102 168Z" fill="#1d1a1c"/><path d="M34 116 Q60 132 86 116 Q86 126 60 134 Q34 126 34 116Z" fill="#f4f1f7"/><circle cx="60" cy="140" r="3.4" fill="#c99a3b"/>`
+    : `<path d="M22 168 Q24 118 60 112 Q96 118 98 168Z" fill="#1d1a1c"/><path d="M48 115 L60 142 L72 115Z" fill="#fff"/><path d="M43 117 L60 148 L51 119Z M77 117 L60 148 L69 119Z" fill="#2f2a2d"/><path d="M57 120 L63 120 L65 141 L60 147 L55 141Z" fill="#c8102e"/><circle cx="39" cy="140" r="1.6" fill="#555"/>`;
+  return `<svg viewBox="0 0 120 168" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${back}${body}<rect x="52" y="94" width="16" height="22" rx="7" fill="${skin}"/><ellipse cx="60" cy="66" rx="34" ry="36" fill="${skin}"/>${bang}${acc}${eyes}<ellipse cx="37" cy="82" rx="6.5" ry="3.6" fill="#ffb3c1" opacity=".85"/><ellipse cx="83" cy="82" rx="6.5" ry="3.6" fill="#ffb3c1" opacity=".85"/>${mouth}</svg>`;
+}
+const MIRANDA = () => toon({ style: 'miranda' });
+
+/* ---------- 라우터 (페이지 이동) ---------- */
+const ROUTES = { '': pHome, about: pAbout, press: pPress, careers: pCareers, game: pGame, intranet: pIntranet, admin: pAdmin };
+function route() {
+  const parts = location.hash.replace(/^#\/?/, '').split('/');
+  const [p, id] = parts;
+  $('#gnb').classList.remove('open');
+  $$('#gnb a').forEach(a => a.classList.toggle('on', a.dataset.nav === p));
+  const fn = ROUTES[p];
+  app.innerHTML = fn ? fn(id) : pNotFound();
+  if (!fn || (p === 'press' && id && !ARTICLES.find(a => a.id === id)) || (p === 'careers' && id && !JOBS.find(j => j.id === id))) app.innerHTML = pNotFound();
+  window.scrollTo(0, 0);
+  afterRender(p, id);
+  document.title = ({ '': 'Elias-Clarke Publications', about: 'About', press: 'Press', careers: 'Careers', game: '악프다 2', intranet: 'Staff Only', admin: 'Admin' }[p] || 'Not Found') + ' | RUNWAY';
+}
+window.addEventListener('hashchange', route);
+
+/* ---------- HOME ---------- */
+function pHome() {
+  const mood = MOODS[new Date().getDate() % MOODS.length];
+  return `
+  <section class="hero"><div class="wrap hero-grid">
+    <div class="reveal">
+      <div class="kicker">THE CERULEAN ISSUE · FALL 2026</div>
+      <h1>AI가 일을 대신하는 시대,<br>당신은 <em>어떤 비서</em>입니까?</h1>
+      <p class="lead">반복 업무는 AI에게, 판단과 소통과 검증은 사람에게. 런웨이가 이번 시즌 가장 주목하는 직업, <b>‘의사결정 지원 파트너’</b>로서의 비서를 만나 보세요.</p>
+      <div class="cta"><a class="btn btn-red" href="#/game">▶ 악프다 2 플레이</a><a class="btn btn-line" href="#/careers/secretary">비서 채용 보기</a></div>
+      <div class="issue-meta"><div><b>180초</b>퇴근까지 남은 시간</div><div><b>3</b>풀어야 할 잠금장치</div><div><b>1</b>최종 보스, 미란다</div></div>
+    </div>
+    <div class="reveal"><div class="cover">
+      <div class="mast">RUNWAY</div>
+      <div class="cl c1">AI vs 비서<small>누가 살아남는가</small></div>
+      <div class="cl c2">프롬프트 5요소<small>역할·배경·지시·제약·출력 형식</small></div>
+      <div class="who-c">${MIRANDA()}</div>
+      <div class="cl c3">The Cerulean Issue</div>
+      <div class="bar"></div><div class="price">FALL 2026 · $8.99</div>
+    </div></div>
+  </div></section>
+
+  <section class="press-strip"><div class="wrap">
+    <div class="nym">The New York Mirror<small>AS FEATURED IN</small></div>
+    <div class="quotes">
+      <a href="#/press/secretary-survive">“비서직은 기술 변화 속에서 직업의 미래를 스스로 재정의한 대표적인 사례다.”</a>
+      <a href="#/press/prompt-check">“AI를 가장 잘 활용하는 사람은 그 답을 한 번 더 의심하고 확인할 수 있는 사람.”</a>
+      <a href="#/press/ai-timeline">“연표가 보여주는 핵심은 ‘대체’가 아닌 ‘재배치’.”</a>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">INSIDE RUNWAY</div><h2>이번 시즌의 <em>런웨이</em></h2></div></div>
+    <div class="feat">
+      <a class="fcard reveal" href="#/press"><div class="ph" style="background:var(--newsprint)"><div class="nym" style="font-size:34px;text-align:center">The New York<br>Mirror</div></div>
+        <div class="bd"><span class="tag">PRESS</span><h3>뉴욕 미러가 주목한 런웨이</h3><p>AI 시대의 비서, 프롬프트, 검증까지 — 언론이 다룬 런웨이 이야기 ${ARTICLES.length}편.</p></div></a>
+      <a class="fcard reveal" href="#/careers/secretary"><div class="ph" style="background:var(--red-soft)"><div style="width:42%">${toon(TEAM[0])}</div></div>
+        <div class="bd"><span class="tag red">HIRING</span><h3>편집장 비서를 찾습니다</h3><p>수많은 사람이 탐내는 자리. 단, 미란다의 기준을 통과할 수 있다면.</p></div></a>
+      <a class="fcard reveal" href="#/game"><div class="ph" style="background:var(--blue-soft)"><div style="text-align:center"><div style="font:900 44px var(--serif);color:var(--red)">17:57</div><div style="font-weight:900">퇴근까지 180초</div></div></div>
+        <div class="bd"><span class="tag blue">GAME</span><h3>악프다 2: 퇴근까지 180초</h3><p>신문기사 속 단서로 잠금을 풀고, 미란다의 갑질 모드를 버텨라.</p></div></a>
+    </div>
+  </div></section>
+
+  <section class="wrap"><div class="stats reveal">
+    <div class="stat"><b>15년</b><span>AI가 업무에 들어온 시간</span><small>2010 상용화 → 2024 사무 업무 전반</small></div>
+    <div class="stat"><b>5</b><span>좋은 프롬프트의 요소</span><small>역할 · 배경 · 지시 · 제약 · 출력 형식</small></div>
+    <div class="stat"><b>7</b><span>인간 비서만의 역할</span><small>맥락 이해부터 AI 결과물 검토까지</small></div>
+    <div class="stat"><b>1차</b><span>반드시 확인할 출처</span><small>같은 질문 반복은 검증이 아니다</small></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap mood">
+    <div class="widget reveal"><h4>오늘의 미란다 기분</h4>
+      <div class="mood-face"><span class="big">${mood[0]}</span><div><b>${mood[1]}</b><small style="color:var(--muted)">${mood[2]}</small></div></div>
+      <div class="meter"><i style="width:${mood[3]}%"></i></div><small style="color:var(--muted)">코트를 책상에 던질 확률 ${mood[3]}%</small></div>
+    <div class="widget reveal"><h4>오늘의 사내 공지</h4>
+      <ul class="notice-list">${notices().slice(0, 3).map(n => `<li><span>${n.pin ? '<span class="pin">[필독]</span> ' : ''}${esc(n.t)}</span><small style="color:var(--muted);white-space:nowrap">${n.d}</small></li>`).join('')}</ul>
+      <p style="margin:12px 0 0;font-size:13px"><a href="#/intranet" class="more">인트라넷에서 전체 보기 →</a></p></div>
+  </div></section>
+
+  <section class="quote-big"><div class="qm">“</div><div class="wrap">
+    <blockquote>“AI가 초안을 쓰는 건 상관없어.<br>하지만 내 책상에 올라오는 건, 자네가 확인한 것이어야 해.”</blockquote>
+    <cite>MIRANDA PRIESTLY · EDITOR-IN-CHIEF</cite></div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">LATEST PRESS</div><h2>최신 <em>보도</em></h2></div><a class="more" href="#/press">전체 보기 →</a></div>
+    <div class="press-grid">${ARTICLES.filter(a => a.featured).map(clip).join('')}</div>
+  </div></section>`;
+}
+const MOODS = [
+  ['⛈️', '폭풍 주의보', '오늘은 눈을 마주치지 마세요.', 92],
+  ['🌤️', '그럭저럭', '“흠.” 한 번이면 칭찬입니다.', 48],
+  ['🌧️', '흐림', '커피 온도를 두 번 확인하세요.', 71],
+  ['☀️', '드물게 맑음', '오늘은 기적이 일어날지도.', 18],
+  ['🌪️', '패션위크 직전', '모두 뛰세요.', 99]
+];
+
+/* ---------- ABOUT ---------- */
+function pAbout() {
+  return `
+  <section class="page-hero"><div class="wrap"><div class="crumb"><a href="#/">HOME</a> / ABOUT</div>
+    <h1>We are <em>RUNWAY.</em></h1><p>엘리아스-클라크 퍼블리케이션의 패션 매거진 런웨이. 우리는 유행을 따라가지 않습니다. 유행이 우리 사무실에서 시작됩니다.</p></div></section>
+  <section class="sec"><div class="wrap">
+    <div class="letter reveal"><div style="max-width:200px">${MIRANDA()}</div>
+      <div><div class="kicker">LETTER FROM THE EDITOR</div><h2 style="font:900 30px var(--kserif);margin:6px 0 16px">편집장 인사말</h2>
+        <p>모두가 AI 이야기를 합니다. 누군가는 비서가 사라질 거라 말하고, 누군가는 사람을 바꾸면 비용이 줄어든다고 말하죠.</p>
+        <p>저는 다르게 생각합니다. AI는 초안을 쓰고, 자료를 찾고, 일정을 정리할 수 있습니다. 하지만 그 결과가 옳은지 판단하고, 사람의 마음을 읽고, 최종 책임을 지는 일은 여전히 사람의 몫입니다.</p>
+        <p>런웨이가 원하는 사람은 AI를 두려워하는 사람도, 맹신하는 사람도 아닙니다. <b>AI를 지휘하고, 결과를 걸러내는 사람</b>입니다.</p>
+        <div class="sig">Miranda Priestly</div><small style="color:var(--muted)">Editor-in-Chief, RUNWAY</small></div></div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">OUR VALUES</div><h2>런웨이의 <em>기준</em></h2></div></div>
+    <div class="values">
+      <div class="value reveal"><b>Perfection</b><small>완벽은 기본값입니다. 90점은 0점과 같습니다.</small></div>
+      <div class="value reveal"><b>Speed</b><small>미란다가 말하기 전에 이미 준비되어 있어야 합니다.</small></div>
+      <div class="value reveal"><b>Judgment</b><small>AI의 답을 그대로 믿지 않습니다. 확인하고, 판단합니다.</small></div>
+      <div class="value reveal"><b>Elegance</b><small>위기 상황에서도 품격을 잃지 않습니다.</small></div>
+    </div>
+  </div></section>
+  <section class="sec" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">ORGANIZATION</div><h2>조직도</h2></div></div>
+    <div class="org reveal">
+      <div class="lvl"><div class="node boss"><b>제이</b><small>런웨이 미디어 그룹 회장</small></div></div>
+      <div class="lvl"><div class="node boss"><b>미란다 프리슬리</b><small>편집장 (Editor-in-Chief)</small></div></div>
+      <div class="lvl"><div class="node sec"><b>에밀리</b><small>1st 어시스턴트</small></div><div class="node sec"><b>앤디 삭스</b><small>2nd 어시스턴트</small></div><div class="node"><b>나이젤</b><small>아트 디렉터</small></div></div>
+      <div class="lvl"><div class="node"><b>편집부</b><small>피처 에디터</small></div><div class="node"><b>스타일링팀</b><small>더 클로젯</small></div><div class="node"><b>디지털 혁신팀</b><small>AI · MCP</small></div><div class="node"><b>마케팅팀</b><small>브랜드 · SNS</small></div></div>
+    </div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">OFFICES</div><h2>오피스</h2></div></div>
+    <div class="offices">
+      <div class="office reveal"><small class="kicker">HEADQUARTERS</small><br><b>New York</b><div class="t" data-tz="America/New_York">--:--</div><small style="color:var(--muted)">Elias-Clarke Building · 편집장실은 최상층</small></div>
+      <div class="office reveal"><small class="kicker">FASHION WEEK</small><br><b>Paris</b><div class="t" data-tz="Europe/Paris">--:--</div><small style="color:var(--muted)">파리 패션위크 기간 상주 오피스</small></div>
+      <div class="office reveal"><small class="kicker">EXHIBITION</small><br><b>Seoul</b><div class="t" data-tz="Asia/Seoul">--:--</div><small style="color:var(--muted)">악프다 2 전시 부스 운영 중</small></div>
+    </div>
+  </div></section>`;
+}
+
+/* ---------- PRESS ---------- */
+function clip(a, i) {
+  const r = [-1.2, .8, -.5, 1.1, -.9, .6][i % 6];
+  return `<a class="clip reveal" href="#/press/${a.id}" style="--r:${r}deg">
+    <div class="nym">The New York Mirror<small>ALL THE NEWS · NEW YORK</small></div>
+    <div class="dt"><span>${a.sec}</span><span>${a.date}</span></div>
+    <h3>${a.title}</h3><p>${a.body[0]}</p><span class="rd">기사 읽기 →</span></a>`;
+}
+function pPress(id) {
+  if (id) {
+    const a = ARTICLES.find(x => x.id === id); if (!a) return pNotFound();
+    const idx = ARTICLES.indexOf(a), next = ARTICLES[(idx + 1) % ARTICLES.length];
+    return `<section class="sec"><div class="wrap">
+      <div class="crumb" style="max-width:860px;margin:0 auto 16px"><a href="#/">HOME</a> / <a href="#/press">PRESS</a> / ${a.sec}</div>
+      <article class="paper">
+        <div class="pm"><div class="nym">The New York Mirror</div><div class="ln"><span>VOL. CLXXV · No. 61,0${idx + 12}</span><span>${a.date}</span><span>${a.sec}</span></div></div>
+        <h1>${a.title}</h1><p class="sub">${a.sub}</p><div class="by">${a.by}</div>
+        <div class="body">${a.body.map(p => `<p class="${a.interview && p.startsWith('Q.') ? 'q' : ''}">${p}</p>`).join('')}</div>
+        ${a.table ? `<table><tr><th>AI의 역할</th><th>인간 비서의 역할</th></tr><tr><td>일정 관리<br>반복적인 행정업무<br>문서 초안 작성<br>자료 검색<br>회의록 작성/요약<br>데이터 처리<br>정보 통합</td><td>맥락 이해<br>상황 판단<br>감정 조율<br>대인관계 관리<br>조직 내 커뮤니케이션<br>예외적인 상황 대응<br>AI 결과물 검토 및 수정</td></tr></table>` : ''}
+        <div class="tools"><a class="btn btn-line btn-sm" href="#/press">← 목록</a><span style="display:flex;gap:8px"><button class="btn btn-line btn-sm" id="copy-link">🔗 링크 복사</button><a class="btn btn-ink btn-sm" href="#/press/${next.id}">다음 기사 →</a></span></div>
+      </article></div></section>`;
+  }
+  return `
+  <section class="page-hero"><div class="wrap"><div class="crumb"><a href="#/">HOME</a> / PRESS</div>
+    <h1>In the <em>Press.</em></h1><p><b>THE NEW YORK MIRROR</b>가 주목한 런웨이와 AI 시대의 비서 이야기. 런웨이가 자랑스럽게 소개하는 보도들입니다.</p></div></section>
+  <section class="sec"><div class="wrap"><div class="press-grid">${ARTICLES.map(clip).join('')}</div></div></section>`;
+}
+
+/* ---------- CAREERS ---------- */
+function pCareers(id) {
+  if (id === 'secretary') return pSecretary();
+  if (id) return pJob(id);
+  const depts = ['전체', ...new Set(JOBS.map(j => j.dept))];
+  return `
+  <section class="page-hero"><div class="wrap"><div class="crumb"><a href="#/">HOME</a> / CAREERS</div>
+    <h1>Join <em>RUNWAY.</em></h1><p>수많은 사람이 탐내는 자리. 런웨이는 AI를 지휘하고, 결과를 걸러내고, 마지막 판단을 책임지는 사람을 찾습니다.</p></div></section>
+  <section class="sec"><div class="wrap">
+    <div class="chips" id="dept-chips">${depts.map((d, i) => `<button class="chip ${i ? '' : 'on'}" data-d="${d}">${d}</button>`).join('')}</div>
+    <div class="jobs" id="jobs">${JOBS.map(jobCard).join('')}</div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><div><div class="kicker">PROCESS</div><h2>채용 <em>절차</em></h2></div></div>
+    <div class="steps">
+      <div class="step reveal"><b>서류 전형</b><small>자기소개서 1장. 오타 하나면 끝입니다.</small></div>
+      <div class="step reveal"><b>실무 테스트</b><small><a href="#/game" style="color:var(--red);font-weight:700">악프다 2 : 퇴근까지 180초</a> 통과</small></div>
+      <div class="step reveal"><b>편집장 면접</b><small>평균 면접 시간 3초. 고개를 끄덕이면 합격.</small></div>
+      <div class="step reveal"><b>입사</b><small>내일 아침 7시까지 출근. 커피는 뜨겁게.</small></div>
+    </div>
+  </div></section>`;
+}
+function jobCard(j) {
+  return `<a class="job ${j.featured ? 'featured' : ''} reveal" data-dept="${j.dept}" href="#/careers/${j.id}"><div class="ji">${j.icon}</div>
+    <div><small style="color:var(--muted);font-weight:700">${j.dept}</small>${j.featured ? ' <span class="tag red">HOT</span>' : ''}<h3>${j.title}</h3><p>${j.short}</p>
+    <div style="margin-top:8px;display:flex;gap:5px;flex-wrap:wrap">${j.tags.map(t => `<span class="tag line">${t}</span>`).join('')}</div></div><div class="go">→</div></a>`;
+}
+function pJob(id) {
+  const j = JOBS.find(x => x.id === id); if (!j) return pNotFound();
+  return `
+  <section class="page-hero"><div class="wrap"><div class="crumb"><a href="#/">HOME</a> / <a href="#/careers">CAREERS</a> / ${j.dept}</div>
+    <h1>${j.icon} ${j.title}</h1><p>${j.short}</p></div></section>
+  <section class="sec"><div class="wrap jd">
+    <div>
+      <h3>주요 업무</h3><ul class="chk">${j.does.map(x => `<li>${x}</li>`).join('')}</ul>
+      <h3>필요 역량</h3><ul class="chk">${j.need.map(x => `<li>${x}</li>`).join('')}</ul>
+      <h3>AI와 함께 일하는 법</h3><p style="font:16.5px/1.9 var(--kserif);background:var(--blue-soft);padding:18px 20px;border-left:4px solid var(--cerulean);margin:0">${j.ai}</p>
+      <h3>미란다의 한마디</h3><p style="font:italic 700 22px/1.6 var(--kserif);margin:0">“${j.boss}”</p>
+    </div>
+    ${jdSide(j)}
+  </div></section>`;
+}
+function jdSide(j) {
+  return `<aside class="jd-side"><div class="kicker">JOB INFO</div><h4 style="font:900 20px var(--kserif);margin:6px 0 14px">${j.title}</h4>
+    <dl><dt>부서</dt><dd>${j.dept}</dd><dt>고용</dt><dd>${j.tags.join(' · ')}</dd><dt>근무지</dt><dd>New York HQ</dd><dt>마감</dt><dd>미란다가 정할 때까지</dd></dl>
+    <a class="btn btn-red" style="width:100%" href="#/game">지원하기 (실무 테스트) →</a>
+    <button class="btn btn-line" style="width:100%;margin-top:8px" id="share-job">🔗 공고 공유</button></aside>`;
+}
+
+/* ---------- 비서 직무 (가장 자세하게) ---------- */
+const SEC_DAY = [
+  ['06:30', '사무실 오픈 & 책상 세팅', '미란다가 도착하기 전, 모든 것이 제자리에 있어야 합니다.', 'me'],
+  ['07:00', '뜨거운 라떼 준비', '엘리베이터가 올라오는 소리가 들리면 이미 책상 위에.', 'me'],
+  ['08:00', '오늘 일정 브리핑', '일정표를 AI 커넥터(MCP)로 연결해 겹치는 일정과 대안을 정리합니다.', 'ai'],
+  ['10:00', '편집회의 & 회의록', '녹취 요약은 AI가, 요약본 검토와 누락 확인은 비서가.', 'ai'],
+  ['13:00', '돌발 상황 대응', '촬영 모델 불참, 디자이너의 분노. 규정으로는 해결할 수 없는 일은 사람이.', 'me'],
+  ['15:00', 'AI 초안 팩트체크', '환각을 걸러내고, 1차 출처를 확인하고, 개인정보는 비식별화.', 'ai'],
+  ['18:00', '“The Book” 배달', '다음 호 가제본을 편집장 자택에 전달. 계단에서는 조용히.', 'me']
+];
+const SEC_RULES = [
+  ['코트와 가방은 받아라', '말없이 책상에 놓인다면, 그건 당신의 일입니다.'],
+  ['“That’s all”은 대화 끝', '추가 질문은 하지 않습니다. 결과로 답합니다.'],
+  ['AI 초안은 그대로 올리지 마라', '출처를 확인하지 않은 문장은 미란다의 책상에 오를 수 없습니다.'],
+  ['개인정보는 AI에 그대로 넣지 마라', '고객 이름·전화번호·계약서·인사정보는 반드시 비식별화.'],
+  ['전화는 두 번 울리기 전에', '긴급한 전화는 직접, 일반 문의는 자동화로.'],
+  ['말하기 전에 준비하라', '하나하나 지시받지 않아도 상사의 니즈를 먼저 읽는 비서.']
+];
+const SEC_SKILLS = [['프롬프트 작성', 92], ['검증 안목 (팩트체크)', 98], ['커뮤니케이션 조율', 95], ['상황 판단', 90], ['데이터 리터러시', 80], ['자기주도성', 88]];
+const QUIZ = [
+  { q:'미란다가 출처 없는 AI 보고서를 “지금 당장 제출해”라고 한다면?', o:[['바로 제출한다. 편집장의 지시니까.', 0], ['1차 출처를 확인하고, 확인 안 된 부분은 ‘검증되지 않음’으로 표시해 보고한다.', 3], ['AI에게 같은 질문을 세 번 해서 확인한다.', 1]] },
+  { q:'고객 명단을 AI에 넣어 요약하고 싶다. 어떻게 할까?', o:[['이름·전화번호를 비식별화한 뒤 활용한다.', 3], ['빠르게 그대로 붙여 넣는다.', 0], ['아예 AI를 쓰지 않는다.', 1]] },
+  { q:'회의 직전, 디자이너가 화가 나서 쇼에 불참하겠다고 한다.', o:[['AI에게 사과 메일을 써서 보내게 한다.', 1], ['직접 찾아가 상황을 듣고 감정을 조율한다.', 3], ['미란다에게 그대로 전달한다.', 0]] },
+  { q:'다음 주 임원 일정이 겹쳐 있다. 가장 좋은 방법은?', o:[['일정표를 AI 커넥터로 연결해 겹치는 일정과 대안을 정리한 뒤, 최종 판단은 내가 한다.', 3], ['하나하나 손으로 비교한다.', 1], ['인사·계약 폴더까지 전부 AI에 연결한다.', 0]] },
+  { q:'AI에게 기사 초안을 부탁할 때 가장 좋은 요청은?', o:[['알아서 잘 써 줘.', 0], ['역할·배경·지시·제약·출력 형식을 구체적으로 적는다.', 3], ['광고 문구 만들어 줘.', 1]] }
+];
+function pSecretary() {
+  const j = JOBS[0];
+  return `
+  <section class="page-hero" style="background:linear-gradient(110deg,#fff 50%,var(--red-soft))"><div class="wrap two" style="align-items:center">
+    <div><div class="crumb"><a href="#/">HOME</a> / <a href="#/careers">CAREERS</a> / 편집장실</div>
+      <span class="tag red" style="margin-top:14px">HOT · 상시 채용</span>
+      <h1>The Assistant.<br><em style="font-size:.6em">편집장 비서</em></h1>
+      <p>세계에서 가장 까다로운 편집장의 하루를 설계하는 사람. AI 시대의 비서는 ‘행정 보조자’가 아니라 <b>‘의사결정 지원 파트너’</b>입니다.</p></div>
+    <div style="display:flex;justify-content:center;gap:10px;align-items:flex-end;max-width:360px;width:100%;margin:0 auto"><div style="width:42%">${toon(TEAM[0])}</div><div style="width:50%">${MIRANDA()}</div></div>
+  </div></section>
+
+  <section class="sec"><div class="wrap jd">
+    <div>
+      <h3>포지션 안내</h3>
+      <div class="tabs-1" id="asst-tabs"><button class="on" data-t="0">1st 어시스턴트</button><button data-t="1">2nd 어시스턴트</button></div>
+      <div id="asst-body"></div>
+
+      <h3>비서의 하루 (A Day in the Life)</h3>
+      <div class="timeline">${SEC_DAY.map(d => `<div class="tl reveal"><b>${d[0]}</b><strong>${d[1]}</strong><span>${d[2]}</span><br><span class="${d[3]}">${d[3] === 'ai' ? '🤖 AI 활용 + 사람의 검토' : '🙋 사람만 할 수 있는 일'}</span></div>`).join('')}</div>
+
+      <h3>AI와 비서, 누가 무엇을?</h3>
+      <table class="vs-table"><tr><th class="ai">🤖 AI의 역할</th><th class="me">🙋 인간 비서의 역할</th></tr>
+        ${[['일정 관리', '맥락 이해'], ['반복적인 행정업무', '상황 판단'], ['문서 초안 작성', '감정 조율'], ['자료 검색', '대인관계 관리'], ['회의록 작성/요약', '조직 내 커뮤니케이션'], ['데이터 처리', '예외적인 상황 대응'], ['정보 통합', 'AI 결과물 검토 및 수정']].map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>
+      <p style="font-size:13px;color:var(--muted)">출처: THE NEW YORK MIRROR <a href="#/press/secretary-survive">「AI 시대에 비서라는 직업은 어떻게 살아남나?」</a></p>
+
+      <h3>필요 역량</h3>
+      <div class="skillbars" id="skillbars">${SEC_SKILLS.map(s => `<div class="sb"><span>${s[0]}</span><div class="meter"><i data-w="${s[1]}"></i></div><b>${s[1]}</b></div>`).join('')}</div>
+
+      <h3>미란다 비서 생존 매뉴얼</h3>
+      <div class="rules">${SEC_RULES.map(r => `<div class="rule reveal"><b>${r[0]}</b>${r[1]}</div>`).join('')}</div>
+
+      <h3>선배 비서 인터뷰</h3>
+      <div class="interview">
+        <p class="qq">Q. AI 시대, 비서에게 가장 필요한 능력은?</p>
+        <p class="aa">“얼마나 AI를 잘 다루고 윤리적인 문제까지 감지해내는 민첩성이 새로운 무기가 되어야 합니다.” <small style="color:var(--muted)">— 현직 비서 아마리</small></p>
+        <p class="qq">Q. 상사들이 원하는 비서는?</p>
+        <p class="aa">“하나하나 지시하지 않아도 상사의 니즈에 맞게 능동적으로 움직이는 비서예요.” <small style="color:var(--muted)">— 에밀리</small></p>
+        <a class="more" href="#/press/interview-amari">인터뷰 전문 보기 →</a>
+      </div>
+
+      <h3>나의 비서 적성 테스트</h3>
+      <div class="quiz" id="quiz"></div>
+
+      <h3>자주 묻는 질문</h3>
+      <div class="faq">
+        <details><summary>AI가 비서 일을 다 하면, 비서는 필요 없지 않나요?</summary><p>AI는 반복적인 행정 업무를 빠르게 처리하지만, 맥락 이해·감정 조율·돌발 상황 대응·AI 결과물 검토는 사람의 몫입니다. 비서직은 사라지는 것이 아니라 ‘역할이 바뀌는 과정’에 있습니다.</p></details>
+        <details><summary>코딩을 할 줄 알아야 하나요?</summary><p>아니요. 대신 AI에게 정확하게 일을 시키는 프롬프트 작성 능력(역할·배경·지시·제약·출력 형식)과 결과를 검증하는 안목이 필요합니다.</p></details>
+        <details><summary>미란다 편집장은 정말 무섭나요?</summary><p>답변을 거부합니다. (이 질문은 기록되었습니다.)</p></details>
+        <details><summary>퇴근은 몇 시인가요?</summary><p>공식적으로는 18:00입니다. 단, 그 전에 <a href="#/game" style="color:var(--red);font-weight:700">180초 안에 모든 업무를 끝낼 수 있다면</a>요.</p></details>
+      </div>
+    </div>
+    ${jdSide(j)}
+  </div></section>`;
+}
+const ASST = [
+  { t:'1st 어시스턴트', d:'편집장의 오른팔. 일정·전화·손님을 총괄하고 2nd 어시스턴트를 이끕니다. 파리 패션위크 동행의 꿈을 가진 자리.', li:['편집장 일정 최종 관리와 우선순위 판단', '외부 VIP·디자이너 응대와 감정 조율', '팀 내 업무 분배와 AI 결과물 최종 검토'] },
+  { t:'2nd 어시스턴트', d:'모든 것의 시작. 커피, 배달, 자료 준비, 그리고 수많은 돌발 상황. 여기서 살아남으면 어디서든 일할 수 있습니다.', li:['커피·식사·물품 준비와 배달', 'AI로 자료 조사·회의록 초안 작성 후 검토', '“The Book” 전달과 각종 심부름'] }
+];
+
+/* ---------- GAME ---------- */
+function pGame() {
+  const plays = +(store.raw('rw_plays') || 0), wins = +(store.raw('rw_wins') || 0), best = +(store.raw('rw_best') || 0);
+  return `
+  <section class="page-hero"><div class="wrap"><div class="crumb"><a href="#/">HOME</a> / GAME</div>
+    <h1>악프다 2: <em>퇴근까지 180초</em></h1><p>신문기사를 읽고 단서를 찾아 사무실의 잠금장치를 해제하고, 미란다의 공격을 버텨 최종 비밀번호 세 자리를 획득하세요.</p></div></section>
+  <section class="sec" style="padding-top:36px"><div class="wrap">
+    <div class="game-frame">
+      <div class="gf-top"><span class="dots"><i></i><i></i><i></i> runway-office.exe</span>
+        <span>이 기기 기록 · 플레이 ${plays}회 · 탈출 ${wins}회 · 최고 기록 ${best ? '남은 시간 ' + Math.floor(best / 60) + ':' + String(best % 60).padStart(2, '0') : '-'}</span>
+        <a href="game/" target="_blank" rel="noopener" style="color:#fff;font-weight:700">새 창에서 크게 하기 ↗</a></div>
+      <iframe src="game/" title="악프다 2 게임" allow="autoplay; fullscreen"></iframe>
+    </div>
+  </div></section>`;
+}
+
+/* ---------- INTRANET (로그인 필요) ---------- */
+const DEFAULT_NOTICES = [
+  { t:'편집장 출근 15분 앞당겨짐 — 전원 06:45까지 착석', d:'오늘', pin:true },
+  { t:'사내 AI 사용 가이드 v2: 개인정보는 반드시 비식별화 후 입력', d:'03.09', pin:true },
+  { t:'MCP 커넥터 접근 권한 점검 — 인사·계약 폴더 연결 금지', d:'03.08' },
+  { t:'가을호 마감: 모든 AI 초안은 1차 출처 확인 후 제출', d:'03.05' },
+  { t:'악프다 2 전시 부스 운영 안내', d:'03.01' }
+];
+function notices() { return store.get('rw_notices', DEFAULT_NOTICES); }
+function needLogin(admin) {
+  return `<section class="wrap"><div class="denied">
+    <div class="lock">🔒</div><h2>${admin ? 'Access Denied.' : 'Staff Only.'}</h2>
+    <p style="color:var(--muted)">${admin ? '이 페이지는 <b>편집장(관리자)</b>만 볼 수 있습니다.' : '임직원 전용 인트라넷입니다. 로그인해 주세요.'}</p>
+    <p style="font:italic 700 20px var(--kserif)">“${admin ? '자네 권한으로는 여기에 올 수 없어.' : '신분증도 없이 여길 들어오려고?'}”</p>
+    <button class="btn btn-red" onclick="openLogin()">로그인</button></div></section>`;
+}
+function dashShell(active, inner) {
+  const u = ACCOUNTS[sess.get()];
+  const items = [['intranet', '🏠', '대시보드'], ['intranet/tasks', '✅', '내 할 일'], ['intranet/msg', '💬', '사내 메신저']];
+  if (u.admin) items.push(['admin', '🛡️', '관리자 콘솔'], ['admin/staff', '👥', '직원 관리'], ['admin/notice', '📌', '공지 관리'], ['admin/log', '📜', '보안 로그']);
+  return `<section class="sec" style="padding-top:36px"><div class="wrap dash">
+    <aside class="side-nav"><div class="me"><div class="av" style="background:${u.color}">${u.name[0]}</div><div><b>${u.name}</b><small>${u.role}</small></div></div>
+      ${items.map(i => `<button class="${active === i[0] ? 'on' : ''}" onclick="location.hash='#/${i[0]}'">${i[1]} ${i[2]}</button>`).join('')}
+      <button onclick="logout()">🚪 로그아웃</button></aside>
+    <div>${inner}</div></div></section>`;
+}
+function pIntranet(sub) {
+  if (!sess.get()) return needLogin(false);
+  const u = ACCOUNTS[sess.get()];
+  if (sub === 'tasks') return dashShell('intranet/tasks', `<div class="panel"><h3>✅ 내 할 일 <small style="color:var(--muted);font-size:12px">이 기기에 저장돼요</small></h3><div class="todo" id="todo"></div>
+    <div style="display:flex;gap:8px;margin-top:12px"><input id="todo-in" class="field" style="flex:1;margin:0;padding:10px 14px;border:1.5px solid #cfc3b5;border-radius:10px;font:inherit" placeholder="할 일 추가"><button class="btn btn-ink btn-sm" id="todo-add">추가</button></div></div>`);
+  if (sub === 'msg') return dashShell('intranet/msg', `<div class="panel"><h3>💬 사내 메신저 · #편집장실</h3>${MSGS.map(m => `<div class="msg"><div class="av" style="background:${m[2]}">${m[0][0]}</div><div class="bb"><small>${m[0]} · ${m[3]}</small>${m[1]}</div></div>`).join('')}
+    <div style="display:flex;gap:8px;margin-top:6px"><input id="msg-in" style="flex:1;padding:10px 14px;border:1.5px solid #cfc3b5;border-radius:10px;font:inherit" placeholder="메시지 입력 (데모)"><button class="btn btn-ink btn-sm" id="msg-send">보내기</button></div><div id="msg-new"></div></div>`);
+  const mood = MOODS[new Date().getDate() % MOODS.length];
+  return dashShell('intranet', `
+    <div class="panel" style="background:var(--ink);color:#fff;border:none"><h3 style="color:#fff">좋은 아침입니다, ${u.name}님 ☕</h3><p style="margin:0;color:#d6cdd1">오늘의 미란다 기분: ${mood[0]} <b>${mood[1]}</b> — ${mood[2]}</p></div>
+    <div class="kpis"><div class="kpi"><small>오늘 미란다 일정</small><b>7</b><em class="dn">충돌 2건</em></div><div class="kpi"><small>검토 대기 AI 초안</small><b>4</b><em class="dn">출처 미확인 1</em></div><div class="kpi"><small>커피 주문</small><b>3</b><em class="up">모두 뜨겁게</em></div><div class="kpi"><small>퇴근까지</small><b id="left-home">--</b><em>18:00 기준</em></div></div>
+    <div class="two" style="gap:20px">
+      <div class="panel"><h3>📅 미란다 오늘 일정</h3><table class="tb"><tr><th>시간</th><th>일정</th><th>상태</th></tr>
+        <tr><td>09:00</td><td>가을호 표지 회의</td><td><span class="st g">확정</span></td></tr>
+        <tr><td>11:00</td><td>디자이너 런치</td><td><span class="st r">충돌</span></td></tr>
+        <tr><td>11:00</td><td>광고주 미팅</td><td><span class="st r">충돌</span></td></tr>
+        <tr><td>15:00</td><td>AI 초안 최종 검토</td><td><span class="st y">대기</span></td></tr>
+        <tr><td>19:00</td><td>VIP 만찬</td><td><span class="st g">보호</span></td></tr></table></div>
+      <div class="panel"><h3>📌 공지사항</h3><ul class="notice-list">${notices().map(n => `<li><span>${n.pin ? '<span class="pin">[필독]</span> ' : ''}${esc(n.t)}</span><small style="color:var(--muted)">${n.d}</small></li>`).join('')}</ul></div>
+    </div>
+    <div class="panel"><h3>🔗 바로가기</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-line btn-sm" href="#/game">실무 테스트(게임)</a><a class="btn btn-line btn-sm" href="#/press/prompt-check">AI 사용 가이드</a><a class="btn btn-line btn-sm" href="#/careers">채용 현황</a><button class="btn btn-line btn-sm" onclick="toast('☕ 미란다 커피 주문 완료! 뜨거운 라떼, 엑스트라 핫.')">커피 주문</button></div></div>`);
+}
+const MSGS = [
+  ['에밀리', '미란다 15분 일찍 온대!!! 다들 자리로!!', '#c8102e', '06:31'],
+  ['나이젤', '세룰리안 스웨터 이야기는 오늘 하지 마. 진심이야.', '#c99a3b', '06:40'],
+  ['앤디 삭스', 'AI 회의록 초안 올렸어요. 출처 미확인 2곳은 ‘검증되지 않음’ 표시했어요!', '#3f7fd9', '10:12'],
+  ['미란다 프리슬리', 'That’s all.', '#1d1a1c', '10:13']
+];
+
+/* ---------- ADMIN (미란다만) ---------- */
+function pAdmin(sub) {
+  if (!sess.get()) return needLogin(true);
+  if (!ACCOUNTS[sess.get()].admin) return dashShell('', needLogin(true));
+  if (sub === 'staff') return dashShell('admin/staff', `<div class="panel"><h3>👥 직원 관리</h3><table class="tb"><tr><th>이름</th><th>직무</th><th>AI 역량</th><th>상태</th></tr>
+    <tr><td>에밀리</td><td>1st 어시스턴트</td><td>★★★★☆</td><td><span class="st y">파리 출장 대기</span></td></tr>
+    <tr><td>앤디 삭스</td><td>2nd 어시스턴트</td><td>★★★★★</td><td><span class="st g">근무 중</span></td></tr>
+    <tr><td>나이젤</td><td>아트 디렉터</td><td>★★★☆☆</td><td><span class="st g">근무 중</span></td></tr>
+    <tr><td>AI 문서작성기</td><td>초안 작성 도구</td><td>-</td><td><span class="st r">검토 필수</span></td></tr></table></div>
+    <div class="panel"><h3>🎬 제작팀 (Special Thanks) <button class="btn btn-red btn-sm" onclick="openCredits()">크레딧 보기 ★</button></h3><table class="tb"><tr><th>이름</th><th>모습</th></tr>${TEAM.map(t => `<tr><td><b>${t.name}</b></td><td>${t.desc}</td></tr>`).join('')}</table></div>`);
+  if (sub === 'notice') return dashShell('admin/notice', `<div class="panel"><h3>📌 공지 관리 <small style="color:var(--muted);font-size:12px">이 기기에 저장 · 홈 화면에 반영</small></h3>
+    <div class="field"><label for="nt-in">새 공지</label><input id="nt-in" placeholder="예: 가을호 마감 연장 없음"></div>
+    <label style="display:flex;gap:8px;align-items:center;font-size:14px;margin-bottom:12px"><input type="checkbox" id="nt-pin"> 필독으로 고정</label>
+    <div style="display:flex;gap:8px"><button class="btn btn-ink btn-sm" id="nt-add">공지 등록</button><button class="btn btn-line btn-sm" id="nt-reset">기본값으로 되돌리기</button></div>
+    <ul class="notice-list" id="nt-list" style="margin-top:16px"></ul></div>`);
+  if (sub === 'log') return dashShell('admin/log', `<div class="panel"><h3>📜 보안 로그</h3><div class="log" id="log"></div></div>`);
+  const plays = +(store.raw('rw_plays') || 0), wins = +(store.raw('rw_wins') || 0);
+  const week = [['월', 320], ['화', 410], ['수', 380], ['목', 520], ['금', 690], ['토', 840], ['일', 760]];
+  return dashShell('admin', `
+    <div class="panel" style="background:var(--ink);color:#fff;border:none"><h3 style="color:#fff">관리자 콘솔 <span class="tag gold">EDITOR-IN-CHIEF</span></h3><p style="margin:0;color:#d6cdd1">“숫자는 거짓말을 하지 않아. 사람이 할 뿐이지.”</p></div>
+    <div class="kpis">
+      <div class="kpi"><small>게임 플레이 (이 기기)</small><b>${plays}</b><em class="up">실제 기록</em></div>
+      <div class="kpi"><small>탈출 성공 (이 기기)</small><b>${wins}</b><em class="up">${plays ? Math.round(wins / plays * 100) : 0}% 성공률</em></div>
+      <div class="kpi"><small>이번 주 방문자</small><b>3,920</b><em class="up">▲ 18% (데모)</em></div>
+      <div class="kpi"><small>비서 지원자</small><b>1,204</b><em class="dn">합격 1명 (데모)</em></div>
+    </div>
+    <div class="panel"><h3>📈 주간 방문자 <small style="color:var(--muted);font-size:12px">데모 데이터</small></h3><div class="chart">${week.map(w => `<div class="c"><b>${w[1]}</b><i data-h="${w[1] / 9}"></i><span>${w[0]}</span></div>`).join('')}</div></div>
+    <div class="two" style="gap:20px">
+      <div class="panel"><h3>🤖 AI 사용 현황</h3><table class="tb"><tr><th>항목</th><th>건수</th></tr><tr><td>AI 초안 작성</td><td>128</td></tr><tr><td>1차 출처 확인 완료</td><td>121</td></tr><tr><td>‘검증되지 않음’ 표시</td><td>7</td></tr><tr><td>개인정보 비식별화</td><td>42</td></tr></table></div>
+      <div class="panel"><h3>⚠️ 승인 대기</h3><ul class="notice-list"><li>출처 미확인 통계 보고서 <span class="st r">반려</span></li><li>인사 폴더 AI 연결 요청 <span class="st r">거부</span></li><li>가을호 표지 시안 B <span class="st y">검토</span></li><li>앤디의 회의록 요약 <span class="st g">승인</span></li></ul></div>
+    </div>`);
+}
+
+/* ---------- 404 ---------- */
+function pNotFound() {
+  return `<section class="nf"><b>404</b><h2 style="font:900 28px var(--kserif)">미란다가 이 페이지를 해고했습니다.</h2><p style="color:var(--muted)">찾으시는 페이지가 없거나, 너무 촌스러워서 삭제되었습니다.</p><a class="btn btn-red" href="#/">홈으로 돌아가기</a></section>`;
+}
+
+/* ---------- 화면 그린 뒤 동작 연결 ---------- */
+function afterRender(p, id) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  $$('.reveal').forEach(el => io.observe(el));
+  tickClocks();
+  if (p === 'careers' && !id) $$('#dept-chips .chip').forEach(c => c.onclick = () => {
+    $$('#dept-chips .chip').forEach(x => x.classList.toggle('on', x === c));
+    $$('#jobs .job').forEach(j => j.style.display = (c.dataset.d === '전체' || j.dataset.dept === c.dataset.d) ? '' : 'none');
+  });
+  if (p === 'careers' && id === 'secretary') {
+    const setT = t => { $$('#asst-tabs button').forEach(b => b.classList.toggle('on', +b.dataset.t === t)); const a = ASST[t]; $('#asst-body').innerHTML = `<p style="font:16.5px/1.9 var(--kserif);margin:0 0 8px">${a.d}</p><ul class="chk">${a.li.map(x => `<li>${x}</li>`).join('')}</ul>`; };
+    $$('#asst-tabs button').forEach(b => b.onclick = () => setT(+b.dataset.t)); setT(0);
+    const bars = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { $$('#skillbars i').forEach(i => i.style.width = i.dataset.w + '%'); bars.disconnect(); } }));
+    bars.observe($('#skillbars'));
+    quiz(0, 0);
+  }
+  if ($('#share-job')) $('#share-job').onclick = copyLink;
+  if ($('#copy-link')) $('#copy-link').onclick = copyLink;
+  if (p === 'intranet' && id === 'tasks' && sess.get()) renderTodo();
+  if (p === 'intranet' && id === 'msg' && sess.get()) $('#msg-send').onclick = () => {
+    const v = $('#msg-in').value.trim(); if (!v) return;
+    $('#msg-new').insertAdjacentHTML('beforeend', `<div class="msg"><div class="av" style="background:${ACCOUNTS[sess.get()].color}">${ACCOUNTS[sess.get()].name[0]}</div><div class="bb"><small>${ACCOUNTS[sess.get()].name} · 방금</small>${esc(v)}</div></div>`);
+    $('#msg-in').value = '';
+    setTimeout(() => $('#msg-new').insertAdjacentHTML('beforeend', `<div class="msg"><div class="av" style="background:#1d1a1c">미</div><div class="bb"><small>미란다 프리슬리 · 방금</small>${['That’s all.', '…그래서?', '그게 최선인가?', '좋아. 다음.'][Math.floor(Math.random() * 4)]}</div></div>`), 1200);
+  };
+  if (p === 'admin' && !id) setTimeout(() => $$('.chart i').forEach(i => i.style.height = i.dataset.h + '%'), 60);
+  if (p === 'admin' && id === 'notice' && ACCOUNTS[sess.get()]?.admin) renderNoticeAdmin();
+  if (p === 'admin' && id === 'log' && ACCOUNTS[sess.get()]?.admin) {
+    const now = new Date(), f = m => new Date(now - m * 60000).toTimeString().slice(0, 8);
+    $('#log').innerHTML = [[1, 'LOGIN  miranda  OK (편집장 콘솔)'], [3, 'MCP    calendar.connect  OK  (scope: 일정표 읽기)'], [5, 'MCP    hr_folder.connect  DENIED  (공개 제한 자료)'], [9, 'AI     draft#128  FLAG  출처 미확인 → 검증되지 않음'], [14, 'DLP    고객 전화번호 감지 → 비식별화 처리'], [22, 'LOGIN  andy  OK'], [31, 'LOGIN  unknown  FAIL x3 (“그게 최선인가?”)']]
+      .map(l => `[${f(l[0])}] ${esc(l[1])}`).join('<br>');
+  }
+}
+function copyLink() { const u = location.href; (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => toast('🔗 링크를 복사했어요'), () => toast('주소창의 링크를 복사해 주세요')); }
+function quiz(i, score) {
+  const el = $('#quiz'); if (!el) return;
+  if (i >= QUIZ.length) {
+    const r = score >= 13 ? ['의사결정 지원 파트너형', '축하합니다. 미란다가 고개를 끄덕였습니다. AI를 지휘하고 결과를 걸러내는 진짜 비서!'] : score >= 8 ? ['성장형 어시스턴트', '나쁘지 않군. 검증과 판단을 조금만 더 다듬으면 1st 어시스턴트도 가능!'] : ['AI 의존형 신입', '“그게 최선인가?” 기사를 다시 읽고 도전해 보세요.'];
+    el.innerHTML = `<div class="res"><div class="qn">RESULT · ${score} / ${QUIZ.length * 3}점</div><b>${r[0]}</b><p style="margin:0 0 18px;color:#e6dde0">${r[1]}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-red" href="#/game">실무 테스트(게임) 도전 →</a><button class="btn btn-line" style="color:#fff;border-color:#fff" id="qz-re">다시 하기</button></div></div>`;
+    $('#qz-re').onclick = () => quiz(0, 0); return;
+  }
+  const q = QUIZ[i];
+  el.innerHTML = `<div class="qn">QUESTION ${i + 1} / ${QUIZ.length}</div><div class="qt">${q.q}</div><div class="opts">${q.o.map((o, k) => `<button data-k="${k}">${o[0]}</button>`).join('')}</div><div class="prog"><i style="width:${i / QUIZ.length * 100}%"></i></div>`;
+  el.querySelectorAll('.opts button').forEach(b => b.onclick = () => quiz(i + 1, score + q.o[+b.dataset.k][1]));
+}
+function renderTodo() {
+  const list = store.get('rw_todo_' + sess.get(), [['미란다 커피 (엑스트라 핫)', false], ['AI 회의록 초안 1차 출처 확인', false], ['고객 명단 비식별화', false], ['“The Book” 배달', false]]);
+  $('#todo').innerHTML = list.map((t, i) => `<label class="${t[1] ? 'done' : ''}"><input type="checkbox" data-i="${i}" ${t[1] ? 'checked' : ''}><span>${esc(t[0])}</span></label>`).join('');
+  $$('#todo input').forEach(c => c.onchange = () => { list[+c.dataset.i][1] = c.checked; store.set('rw_todo_' + sess.get(), list); renderTodo(); if (list.every(t => t[1])) toast('🎉 오늘 할 일 끝! …미란다: “그래서, 다음은?”'); });
+  $('#todo-add').onclick = () => { const v = $('#todo-in').value.trim(); if (!v) return; list.push([v, false]); store.set('rw_todo_' + sess.get(), list); $('#todo-in').value = ''; renderTodo(); };
+}
+function renderNoticeAdmin() {
+  const list = notices();
+  $('#nt-list').innerHTML = list.map((n, i) => `<li><span>${n.pin ? '<span class="pin">[필독]</span> ' : ''}${esc(n.t)} <small style="color:var(--muted)">${n.d}</small></span><button class="btn btn-line btn-sm" data-del="${i}">삭제</button></li>`).join('');
+  $$('#nt-list [data-del]').forEach(b => b.onclick = () => { list.splice(+b.dataset.del, 1); store.set('rw_notices', list); renderNoticeAdmin(); toast('공지를 삭제했어요'); });
+  $('#nt-add').onclick = () => { const v = $('#nt-in').value.trim(); if (!v) return toast('공지 내용을 입력해 주세요'); list.unshift({ t: v, d: '오늘', pin: $('#nt-pin').checked }); store.set('rw_notices', list); $('#nt-in').value = ''; renderNoticeAdmin(); toast('📌 공지를 등록했어요 (홈 화면에도 보여요)'); };
+  $('#nt-reset').onclick = () => { try { localStorage.removeItem('rw_notices'); } catch (e) {} renderNoticeAdmin(); toast('기본 공지로 되돌렸어요'); };
+}
+
+/* ---------- 로그인 ---------- */
+function openModal(html, wide) { $('#mbody').innerHTML = html; $('#mbox').classList.toggle('wide', !!wide); $('#modal').classList.remove('hidden'); }
+function closeModal() { $('#modal').classList.add('hidden'); }
+function openLogin() {
+  openModal(`<div class="login-top"><div class="logo">RUNWAY</div><p>임직원 인트라넷 · STAFF ONLY</p></div>
+    <form class="login-bd" id="login-form" autocomplete="off">
+      <div class="demo">🎬 <b>전시용 체험 계정</b> — 실제 아이디·비밀번호는 입력하지 마세요. 입력한 내용은 어디에도 전송되지 않아요.
+        <div class="acc">${Object.entries(ACCOUNTS).map(([k, a]) => `<button type="button" data-u="${k}">${a.name} · ${a.role}</button>`).join('')}</div></div>
+      <div class="field"><label for="lg-id">사번 (ID)</label><input id="lg-id" placeholder="예: andy"></div>
+      <div class="field"><label for="lg-pw">보안 코드</label><input id="lg-pw" type="password" placeholder="체험 계정 버튼을 누르면 자동 입력"></div>
+      <div class="err" id="lg-err"></div>
+      <button class="btn btn-ink" style="width:100%" type="submit">로그인</button>
+      <p style="text-align:center;font-size:12.5px;color:var(--muted);margin:12px 0 0">보안 코드를 잊으셨나요? <a href="#/" onclick="toast('미란다: “그건 자네 문제야.”');return false">재설정 요청</a></p>
+    </form>`);
+  $$('.demo [data-u]').forEach(b => b.onclick = () => { $('#lg-id').value = b.dataset.u; $('#lg-pw').value = ACCOUNTS[b.dataset.u].pw; });
+  $('#login-form').onsubmit = e => {
+    e.preventDefault();
+    const id = $('#lg-id').value.trim().toLowerCase(), pw = $('#lg-pw').value, a = ACCOUNTS[id];
+    if (!a || a.pw !== pw) { $('#lg-err').textContent = '“그게 최선인가?” — 사번 또는 보안 코드가 틀렸어요.'; const b = $('#mbox'); b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); return; }
+    sess.set(id); closeModal(); renderHeader(); toast(`환영합니다, ${a.name}님 👠`);
+    location.hash = a.admin ? '#/admin' : '#/intranet'; route();
+  };
+}
+function logout() { sess.set(null); renderHeader(); toast('로그아웃했어요. That’s all.'); location.hash = '#/'; }
+function renderHeader() {
+  const id = sess.get(), u = ACCOUNTS[id];
+  $('#hd-r').innerHTML = u
+    ? `<button class="who" id="who"><span class="av" style="background:${u.color}">${u.name[0]}</span><span class="nm">${u.name}</span> ▾</button>`
+    : `<button class="btn btn-ink btn-sm" id="btn-login">로그인</button>`;
+  if (u) $('#who').onclick = e => {
+    e.stopPropagation();
+    const ex = $('.menu-dd'); if (ex) return ex.remove();
+    $('#who').insertAdjacentHTML('beforeend', `<div class="menu-dd"><a href="#/intranet">🏠 인트라넷</a><a href="#/intranet/tasks">✅ 내 할 일</a>${u.admin ? '<a href="#/admin">🛡️ 관리자 콘솔</a>' : ''}<button id="dd-out">🚪 로그아웃</button></div>`);
+    $('#dd-out').onclick = ev => { ev.stopPropagation(); logout(); };
+  };
+  else $('#btn-login').onclick = openLogin;
+}
+document.addEventListener('click', () => { const d = $('.menu-dd'); if (d) d.remove(); });
+
+/* ---------- 검색 ---------- */
+function openSearch() {
+  openModal(`<div class="search-box"><input id="sq" placeholder="검색어 (예: 비서, 프롬프트, MCP)" aria-label="검색"><div class="sr" id="sr"></div></div>`, true);
+  const idx = [...ARTICLES.map(a => ({ t: a.title, s: 'PRESS · ' + a.sub, h: '#/press/' + a.id, x: a.body.join(' ') })), ...JOBS.map(j => ({ t: j.title, s: 'CAREERS · ' + j.dept, h: '#/careers/' + j.id, x: j.short })),
+    { t: '악프다 2: 퇴근까지 180초', s: 'GAME', h: '#/game', x: '게임 방탈출 미란다' }, { t: '회사 소개 · 편집장 인사말', s: 'ABOUT', h: '#/about', x: '미란다 조직도 오피스' }];
+  const run = () => { const q = $('#sq').value.trim(); $('#sr').innerHTML = q ? (idx.filter(i => (i.t + i.s + i.x).includes(q)).map(i => `<a href="${i.h}" onclick="closeModal()">${i.t}<small>${i.s}</small></a>`).join('') || '<p style="color:var(--muted)">결과가 없어요. 미란다도 모르는 내용입니다.</p>') : ''; };
+  $('#sq').oninput = run; setTimeout(() => $('#sq').focus(), 50);
+}
+
+/* ---------- 이스터에그: 만든 사람들 ---------- */
+function openCredits() {
+  const sp = Array.from({ length: 12 }, () => `<span class="spark" style="left:${Math.random() * 96}%;top:${Math.random() * 90}%;animation-delay:${Math.random() * 1.6}s">✦</span>`).join('');
+  openModal(`<div class="credit-wrap">${sp}<div class="k">BEHIND THE RUNWAY · SECRET CREDITS</div><h2>Made by</h2><p class="s">이 사무실을 만든 네 명의 비서들. 축하해요, 숨겨진 크레딧을 찾았어요!</p>
+    <div class="toons">${TEAM.map((t, i) => `<div class="toon-card" style="animation-delay:${.2 + i * .18}s"><span class="say">${t.say}</span>${toon(t)}<b>${t.name}</b><small>${t.desc}</small></div>`).join('')}</div>
+    <p style="margin:22px 0 0;font:italic 700 18px var(--kserif);color:var(--gold)">“흥미롭군. 자네들, 생각보다 쓸 만한 팀이었어.” — M.P.</p></div>`, true);
+}
+let logoClicks = 0, logoTimer;
+$('#logo').addEventListener('click', () => {
+  logoClicks++; clearTimeout(logoTimer); logoTimer = setTimeout(() => logoClicks = 0, 1500);
+  if (logoClicks === 3) toast('…? 로고를 조금 더 눌러 보세요');
+  if (logoClicks >= 5) { logoClicks = 0; openCredits(); }
+});
+$('#heart').onclick = openCredits;
+let typed = '';
+document.addEventListener('keydown', e => {
+  if (e.target.matches('input,textarea')) return;
+  typed = (typed + e.key.toLowerCase()).slice(-12);
+  if (typed.endsWith('runway')) openCredits();
+  if (typed.endsWith('thatsall')) { toast('👠 <i>That’s all.</i>'); document.body.animate([{ filter: 'none' }, { filter: 'grayscale(1)' }, { filter: 'none' }], 1600); }
+  if (e.key === 'Escape') closeModal();
+});
+$('#swatch').onclick = () => toast('💙 그 스웨터, 그냥 파란색이 아니야. 세룰리안이지.');
+console.log('%cRUNWAY', 'font:900 40px Georgia;color:#c8102e', '\n만든 사람들: ' + TEAM.map(t => t.name).join(' · ') + '\n힌트: 로고를 5번 눌러 보세요.');
+
+/* ---------- 광고 영상 ---------- */
+const AD = { dur: 16000, scenes: [[0, 1800], [1800, 4400], [4400, 6800], [6800, 9600], [9600, 12400], [12400, 16000]], t: 0, last: 0, raf: 0, paused: false, sound: false };
+function playAd() {
+  $('#ad-miranda').innerHTML = MIRANDA();
+  $('#ad').classList.remove('hidden'); document.body.style.overflow = 'hidden';
+  AD.t = 0; AD.last = Date.now(); AD.paused = false; $('#ad-pause').textContent = '⏸';
+  clearInterval(AD.raf); AD.raf = setInterval(adFrame, 100); adFrame();
+}
+function adFrame() {
+  const now = Date.now();
+  if (!AD.paused) AD.t += now - AD.last; AD.last = now;
+  const t = Math.min(AD.t, AD.dur);
+  $$('#ad .scene').forEach((s, i) => s.classList.toggle('on', t >= AD.scenes[i][0] && (t < AD.scenes[i][1] || i === AD.scenes.length - 1)));
+  if (t >= 4400 && t < 6800) { const sec = Math.floor((t - 4400) / 800); $('#ad-clock').textContent = '17:5' + Math.min(9, 7 + sec); }
+  $('#ad-pg').style.width = (t / AD.dur * 100) + '%';
+  $('#ad-tm').textContent = `0:${String(Math.floor(t / 1000)).padStart(2, '0')} / 0:16`;
+  const left = Math.ceil((5000 - t) / 1000), sk = $('#ad-skip');
+  if (left > 0) { sk.disabled = true; sk.textContent = `${left}초 후 건너뛰기`; } else { sk.disabled = false; sk.textContent = '광고 건너뛰기 ▶▏'; }
+  if (AD.sound && !AD.paused && Math.floor(t / 500) !== AD.beat) { AD.beat = Math.floor(t / 500); beat(AD.beat); }
+  if (AD.t >= AD.dur + 2500) closeAd();
+}
+let actx;
+function beat(n) {
   try {
-    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-    let t = audioCtx.currentTime;
-    freqs.forEach(f => {
-      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-      o.type = type; o.frequency.value = f;
-      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t + dur);
-      t += dur * 0.9;
-    });
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = actx.createOscillator(), g = actx.createGain(), notes = [220, 0, 330, 220, 0, 262, 330, 392];
+    const f = notes[n % notes.length]; if (!f) return;
+    o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(.06, actx.currentTime); g.gain.exponentialRampToValueAtTime(.0001, actx.currentTime + .3);
+    o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime + .3);
   } catch (e) {}
 }
-const sfx = {
-  click: () => beep([700], 0.04, 'triangle', 0.04),
-  good:  () => beep([660, 880], 0.08, 'triangle'),
-  bad:   () => beep([220, 150], 0.14, 'sawtooth', 0.04),
-  unlock:() => beep([523, 659, 784, 1046], 0.1, 'triangle', 0.07),
-  tick:  () => beep([1000], 0.03, 'square', 0.025),
-  boss:  () => beep([130, 110, 87], 0.22, 'sawtooth', 0.05),
-  win:   () => beep([523, 659, 784, 1046, 784, 1046, 1318], 0.12, 'triangle', 0.08)
-};
+function closeAd() {
+  clearInterval(AD.raf); $('#ad').classList.add('hidden'); document.body.style.overflow = '';
+  try { sessionStorage.setItem('rw_ad', '1'); } catch (e) {}
+  if (store.get('rw_cookie', null) === null) $('#cookie').classList.remove('hidden');
+}
+$('#ad-skip').onclick = closeAd;
+$('#ad-play').onclick = () => { closeAd(); location.hash = '#/game'; };
+$('#ad-pause').onclick = () => { AD.paused = !AD.paused; $('#ad-pause').textContent = AD.paused ? '▶' : '⏸'; };
+$('#ad-mute').onclick = () => { AD.sound = !AD.sound; $('#ad-mute').textContent = AD.sound ? '🔊' : '🔇'; };
+$('#replay-ad').onclick = playAd;
 
-/* ---------- 도우미 ---------- */
-function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
-function later(fn, ms) { const id = S.runId; setTimeout(() => { if (S.runId === id && S.running) fn(); }, ms); }
-function showScreen(name) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); $('#scr-' + name).classList.add('active'); window.scrollTo(0, 0); }
-function toast(msg, kind = '') { const t = document.createElement('div'); t.className = 'toast ' + kind; t.innerHTML = msg; $('#toasts').appendChild(t); setTimeout(() => t.remove(), 2500); }
-function bigFx(text, color) { const b = $('#bigfx'); b.textContent = text; b.style.color = color || ''; b.classList.remove('go'); void b.offsetWidth; b.classList.add('go'); }
-function floatText(text, x, y, color) { const f = document.createElement('div'); f.className = 'float'; f.textContent = text; f.style.left = x + 'px'; f.style.top = y + 'px'; f.style.color = color; document.body.appendChild(f); setTimeout(() => f.remove(), 1000); }
-function shakeEl(el, cls = 'wrong') { if (!el) return; el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); setTimeout(() => el.classList.remove(cls), 450); }
-const fmt = sec => String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(sec % 60).padStart(2, '0');
-
-/* ---------- 목표(퀘스트) ---------- */
-function goal() { if (!S.l1.done) return 1; if (!S.l2.done) return 2; if (!S.l3.done) return 3; return 4; }
-const GOAL_TEXT = {
-  1: '목표 1/4 · 서류함을 열어 미란다의 업무를 분배하라',
-  2: '목표 2/4 · 컴퓨터의 AI 문서작성기에 프롬프트를 입력하라',
-  3: '목표 3/4 · 검수 데스크에서 AI 초안을 검증하라',
-  4: '목표 4/4 · 출구로 가서 미란다에게 기사를 제출하라',
-  5: 'BOSS · 미란다의 갑질 모드를 버텨라!'
-};
-
-/* ---------- HUD ---------- */
-function renderTime() {
-  $('#h-time').textContent = fmt(S.timeLeft); $('#cu-time').textContent = fmt(S.timeLeft); $('#cu-hp').textContent = S.hp;
-  document.body.classList.toggle('danger', S.running && S.timeLeft <= 30);
-  document.body.classList.toggle('critical', S.running && S.timeLeft <= 10);
+/* ---------- 기타 ---------- */
+const TICKS = ['[속보] 미란다 편집장, 출근 15분 앞당겨', 'THE NEW YORK MIRROR “결과를 걸러내는 사람이 경쟁력”', '런웨이, 편집장 비서 상시 채용 중', '악프다 2: 퇴근까지 180초 — 전시 부스 오픈', '사내 공지: AI 초안은 1차 출처 확인 후 제출', '오늘의 컬러: 세룰리안'];
+$('#ticker').innerHTML = [...TICKS, ...TICKS].map(t => `<span>${t}</span>`).join('');
+function tickClocks() {
+  const f = tz => new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour: '2-digit', minute: '2-digit' });
+  $('#ck-ny').textContent = f('America/New_York'); $('#ck-pa').textContent = f('Europe/Paris'); $('#ck-se').textContent = f('Asia/Seoul');
+  $$('[data-tz]').forEach(e => e.textContent = f(e.dataset.tz));
+  const lh = $('#left-home'); if (lh) { const n = new Date(), end = new Date(n); end.setHours(18, 0, 0, 0); const m = Math.round((end - n) / 60000); lh.textContent = m > 0 ? `${Math.floor(m / 60)}시간 ${m % 60}분` : '야근 중'; }
 }
-function renderHUD() {
-  renderTime();
-  $('#h-hp').style.width = S.hp + '%'; $('#h-hp-n').textContent = S.hp;
-  $('#row-hp').classList.toggle('low', S.hp <= 30);
-  $('#h-boss').style.width = S.boss + '%'; $('#h-boss-n').textContent = S.boss;
-  const all = S.digits.every(d => d !== null);
-  $('#h-digits').innerHTML = S.digits.map(d => all ? '<div class="digit sealed" title="봉인됨">★</div>'
-    : d === null ? '<div class="digit">🔒</div>' : `<div class="digit got">${d}</div>`).join('');
-  $('#h-inv').innerHTML = [['pen', '✏️', '만년필'], ['draft', '📄', 'AI 초안'], ['article', '📰', '완성 기사']]
-    .map(([k, i, n]) => `<span class="${S.inv[k] ? 'has' : ''}" title="${n}">${S.inv[k] ? i : ''}</span>`).join('');
-  $('#h-stage').textContent = GOAL_TEXT[S.phase === 'boss' ? 5 : goal()];
-  $('#combo-tag').textContent = S.combo >= 2 ? `COMBO ×${S.combo}` : (all && S.phase !== 'boss' ? '' : (all ? '🔐 숫자 봉인 중 · 미란다를 이겨라' : ''));
-}
-
-/* ---------- 타이머 (항상 1개만 돌아가도록) ---------- */
-function startTimer() { stopTimer(); timerId = setInterval(tick, 200); }
-function stopTimer() { if (timerId) clearInterval(timerId); timerId = null; }
-function tick() {
-  if (!S.running) return;
-  const left = Math.max(0, Math.ceil((S.deadline - Date.now()) / 1000));
-  if (left !== S.timeLeft) { S.timeLeft = left; renderTime(); if (left <= 10 && left > 0) sfx.tick(); onSecond(); }
-  if (left <= 0) { gameOver('time'); return; }
-  if (S.phase === 'boss' && S.wave) {
-    const remain = S.waveEnd - Date.now(), bar = $('#wave-bar');
-    if (bar) bar.style.width = Math.max(0, remain / (S.wave.time * 1000) * 100) + '%';
-    if (remain <= 0) waveTimeout();
-  }
-}
-function onSecond() {
-  if (S.phase !== 'room') return;
-  S.elapsed++;
-  if (S.elapsed >= S.nextPile) {
-    S.nextPile += CONFIG.pileEvery;
-    const p = document.createElement('div'); p.className = 'pile';
-    p.textContent = '📄📄📄 업무 폭주! 책상에 서류가 쌓이고 있다 📄📄📄';
-    document.body.appendChild(p); setTimeout(() => p.remove(), 1800);
-    damageMe(5, '업무가 쌓이고 있어요! 서두르세요 (멘탈 -5)');
-  }
-}
-
-/* ---------- HP 변화 ---------- */
-function damageMe(n, msg) {
-  if (!S.running) return;
-  S.hp = Math.max(0, S.hp - n); S.combo = 0; S.lockMistakes++; S.mistakes++;
-  sfx.bad(); toast(msg, 'bad');
-  const f = $('#flash'); f.classList.remove('on'); void f.offsetWidth; f.classList.add('on');
-  document.body.classList.add('shake'); setTimeout(() => document.body.classList.remove('shake'), 400);
-  floatText('-' + n, 40, 100, '#c8102e');
-  renderHUD();
-  if (S.phase === 'boss') { mirandaSay(['그게 최선인가?', '실망이군.', '자네, 내일도 출근하고 싶나?'][Math.floor(Math.random() * 3)]); shakeEl($('.fighter.me'), 'hurt'); }
-  if (S.hp <= 0) gameOver('hp');
-}
-function hitBoss(n) {
-  if (!S.running) return;
-  S.combo++;
-  const bonus = S.combo >= 3 ? 1 : 0;
-  S.boss = Math.max(0, S.boss - n - bonus);
-  sfx.good();
-  if (S.combo >= 2) bigFx('COMBO ×' + S.combo);
-  floatText('미란다 -' + (n + bonus), window.innerWidth / 2 - 50, 120, '#c99a3b');
-  renderHUD();
-  if (S.phase === 'boss') { shakeEl($('.fighter.miranda'), 'hurt'); if (S.boss <= 0) { S.wave = null; later(win, 700); } }
-}
-
-/* ---------- 시작 / 초기화 ---------- */
-function resetState() {
-  Object.assign(S, {
-    runId: S.runId + 1, running: false, deadline: 0, timeLeft: CONFIG.totalSeconds,
-    hp: 100, boss: 100, digits: [null, null, null], combo: 0, mistakes: 0, hintsUsed: 0, lockMistakes: 0,
-    elapsed: 0, nextPile: CONFIG.pileFirst, phase: 'room', open: 0, coffee: false,
-    inv: { pen: false, draft: false, article: false },
-    l1: { done: false, order: shuffle(TASKS.map((_, i) => i)), placed: {} },
-    l2: { done: false, order: shuffle(FRAGS.map((_, i) => i)), slots: [null, null, null, null, null], sel: null, rejected: {}, ran: false },
-    l3: { done: false, tool: null, fixed: {}, sub: 'doc' },
-    wave: null, waveIdx: 0, skill: null, dialog: ''
-  });
-}
-function startGame() {
-  stopTimer(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
-  resetState();
-  S.running = true; S.deadline = Date.now() + CONFIG.totalSeconds * 1000;
-  showScreen('game');
-  S.dialog = '📱 <b>미란다의 메모</b> “내일 아침까지 ‘AI 시대의 비서’ 특집 기사를 완성해 둬. 퇴근은 그다음이야.” …먼저 반짝이는 <b>서류함</b>부터 열어 보자!';
-  renderRoom(); renderHUD(); startTimer(); sfx.unlock();
-}
-function goHome() {
-  stopTimer(); resetState(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
-  document.body.classList.remove('danger', 'critical');
-  document.querySelectorAll('.confetti').forEach(c => c.remove());
-  showScreen('start');
-}
-
-/* =====================================================================
-   🏢 미란다의 사무실 (방탈출 메인 화면)
-   ===================================================================== */
-const OBJECTS = [
-  { id:'cabinet', label:'서류함',       icon:'🗄️', spr:'cabinet',   x:4,    y:40,   w:11,  lock:1 },
-  { id:'news',    label:'신문 더미',     icon:'📰', spr:'news',      x:29.5, y:50.6, w:8 },
-  { id:'pc',      label:'AI 문서작성기', icon:'💻', spr:'pc',        x:40,   y:41.6, w:12,  lock:2 },
-  { id:'coffee',  label:'커피',         icon:'☕', spr:'coffee',    x:55,   y:52.6, w:4 },
-  { id:'check',   label:'검수 데스크',   icon:'🔍', spr:'magnifier', x:76.5, y:51,   w:5,   lock:3 },
-  { id:'door',    label:'출구',         icon:'🚪', spr:'door',      x:86.5, y:27.5, w:11.5, lock:4 }
-];
-function objState(o) {
-  if (!o.lock) return '';
-  const g = goal();
-  if (o.lock < g) return 'done';
-  if (o.lock === g) return 'target';
-  return 'locked';
-}
-function renderRoom() {
-  if (S.phase !== 'room') return;
-  main.innerHTML = `
-    <div class="room" id="room">
-      <div class="room-sign">MIRANDA'S OFFICE</div>
-      <div class="window"><div class="sun"></div><div class="city"></div></div>
-      <div class="frames"><div class="frame">RUNWAY<i></i></div><div class="frame">RUNWAY<i></i></div><div class="frame">RUNWAY<i></i></div></div>
-      <div class="wainscot"></div><div class="floor"></div><div class="rug"></div>
-      <div class="desk"></div><div class="side"></div><div class="paper-sheet"></div>
-      <div class="obj" style="left:17.5%;top:49%;width:5%">${spr('plant')}</div>
-      ${OBJECTS.map(o => `<button class="obj ${objState(o)}" data-o="${o.id}" style="left:${o.x}%;top:${o.y}%;width:${o.w}%" aria-label="${o.label}">${spr(o.spr)}<span class="tag">${o.label}</span></button>`).join('')}
-      <div class="me-spr">${spr(meName())}</div>
-    </div>
-    <div class="dialog typing"><div class="av">${headOnly(meName())}</div><p id="dlg">${S.dialog}</p></div>
-    <div class="objlist">${OBJECTS.map(o => `<button class="${objState(o)}" data-o="${o.id}"><span>${o.icon}</span>${o.label}</button>`).join('')}</div>`;
-  main.querySelectorAll('[data-o]').forEach(b => b.onclick = () => clickObj(b.dataset.o, b));
-}
-function say(html) { S.dialog = html; const d = $('#dlg'); if (d) { d.innerHTML = html; d.parentElement.classList.remove('typing'); void d.offsetWidth; d.parentElement.classList.add('typing'); } }
-function clickObj(id, el) {
-  if (!S.running || S.phase !== 'room') return;
-  sfx.click();
-  const o = OBJECTS.find(x => x.id === id), g = goal();
-  if (id === 'news') { say('수상한 신문기사 더미다. <b>문제의 단서</b>가 모두 여기 있어!'); openArticles(0); return; }
-  if (id === 'coffee') {
-    if (!S.coffee) { S.coffee = true; S.hp = Math.min(100, S.hp + 5); renderHUD(); toast('☕ 뜨거운 커피 한 모금… 멘탈 +5', 'good'); say('미란다의 커피를 몰래 한 모금… <b>멘탈 +5</b>. 식기 전에 서두르자!'); }
-    else say('컵이 비었다. 미란다에게 들키기 전에 일이나 하자.');
-    return;
-  }
-  if (o.lock < g) { say(`${o.label}은(는) 이미 해결했다. ✔`); if (o.lock !== 4) return; }
-  if (o.lock > g) {
-    const need = { 2: '✏️ <b>만년필</b>이 없어 프롬프트를 쓸 수 없다. 먼저 <b>서류함</b>을 열자.',
-                   3: '검증할 <b>📄 AI 초안</b>이 아직 없다. 먼저 <b>컴퓨터</b>를 확인하자.',
-                   4: `문이 굳게 잠겨 있다. 잠금장치 <b>${S.digits.filter(d => d).length} / 3</b> 해제됨.` }[o.lock];
-    say('🔒 ' + need); shakeEl(el, 'nope'); return;
-  }
-  if (o.lock === 4) { bossIntro(); return; }
-  openLock(o.lock);
-}
-
-/* =====================================================================
-   🔎 클로즈업 (퍼즐 창)
-   ===================================================================== */
-function openLock(n) {
-  S.open = n; S.lockMistakes = 0;
-  const t = { 1: ['LOCK 01', '서류함 — 업무 분배표'], 2: ['LOCK 02', 'AI 문서작성기 — 프롬프트 입력'], 3: ['LOCK 03', '검수 데스크 — AI 초안 검증'] }[n];
-  $('#cu-lt').textContent = t[0]; $('#cu-title').textContent = t[1];
-  $('#cu').classList.remove('hidden'); $('#cu-body').scrollTop = 0;
-  renderLock();
-}
-function closeCU(silent) {
-  $('#cu').classList.add('hidden'); S.open = 0;
-  if (!silent && S.running) renderRoom();
-}
-function renderLock() { ({ 1: renderL1, 2: renderL2, 3: renderL3 })[S.open](); }
-const art = (i, txt) => `<button class="alink" data-art="${i}">📰 ${txt}</button>`;
-
-/* ---------- 잠금 1: 업무 분배 ---------- */
-function renderL1() {
-  const L = S.l1, body = $('#cu-body');
-  if (L.done) return;
-  const chips = to => TASKS.map((t, i) => L.placed[i] === to ? `<span class="chip">${t.k}</span>` : '').join('');
-  body.innerHTML = `
-    <p class="lead">미란다의 밀린 업무 8건! ${art(0, '기사 ③')} 속 표를 참고해 <b>AI에게 맡길 일</b>과 <b>비서가 직접 할 일</b>로 나누세요.</p>
-    <div class="trays">
-      <div class="tray ai"><h4>🤖 AI에게 맡기기</h4><div class="chips">${chips('ai')}</div></div>
-      <div class="tray me"><h4>🙋 비서가 직접</h4><div class="chips">${chips('me')}</div></div>
-    </div>
-    <div class="tasks">${L.order.filter(i => !L.placed[i]).map(i => `
-      <div class="task" data-i="${i}"><b>${TASKS[i].k}</b><span>${TASKS[i].d}</span>
-        <div class="tb"><button class="to-ai" data-to="ai">🤖 AI에게</button><button class="to-me" data-to="me">🙋 내가 직접</button></div></div>`).join('')}</div>`;
-  body.querySelectorAll('.task button').forEach(b => b.onclick = () => {
-    const card = b.closest('.task'), i = +card.dataset.i;
-    if (TASKS[i].to === b.dataset.to) {
-      L.placed[i] = b.dataset.to; hitBoss(1);
-      if (Object.keys(L.placed).length === TASKS.length) { L.done = true; lockClear(1); }
-      else renderL1();
-    } else {
-      shakeEl(card);
-      damageMe(7, TASKS[i].to === 'ai' ? `‘${TASKS[i].k}’은(는) 정형화된 업무! AI에게 맡겨도 돼요 (멘탈 -7)` : `‘${TASKS[i].k}’은(는) 사람만 할 수 있는 일이에요! (멘탈 -7)`);
-    }
-  });
-}
-
-/* ---------- 잠금 2: 프롬프트 ---------- */
-function renderL2() {
-  const L = S.l2, body = $('#cu-body');
-  if (L.done) return;
-  const placedFrag = s => L.slots[s] !== null ? FRAGS[L.slots[s]].t : (L.sel !== null ? '👉 여기에 넣기' : '비어 있음');
-  body.innerHTML = `
-    <p class="lead">✏️ 만년필로 AI에게 특집 기사를 맡기자! ${art(1, '기사 ④')}에 나온 <b>좋은 프롬프트 5요소</b>에 맞게 <b>① 아래 문장을 고르고 → ② 알맞은 칸</b>을 누르세요.</p>
-    <div class="screen-pc">
-      <div class="bar-top"><i></i><i></i><i></i>&nbsp; RUNWAY AI WRITER</div>
-      <div class="pslots">${P_SLOTS.map((n, s) => `<button class="pslot ${L.slots[s] !== null ? 'filled' : (L.sel !== null ? 'armed' : '')}" data-s="${s}"><span class="lab">${n}</span><span class="val">${placedFrag(s)}</span></button>`).join('')}</div>
-      <div class="run" id="run">&gt; 입력 대기 중_</div>
-    </div>
-    <div class="frags">${L.order.map(i => `<button class="frag ${L.slots.includes(i) ? 'used' : ''} ${L.rejected[i] ? 'rejected' : ''} ${L.sel === i ? 'sel' : ''}" data-i="${i}">${FRAGS[i].t}</button>`).join('')}</div>`;
-  body.querySelectorAll('.frag').forEach(b => b.onclick = () => {
-    const i = +b.dataset.i; if (L.rejected[i]) return;
-    sfx.click(); L.sel = L.sel === i ? null : i; renderL2();
-  });
-  body.querySelectorAll('.pslot').forEach(b => b.onclick = () => {
-    const s = +b.dataset.s;
-    if (L.slots[s] !== null) return;
-    if (L.sel === null) { toast('먼저 아래에서 문장을 골라 주세요 👇'); return; }
-    const f = FRAGS[L.sel];
-    if (f.slot === -1) { L.rejected[L.sel] = true; L.sel = null; renderL2(); shakeEl($(`.pslot[data-s="${s}"]`)); damageMe(8, f.why + ' (멘탈 -8)'); return; }
-    if (f.slot !== s) { shakeEl(b); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ④의 설명을 확인하세요 (멘탈 -6)`); return; }
-    L.slots[s] = L.sel; L.sel = null; hitBoss(2); renderL2();
-    if (L.slots.every(x => x !== null)) runAI();
-  });
-}
-function runAI() {
-  const L = S.l2; L.done = true;
-  const lines = ['> 프롬프트 분석 중...', '> 역할·배경·지시·제약·출력 형식 확인 ✔', '> 기사 초안 작성 중...', '> 프린터로 출력 완료! 📄'];
-  let k = 0;
-  const step = () => { const r = $('#run'); if (!r || !S.running) return; r.innerHTML = lines.slice(0, k + 1).join('<br>'); k++; if (k < lines.length) later(step, 380); else later(() => lockClear(2), 500); };
-  step();
-}
-
-/* ---------- 잠금 3: 검증 ---------- */
-function renderL3() {
-  const L = S.l3, body = $('#cu-body');
-  if (L.done) return;
-  const n = Object.keys(L.fixed).length;
-  body.innerHTML = `
-    <p class="lead">AI가 쓴 초안이 나왔다. 하지만 ${art(1, '기사 ④')}는 말한다 — <b>“그대로 믿지 마라.”</b> <b>① 도구를 고르고 → ② 문제 있는 문장</b>을 눌러 처리하세요.</p>
-    <div class="tools">${TOOLS.map(t => `<button class="tool ${L.tool === t.k ? 'on' : ''}" data-k="${t.k}"><span>${t.icon}</span>${t.name}<small>${t.sub}</small></button>`).join('')}</div>
-    <div class="draft" id="draft">
-      <div class="draft-head"><b>RUNWAY DAILY</b><small>AI 작성 초안 · 검토 전</small></div>
-      ${DRAFT.map((l, i) => {
-        const f = L.fixed[i];
-        const inner = f ? (l.fixed || l.t) + `<span class="stampmini ${l.stamp[0]}">${l.stamp[1]}</span>` : l.t;
-        return `<button class="dline ${l.title ? 'title-line' : ''} ${f ? 'fixed' : ''}" data-i="${i}">${inner}</button>`;
-      }).join('')}
-      ${L.sub === 'code' ? '<div class="approved"><div>APPROVED<small>검증 완료 기사</small></div></div>' : ''}
-    </div>
-    <p class="note">※ 문서 속 인물·연락처·통계는 게임을 위해 만든 가상의 내용입니다. · 처리한 문제: <b>${n}</b> / 4</p>
-    <div id="code-area"></div>`;
-  body.querySelectorAll('.tool').forEach(t => t.onclick = () => { sfx.click(); L.tool = t.dataset.k; body.querySelectorAll('.tool').forEach(x => x.classList.toggle('on', x === t)); });
-  body.querySelectorAll('.dline').forEach(d => d.onclick = () => fixLine(+d.dataset.i, d));
-  if (L.sub === 'code') renderCode();
-}
-function fixLine(i, d) {
-  const L = S.l3, l = DRAFT[i];
-  if (L.sub !== 'doc' || L.fixed[i]) return;
-  if (!L.tool) { toast('먼저 위에서 도구를 골라 주세요 👆'); return; }
-  if (!l.ok) { shakeEl(d); damageMe(5, '이 문장은 기사 내용과 맞는 사실이에요. 문제가 없어요! (멘탈 -5)'); return; }
-  if (!l.ok.includes(L.tool)) { shakeEl(d); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '문제 있는 문장은 맞지만, 도구가 맞지 않아요! (멘탈 -5)'); return; }
-  L.fixed[i] = true; hitBoss(2);
-  if (Object.keys(L.fixed).length === 4) { L.sub = 'code'; sfx.unlock(); bigFx('PERFECT CHECK'); renderL3(); later(() => { const c = $('#code-area'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300); }
-  else renderL3();
-}
-function renderCode() {
-  $('#code-area').innerHTML = `
-    <div class="codebox">
-      <h3>🔐 기사 보관함 잠금</h3>
-      <p>검증된 기사를 보관함에 넣으려면 코드가 필요하다.<br>
-      <b>“AI 활용이 문서 작성·요약·번역·자료조사 등 사무 업무 전반으로 확대되기 시작한 해의 끝자리 숫자는?”</b></p>
-      <p>${art(2, '기사 ② AI 연표에서 단서 확인하기')}</p>
-      <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => `<button class="key" data-n="${n}">${n}</button>`).join('')}</div>
-    </div>`;
-  $('#code-area').querySelectorAll('.key').forEach(k => k.onclick = () => {
-    if (S.l3.done) return;
-    if (k.dataset.n === CONFIG.code[2]) { S.l3.done = true; hitBoss(3); lockClear(3); }
-    else { shakeEl(k); damageMe(8, '코드가 틀렸어요! 기사 ② 연표를 다시 확인하세요 (멘탈 -8)'); }
-  });
-}
-
-/* ---------- 잠금 해제 보상 ---------- */
-const REWARD = {
-  1: { item:'pen',     itemTxt:'✏️ 만년필',     skill:'🤝 비서의 판단', say:'서랍 속에서 <b>✏️ 만년필</b>을 찾았다! 이제 <b>컴퓨터의 AI 문서작성기</b>에 프롬프트를 써 보자.' },
-  2: { item:'draft',   itemTxt:'📄 AI 초안',    skill:'⚙️ AI 자동화',  say:'프린터에서 <b>📄 AI 기사 초안</b>이 나왔다! 하지만 AI의 결과를 그대로 믿으면 안 돼. <b>검수 데스크</b>로 가자.' },
-  3: { item:'article', itemTxt:'📰 완성 기사',  skill:'🛡️ 팩트체크 실드 · 🔌 커넥터', say:'검증을 마친 <b>📰 완성 기사</b>를 손에 넣었다! 이제 <b>출구</b>로 가서 미란다에게 제출하고 탈출하자!' }
-};
-function lockClear(n) {
-  const R = REWARD[n];
-  S.digits[n - 1] = CONFIG.code[n - 1]; S.inv[R.item] = true;
-  hitBoss(5); sfx.unlock();
-  S.elapsed = 0; S.nextPile = CONFIG.pileFirst;
-  const perfect = S.lockMistakes === 0;
-  S.dialog = R.say;
-  $('#cu-body').innerHTML = `
-    <div class="reward">
-      <div class="padlock"><div class="shackle"></div><div class="lbody">${CONFIG.code[n - 1]}</div></div>
-      <h3>LOCK 0${n} UNLOCKED</h3>
-      ${perfect ? '<div class="perfect">★ PERFECT ★</div>' : ''}
-      <div class="gains"><span class="d">금고 숫자 ${CONFIG.code[n - 1]}</span><span>아이템 ${R.itemTxt}</span><span>NEW SKILL ${R.skill}</span></div>
-      <button class="btn btn-red" id="back-room">방으로 돌아가기 →</button>
-    </div>`;
-  $('#cu-body').scrollTop = 0; $('.cu-box').scrollTop = 0;
-  $('#back-room').onclick = () => closeCU();
-  renderHUD();
-}
-
-/* =====================================================================
-   👑 최종 보스 — 미란다의 갑질 모드
-   ===================================================================== */
-function bossIntro() {
-  S.phase = 'boss'; sfx.boss(); renderHUD();
-  const it = $('#intro');
-  it.innerHTML = `<div class="intro-box">
-      <div class="badge" style="background:#c8102e">FINAL BOSS</div>
-      ${mirandaSpr(true)}
-      <h2>MIRANDA</h2>
-      <div class="say">“자네가 일을 모두 처리했다고? 그렇다면 마지막 시험을 통과해 봐.”</div>
-      <p><b>스킬</b>을 눌러 고르고 → 몰려오는 <b>업무 카드</b>를 눌러 처리하세요.<br>미란다의 HP를 0으로 만들면 탈출!</p>
-      <button class="btn btn-red" id="go-boss">⚔️ 마지막 시험 시작</button></div>`;
-  it.classList.remove('hidden');
-  $('#go-boss').onclick = () => { it.classList.add('hidden'); renderBoss(); startWave(0); };
-}
-function renderBoss() {
-  main.innerHTML = `
-    <div class="arena">
-      <div class="stage-top">
-        <div class="fighter me">${spr(meName())}<div class="nm">ME</div></div>
-        <div class="vs">VS</div>
-        <div class="fighter miranda"><div class="say" id="m-say">…</div>${mirandaSpr(true)}<div class="nm">MIRANDA</div></div>
-      </div>
-      <div class="wave-wrap">
-        <div class="wave-head"><h3 id="wave-name">-</h3><small id="wave-no"></small></div>
-        <div class="wavebar"><i id="wave-bar"></i></div>
-        <div class="items" id="items"></div>
-        <p class="tip" id="wave-tip"></p>
-      </div>
-    </div>
-    <div class="skills">${SKILLS.map(s => `<button class="skill" data-k="${s.k}"><span>${s.icon}</span><b>${s.name}</b><small>${s.from}</small></button>`).join('')}</div>`;
-  main.querySelectorAll('.skill').forEach(b => b.onclick = () => {
-    sfx.click(); S.skill = S.skill === b.dataset.k ? null : b.dataset.k;
-    main.querySelectorAll('.skill').forEach(x => x.classList.toggle('on', x.dataset.k === S.skill));
-  });
-}
-function mirandaSay(t) { const b = $('#m-say'); if (b) b.textContent = '“' + t + '”'; }
-function startWave(i) {
-  if (!S.running || S.boss <= 0) return;
-  const base = WAVES[i % WAVES.length];
-  S.waveIdx = i;
-  S.wave = { ...base, items: base.items.map(it => ({ ...it, done: false })) };
-  S.waveEnd = Date.now() + base.time * 1000;
-  $('#wave-name').textContent = (i >= WAVES.length ? '앙코르! ' : '') + base.name;
-  $('#wave-no').textContent = `WAVE ${i + 1} · 제한 ${base.time}초`;
-  $('#wave-tip').textContent = '💡 ' + base.tip;
-  mirandaSay(base.line); sfx.boss(); bigFx(base.name, '#c8102e');
-  renderItems();
-}
-function renderItems() {
-  const box = $('#items'); if (!box || !S.wave) return;
-  box.innerHTML = S.wave.items.map((it, i) => `
-    <button class="bitem t-${it.type} ${it.done ? 'done' : ''}" data-i="${i}">
-      <span class="tg">${it.done ? '처리 완료 ✔' : TAGS[it.type]}</span>
-      <span class="tx">${it.done && it.ok ? it.ok : it.tx}</span></button>`).join('');
-  box.querySelectorAll('.bitem').forEach(b => b.onclick = () => useSkillOn(+b.dataset.i, b));
-}
-function useSkillOn(i, el) {
-  if (!S.wave) return;
-  const it = S.wave.items[i];
-  if (it.done) return;
-  if (!S.skill) { toast('먼저 아래에서 스킬을 골라 주세요 👇'); shakeEl(el); return; }
-  if (S.skill !== NEED[it.type]) { shakeEl(el); damageMe(WRONG[it.type][1], WRONG[it.type][0] + ` (멘탈 -${WRONG[it.type][1]})`); return; }
-  if (S.skill === 'auto') {                   // 자동화: 반복 업무를 한 번에
-    let sum = 0, cnt = 0;
-    S.wave.items.forEach(x => { if (x.type === 'routine' && !x.done) { x.done = true; sum += x.dmg; cnt++; } });
-    toast(`⚙️ AI 자동화! 반복 업무 ${cnt}건 일괄 처리`, 'good'); hitBoss(sum);
-  } else {
-    it.done = true;
-    toast({ judge: '🤝 사람만 할 수 있는 일! 비서의 판단으로 해결', connect: '🔌 커넥터 연결 성공!', shield: '🛡️ 팩트체크 실드 발동!' }[S.skill], 'good');
-    if (S.skill === 'shield') mirandaSay('…흥, 원칙을 지키겠다?');
-    hitBoss(it.dmg);
-  }
-  if (!S.running || S.boss <= 0) { renderItems(); return; }
-  renderItems();
-  if (S.wave.items.every(x => x.done)) {
-    mirandaSay(['흠. 나쁘지 않군.', '…그 정도는 기본이지.', '좋아, 다음이다.'][S.waveIdx % 3]);
-    bigFx('WAVE CLEAR');
-    const nextI = S.waveIdx + 1; S.wave = null;
-    later(() => startWave(nextI), 1300);
-  }
-}
-function waveTimeout() {
-  const left = S.wave.items.filter(x => !x.done).length, dmg = Math.min(20, left * 6);
-  const nextI = S.waveIdx + 1; S.wave = null;
-  mirandaSay('시간 끝. 일이 이렇게 쌓여 있는데 뭐 하고 있었지?');
-  damageMe(dmg, `⏰ 처리 못 한 업무 ${left}건이 쌓였어요! (멘탈 -${dmg})`);
-  later(() => startWave(nextI), 1300);
-}
-
-/* =====================================================================
-   결과 화면
-   ===================================================================== */
-function endRun() {
-  S.running = false; stopTimer(); S.wave = null;
-  closeModal(); closeCU(true); $('#intro').classList.add('hidden');
-  document.body.classList.remove('danger', 'critical');
-  $('#toasts').innerHTML = '';
-}
-function gameOver(reason) {
-  if (!S.running) return;
-  endRun();
-  $('#fail-title').textContent = reason === 'time' ? 'TIME OVER' : '멘탈 붕괴';
-  $('#fail-chars').innerHTML = `<div>${spr(meName())}</div><div class="mir">${mirandaSpr(true)}</div>`;
-  $('#fail-quote').textContent = reason === 'time' ? '“18시 정각. 자네는 아직 내 사무실에 있군. 내일도 출근하게.”' : '“그 정도로 무너지다니. 내일 아침 7시에 다시 보지.”';
-  const where = S.phase === 'boss' ? '보스전' : ['', '잠금 1', '잠금 2', '잠금 3', '출구 앞'][goal()];
-  $('#fail-stats').textContent = `도달한 단계: ${where} · 미란다 남은 HP ${S.boss}`;
-  sfx.bad(); showScreen('fail');
-}
-function win() {
-  if (!S.running) return;
-  endRun();
-  $('#win-chars').innerHTML = `<div>${spr(meName())}</div><div class="mir">${mirandaSpr(false)}</div>`;
-  $('#bigcode').innerHTML = `<div class="n">${CONFIG.code[0]}</div><span class="sl">/</span><div class="n">${CONFIG.code[1]}</div><span class="sl">/</span><div class="n">${CONFIG.code[2]}</div>`;
-  renderCredits();
-  $('#win-stats').textContent =`남은 시간 ${fmt(S.timeLeft)} · 내 멘탈 ${S.hp} · 실수 ${S.mistakes}회 · 힌트 ${S.hintsUsed}회`;
-  showScreen('win'); sfx.win();
-  const colors = ['#c8102e', '#3f7fd9', '#c99a3b', '#f7d3da', '#1d1a1c'];
-  for (let i = 0; i < 90; i++) {
-    const c = document.createElement('div'); c.className = 'confetti';
-    c.style.left = Math.random() * 100 + 'vw'; c.style.background = colors[i % colors.length];
-    c.style.animationDuration = 2.5 + Math.random() * 3 + 's'; c.style.animationDelay = Math.random() * 1.5 + 's';
-    c.style.width = 6 + Math.random() * 8 + 'px';
-    document.body.appendChild(c); setTimeout(() => c.remove(), 7500);
-  }
-}
-
-/* =====================================================================
-   팝업창: 기사 / 힌트 / 게임 방법
-   ===================================================================== */
-function openModal(title, html) { $('#modal-title').textContent = title; $('#modal-body').innerHTML = html; $('#modal').classList.remove('hidden'); $('.modal-box').scrollTop = 0; }
-function closeModal() { $('#modal').classList.add('hidden'); }
-function openArticles(idx = 0) {
-  sfx.click();
-  const a = ARTICLES[idx];
-  openModal('RUNWAY DAILY', `
-    <div class="tabs">${ARTICLES.map((x, i) => `<button class="tab ${i === idx ? 'on' : ''}" data-t="${i}">${x.tab}</button>`).join('')}</div>
-    <article class="news"><h3>${a.title}</h3><div class="meta">${a.meta}</div>${a.body}
-    <div class="src">※ 형광펜은 게임에 필요한 핵심 문장입니다.${S.running ? ' 기사를 읽는 동안에도 시간은 흐릅니다!' : ''}</div></article>`);
-  $('#modal-body').querySelectorAll('.tab').forEach(t => t.onclick = () => openArticles(+t.dataset.t));
-}
-function articleForNow() {
-  if (S.phase === 'boss') return 0;
-  const n = S.open || goal();
-  if (n === 1) return 0;
-  if (n === 3 && S.l3.sub === 'code') return 2;
-  return 1;
-}
-function hintKey() {
-  if (S.phase === 'boss') return 4;
-  const n = S.open || goal();
-  if (n === 3 && S.l3.sub === 'code') return '3b';
-  if (n === 4) return 'door';
-  return n;
-}
-function openHint() {
-  if (!S.running || !$('#intro').classList.contains('hidden')) return;
-  const key = hintKey();
-  S.deadline -= CONFIG.hintCost * 1000; S.hintsUsed++; tick();
-  floatText('-' + CONFIG.hintCost + '초', 40, 70, '#c8102e'); sfx.bad();
-  openModal('💡 HINT', `<p class="note" style="margin-top:0">남은 시간 -${CONFIG.hintCost}초</p><div class="hint-box">${HINTS[key]}</div>
-    <p style="margin-top:16px"><button class="btn btn-red" id="hint-art">📰 관련 기사 열기</button></p>`);
-  $('#hint-art').onclick = () => openArticles(articleForNow());
-}
-function openHowto() {
-  sfx.click();
-  openModal('HOW TO PLAY', `<div class="hint-box" style="font-size:16px">
-    <p>⏱ 제한 시간은 <b>180초</b>. 게임 시작을 누르면 시계가 움직여요.</p>
-    <p>🏢 미란다의 사무실에서 <b>반짝이는 물건</b>을 눌러 조사하세요. (아래 버튼 목록으로 눌러도 돼요)</p>
-    <p>🔓 <b>서류함 → 컴퓨터 → 검수 데스크</b> 순서로 잠금을 풀면 금고 숫자와 아이템을 얻어요. 단서는 모두 <b>📰 신문기사</b>에 있어요.</p>
-    <p>👑 마지막으로 <b>출구</b>를 누르면 <b>미란다</b>가 나타나요. 얻은 <b>스킬을 고르고 → 업무 카드</b>를 눌러 처리하세요.</p>
-    <p>❤️ 실수하면 <b>내 멘탈</b>이 줄고, 잘 처리하면 <b>미란다 HP</b>가 줄어요. 실수해도 처음으로 돌아가진 않아요!</p>
-    <p>💡 <b>힌트</b>는 기사 속 찾을 곳을 알려 주지만 <b>시간이 10초</b> 줄어요. 🔥 연속 성공하면 <b>COMBO</b>!</p>
-    <p>💀 시간이 다 되거나 멘탈이 0이 되면 실패. 언제든 다시 도전할 수 있어요.</p></div>`);
-}
-
-/* ---------- 버튼 연결 ---------- */
-function renderPicks() {
-  $('#pv-f').innerHTML = spr('fem'); $('#pv-m').innerHTML = spr('male');
-  $('#hero').innerHTML = `<div class="clock">17:57</div><div class="who">${spr(meName())}</div><div class="who big">${mirandaSpr(false)}</div>`;
-  $('#face-me').innerHTML = headOnly(meName()); $('#face-mir').innerHTML = headOnly('miranda');
-}
-document.querySelectorAll('.pick-card').forEach(c => c.onclick = () => {
-  GENDER = c.dataset.g; sfx.click();
-  document.querySelectorAll('.pick-card').forEach(x => x.classList.toggle('on', x === c));
-  renderPicks();
-});
-$('#btn-start').onclick = startGame;
-$('#btn-howto').onclick = openHowto;
-$('#btn-news').onclick = () => openArticles(0);
-$('#btn-retry').onclick = startGame;
-$('#btn-home1').onclick = goHome;
-$('#btn-home2').onclick = goHome;
-$('#b-article').onclick = () => openArticles(articleForNow());
-$('#b-hint').onclick = openHint;
-$('#b-sound').onclick = () => { soundOn = !soundOn; $('#b-sound').textContent = soundOn ? '🔊' : '🔇'; };
-$('#modal-x').onclick = closeModal;
+setInterval(tickClocks, 15000);
+$('#burger').onclick = () => $('#gnb').classList.toggle('open');
+$('#btn-search').onclick = openSearch;
+$('#mx').onclick = closeModal;
 $('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
-$('#cu-x').onclick = () => closeCU();
-$('#cu-hint').onclick = openHint;
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-$('#cu-body').addEventListener('click', e => { const a = e.target.closest('.alink'); if (a) openArticles(+a.dataset.art); });
+$('#tb-sub').onclick = () => toast('📬 구독은 미란다의 승인 후 가능합니다. (데모)');
+$('#tb-lang').onclick = () => toast('English version: Coming this fall. That’s all.');
+$('#nl-btn').onclick = () => { $('#nl-in').value = ''; toast('💌 데모 사이트라 실제로 저장되지 않아요. 마음만 받을게요!'); };
+$$('#cookie [data-ck]').forEach(b => b.onclick = () => { store.set('rw_cookie', b.dataset.ck); $('#cookie').classList.add('hidden'); toast(b.dataset.ck === 'all' ? '🍪 모두 허용했어요' : '🍪 필수 쿠키만 허용했어요'); });
+window.addEventListener('scroll', () => $('#totop').classList.toggle('show', scrollY > 600));
+$('#totop').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
-resetState(); renderPicks(); renderHUD();
+S.user = sess.get();
+renderHeader(); route();
+let seen = null; try { seen = sessionStorage.getItem('rw_ad'); } catch (e) {}
+if (!seen) playAd(); else if (store.get('rw_cookie', null) === null) $('#cookie').classList.remove('hidden');
 </script>
 </body>
 </html>
