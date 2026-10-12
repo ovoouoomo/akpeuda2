@@ -78,58 +78,31 @@ nav.gnb a.on{color:var(--red)}
 nav.gnb a.hot{color:var(--red)}
 .burger{display:none}
 
-/* ---------- 움직이는 광고 무대 ---------- */
-.stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#fbf7f2;border-radius:0}
-.stage .wall{position:absolute;inset:0 0 22% 0;background:linear-gradient(#fff,#fdf2f2)}
-.stage .win{position:absolute;left:6%;top:9%;width:34%;height:52%;border:6px solid #fff;outline:1.5px solid #ddd;background:linear-gradient(#bcd6f6,#e9f1fb 70%);overflow:hidden}
-.stage .win::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:5px;background:#fff;z-index:2}
-.stage .win .sky{position:absolute;left:0;right:0;bottom:0;height:55%;background:
-  linear-gradient(#7d8fb0,#7d8fb0) 4% 100%/10% 70% no-repeat,linear-gradient(#93a3c2,#93a3c2) 16% 100%/8% 95% no-repeat,linear-gradient(#6f80a1,#6f80a1) 27% 100%/12% 55% no-repeat,
-  linear-gradient(#8a9abb,#8a9abb) 42% 100%/7% 100% no-repeat,linear-gradient(#7d8fb0,#7d8fb0) 54% 100%/12% 75% no-repeat,linear-gradient(#93a3c2,#93a3c2) 70% 100%/9% 60% no-repeat,linear-gradient(#6f80a1,#6f80a1) 82% 100%/14% 85% no-repeat}
-.stage .sign{position:absolute;left:47%;top:36%;font:400 clamp(12px,2.6vw,34px)/1 var(--didone);letter-spacing:.12em;color:#141414}
-.stage .sign small{display:block;font:500 clamp(5px,.7vw,9px) var(--sans);letter-spacing:.4em;color:#999;margin-top:4px}
-.stage .floor{position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(#efe6dc,#e4d7c8)}
-.stage .carpet{position:absolute;left:0;right:0;bottom:7%;height:7%;background:var(--red);opacity:.92}
-.stage .desk{position:absolute;left:20%;bottom:12%;width:24%;height:16%}
-.stage .desk::before{content:"";position:absolute;left:0;right:0;top:0;height:16%;background:#fff;border:1.5px solid #ccc;border-radius:3px}
-.stage .desk::after{content:"";position:absolute;left:8%;right:8%;top:16%;bottom:0;background:linear-gradient(#bbb,#bbb) 0 0/5% 100% no-repeat,linear-gradient(#bbb,#bbb) 100% 0/5% 100% no-repeat}
-.stage .lift{position:absolute;right:6%;bottom:22%;width:16%;height:58%;background:#d9d9de;border:5px solid #b9b9c1;overflow:hidden}
-.stage .lift i{position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(90deg,#c9c9d1,#e2e2e8);transition:transform .8s ease}
-.stage .lift i:first-child{left:0;border-right:1px solid #aaa}
-.stage .lift i:last-child{right:0}
-.stage .lift.open i:first-child{transform:translateX(-100%)}
-.stage .lift.open i:last-child{transform:translateX(100%)}
-.stage .lift::after{content:"▲";position:absolute;left:50%;top:-1px;transform:translateX(-50%);font-size:8px;color:var(--red)}
-.actor{position:absolute;bottom:6%;height:64%;transform-origin:bottom center;transition:opacity .4s}
-.actor svg{height:100%;width:auto;display:block;overflow:visible}
-.actor .lg,.actor .arm{transform-box:view-box}
-.actor.walk .lg.l{animation:legA .5s ease-in-out infinite alternate}
-.actor.walk .lg.r{animation:legB .5s ease-in-out infinite alternate}
-.actor.walk .arm.l{animation:legB .5s ease-in-out infinite alternate}
-.actor.walk .arm.r{animation:legA .5s ease-in-out infinite alternate}
-.actor.walk .bd{animation:bobY .25s ease-in-out infinite alternate}
-.actor.run .lg.l,.actor.run .arm.r{animation-duration:.28s}
-.actor.run .lg.r,.actor.run .arm.l{animation-duration:.28s}
-@keyframes legA{from{transform:rotate(14deg)}to{transform:rotate(-14deg)}}
-@keyframes legB{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
-@keyframes bobY{from{transform:translateY(0)}to{transform:translateY(-3px)}}
-.prop{position:absolute;font-size:clamp(14px,3vw,40px);transition:opacity .3s}
-.bubble{position:absolute;background:#fff;border:1.5px solid #141414;border-radius:16px;padding:.5em .9em;font:italic 400 clamp(11px,1.8vw,24px) var(--didone);color:#141414;white-space:nowrap;transition:opacity .3s,transform .3s;transform-origin:bottom left}
-.bubble.hide{opacity:0;transform:scale(.6)}
-.cap{position:absolute;z-index:4;left:0;right:0;top:4%;text-align:center;font:900 clamp(13px,2.4vw,32px)/1.3 var(--kserif);color:#141414;text-shadow:0 2px 0 #fff;transition:opacity .4s;padding:0 4%}
-.cap small{display:block;font:500 clamp(8px,1vw,13px) var(--sans);letter-spacing:.3em;color:var(--red);margin-bottom:4px}
-.endcard{position:absolute;inset:0;z-index:6;background:var(--red);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;transition:opacity .6s;pointer-events:none}
-.endcard.on{opacity:1;pointer-events:auto}
-.endcard .k{font:700 clamp(8px,1.1vw,13px) var(--sans);letter-spacing:.35em}
-.endcard b{font:900 clamp(22px,5vw,64px)/1.15 var(--kserif);margin:8px 0}
-.endcard .line{display:flex;align-items:flex-end;gap:2%;height:34%;margin-top:2%}
-.endcard .line svg{height:100%;width:auto}
-.endcard .go{margin-top:2%;pointer-events:auto}
+/* ---------- 시네마틱 광고 영상 ---------- */
+.stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;color:#fff}
+.stage .sc{position:absolute;inset:0;opacity:0}
+.stage .sc.on{opacity:1}
+.stage .sc svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage .lb{position:absolute;left:0;right:0;height:7%;background:#000;z-index:5}
+.stage .lb.t{top:0}.stage .lb.b{bottom:0}
+.stage .grain{position:absolute;inset:-50%;z-index:4;opacity:.08;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain .45s steps(3) infinite}
+@keyframes grain{0%{transform:translate(0,0)}33%{transform:translate(-3%,2%)}66%{transform:translate(2%,-3%)}}
+.stage .vig{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.7))}
+.stage .flash{position:absolute;inset:0;z-index:6;background:#000;opacity:0;pointer-events:none}
+.stage .sub{position:absolute;left:0;right:0;bottom:11%;z-index:6;text-align:center;font:600 clamp(12px,2.1vw,27px)/1.4 var(--kserif);color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.95);padding:0 6%;transition:opacity .3s;opacity:0;pointer-events:none}
+.stage .fm{position:absolute;right:2%;top:8.4%;z-index:6;font:500 clamp(8px,.95vw,12px) var(--sans);color:rgba(255,255,255,.5)}
+.stage .snd{position:absolute;left:2%;top:8.4%;z-index:7;background:rgba(0,0,0,.5);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:.45em 1.1em;font:700 clamp(10px,1.15vw,14px) var(--sans)}
+.stage .snd:hover{background:#7a1124;border-color:#7a1124}
+.stage .cta{position:absolute;left:50%;bottom:19%;transform:translateX(-50%);z-index:7;opacity:0;transition:opacity .6s;pointer-events:none;min-height:clamp(30px,4vw,48px);font-size:clamp(12px,1.4vw,16px)}
+.stage .cta.on{opacity:1;pointer-events:auto}
 .stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
 /* ---------- 홈 ---------- */
-.hero{background:var(--bg2);padding:26px 0 40px;border-bottom:1px solid var(--line)}
-.hero .stage{border-radius:22px;box-shadow:0 30px 60px rgba(208,2,27,.12)}
+.hero{background:linear-gradient(#0a0708,#2a0a12);color:#fff;padding:26px 0 40px}
+.hero .stage{border-radius:18px;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.hero .btn-out{border-color:#fff;color:#fff}
+.hero .btn-out:hover{background:#fff;color:#141414}
+.hero .eyebrow{color:#ff5a6e}
 .hero-cta{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:22px;flex-wrap:wrap}
 .hero-cta h1{margin:0;font:900 clamp(24px,3.4vw,40px)/1.25 var(--kserif);letter-spacing:-.03em}
 .hero-cta h1 em{font-style:normal;color:var(--red)}
@@ -433,7 +406,7 @@ nav.gnb a.hot{color:var(--red)}
 /* 첫 화면 광고 */
 #ad{position:fixed;inset:0;z-index:200;background:#000;display:flex;align-items:center;justify-content:center}
 #ad .stage{max-height:100vh;width:min(100vw,177.8vh)}
-#ad .adlab{position:absolute;top:16px;left:18px;z-index:3;font:700 12px var(--sans);color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:6px}
+#ad .adlab{position:absolute;top:16px;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:3;font:700 12px var(--sans);color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:6px}
 #ad .skip{position:absolute;right:0;bottom:70px;z-index:3;background:rgba(0,0,0,.75);color:#fff;border:1px solid rgba(255,255,255,.35);border-right:none;padding:12px 20px;font-size:14px;min-width:160px;text-align:left}
 #ad .skip:disabled{opacity:.85;cursor:default}
 #ad .chrome{position:absolute;left:0;right:0;bottom:0;padding:12px 18px 16px;background:linear-gradient(transparent,rgba(0,0,0,.7));display:flex;align-items:center;gap:14px;z-index:3;color:#fff}
@@ -529,10 +502,10 @@ footer a:hover,footer button:hover{color:#fff}
 
 <!-- 첫 화면 광고 (처음 들어오면 한 번 재생) -->
 <div id="ad" class="hidden" aria-label="광고 영상">
-  <div class="adlab">광고 · RUNWAY × 악프다 2</div>
+  <div class="adlab">광고 · 팬메이드 게임 홍보 영상</div>
   <div class="stage" id="ad-stage"></div>
   <button class="skip" id="ad-skip" disabled>5초 후 건너뛰기</button>
-  <div class="chrome"><button id="ad-pause" aria-label="일시정지">❚❚</button><div class="pg"><i id="ad-pg"></i></div><span class="tm" id="ad-tm">0:00 / 0:15</span></div>
+  <div class="chrome"><button id="ad-pause" aria-label="일시정지">❚❚</button><div class="pg"><i id="ad-pg"></i></div><span class="tm" id="ad-tm">0:00 / 0:24</span></div>
 </div>
 
 <div class="util"><div class="wrap">
@@ -773,56 +746,286 @@ function toon(o) {
 }
 
 /* =====================================================================
-   🎬 움직이는 광고 (사람들이 걸어 다니는 애니메이션)
+   🎬 시네마틱 광고 영상 (팬메이드)
+   - 장면은 코드로 그린 그림, 효과음은 브라우저에서 직접 만든 소리,
+     내레이션은 브라우저 기본 한국어 음성이에요. (실제 영화 영상·음성 사용 안 함)
+   - SCENES 의 sub(자막)와 say(내레이션) 문구를 바꾸면 영상 문구가 바뀌어요.
    ===================================================================== */
-const AD_LEN = 15000;
-// 각 인물이 언제 어디에 있는지: [시간(ms), 가로 위치(%)]
-const TRACKS = {
-  miranda:[[0, 78, 0], [1300, 78, 1], [4300, 30, 1], [7400, 30, 1], [9000, -20, 1]],
-  amari:  [[0, 8, 1], [4300, 8, 1], [5200, 16, 1], [9000, 16, 1], [9800, 16, 0]],
-  andy:   [[0, -25, 1], [6800, -25, 1], [9800, 52, 1], [11800, 52, 1]],
-  jin:    [[0, -35, 1], [7400, -35, 1], [9400, 38, 1], [11800, 38, 1]],
-  nigel:  [[0, 112, 1], [8200, 112, 1], [10000, 68, 1], [11800, 68, 1]]
-};
-const CAPS = [[0, 2400, '<small>AM 06:58 · RUNWAY</small>“Gird your loins!”'], [2400, 6800, '<small>편집장 도착</small>오늘도, 런웨이의 하루가 시작된다'], [6800, 11600, '<small>AI 시대의 비서</small>반복 업무는 AI에게, 판단은 사람에게']];
-function buildStage(el) {
-  if (AD_VIDEO) { el.innerHTML = `<video src="${AD_VIDEO}" autoplay muted loop playsinline></video>`; return { set() {} }; }
-  el.innerHTML = `<div class="wall"></div><div class="win"><div class="sky"></div></div><div class="sign">RUNWAY<small>EDITOR-IN-CHIEF</small></div>
-    <div class="floor"></div><div class="carpet"></div><div class="lift"><i></i><i></i></div><div class="desk"></div>
-    ${Object.keys(TRACKS).map(k => `<div class="actor" data-a="${k}">${figure(k, { prop: k === 'jin' ? 'coffee' : k === 'andy' ? 'papers' : k === 'miranda' ? 'bag' : '' })}</div>`).join('')}
-    <div class="prop" data-p="coat">🧥</div>
-    <div class="bubble hide" data-b="m" style="left:38%;top:16%">“That’s all.”</div>
-    <div class="bubble hide" data-b="a" style="left:26%;top:22%">네, 편집장님.</div>
-    <div class="bubble hide" data-b="n" style="left:62%;top:20%">“Florals? Groundbreaking.”</div>
-    <div class="cap"></div>
-    <div class="endcard"><div class="k">NOW PLAYING · 전시 특별 체험</div><b>악프다 2: 퇴근까지 180초</b><div class="line">${['amari', 'andy', 'miranda', 'jin', 'nigel', 'emily'].map(k => figure(k)).join('')}</div><a class="btn btn-white btn-sm go" href="#/game" data-adgo>지금 플레이 →</a></div>`;
-  const actors = [...el.querySelectorAll('.actor')], coat = el.querySelector('[data-p=coat]'), cap = el.querySelector('.cap'), lift = el.querySelector('.lift'), end = el.querySelector('.endcard');
-  const bub = k => el.querySelector(`[data-b=${k}]`);
-  let lastCap = '';
-  return { set(t) {
-    actors.forEach(a => {
-      const tr = TRACKS[a.dataset.a]; let x = tr[0][1], op = tr[0][2] ?? 1, moving = false;
-      for (let i = 0; i < tr.length; i++) {
-        if (t >= tr[i][0]) { x = tr[i][1]; op = tr[i][2] ?? 1; }
-        if (i < tr.length - 1 && t >= tr[i][0] && t < tr[i + 1][0]) { const p = (t - tr[i][0]) / (tr[i + 1][0] - tr[i][0]); x = tr[i][1] + (tr[i + 1][1] - tr[i][1]) * p; moving = tr[i + 1][1] !== tr[i][1]; }
+const AD_LEN = 24000;
+const SCENES = [
+  { id:'clock', s:0,     e:2600,  sub:'오후 5시 57분.',                         say:'오후 다섯 시 오십칠 분.' },
+  { id:'heels', s:2600,  e:5400,  sub:'그녀가 돌아오기까지, 남은 시간은 단 3분.', say:'그녀가 돌아오기까지, 남은 시간은 단 삼 분.' },
+  { id:'phone', s:5400,  e:7800,  sub:'쉴 새 없이 울리는 전화.',                 say:'쉴 새 없이 울리는 전화.' },
+  { id:'keys',  s:7800,  e:10600, sub:'AI에게 일을 맡기는 시대.',                say:'에이아이에게 일을 맡기는 시대.' },
+  { id:'paper', s:10600, e:13400, sub:'하지만, 답을 의심하는 사람만이 살아남는다.', say:'하지만, 답을 의심하는 사람만이 살아남는다.' },
+  { id:'door',  s:13400, e:15800, sub:'“그게 최선인가?”',                        say:'그게, 최선인가?' },
+  { id:'safe',  s:15800, e:19000, sub:'세 개의 잠금장치. 단 하나의 비밀번호.',     say:'세 개의 잠금장치. 단 하나의 비밀번호.' },
+  { id:'title', s:19000, e:24000, sub:'',                                       say:'악프다 투. 퇴근까지 백팔십 초.' }
+];
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const ease = x => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+const film = (inner, defs = '') => `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs>${defs}</defs>${inner}</svg>`;
+const cam = (r, s, x = 0, y = 0) => r.querySelector('.cam').setAttribute('transform', `translate(${800 + x} ${450 + y}) scale(${s}) translate(-800 -450)`);
+const KR = "font-family=\"Noto Serif KR, serif\"", KS = "font-family=\"Noto Sans KR, sans-serif\"";
+const LEG = `<path d="M30 -100 C24 -300 40 -480 52 -720 L120 -720 C110 -480 92 -300 78 -104 Z" fill="url(#lgG)"/>
+  <path d="M14 -2 L14 -78 Q30 -112 82 -110 L198 -44 Q216 -32 208 -12 L178 0 Q150 -14 118 -24 L44 -40 L36 -2 Z" fill="#0a0a0a"/>
+  <path d="M178 0 Q150 -14 118 -24 L44 -40" stroke="#c8102e" stroke-width="7" fill="none"/><rect x="10" y="-62" width="10" height="62" fill="#0a0a0a"/>`;
+const SC = {
+  clock: {
+    html: () => film(`<rect width="1600" height="900" fill="url(#cg)"/><g class="cam">
+      <circle cx="800" cy="450" r="318" fill="#0c0708" stroke="#4a0f1c" stroke-width="16"/>
+      <circle cx="800" cy="450" r="300" fill="#0d0909" stroke="#ebe5dc" stroke-width="3"/>
+      ${Array.from({ length: 60 }, (_, i) => { const a = i * 6 * Math.PI / 180, r1 = 284, r2 = i % 5 ? 270 : 244; return `<line x1="${(800 + r1 * Math.sin(a)).toFixed(1)}" y1="${(450 - r1 * Math.cos(a)).toFixed(1)}" x2="${(800 + r2 * Math.sin(a)).toFixed(1)}" y2="${(450 - r2 * Math.cos(a)).toFixed(1)}" stroke="#ebe5dc" stroke-width="${i % 5 ? 2 : 6}"/>`; }).join('')}
+      <line x1="800" y1="470" x2="800" y2="300" stroke="#ebe5dc" stroke-width="12" stroke-linecap="round" transform="rotate(178.5 800 450)"/>
+      <line x1="800" y1="480" x2="800" y2="196" stroke="#ebe5dc" stroke-width="7" stroke-linecap="round" transform="rotate(342 800 450)"/>
+      <g class="sec"><line x1="800" y1="512" x2="800" y2="172" stroke="#c8102e" stroke-width="3"/><circle cx="800" cy="450" r="11" fill="#c8102e"/></g></g>`,
+      `<radialGradient id="cg" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#2c0b13"/><stop offset="1" stop-color="#000"/></radialGradient>`),
+    upd(r, p, tt, st, fx) {
+      const s = Math.floor(tt / 1000), f = (tt % 1000) / 1000, over = f < .14 ? Math.sin(f / .14 * Math.PI) * 1.8 : 0;
+      r.querySelector('.sec').setAttribute('transform', `rotate(${(54 + s) * 6 + over} 800 450)`);
+      if (st.s !== s) { st.s = s; fx('tick'); }
+      cam(r, 1 + .1 * ease(p));
+    }
+  },
+  heels: {
+    html: () => film(`<rect width="1600" height="900" fill="#0a0708"/><rect y="560" width="1600" height="340" fill="url(#flG)"/><rect y="556" width="1600" height="5" fill="#4a0f1c"/>
+      <g class="cam"><g>${[0, 1].map(i => `<g class="f${i}">${LEG}</g>`).join('')}</g>
+      <g transform="translate(0 1560) scale(1 -1)" opacity=".12">${[0, 1].map(i => `<g class="r${i}">${LEG}</g>`).join('')}</g></g>`,
+      `<linearGradient id="flG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d4ce"/><stop offset="1" stop-color="#7d7570"/></linearGradient>
+       <linearGradient id="lgG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0d0d0d"/><stop offset=".55" stop-color="#2a2426"/><stop offset="1" stop-color="#0d0d0d"/></linearGradient>`),
+    upd(r, p, tt, st, fx) {
+      const per = 330, n = Math.floor(tt / per), f = (tt % per) / per, stride = 150;
+      [0, 1].forEach(i => {
+        const prog = n % 2 === i, done = prog ? Math.floor((n - i) / 2) : Math.floor((n - i) / 2) + 1;
+        const x = 140 + i * stride + Math.max(0, done) * 2 * stride + (prog ? ease(f) * 2 * stride : 0), y = prog ? -70 * Math.sin(Math.PI * f) : 0, rot = prog ? -7 * Math.sin(Math.PI * f) : 0;
+        const tr = `translate(${x} ${780 + y}) rotate(${rot})`;
+        r.querySelector('.f' + i).setAttribute('transform', tr); r.querySelector('.r' + i).setAttribute('transform', tr);
+      });
+      if (st.n !== n) { if (st.n !== undefined) fx('heel'); st.n = n; }
+      cam(r, 1.1, -ease(p) * 560, -70);
+    }
+  },
+  phone: {
+    html: () => film(`<rect width="1600" height="900" fill="url(#pgG)"/><ellipse cx="800" cy="770" rx="720" ry="120" fill="#24070e" opacity=".8"/>
+      <g class="cam">${[0, 1, 2].map(i => `<circle class="w${i}" cx="800" cy="560" r="200" fill="none" stroke="#c8102e" stroke-width="3" opacity="0"/>`).join('')}
+      <ellipse cx="800" cy="560" rx="460" ry="300" fill="#ffffff" opacity=".05"/><g class="ph"><path d="M560 720 Q560 540 640 520 L960 520 Q1040 540 1040 720 Z" fill="#121212" stroke="#5a5a5a" stroke-width="3"/><path d="M590 560 Q620 532 660 528 L940 528" stroke="#8a8a8a" stroke-width="3" fill="none" opacity=".6"/>
+        <rect x="690" y="575" width="220" height="125" rx="14" fill="#1a1a1a"/>
+        ${Array.from({ length: 12 }, (_, k) => `<rect x="${704 + (k % 3) * 70}" y="${584 + Math.floor(k / 3) * 28}" width="56" height="20" rx="5" fill="#2c2c2c"/>`).join('')}
+        <g class="hs"><path d="M520 488 Q540 418 620 428 L980 428 Q1060 418 1080 488 L1040 508 Q1010 468 960 470 L640 470 Q590 468 560 508 Z" fill="#0a0a0a" stroke="#333" stroke-width="3"/></g>
+        <circle class="led" cx="1000" cy="620" r="12" fill="#c8102e"/></g></g>`,
+      `<radialGradient id="pgG" cx="50%" cy="58%" r="75%"><stop offset="0" stop-color="#3d0e1a"/><stop offset="1" stop-color="#040203"/></radialGradient>`),
+    upd(r, p, tt, st, fx) {
+      const b = Math.floor(tt / 1300), ringing = (tt % 1300) < 850;
+      if (st.b !== b) { st.b = b; fx('ring'); }
+      r.querySelector('.ph').setAttribute('transform', `rotate(${ringing ? Math.sin(tt / 16) * 2.2 : 0} 800 620)`);
+      r.querySelector('.hs').setAttribute('transform', `translate(0 ${ringing ? -Math.abs(Math.sin(tt / 28)) * 9 : 0})`);
+      r.querySelector('.led').setAttribute('opacity', ringing ? (Math.floor(tt / 110) % 2 ? 1 : .25) : .25);
+      [0, 1, 2].forEach(i => { const fr = (tt / 1300 + i / 3) % 1, c = r.querySelector('.w' + i); c.setAttribute('r', 220 + fr * 420); c.setAttribute('opacity', ringing ? (1 - fr) * .55 : 0); });
+      cam(r, 1 + .12 * ease(p), 0, -90);
+    }
+  },
+  keys: {
+    html: () => film(`<rect width="1600" height="900" fill="#060506"/><g class="cam">
+      <rect x="430" y="140" width="740" height="410" rx="14" fill="#141214" stroke="#2a2a2a" stroke-width="4"/><rect x="452" y="162" width="696" height="366" rx="6" fill="#f3efe8"/>
+      <rect x="452" y="162" width="696" height="42" fill="#e5ddd2"/><circle cx="478" cy="183" r="7" fill="#c8102e"/><circle cx="502" cy="183" r="7" fill="#bdb3a5"/><circle cx="526" cy="183" r="7" fill="#bdb3a5"/>
+      <text x="490" y="262" ${KS} font-size="22" fill="#8a7f72">AI 문서작성기 · 새 요청</text>
+      <text class="ty" x="490" y="336" ${KR} font-weight="700" font-size="33" fill="#141414"></text><rect class="cur" x="490" y="308" width="3" height="36" fill="#c8102e"/>
+      <text class="ok" x="490" y="420" ${KS} font-size="24" font-weight="700" fill="#c8102e" opacity="0">✓ 다섯 가지 요소 입력 완료</text>
+      <path d="M260 900 L400 600 L1200 600 L1340 900 Z" fill="#161314"/>
+      ${Array.from({ length: 5 }, (_, rw) => Array.from({ length: 14 }, (_, c) => { const w = 50 + rw * 6, gap = 8 + rw; return `<rect class="k" x="${(800 + (c - 6.5) * (w + gap) - w / 2).toFixed(0)}" y="${620 + rw * 54}" width="${w}" height="${38 + rw * 3}" rx="6" fill="#2a2628"/>`; }).join('')).join('')}</g>`),
+    upd(r, p, tt, st, fx) {
+      const T = '역할 · 배경 · 지시 · 제약 · 출력 형식', n = Math.floor(T.length * clamp((p - .05) / .62)), ty = r.querySelector('.ty');
+      if (st.n !== n) {
+        ty.textContent = T.slice(0, n);
+        if (st.n !== undefined && n > st.n) { fx('key'); const ks = r.querySelectorAll('.k'), k = ks[Math.floor(Math.random() * ks.length)]; k.setAttribute('fill', '#c8102e'); setTimeout(() => k.setAttribute('fill', '#2a2628'), 90); }
+        st.n = n;
       }
-      a.style.left = x + '%'; a.style.opacity = op; a.classList.toggle('walk', moving); a.classList.toggle('run', moving && a.dataset.a === 'jin');
-    });
-    lift.classList.toggle('open', t > 500 && t < 5000);
-    // 코트가 미란다 → 아마리 책상으로 날아가요
-    const ct = (t - 4400) / 900;
-    if (ct > 0 && ct < 1) { coat.style.opacity = 1; coat.style.left = (34 - 6 * ct) + '%'; coat.style.top = (44 + 18 * ct - 26 * Math.sin(ct * Math.PI)) + '%'; coat.style.transform = `rotate(${ct * 540}deg)`; }
-    else { coat.style.opacity = ct >= 1 && t < 11800 ? 1 : 0; coat.style.left = '28%'; coat.style.top = '62%'; coat.style.transform = 'rotate(-10deg)'; }
-    bub('m').classList.toggle('hide', !(t > 5300 && t < 7300));
-    bub('a').classList.toggle('hide', !(t > 6000 && t < 7600));
-    bub('n').classList.toggle('hide', !(t > 10100 && t < 11600));
-    const c = CAPS.find(c => t >= c[0] && t < c[1]); const html = c ? c[2] : '';
-    if (html !== lastCap) { lastCap = html; cap.style.opacity = 0; setTimeout(() => { cap.innerHTML = html; cap.style.opacity = html ? 1 : 0; }, 200); }
-    end.classList.toggle('on', t >= 11800);
-  } };
+      let w = 0; try { w = ty.getComputedTextLength(); } catch (e) {}
+      const cur = r.querySelector('.cur'); cur.setAttribute('x', 494 + w); cur.setAttribute('opacity', Math.floor(tt / 300) % 2 ? 1 : 0);
+      r.querySelector('.ok').setAttribute('opacity', clamp((p - .74) / .1));
+      if (p > .74 && !st.ok) { st.ok = 1; fx('click'); }
+      cam(r, 1.06 + .1 * ease(p), 0, -30 * p);
+    }
+  },
+  paper: {
+    html: () => film(`<rect width="1600" height="900" fill="url(#dgG)"/><g class="cam"><g transform="rotate(-4 800 450)">
+      <rect x="420" y="80" width="760" height="780" fill="#efe9dc"/><rect x="420" y="80" width="760" height="780" fill="url(#pgShade)"/>
+      <text x="800" y="160" text-anchor="middle" ${KR} font-weight="900" font-size="56" fill="#141414">뉴욕 미러</text>
+      <line x1="450" y1="188" x2="1150" y2="188" stroke="#141414" stroke-width="3"/><line x1="450" y1="196" x2="1150" y2="196" stroke="#141414" stroke-width="1"/>
+      <text x="460" y="268" ${KR} font-weight="900" font-size="44" fill="#141414">“AI는 하루아침에 오지 않았다”</text>
+      ${Array.from({ length: 10 }, (_, i) => `<rect x="460" y="${318 + i * 42}" width="${i === 2 ? 520 : i % 3 === 2 ? 420 : 680}" height="14" fill="${i === 2 ? '#a39886' : '#d0c7b7'}"/>`).join('')}
+      <path class="pen" d="M420 409 A300 38 0 1 0 1020 409 A300 38 0 1 0 420 409" fill="none" stroke="#c8102e" stroke-width="5" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" stroke-linecap="round"/>
+      <g class="stamp" opacity="0"><rect x="760" y="580" width="360" height="110" rx="8" fill="none" stroke="#c8102e" stroke-width="8"/><text x="940" y="655" text-anchor="middle" ${KS} font-weight="900" font-size="50" fill="#c8102e">검증되지 않음</text></g>
+      </g></g>`,
+      `<radialGradient id="dgG" cx="50%" cy="50%" r="75%"><stop offset="0" stop-color="#3a0d18"/><stop offset="1" stop-color="#050203"/></radialGradient>
+       <linearGradient id="pgShade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient>`),
+    upd(r, p, tt, st, fx) {
+      r.querySelector('.pen').setAttribute('stroke-dashoffset', 100 - 100 * ease(clamp((p - .08) / .34)));
+      if (p > .08 && !st.pen) { st.pen = 1; fx('pen'); }
+      const sp = clamp((p - .55) / .07), s = 2.6 - 1.6 * ease(sp), g = r.querySelector('.stamp');
+      g.setAttribute('opacity', sp > 0 ? 1 : 0); g.setAttribute('transform', `translate(940 635) rotate(-8) scale(${s}) translate(-940 -635)`);
+      if (sp >= 1 && !st.hit) { st.hit = 1; fx('stamp'); }
+      cam(r, 1 + .14 * ease(p), -60 * p, 30 * p);
+    }
+  },
+  door: {
+    html: () => film(`<rect width="1600" height="900" fill="#020101"/><g class="cam">
+      <rect x="620" y="50" width="360" height="780" fill="url(#ltG)"/><polygon points="620,830 980,830 1320,900 280,900" fill="#f4eee6" opacity=".12"/>
+      <g class="fig"><path d="M640 830 L676 530 Q700 478 800 462 Q900 478 924 530 L960 830 Z" fill="#050505"/><path d="M676 530 Q700 478 800 462 Q900 478 924 530" fill="none" stroke="#4a0f1c" stroke-width="4"/>
+        <rect x="778" y="412" width="44" height="56" fill="#060606"/>
+        <path d="M718 384 Q710 280 800 270 Q890 280 882 384 Q886 434 860 446 L740 446 Q714 434 718 384Z" fill="#0a0a0a"/>
+        <path d="M720 384 Q712 282 800 272 Q888 282 880 384 Q884 432 860 444" fill="none" stroke="#ece8f0" stroke-width="6" opacity=".85"/>
+        <line class="gl" x1="768" y1="372" x2="792" y2="364" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity="0"/></g>
+      <rect width="1600" height="900" fill="url(#hzG)"/></g>`,
+      `<linearGradient id="ltG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaf3"/><stop offset="1" stop-color="#d9cbbf"/></linearGradient>
+       <radialGradient id="hzG" cx="50%" cy="45%" r="45%"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>`),
+    upd(r, p, tt, st, fx) {
+      const s = .8 + .28 * ease(p);
+      r.querySelector('.fig').setAttribute('transform', `translate(800 830) scale(${s}) translate(-800 -830)`);
+      r.querySelector('.gl').setAttribute('opacity', p > .55 && p < .68 ? 1 : 0);
+      const k = Math.floor(tt / 620); if (st.k !== k && p < .55) { st.k = k; fx('heel'); }
+      if (p > .55 && !st.g) { st.g = 1; fx('glint'); }
+      cam(r, 1 + .05 * p);
+    }
+  },
+  safe: {
+    html: () => film(`<rect width="1600" height="900" fill="url(#sgG)"/><g class="cam"><g class="vd">
+      <circle cx="800" cy="450" r="335" fill="url(#stG)" stroke="#121214" stroke-width="12"/><circle cx="800" cy="450" r="292" fill="none" stroke="#2a2a2e" stroke-width="4"/>
+      ${Array.from({ length: 12 }, (_, i) => { const a = i * 30 * Math.PI / 180; return `<circle cx="${(800 + 314 * Math.cos(a)).toFixed(1)}" cy="${(450 + 314 * Math.sin(a)).toFixed(1)}" r="10" fill="#8d8d95"/>`; }).join('')}
+      <g class="dial"><circle cx="800" cy="450" r="124" fill="#17171a" stroke="#a0a0a8" stroke-width="6"/>
+        ${Array.from({ length: 40 }, (_, i) => { const a = i * 9 * Math.PI / 180, r1 = 114, r2 = i % 5 ? 102 : 88; return `<line x1="${(800 + r1 * Math.sin(a)).toFixed(1)}" y1="${(450 - r1 * Math.cos(a)).toFixed(1)}" x2="${(800 + r2 * Math.sin(a)).toFixed(1)}" y2="${(450 - r2 * Math.cos(a)).toFixed(1)}" stroke="#dcdce2" stroke-width="${i % 5 ? 2 : 4}"/>`; }).join('')}
+        <circle cx="800" cy="450" r="32" fill="#2a2a2e"/></g>
+      <polygon points="800,314 789,296 811,296" fill="#c8102e"/>
+      <g class="hd">${[0, 120, 240].map(a => `<line x1="1080" y1="450" x2="1080" y2="370" stroke="#b9b9c1" stroke-width="12" stroke-linecap="round" transform="rotate(${a} 1080 450)"/>`).join('')}<circle cx="1080" cy="450" r="20" fill="#d0d0d6"/></g>
+      </g></g><rect class="glow" width="1600" height="900" fill="#c8102e" opacity="0"/>`,
+      `<radialGradient id="sgG" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#1c0a0e"/><stop offset="1" stop-color="#000"/></radialGradient>
+       <radialGradient id="stG" cx="40%" cy="35%" r="80%"><stop offset="0" stop-color="#77777f"/><stop offset=".6" stop-color="#3a3a40"/><stop offset="1" stop-color="#1e1e22"/></radialGradient>`),
+    upd(r, p, tt, st, fx) {
+      const K = [[0, 0], [.28, -300], [.48, 150], [.66, -90], [.74, -90]];
+      let a = -90; for (let i = 0; i < K.length - 1; i++) if (p >= K[i][0] && p < K[i + 1][0]) a = K[i][1] + (K[i + 1][1] - K[i][1]) * ease((p - K[i][0]) / (K[i + 1][0] - K[i][0]));
+      r.querySelector('.dial').setAttribute('transform', `rotate(${a} 800 450)`);
+      const ti = Math.round(a / 9); if (st.ti !== ti) { if (st.ti !== undefined) fx('click'); st.ti = ti; }
+      r.querySelector('.hd').setAttribute('transform', `rotate(${90 * ease(clamp((p - .74) / .08))} 1080 450)`);
+      if (p >= .76 && !st.u) { st.u = 1; fx('unlock'); }
+      const o = ease(clamp((p - .84) / .16));
+      r.querySelector('.vd').setAttribute('transform', `translate(465 0) scale(${1 - .85 * o} 1) translate(-465 0)`);
+      r.querySelector('.glow').setAttribute('opacity', o * .8);
+      cam(r, 1 + .07 * ease(p));
+    }
+  },
+  title: {
+    html: () => film(`<rect width="1600" height="900" fill="#050304"/><rect width="1600" height="900" fill="url(#tgG)"/><g class="cam">
+      <rect class="ln" x="800" y="318" width="0" height="2" fill="#7a1124"/>
+      <text class="t1" x="800" y="468" text-anchor="middle" ${KR} font-weight="900" font-size="150" fill="#f4f1ec" opacity="0">악프다 2</text>
+      <text class="t2" x="800" y="560" text-anchor="middle" ${KR} font-weight="600" font-size="62" letter-spacing="8" fill="#c8102e" opacity="0">퇴근까지 180초</text>
+      <text class="t3" x="800" y="638" text-anchor="middle" ${KS} font-size="28" fill="#bdb5ad" opacity="0">AI 시대, 당신은 끝까지 판단할 수 있는가</text>
+      <text class="t4" x="800" y="770" text-anchor="middle" ${KS} font-size="18" fill="#7a726b" opacity="0">팬메이드 게임 홍보 영상 · 실제 영화 및 제작사와 관련이 없습니다</text></g>`,
+      `<radialGradient id="tgG" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#3a0b16" stop-opacity=".8"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>`),
+    upd(r, p, tt, st, fx) {
+      if (!st.b) { st.b = 1; fx('boom'); }
+      const w = ease(clamp(p / .2)) * 760, ln = r.querySelector('.ln'); ln.setAttribute('x', 800 - w / 2); ln.setAttribute('width', w);
+      [['.t1', .08], ['.t2', .22], ['.t3', .36], ['.t4', .5]].forEach(([c, d]) => r.querySelector(c).setAttribute('opacity', ease(clamp((p - d) / .14))));
+      cam(r, 1.04 - .04 * ease(p));
+    }
+  }
+};
+
+/* ---------- 효과음 (모두 브라우저에서 직접 만든 소리) ---------- */
+const FX = (() => {
+  let ctx, noise, master, drone;
+  function init() {
+    if (ctx) return;
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain(); master.gain.value = .9; master.connect(ctx.destination);
+    noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate); const d = noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  }
+  function nz(dur, type, freq, q, vol, delay = 0) {
+    const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain(), t = ctx.currentTime + delay;
+    s.buffer = noise; f.type = type; f.frequency.value = freq; f.Q.value = q;
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + dur + .05);
+  }
+  function tone(freq, dur, type, vol, delay = 0, to) {
+    const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime + delay;
+    o.type = type; o.frequency.setValueAtTime(freq, t); if (to) o.frequency.exponentialRampToValueAtTime(to, t + dur);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .05);
+  }
+  const SND = {
+    tick() { nz(.03, 'highpass', 4200, 1, .4); tone(1900, .02, 'square', .03); },
+    heel() { nz(.07, 'bandpass', 2700, 3, .7); tone(150, .06, 'sine', .3); nz(.06, 'bandpass', 2700, 3, .15, .11); },
+    ring() { for (let k = 0; k < 17; k++) { tone(440, .045, 'sine', .11, k * .05); tone(480, .045, 'sine', .11, k * .05); } },
+    key() { nz(.025, 'highpass', 2500 + Math.random() * 1600, 1, .3 + Math.random() * .2); },
+    click() { nz(.012, 'highpass', 5200, 1, .35); tone(3300, .012, 'triangle', .05); },
+    pen() { nz(.9, 'bandpass', 3800, 6, .06); },
+    stamp() { tone(95, .28, 'sine', .7, 0, 40); nz(.14, 'lowpass', 700, 1, .55); },
+    glint() { tone(2600, .5, 'sine', .04); tone(3900, .4, 'sine', .02, .05); },
+    unlock() { tone(72, .35, 'sine', .7, 0, 45); nz(.1, 'lowpass', 400, 1, .55); tone(1250, .9, 'sine', .06, .12); tone(1870, .7, 'sine', .03, .14); nz(.08, 'bandpass', 1500, 4, .35, .26); tone(60, .35, 'sine', .55, .3, 38); },
+    boom() { tone(55, 1.8, 'sine', .8, 0, 28); nz(1.3, 'lowpass', 220, 1, .35); },
+    whoosh() { nz(.32, 'bandpass', 1400, .8, .12); }
+  };
+  return {
+    on: false,
+    enable() { init(); ctx.resume(); this.on = true; if (!drone) { const g = ctx.createGain(); g.gain.value = 0; g.connect(master); const os = [55, 82.4, 110.6].map((f, i) => { const o = ctx.createOscillator(); o.type = i ? 'sine' : 'triangle'; o.frequency.value = f; o.connect(g); o.start(); return o; }); g.gain.linearRampToValueAtTime(.045, ctx.currentTime + 2); drone = { g, os }; } },
+    disable() { this.on = false; try { speechSynthesis.cancel(); } catch (e) {} if (drone) { const d = drone; drone = null; d.g.gain.linearRampToValueAtTime(0, ctx.currentTime + .4); setTimeout(() => d.os.forEach(o => o.stop()), 600); } },
+    play(n) { if (this.on && ctx) try { SND[n](); } catch (e) {} },
+    say(text) {
+      if (!this.on || !text || !window.speechSynthesis) return;
+      const v = speechSynthesis.getVoices().find(v => /^ko/i.test(v.lang)); if (!v) return;
+      const u = new SpeechSynthesisUtterance(text); u.voice = v; u.lang = 'ko-KR'; u.rate = 1.08; u.pitch = .85; speechSynthesis.speak(u);
+    }
+  };
+})();
+try { speechSynthesis.getVoices(); } catch (e) {}
+
+/* ---------- 영상 플레이어 ---------- */
+function makePlayer(el, opt = {}) {
+  if (AD_VIDEO) {
+    el.innerHTML = `<video src="${AD_VIDEO}" autoplay muted playsinline ${opt.loop ? 'loop' : ''}></video><button class="snd">🔊 소리 켜고 보기</button><a class="cta on btn btn-red" href="#/game">게임 체험하기 →</a>`;
+    const v = el.querySelector('video'), P = { sound: false, paused: false, stop() { v.pause(); }, setSound(on) { P.sound = on; v.muted = !on; if (on) { v.currentTime = 0; v.play(); } } };
+    el.querySelector('.snd').onclick = () => { P.setSound(!P.sound); el.querySelector('.snd').textContent = P.sound ? '🔇 소리 끄기' : '🔊 소리 켜고 보기'; };
+    v.ontimeupdate = () => opt.onTick && opt.onTick(v.currentTime * 1000); v.onended = () => opt.onEnd && opt.onEnd();
+    return P;
+  }
+  el.innerHTML = SCENES.map(s => `<div class="sc">${SC[s.id].html()}</div>`).join('') +
+    `<div class="vig"></div><div class="grain"></div><div class="lb t"></div><div class="lb b"></div><div class="flash"></div><div class="sub"></div><div class="fm">팬메이드 영상</div><button class="snd">🔊 소리 켜고 보기</button><a class="cta btn btn-red" href="#/game">게임 체험하기 →</a>`;
+  const roots = [...el.querySelectorAll('.sc')], sub = el.querySelector('.sub'), flash = el.querySelector('.flash'), cta = el.querySelector('.cta'), snd = el.querySelector('.snd');
+  const states = roots.map(() => ({}));
+  const P = { t: 0, last: Date.now(), paused: false, sound: false, scene: -1, ended: false, stopped: false };
+  const fx = n => { if (P.sound) FX.play(n); };
+  function render(t) {
+    let idx = SCENES.findIndex(s => t >= s.s && t < s.e); if (idx < 0) idx = SCENES.length - 1;
+    if (idx !== P.scene) {
+      P.scene = idx; roots.forEach((r, k) => r.classList.toggle('on', k === idx));
+      for (const k in states[idx]) delete states[idx][k];
+      flash.style.transition = 'none'; flash.style.opacity = .85; setTimeout(() => { flash.style.transition = 'opacity .28s'; flash.style.opacity = 0; }, 40);
+      sub.style.opacity = 0; setTimeout(() => { sub.textContent = SCENES[idx].sub; sub.style.opacity = SCENES[idx].sub ? 1 : 0; }, 140);
+      if (P.sound) { if (idx) FX.play('whoosh'); FX.say(SCENES[idx].say); }
+    }
+    const s = SCENES[idx], tt = t - s.s;
+    SC[s.id].upd(roots[idx], clamp(tt / (s.e - s.s)), tt, states[idx], fx);
+    cta.classList.toggle('on', idx === SCENES.length - 1 && tt > 2400);
+  }
+  function frame() {
+    if (P.stopped) return;
+    const now = Date.now(); if (!P.paused && !document.hidden) P.t += now - P.last; P.last = now;
+    if (P.t >= AD_LEN) {
+      if (opt.loop) { P.t = 0; P.scene = -1; }
+      else { P.t = AD_LEN; if (!P.ended) { P.ended = true; opt.onEnd && opt.onEnd(); } }
+    }
+    render(Math.min(P.t, AD_LEN - 1)); opt.onTick && opt.onTick(P.t);
+  }
+  P.setSound = on => {
+    P.sound = on; snd.textContent = on ? '🔇 소리 끄기' : '🔊 소리 켜고 보기';
+    if (on) { FX.enable(); try { speechSynthesis.cancel(); } catch (e) {} P.t = 0; P.scene = -1; P.ended = false; P.last = Date.now(); }
+    else FX.disable();
+  };
+  P.stop = () => { P.stopped = true; clearInterval(P.timer); if (P.sound) FX.disable(); };
+  snd.onclick = () => P.setSound(!P.sound);
+  P.timer = setInterval(frame, 33); render(0);
+  return P;
 }
-let heroStage = null, heroT = 0;
-setInterval(() => { if (heroStage && !document.hidden) { heroT = (heroT + 50) % AD_LEN; heroStage.set(heroT); } }, 50);
+let heroPlayer = null;
 
 /* =====================================================================
    아래부터는 홈페이지가 움직이는 부분입니다 (보통은 고칠 필요 없어요)
@@ -852,7 +1055,7 @@ function route() {
   $$('#gnb a').forEach(a => a.classList.toggle('on', a.dataset.nav === p));
   const fn = ROUTES[p];
   const bad = !fn || (p === 'press' && id && !ARTICLES.find(a => a.id === id)) || (p === 'careers' && id && !JOBS.find(j => j.id === id));
-  heroStage = null;
+  if (heroPlayer) { heroPlayer.stop(); heroPlayer = null; }
   app.innerHTML = bad ? pNotFound() : fn(id);
   window.scrollTo(0, 0);
   document.title = bad ? '페이지를 찾을 수 없어요 | 런웨이' : TITLES[p];
@@ -1201,8 +1404,8 @@ function afterRender(p, id) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
   $$('.fade').forEach(el => io.observe(el));
   tickClocks();
-  if (p === '' && $('#hero-stage')) { heroStage = buildStage($('#hero-stage')); heroT = 0; heroStage.set(0); }
-  if (p === 'careers' && id) {
+  if (p === '' && $('#hero-stage')) heroPlayer = makePlayer($('#hero-stage'), { loop: true });
+  if (p === 'careers' && id && JOBS.find(x => x.id === id)) {
     const j = JOBS.find(x => x.id === id);
     quiz(id === 'secretary' ? SEC_QUIZ : j.test, 0, 0, id === 'secretary');
     if (id === 'secretary') {
@@ -1336,31 +1539,28 @@ document.addEventListener('keydown', e => {
 $('#swatch').onclick = () => toast('그 스웨터, 그냥 파란색이 아니에요. 세룰리안이죠.');
 
 /* ---------- 첫 화면 광고 ---------- */
-const AD = { t: 0, last: 0, timer: 0, paused: false, stage: null };
+const AD = { player: null };
 function playAd() {
-  AD.stage = buildStage($('#ad-stage'));
-  $('#ad').classList.remove('hidden'); document.body.style.overflow = 'hidden';
-  AD.t = 0; AD.last = Date.now(); AD.paused = false; $('#ad-pause').textContent = '❚❚';
-  clearInterval(AD.timer); AD.timer = setInterval(adFrame, 50); adFrame();
-  $('#ad-stage').querySelectorAll('[data-adgo]').forEach(a => a.onclick = () => closeAd());
+  if (heroPlayer && heroPlayer.sound) heroPlayer.setSound(false);
+  $('#ad').classList.remove('hidden'); document.body.style.overflow = 'hidden'; $('#ad-pause').textContent = '❚❚';
+  AD.player = makePlayer($('#ad-stage'), { onTick: adTick, onEnd: () => setTimeout(() => { if (AD.player && AD.player.ended) closeAd(); }, 2500) });
+  const go = $('#ad-stage .cta'); if (go) go.addEventListener('click', () => closeAd());
 }
-function adFrame() {
-  const now = Date.now(); if (!AD.paused) AD.t += now - AD.last; AD.last = now;
-  const t = Math.min(AD.t, AD_LEN);
-  AD.stage.set(t);
+function adTick(t) {
+  t = Math.min(t, AD_LEN);
   $('#ad-pg').style.width = (t / AD_LEN * 100) + '%';
-  $('#ad-tm').textContent = `0:${String(Math.floor(t / 1000)).padStart(2, '0')} / 0:15`;
+  $('#ad-tm').textContent = `0:${String(Math.floor(t / 1000)).padStart(2, '0')} / 0:${AD_LEN / 1000}`;
   const left = Math.ceil((5000 - t) / 1000), sk = $('#ad-skip');
   if (left > 0) { sk.disabled = true; sk.textContent = `${left}초 후 건너뛰기`; } else { sk.disabled = false; sk.textContent = '광고 건너뛰기 ▸▏'; }
-  if (AD.t >= AD_LEN + 2500) closeAd();
 }
 function closeAd() {
-  clearInterval(AD.timer); $('#ad').classList.add('hidden'); $('#ad-stage').innerHTML = ''; document.body.style.overflow = '';
+  if (AD.player) { AD.player.stop(); AD.player = null; }
+  $('#ad').classList.add('hidden'); $('#ad-stage').innerHTML = ''; document.body.style.overflow = '';
   try { sessionStorage.setItem('rw_ad', '1'); } catch (e) {}
   if (store.get('rw_cookie', null) === null) $('#cookie').classList.remove('hidden');
 }
 $('#ad-skip').onclick = closeAd;
-$('#ad-pause').onclick = () => { AD.paused = !AD.paused; $('#ad-pause').textContent = AD.paused ? '▶' : '❚❚'; };
+$('#ad-pause').onclick = () => { if (!AD.player) return; AD.player.paused = !AD.player.paused; $('#ad-pause').textContent = AD.player.paused ? '▶' : '❚❚'; if (AD.player.paused) try { speechSynthesis.cancel(); } catch (e) {} };
 $('#replay-ad').onclick = playAd;
 
 /* ---------- 기타 ---------- */
