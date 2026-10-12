@@ -441,7 +441,7 @@ footer a:hover,footer button:hover{color:#fff}
 .egg .go{margin-left:auto;background:var(--gold);color:#111;font-weight:700;font-size:13px;padding:8px 14px;border-radius:999px;white-space:nowrap}
 .fb{margin-top:20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#7a7a7a}
 .fb i{font-family:var(--didone)}
-.swatch{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--cer);vertical-align:-1px;cursor:pointer}
+.swatch{display:inline-block;width:12px;height:12px;border-radius:3px;background:#2a6fc9;vertical-align:-1px;cursor:pointer}
 .nf{text-align:center;padding:90px 24px}
 .nf b{display:block;font:400 clamp(90px,18vw,180px)/1 var(--didone);color:var(--red)}
 .nf h2{font:900 26px var(--kserif);margin:8px 0}
@@ -552,7 +552,6 @@ footer a:hover,footer button:hover{color:#fff}
 .letter .pf{padding:0;display:block;background:#141414}
 .letter .pf .pic img{object-position:50% 30%}
 .boss-line .face,.mentor .face,.node .face,.side .me .av,.msg .av,.denied .face{background:#141414}
-.office:nth-child(1){background:#141414!important}.office:nth-child(2){background:var(--red)!important}.office:nth-child(3){background:#7a1124!important}
 @media (max-width:960px){
   .hero-grid{grid-template-columns:1fr;gap:32px}
   .hero .stage{max-width:360px;width:100%;margin:0 auto}
@@ -566,6 +565,50 @@ footer a:hover,footer button:hover{color:#fff}
   .hero-meta{gap:22px}
 }
 #ad .stage.vert{height:100vh;width:auto;max-width:100vw}
+
+/* ---------- 흰 배경 히어로 ---------- */
+.hero{background:#fff;color:var(--ink);border-bottom:1px solid var(--line)}
+[data-theme="dark"] .hero{background:var(--bg)}
+.hero h1{color:var(--ink)}
+.hero h1 em{color:var(--red)}
+.hero .dek{color:var(--grey)}
+.hero .dek b{color:var(--ink)}
+.hero .eyebrow{color:var(--red)}
+.hero .btn-out{border-color:var(--ink);color:var(--ink)}
+.hero .btn-out:hover{background:var(--ink);color:var(--bg)}
+.hero-meta{border-top-color:var(--line);color:var(--grey)}
+.hero-meta b{color:var(--ink)}
+.hero .stage{box-shadow:0 24px 60px rgba(0,0,0,.18)}
+/* 채용 밴드: 상징 사진 */
+.hire .art{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:#111}
+.sym{margin:0;position:relative;overflow:hidden;min-height:200px}
+.sym img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.sym:hover img{transform:scale(1.06)}
+.sym::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.sym figcaption{z-index:2;position:absolute;left:12px;bottom:10px;font:italic 400 18px var(--didone);color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+/* 오피스: 도시 사진 */
+.office.city{position:relative;background-size:cover!important;background-position:center!important;min-height:260px;overflow:hidden;isolation:isolate}
+.office.city::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.65));z-index:-1}
+.office.city span{font:700 11.5px var(--sans);letter-spacing:.2em;text-transform:uppercase}
+.office.city{background-color:#141414}
+/* 편집장 비서 공고: 다른 공고와 확실히 구분 */
+.job.feat{background:#141414!important;border:0!important;color:#fff}
+.job.feat .dept{color:#ff8a9a!important}
+.job.feat h3{color:#fff}
+.job.feat p{color:#cfc8c2}
+.job.feat .tags span{border-color:#444;color:#ddd}
+.job.feat h3 span{background:#fff!important;color:var(--red)!important;font-weight:900}
+.job.feat:hover{box-shadow:0 16px 34px rgba(0,0,0,.25)}
+.job.feat::before{content:"HIRING NOW · 편집장실";position:absolute;right:18px;top:16px;font:700 10.5px var(--sans);letter-spacing:.2em;color:var(--red2)}
+.job{position:relative}
+/* 편집장 비서 페이지 머리: 검정 바탕 + 레드 포인트 */
+.sec-band{background:#141414!important;color:#fff}
+.sec-band .crumb,.sec-band .crumb a{color:#9a938d}
+.sec-band .eyebrow{color:var(--red2)}
+.sec-band h1{color:#fff}.sec-band h1 em{font-style:normal;color:var(--red2)}
+.sec-band p{color:#cfc8c2}.sec-band p b{color:#fff}
+.sec-band .figs{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.sec-band .figs .sym{max-width:none;height:100%}
 </style>
 </head>
 <body>
@@ -580,7 +623,7 @@ footer a:hover,footer button:hover{color:#fff}
 
 <div class="util"><div class="wrap">
   <div class="q" id="quote">“That’s all.”</div>
-  <div class="r"><span class="hm">뉴욕 <b id="ck-ny">--:--</b></span><span class="hm">밀라노 <b id="ck-mi">--:--</b></span><span>서울 <b id="ck-se">--:--</b></span></div>
+  <div class="r"><span class="hm">NEW YORK <b id="ck-ny">--:--</b></span><span class="hm">MILAN <b id="ck-mi">--:--</b></span><span>SEOUL <b id="ck-se">--:--</b></span></div>
 </div></div>
 <header class="site">
   <div class="wrap hd">
@@ -606,7 +649,7 @@ footer a:hover,footer button:hover{color:#fff}
 <footer>
   <div class="wrap">
     <div class="ft">
-      <div><a class="logo" href="#/">RUNWAY</a><p style="margin:8px 0 0">엘리아스-클라크 퍼블리케이션 · 뉴욕</p><p style="margin:4px 0 0">이번 시즌의 색 <span class="swatch" id="swatch" title="눌러 보세요"></span> 세룰리안</p></div>
+      <div><a class="logo" href="#/">RUNWAY</a><p style="margin:8px 0 0">엘리아스-클라크 퍼블리케이션 · 뉴욕</p><p style="margin:4px 0 0">This season’s color <span class="swatch" id="swatch" title="눌러 보세요"></span> <span style="color:#6fa3e8">Cerulean</span></p></div>
       <div><h5>회사</h5><ul><li><a href="#/about">회사 소개</a></li><li><a href="#/about">편집장 인사말</a></li><li><a href="#/about">조직도</a></li><li><a href="#/about">오피스</a></li></ul></div>
       <div><h5>채용</h5><ul><li><a href="#/careers/secretary">편집장 비서 ★</a></li><li><a href="#/careers/features">피처 에디터 어시스턴트</a></li><li><a href="#/careers/art">아트 디렉터 어시스턴트</a></li><li><a href="#/careers/partner">브랜드 파트너십</a></li></ul></div>
       <div><h5>더 보기</h5><ul><li><a href="#/press">언론 보도</a></li><li><a href="#/game">악프다 2 게임</a></li><li><a href="#/intranet">임직원 전용</a></li><li><button id="replay-ad">광고 다시 보기 ▸</button></li></ul></div>
@@ -800,8 +843,17 @@ function figure(id, opt = {}) {
 /* ---------- 📷 인물 사진 (팀이 AI로 만든 홍보 영상에서 뽑은 장면) ----------
    사진을 바꾸려면 img 폴더에 사진을 넣고 아래 파일 이름을 바꾸세요.
    사진이 없는 인물은 이름 머리글자(모노그램)로 보여요. */
-const PHOTO      = { miranda:'img/miranda.jpg',      amari:'img/assistant.jpg' };
-const PHOTO_FULL = { miranda:'img/miranda-full.jpg', amari:'img/desk.jpg' };
+const PHOTO      = {};   // 예: { miranda:'img/miranda.jpg' } 처럼 적으면 사진이 들어가요
+const PHOTO_FULL = {};
+/* ---------- 상징 사진 · 도시 사진 (Unsplash 무료 사진) ---------- */
+const UNS = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=75`;
+const SYMBOLS = [
+  { src: UNS('photo-1670607231621-c00fd76d2387'), cap: 'Red Soles', ko: '빨간 하이힐' },
+  { src: UNS('photo-1779398411533-8a21479a51fa'), cap: 'Cerulean', ko: '세룰리안 스웨터' },
+  { src: UNS('photo-1584036553516-bf83210aa16c'), cap: 'Sunglasses', ko: '편집장의 선글라스' },
+  { src: UNS('photo-1696960741206-63a41bb798ad'), cap: 'Hot Latte', ko: '뜨거운 라떼' }
+];
+const CITY = { ny: UNS('photo-1496588152823-86ff7695e68f'), milan: UNS('photo-1610016302534-6f67f1c968d8'), seoul: UNS('photo-1546874177-9e664107314e') };
 const INITIAL    = { miranda:'MP', amari:'A', andy:'AS', jin:'JC', nigel:'N', emily:'EC' };
 function portrait(id, opt = {}) {
   const c = CAST.find(x => x.id === id) || {}, src = (opt.full && PHOTO_FULL[id]) || PHOTO[id];
@@ -1189,7 +1241,7 @@ function pHome() {
   <section class="sec" style="padding-top:10px"><div class="wrap"><div class="hire fade">
     <div class="tx"><div class="eyebrow" style="color:#fff;opacity:.8">Careers</div><h2>지금 런웨이가<br>함께할 사람을 찾습니다</h2><p>AI를 지휘하고, 결과를 걸러내고, 마지막 판단을 책임지는 사람.</p>
       <div class="jl">${JOBS.map(j => `<a href="#/careers/${j.id}"><span>${j.title}</span><span>→</span></a>`).join('')}</div></div>
-    <div class="art">${figure('amari', { full: true })}${figure('miranda', { full: true })}</div>
+    <div class="art">${SYMBOLS.map(s => `<figure class="sym"><img src="${s.src}" alt="${s.ko}" loading="lazy"><figcaption>${s.cap}</figcaption></figure>`).join('')}</div>
   </div></div></section>
 
   <section class="sec" style="padding-top:10px"><div class="wrap">
@@ -1238,11 +1290,11 @@ function pAbout() {
     <p class="org-note">빨간 칸은 비서 · 점선은 외부 파트너 — 에밀리는 이제 런웨이 직원이 아니라 <b>럭셔리 브랜드 임원(광고주)</b>이에요.</p>
   </div></section>
   <section class="sec"><div class="wrap">
-    <div class="st"><div><div class="eyebrow">Offices</div><h2>오피스</h2></div></div>
+    <div class="st"><div><div class="eyebrow">Our Offices</div><h2>Offices</h2></div></div>
     <div class="offices">
-      <div class="office fade" style="background:var(--red)"><span>본사</span><div><b>뉴욕</b><div class="t" data-tz="America/New_York">--:--</div></div></div>
-      <div class="office fade" style="background:var(--cer)"><span>패션위크</span><div><b>밀라노</b><div class="t" data-tz="Europe/Rome">--:--</div></div></div>
-      <div class="office fade" style="background:#141414"><span>악프다 2 전시 부스</span><div><b>서울</b><div class="t" data-tz="Asia/Seoul">--:--</div></div></div>
+      <div class="office city fade" style="background-image:url(${CITY.ny})"><span>Headquarters</span><div><b>New York</b><div class="t" data-tz="America/New_York">--:--</div></div></div>
+      <div class="office city fade" style="background-image:url(${CITY.milan})"><span>Fashion Week</span><div><b>Milan</b><div class="t" data-tz="Europe/Rome">--:--</div></div></div>
+      <div class="office city fade" style="background-image:url(${CITY.seoul})"><span>Exhibition · 악프다 2</span><div><b>Seoul</b><div class="t" data-tz="Asia/Seoul">--:--</div></div></div>
     </div>
   </div></section>`;
 }
@@ -1348,8 +1400,9 @@ const ASST = [
 function pSecretary() {
   const j = JOBS[0];
   return `
-  <section class="band" style="background:var(--red);color:#fff"><div class="wrap"><div><div class="crumb" style="color:#ffd6db"><a href="#/">홈</a> / <a href="#/careers">채용</a> / 편집장 비서</div><div class="eyebrow" style="margin-top:16px;color:#fff">편집장실 · 지금 채용 중</div><h1 style="color:#fff">편집장 비서<br>(2nd 어시스턴트)</h1><p style="color:#ffe3e6">세계에서 가장 까다로운 편집장의 하루를 설계하는 사람. AI 시대의 비서는 ‘행정 보조자’가 아니라 <b>‘의사결정 지원 파트너’</b>입니다.</p></div>
-    <div class="figs">${figure('amari')}${figure('miranda', { prop: 'bag' })}</div></div></section>
+  <section class="band sec-band"><div class="wrap"><div><div class="crumb"><a href="#/">홈</a> / <a href="#/careers">채용</a> / 편집장 비서</div><div class="eyebrow" style="margin-top:16px">Hiring Now · 편집장실</div><h1>편집장 비서<br><em>(2nd 어시스턴트)</em></h1><p>세계에서 가장 까다로운 편집장의 하루를 설계하는 사람. AI 시대의 비서는 ‘행정 보조자’가 아니라 <b>‘의사결정 지원 파트너’</b>입니다.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin:-14px 0 34px"><a class="btn btn-red" href="#/game">▶ 실무 테스트(게임) 응시</a><a class="btn btn-white" href="#fit" onclick="document.getElementById('fit').scrollIntoView({behavior:'smooth'});return false">적성 테스트 먼저 하기</a></div></div>
+    <div class="figs">${SYMBOLS.slice(0, 2).map(s => `<figure class="sym"><img src="${s.src}" alt="${s.ko}"><figcaption>${s.cap}</figcaption></figure>`).join('')}</div></div></section>
   <section class="sec" style="padding-top:36px"><div class="wrap jd">
     <div>
       <h3>포지션 안내</h3>
