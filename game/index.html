@@ -499,6 +499,12 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
 .cf-btn.need{background:#e7f6ec;border-color:var(--green);animation:glowBtn 1s infinite}
 .cf-btn.need .cf-ring{animation:none}
 
+/* 틀리면 시각 힌트 */
+.hint-glow{animation:hintGlow .5s ease-in-out 6!important;outline:4px solid #ffd166!important;outline-offset:3px;position:relative;z-index:4}
+@keyframes hintGlow{50%{outline-color:#ff9f1c;box-shadow:0 0 0 10px rgba(255,209,102,.55),0 0 24px #ffd166}}
+.hint-arrow{position:fixed;z-index:9500;transform:translateX(-50%);font-size:40px;pointer-events:none;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35));animation:hintBob .45s ease-in-out infinite alternate}
+@keyframes hintBob{from{margin-top:2px}to{margin-top:16px}}
+.np-mast .date-glow{font-style:normal;background:#ffd166;color:var(--ink);padding:1px 6px;border-radius:4px;animation:hintGlow .6s ease-in-out infinite;outline:3px solid #ffd166}
 /* 게임 종료 후 화면 닫힘 안내 (크게 · 눈에 띄게) */
 .auto-home{position:relative;margin:16px auto 0;max-width:560px;border:3px solid var(--red);border-radius:16px;background:#fff5f6;padding:14px 16px 20px;overflow:hidden;text-align:center;animation:ahPulse 1.4s ease-in-out infinite}
 .auto-home:empty{display:none}
@@ -1057,6 +1063,20 @@ function onSecond() {
 }
 
 /* ---------- HP 변화 ---------- */
+/* ---------- 👆 틀리면 시각 힌트: 정답 쪽을 반짝이고 손가락으로 가리켜요 ---------- */
+function showHint(el) {
+  if (!el) return;
+  document.querySelectorAll('.hint-arrow').forEach(a => a.remove());
+  el.classList.remove('hint-glow'); void el.offsetWidth; el.classList.add('hint-glow');
+  setTimeout(() => el.classList.remove('hint-glow'), 3000);
+  setTimeout(() => {
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const r = el.getBoundingClientRect(), a = document.createElement('div');
+    a.className = 'hint-arrow'; a.textContent = '👆';
+    a.style.left = (r.left + r.width / 2) + 'px'; a.style.top = Math.min(r.bottom, innerHeight - 50) + 'px';
+    document.body.appendChild(a); setTimeout(() => a.remove(), 2600);
+  }, 450);
+}
 function damageMe(n, msg) {
   if (!S.running) return;
   S.hp = Math.max(0, S.hp - n); S.combo = 0; S.lockMistakes++; S.mistakes++;
@@ -1084,7 +1104,7 @@ function hitBoss(n) {
 function resetState() {
   Object.assign(S, {
     runId: S.runId + 1, running: false, startAt: Date.now(), timeLeft: 0,
-    hp: 100, boss: 100, digits: [null, null, null], combo: 0, mistakes: 0, hintsUsed: 0, lockMistakes: 0,
+    hp: 100, boss: 100, digits: [null, null, null], combo: 0, mistakes: 0, hintsUsed: 0, lockMistakes: 0, dateHint: false,
     elapsed: 0, nextPile: CONFIG.pileFirst, phase: 'room', open: 0, coffeeReadyAt: 0, coffeeAlertAt: 0,
     round: 0, roundEnd: 0, roundData: null, answered: false, bossEntry: null,
     inv: { pen: false, draft: false, article: false },
@@ -1241,7 +1261,7 @@ function renderL1() {
       if (Object.keys(L.placed).length === TASKS.length) { L.done = true; lockClear(1); }
       else renderL1();
     } else {
-      shakeEl(card);
+      shakeEl(card); showHint(card.querySelector(`[data-to="${TASKS[i].to}"]`));
       damageMe(7, TASKS[i].to === 'ai' ? `‘${TASKS[i].k}’은(는) 정형화된 업무! AI에게 맡겨도 돼요 (멘탈 -7)` : `‘${TASKS[i].k}’은(는) 사람만 할 수 있는 일이에요! (멘탈 -7)`);
     }
   });
@@ -1270,7 +1290,7 @@ function renderL2() {
     if (L.sel === null) { toast('먼저 아래에서 문장을 골라 주세요 👇'); return; }
     const f = FRAGS[L.sel];
     if (f.slot === -1) { L.rejected[L.sel] = true; L.sel = null; renderL2(); shakeEl($(`.pslot[data-s="${s}"]`)); damageMe(8, f.why + ' (멘탈 -8)'); return; }
-    if (f.slot !== s) { shakeEl(b); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ④의 설명을 확인하세요 (멘탈 -6)`); return; }
+    if (f.slot !== s) { shakeEl(b); showHint($(`.pslot[data-s="${f.slot}"]`)); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ④의 설명을 확인하세요 (멘탈 -6)`); return; }
     L.slots[s] = L.sel; L.sel = null; hitBoss(2); renderL2();
     if (L.slots.every(x => x !== null)) runAI();
   });
@@ -1306,7 +1326,7 @@ function renderL3() {
     <div id="code-area"></div>`;
   body.querySelectorAll('.tool').forEach(t => t.onclick = () => { sfx.click(); L.tool = t.dataset.k; body.querySelectorAll('.tool').forEach(x => x.classList.toggle('on', x === t)); });
   body.querySelectorAll('.bad-seg').forEach(b => b.onclick = () => {
-    if (!L.tool) { toast('먼저 위에서 도구를 골라 주세요 👆'); shakeEl($('.tools')); return; }
+    if (!L.tool) { toast('먼저 위에서 도구를 골라 주세요 👆'); showHint($(`.tool[data-k="${DRAFT[+b.dataset.i].ok[0]}"]`)); return; }
     fixLine(+b.dataset.i, b.closest('.dline'));
   });
   if (L.sub === 'code') renderCode();
@@ -1314,7 +1334,7 @@ function renderL3() {
 function fixLine(i, d) {
   const L = S.l3, l = DRAFT[i];
   if (L.sub !== 'doc' || L.fixed[i] || !l.ok) return;
-  if (!l.ok.includes(L.tool)) { shakeEl(d); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '이 문장에는 다른 도구가 필요해요! (멘탈 -5)'); return; }
+  if (!l.ok.includes(L.tool)) { shakeEl(d); showHint($(`.tool[data-k="${l.ok[0]}"]`)); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '이 문장에는 다른 도구가 필요해요! (멘탈 -5)'); return; }
   L.fixed[i] = true; hitBoss(2);
   if (Object.keys(L.fixed).length === 4) { L.sub = 'code'; sfx.unlock(); bigFx('PERFECT CHECK'); renderL3(); later(() => { const c = $('#code-area'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300); }
   else renderL3();
@@ -1331,7 +1351,7 @@ function renderCode() {
   $('#code-area').querySelectorAll('.key').forEach(k => k.onclick = () => {
     if (S.l3.done) return;
     if (k.dataset.n === CONFIG.code[2]) { S.l3.done = true; hitBoss(3); lockClear(3); }
-    else { shakeEl(k); damageMe(8, '코드가 틀렸어요! 신문 맨 위의 발행 날짜를 확인하세요 (멘탈 -8)'); }
+    else { shakeEl(k); S.dateHint = true; showHint($('#code-area .alink')); damageMe(8, '코드가 틀렸어요! 신문 맨 위의 발행 날짜를 확인하세요 (멘탈 -8)'); }
   });
 }
 
@@ -1435,7 +1455,7 @@ function answer(btn) {
   if (r.type === 'ox') {
     const ok = btn.dataset.v === r.answer; kind = ok ? 'best' : 'bad'; why = r.why;
     $('#opts').querySelector(`[data-v="${r.answer}"]`).classList.add('right');
-    if (!ok) btn.classList.add('wrong-pick');
+    if (!ok) { btn.classList.add('wrong-pick'); showHint($('#opts').querySelector(`[data-v="${r.answer}"]`)); }
     if (ok) { bigFx('정답!'); hitBoss(DMG.ox); mirandaSay('…맞아.'); }
     else damageMe(DMG.oxWrong, `땡! 정답은 ${r.answer} (멘탈 -${DMG.oxWrong})`);
     fb.innerHTML = `<b>${ok ? `⭕ 정답! 미란다 -${DMG.ox}` : `❌ 오답! 정답은 ${r.answer} · 멘탈 -${DMG.oxWrong}`}</b><span>${why}</span>`;
@@ -1445,7 +1465,7 @@ function answer(btn) {
     $('#opts').querySelector(`[data-k="${best}"]`).classList.add('right');
     if (kind === 'best') { bigFx('PERFECT 보고!'); hitBoss(DMG.best); mirandaSay(['흠. 나쁘지 않군.', '…계속해.', '좋아. 다음.'][S.round % 3]); }
     else if (kind === 'good') { btn.classList.add('meh'); bigFx('GOOD', '#c99a3b'); hitBoss(DMG.good); mirandaSay('그럭저럭이군.'); }
-    else { btn.classList.add('wrong-pick'); damageMe(DMG.bad, `그게 최선인가? (멘탈 -${DMG.bad})`); }
+    else { btn.classList.add('wrong-pick'); showHint($('#opts').querySelector(`[data-k="${best}"]`)); damageMe(DMG.bad, `그게 최선인가? (멘탈 -${DMG.bad})`); }
     fb.innerHTML = `<b>${kind === 'best' ? `★ PERFECT · 미란다 -${DMG.best}` : kind === 'good' ? `△ 그럭저럭 · 미란다 -${DMG.good}` : `✕ 잘못된 보고 · 멘탈 -${DMG.bad}`}</b><span>${why}</span>`;
   }
   fb.className = 'feedback ' + (kind === 'bad' ? 'bad' : kind === 'good' ? 'meh' : 'good');
@@ -1530,7 +1550,7 @@ function openArticles(idx = 0) {
   sfx.click();
   const a = ARTICLES[idx];
   openModal('THE NEW YORK MIRROR', `
-    <div class="np-mast"><b>뉴욕 미러</b><span>THE NEW YORK MIRROR · ${CONFIG.issueDate} 발행 · 특집호</span></div>
+    <div class="np-mast"><b>뉴욕 미러</b><span>THE NEW YORK MIRROR · <i class="${S.dateHint ? 'date-glow' : ''}">${CONFIG.issueDate} 발행</i> · 특집호</span></div>
     <div class="tabs">${ARTICLES.map((x, i) => `<button class="tab ${i === idx ? 'on' : ''}" data-t="${i}">${x.tab}</button>`).join('')}</div>
     <article class="news"><h3>${a.title}</h3><div class="meta">${a.meta}</div>${a.body}
     <div class="src">※ 형광펜은 게임에 필요한 핵심 문장입니다.${S.running ? ' 기사를 읽는 동안에도 시간은 흐릅니다!' : ''}</div></article>`);
