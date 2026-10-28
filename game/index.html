@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>악프다 2: 퇴근까지 180초</title>
+<title>악프다 2: 미란다의 비서</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
@@ -117,7 +117,7 @@ body.critical #game-main{animation:pulseRed .7s infinite}
   repeating-linear-gradient(45deg,#e7c9a3 0 14px,#dcb98f 14px 28px)}
 .floor::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.08),transparent 40%)}
 .rug{position:absolute;left:24%;top:72%;width:44%;height:20%;border-radius:50%;background:var(--red);box-shadow:inset 0 0 0 6px #e8475f,inset 0 0 0 9px #fff}
-.window{position:absolute;left:28%;top:7%;width:26%;height:34%;border:6px solid #fff;outline:2px solid var(--ink);background:linear-gradient(#ffb48a,#ffd8b0 55%,#fde9d0);overflow:hidden}
+.window{position:absolute;left:21%;top:5%;width:38%;height:38%;border:6px solid #fff;outline:2px solid var(--ink);background:linear-gradient(#ffb48a,#ffd8b0 55%,#fde9d0);overflow:hidden}
 .window::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:5px;margin-left:-2px;background:#fff;z-index:2}
 .window .sun{position:absolute;left:62%;top:38%;width:18%;aspect-ratio:1;border-radius:50%;background:#ff7a59}
 .window .city{position:absolute;left:0;right:0;bottom:0;height:46%;background:
@@ -128,7 +128,7 @@ body.critical #game-main{animation:pulseRed .7s infinite}
   linear-gradient(#8a7fa8,#8a7fa8) 54% 100%/12% 75% no-repeat,
   linear-gradient(#a397c0,#a397c0) 70% 100%/9% 60% no-repeat,
   linear-gradient(#7c7199,#7c7199) 82% 100%/14% 85% no-repeat}
-.frames{position:absolute;left:58%;top:9%;display:flex;gap:1.4%;width:24%}
+.frames{position:absolute;left:62%;top:9%;display:flex;gap:1.4%;width:21%}
 .frame{flex:1;aspect-ratio:3/4;background:#fff;border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:4% 2%;font:900 clamp(5px,1vw,10px) var(--serif);color:var(--red)}
 .frame i{display:block;width:60%;flex:1;margin:6% 0;border-radius:40% 40% 10% 10%;background:var(--blue)}
 .frame:nth-child(2) i{background:var(--ink)}
@@ -455,8 +455,8 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
 .pslot .val .here{color:#ffd166;margin-left:6px}
 
 /* 문서 검증: 빨간 글씨 + 도구만 고르기 */
-.dline.risk{cursor:default;background:#fff5f6;border-left:4px solid var(--red);margin:6px 0;padding-bottom:10px}
-.dline.risk:hover{background:#fff5f6}
+.dline.risk{cursor:default;background:none;color:var(--ink);margin:6px 0}
+.dline.risk:hover{background:none}
 .bad-txt{color:var(--red);font-weight:700;text-decoration:underline wavy rgba(200,16,46,.5);text-underline-offset:4px}
 .pick-tool{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
 .pick-tool button{min-height:44px;border:2px solid var(--ink);border-radius:10px;background:#fff;font:700 13px var(--sans);display:flex;align-items:center;justify-content:center;gap:4px}
@@ -499,18 +499,24 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
 .cf-btn.need{background:#e7f6ec;border-color:var(--green);animation:glowBtn 1s infinite}
 .cf-btn.need .cf-ring{animation:none}
 
-/* 게임 종료 후 홈페이지 자동 이동 */
-.auto-home{margin:14px 0 0;font-size:14px;color:var(--muted);min-height:20px}
-.auto-home b{color:var(--red)}
-.ah-stop{margin-left:8px;border:1.5px solid var(--ink);border-radius:99px;padding:2px 10px;font-size:12.5px;font-weight:700;background:#fff}
-
-/* 신문 버전 선택 + 옛날 신문(노란 필터) */
-.paper-pick{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:16px;font-size:13.5px;font-weight:700;flex-wrap:wrap}
-.paper-pick button{border:1.5px solid var(--ink);border-radius:99px;padding:6px 14px;font-weight:700;font-size:13px;background:#fff}
-.paper-pick button.on{background:var(--ink);color:#fff}
-body.old-paper::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;background:radial-gradient(ellipse at center,rgba(240,200,90,.16),rgba(150,100,30,.32));mix-blend-mode:multiply}
-body.old-paper .modal-box,body.old-paper .news{background-color:#f4e9c8}
-body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif KR',serif}
+/* 게임 종료 후 화면 닫힘 안내 (크게 · 눈에 띄게) */
+.auto-home{position:relative;margin:16px auto 0;max-width:560px;border:3px solid var(--red);border-radius:16px;background:#fff5f6;padding:14px 16px 20px;overflow:hidden;text-align:center;animation:ahPulse 1.4s ease-in-out infinite}
+.auto-home:empty{display:none}
+.screen .auto-home{position:fixed;left:50%;top:10px;margin:0;transform:translateX(-50%);width:min(560px,calc(100% - 24px));z-index:9000;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.ah-msg{display:block;font:900 clamp(18px,3vw,26px) var(--sans);color:var(--ink)}
+.ah-count{display:block;margin-top:4px;font:800 clamp(16px,2.4vw,21px) var(--sans);color:var(--red)}
+.ah-count b{font:900 clamp(34px,6vw,54px)/1 var(--sans);vertical-align:-6px;margin-right:2px}
+.ah-bar{position:absolute;left:0;bottom:0;height:8px;background:var(--red);transition:width 1s linear}
+@keyframes ahPulse{0%,100%{box-shadow:0 10px 30px rgba(0,0,0,.25)}50%{box-shadow:0 10px 30px rgba(0,0,0,.25),0 0 0 8px rgba(200,16,46,.25)}}
+#scr-win,#scr-fail{padding-top:150px}
+/* 신문 버전 선택 */
+.pick-card .np-ic{font-size:34px;width:52px;text-align:center;flex:none}
+.pick-card{position:relative}
+.pick-card.soon{opacity:.6;border-style:dashed;cursor:not-allowed}
+.soon-tag{position:absolute;top:-10px;right:10px;background:var(--ink);color:#fff;font:900 10.5px var(--sans);letter-spacing:.08em;padding:3px 8px;border-radius:99px}
+/* 문서 검증: 도구는 위 한 줄, 문제 부분만 빨간 글씨 */
+.bad-seg{display:inline;color:var(--red);font:inherit;font-weight:800;text-decoration:underline wavy rgba(200,16,46,.6);text-underline-offset:4px;padding:0 2px;border-radius:4px;cursor:pointer;background:none}
+.bad-seg:hover{background:#ffe1e6}
 
 /* ---------- 휴대전화 화면 ---------- */
 @media (max-width:760px){
@@ -569,22 +575,22 @@ body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif 
     <div class="cover-grid">
       <div>
         <div class="kicker">OFFICE ESCAPE · 방탈출</div>
-        <div class="title">악프다 2<br><em>퇴근까지 180초</em></div>
+        <div class="title">악프다 2<br><em>미란다의 비서</em></div>
         <p class="subtitle">AI보다 먼저 퇴근할 수 있을까?</p>
         <div class="story">
-          현재 시각 <b>17:57</b>. 퇴근까지 3분.<br>
-          미란다의 사무실에 갇혔다. 책상에는 처리하지 못한 업무와 수상한 신문기사가 쌓여 있다.<br>
-          미란다가 돌아오기 전까지 <b>세 개의 잠금장치</b>를 풀고 비밀번호를 완성하라.<br>
-          실패하면 내일도 출근이다.
+          현재 시각 <b>17:57</b>. 퇴근 직전, 미란다의 사무실에 갇혔다.<br>
+          책상에는 처리하지 못한 업무와 수상한 신문기사가 쌓여 있다.<br>
+          <b>세 개의 잠금장치</b>를 풀고 미란다에게 보고를 마쳐 비밀번호를 완성하라.<br>
+          단, <b>멘탈</b>이 0이 되면 내일도 출근이다.
         </div>
       </div>
       <div class="hero" id="hero"></div>
     </div>
     <div class="pick">
-      <h3>👤 나의 비서 캐릭터를 골라 주세요</h3>
+      <h3>📰 신문 버전을 골라 주세요</h3>
       <div class="pick-row">
-        <button class="pick-card on" data-g="f"><div class="pv" id="pv-f"></div><div><b>여자 비서</b><small>꼼꼼한 신입 비서</small></div></button>
-        <button class="pick-card" data-g="m"><div class="pv" id="pv-m"></div><div><b>남자 비서</b><small>센스 있는 신입 비서</small></div></button>
+        <button class="pick-card on" data-np="now"><div class="np-ic">📰</div><div><b>현재 신문</b><small>뉴욕 미러 · 2026년 3월 4일 발행</small></div></button>
+        <button class="pick-card soon" data-np="past"><div class="np-ic">📜</div><div><b>과거 신문</b><small>COMING SOON · 곧 공개됩니다</small></div><span class="soon-tag">COMING SOON</span></button>
       </div>
     </div>
     <div class="start-btns">
@@ -592,7 +598,6 @@ body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif 
       <button class="btn btn-line" id="btn-howto">게임 방법</button>
       <button class="btn btn-line" id="btn-news">📰 신문기사 열람</button>
     </div>
-    <div class="paper-pick"><span>📰 신문 버전</span><button data-paper="new" class="on">현재 신문</button><button data-paper="old">옛날 신문</button></div>
     <p style="text-align:center;margin:16px 0 0"><a href="../" target="_top" style="color:var(--muted);font-weight:700;font-size:14px">← RUNWAY 홈페이지로</a></p>
   </div>
 </section>
@@ -600,7 +605,7 @@ body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif 
 <!-- ================= 게임 화면 ================= -->
 <section id="scr-game" class="screen">
   <header id="hud"><div class="hud-in">
-    <div class="hud-time"><small>남은 시간</small><b id="h-time">03:00</b></div>
+    <div class="hud-time"><small>플레이 시간</small><b id="h-time">00:00</b></div>
     <div class="hud-bars">
       <div class="bar-row" id="row-hp"><span class="face" id="face-me"></span><span>내 멘탈</span><div class="bar"><i id="h-hp"></i></div><em id="h-hp-n">100</em></div>
       <div class="bar-row boss"><span class="face" id="face-mir"></span><span>미란다</span><div class="bar"><i id="h-boss"></i></div><em id="h-boss-n">100</em></div>
@@ -611,7 +616,7 @@ body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif 
     </div>
     <div class="hud-actions">
       <button id="b-article">📰 기사</button>
-      <button id="b-hint">💡 힌트 <small>-10초</small></button>
+      <button id="b-hint">💡 힌트 <small>멘탈 -5</small></button>
       <button id="b-sound" aria-label="소리 켜기/끄기">🔊</button>
     </div>
     <div class="quest"><span>🎯 <b id="h-stage">-</b></span><span id="combo-tag"></span></div>
@@ -632,7 +637,7 @@ body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif 
       <button class="btn btn-red" id="btn-retry">↻ 처음부터 다시 도전</button>
       <button class="btn btn-line" id="btn-home1">시작 화면</button>
     </div>
-    <p class="auto-home" id="ah-fail"></p>
+    <div class="auto-home" id="ah-fail"></div>
   </div>
 </section>
 
@@ -645,19 +650,19 @@ body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif 
     <div class="quote">“흥미롭군. 자네, 생각보다 쓸 만한 비서였어.”</div>
     <div class="bigcode" id="bigcode"></div>
     <p class="notice">탈출 성공! 획득한 비밀번호를 실제 전시회 금고에 입력하고 상품을 획득하세요.</p>
+    <div class="auto-home big" id="ah-win"></div>
     <div class="credits"><div class="cr-title">MADE BY · 만든 사람들</div><div class="cr-row" id="credits"></div></div>
     <div class="front"><div class="fm">RUNWAY DAILY <small>특집 · 오늘의 1면</small></div>
       <h4>“AI 시대, 결과를 걸러내는 비서가 살아남는다”</h4>
       <p>반복 업무는 AI에게, 판단·소통·검증은 사람에게. 당신이 완성한 특집 기사가 내일 아침 1면에 실립니다.</p></div>
     <p class="stats" id="win-stats"></p>
     <div class="btns"><button class="btn btn-line" id="btn-home2">처음 화면으로 (다음 참가자)</button></div>
-    <p class="auto-home" id="ah-win"></p>
   </div>
 </section>
 
 <!-- 팝업창, 퍼즐창, 효과 -->
 <div id="cu" class="cu hidden"><div class="cu-box">
-  <div class="cu-top"><span class="lt" id="cu-lt">LOCK</span><h2 id="cu-title"></h2><span class="cu-time">⏱ <b id="cu-time">03:00</b> · ❤️ <b id="cu-hp">100</b></span><button id="cu-hint" aria-label="힌트">💡 힌트</button><button id="cu-x">✕ 방으로</button></div>
+  <div class="cu-top"><span class="lt" id="cu-lt">LOCK</span><h2 id="cu-title"></h2><span class="cu-time">⏱ <b id="cu-time">00:00</b> · ❤️ <b id="cu-hp">100</b></span><button id="cu-hint" aria-label="힌트">💡 힌트</button><button id="cu-x">✕ 방으로</button></div>
   <div class="cu-body" id="cu-body"></div>
 </div></div>
 <div id="modal" class="modal hidden"><div class="modal-box">
@@ -677,48 +682,47 @@ body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif 
 const ARTICLES = [
   { tab:'③ 비서의 역할', title:'AI 시대에 비서라는 직업은 어떻게 살아남나?', meta:'RUNWAY DAILY · 특집',
     body:`
-    <p>인공지능(AI)이 처음 등장했을 때만 해도, 비서는 가장 먼저 사라질 대표적인 직업으로 꼽혔다. 하지만 실제 현장에서 일어난 변화는 직업이 사라지는 것이 아니라 <mark>‘역할이 바뀌는 과정’</mark>이었다. AI가 반복적인 행정 업무를 대신해 주면서, 인간 비서의 역할은 <mark>판단과 소통 중심</mark>으로 이동했다.</p>
+    <p>인공지능(AI)이 처음 등장했을 때만 해도, 비서는 가장 먼저 사라질 대표적인 직업으로 꼽혔다. 하지만 실제 현장에서 일어난 변화는 직업이 사라지는 것이 아니라 ‘역할이 바뀌는 과정’이었다. AI가 반복적인 행정 업무를 대신해 주면서, 인간 비서의 역할은 판단과 소통 중심으로 이동했다.</p>
     <p>실제로 <mark>AI는 일정 관리나 반복 행정, 문서 초안 작성, 회의록 정리, 데이터 통합처럼 정형화된 업무</mark>를 빠르고 정확하게 자동화하는 데 특화되어 있다. 반면 <mark>인간 비서는 조직 내 커뮤니케이션을 조율하고 예외적인 돌발 상황에 유연하게 대응하며, AI가 내놓은 결과물을 검토하고 수정</mark>하는 고차원적 역할을 수행한다.</p>
     <p>AI가 정형화된 데이터를 빠르게 검색하고 요약하는 ‘기능적 보조자’라면, 인간 비서는 복잡한 맥락을 이해하고 정서를 다루는 ‘관계적·판단적 주체’다. <mark>상사의 미세한 의도를 파악하고 부서 간 감정을 조율하는 일</mark>, 규정만으로는 해결할 수 없는 돌발 상황에 대응하는 것은 오직 인간 비서만이 수행할 수 있는 고유한 영역이다.</p>
     <table><tr><th>AI의 역할</th><th>인간 비서의 역할</th></tr>
       <tr><td>일정 관리<br>반복적인 행정업무<br>문서 초안 작성<br>자료 검색<br>회의록 작성/요약<br>데이터 처리<br>정보 통합</td>
           <td>맥락 이해<br>상황 판단<br>감정 조율<br>대인관계 관리<br>조직 내 커뮤니케이션<br>예외적인 상황 대응<br>AI 결과물 검토 및 수정</td></tr></table>
-    <p>이제 비서에게는 AI를 다루는 <mark>프롬프트 작성 능력</mark>과 데이터 리터러시는 물론, <mark>AI가 제시한 결과물의 오류를 검증하고 수정하는 정교한 안목</mark>이 필수가 되었다. 결국 AI 시대의 비서는 단순한 ‘행정 보조자’에서 최종 판단을 내리는 <mark>‘의사결정 지원 파트너’</mark>로 전환을 이루어냈다.</p>` },
+    <p>이제 비서에게는 AI를 다루는 프롬프트 작성 능력과 데이터 리터러시는 물론, <mark>AI가 제시한 결과물의 오류를 검증하고 수정하는 정교한 안목</mark>이 필수가 되었다. 결국 AI 시대의 비서는 단순한 ‘행정 보조자’에서 최종 판단을 내리는 ‘의사결정 지원 파트너’로 전환을 이루어냈다.</p>` },
   { tab:'④ 프롬프트·검증', title:'“AI에게 시키면 끝?” … 결과를 걸러내는 사람이 경쟁력을 갖는다', meta:'앤드리아 삭스(Andrea Sachs) · 프리랜스저널리스트',
     body:`
     <p>AI를 효과적으로 활용하기 위해서는 먼저 프롬프트를 구체적으로 작성해야 한다. 좋은 프롬프트는 크게 <mark>다섯 가지 요소</mark>로 구성된다.
     AI에게 어떤 역할을 맡길 것인지 정하는 <mark>‘역할’</mark>, 업무의 상황을 설명하는 <mark>‘배경’</mark>, 원하는 작업을 구체적으로 제시하는 <mark>‘지시’</mark>, 결과물에서 지켜야 할 조건을 정하는 <mark>‘제약’</mark>, 그리고 원하는 결과의 형태를 알려주는 <mark>‘출력 형식’</mark>이다. 단순히 “광고 문구를 만들어줘”라고 하는 것보다 대상과 목적, 글자 수, 결과물의 형식까지 <mark>구체적으로 제시할수록</mark> AI의 결과를 원하는 방향으로 이끌 수 있다.</p>
-    <p>구체적인 프롬프트를 사용해도 AI가 항상 정확한 답을 내놓는 것은 아니다. AI는 사실이 아닌 내용을 사실처럼 제시하는 <mark>‘환각(hallucination)’</mark> 현상을 보일 수 있기 때문이다. 따라서 원문 출처와 수치·정보를 확인해야 한다. <mark>AI에게 같은 질문을 반복하는 것만으로는 검증이 되지 않으며, 최종적으로 1차 출처를 확인해야 한다.</mark></p>
+    <p>구체적인 프롬프트를 사용해도 AI가 항상 정확한 답을 내놓는 것은 아니다. AI는 사실이 아닌 내용을 사실처럼 제시하는 ‘환각(hallucination)’ 현상을 보일 수 있기 때문이다. 따라서 원문 출처와 수치·정보를 확인해야 한다. <mark>AI에게 같은 질문을 반복하는 것만으로는 검증이 되지 않으며, 최종적으로 1차 출처를 확인해야 한다.</mark></p>
     <p>또한 AI를 업무에 활용할 때는 <mark>개인정보와 기밀정보를 그대로 입력해서도 안 된다.</mark> 고객의 이름이나 전화번호, 주민등록번호, 내부 계약서, 인사정보, 비밀번호와 같은 정보는 <mark>비식별화한 뒤 활용</mark>해야 한다.</p>
-    <p>최근에는 AI를 업무 도구와 직접 연결해 쓰는 방식이 주목받고 있다. <mark>MCP(Model Context Protocol)</mark>는 AI가 일정표나 메일함, 사내 문서함 같은 실제 업무 도구에 직접 접근하도록 연결해 주는 ‘공통 규격’이다. 예를 들어 일정표가 연결되어 있으면 <mark>“다음 주 임원 일정 중 겹치는 건을 찾아 대안을 정리해 달라”</mark>는 요청을 한 번에 처리할 수 있다. 다만 <mark>AI의 접근 권한은 업무에 꼭 필요한 범위로만 설정하고, 인사·계약 정보처럼 공개가 제한된 자료는 연결 대상에서 제외</mark>해야 한다. 이 기능은 클로드(Claude)에서는 ‘커넥터’, 챗GPT에서는 ‘플러그인’으로 불린다.</p>
-    <p>가장 중요한 것은 AI가 만들어낸 결과를 그대로 믿지 않는 태도다. 확인되지 않은 내용은 <mark>‘검증되지 않음’으로 표시</mark>하는 방식이다. 결국 AI를 가장 잘 활용하는 사람은 답을 가장 빨리 받아들이는 사람이 아니라, <mark>그 답을 한 번 더 의심하고 확인할 수 있는 사람</mark>일 것이다.</p>` },
+    <p>최근에는 AI를 업무 도구와 직접 연결해 쓰는 방식이 주목받고 있다. MCP(Model Context Protocol)는 AI가 일정표나 메일함, 사내 문서함 같은 실제 업무 도구에 직접 접근하도록 연결해 주는 ‘공통 규격’이다. 예를 들어 일정표가 연결되어 있으면 <mark>“다음 주 임원 일정 중 겹치는 건을 찾아 대안을 정리해 달라”</mark>는 요청을 한 번에 처리할 수 있다. 다만 <mark>AI의 접근 권한은 업무에 꼭 필요한 범위로만 설정하고, 인사·계약 정보처럼 공개가 제한된 자료는 연결 대상에서 제외</mark>해야 한다. 이 기능은 클로드(Claude)에서는 ‘커넥터’, 챗GPT에서는 ‘플러그인’으로 불린다.</p>
+    <p>가장 중요한 것은 AI가 만들어낸 결과를 그대로 믿지 않는 태도다. 확인되지 않은 내용은 <mark>‘검증되지 않음’으로 표시</mark>하는 방식이다. 결국 AI를 가장 잘 활용하는 사람은 답을 가장 빨리 받아들이는 사람이 아니라, 그 답을 한 번 더 의심하고 확인할 수 있는 사람일 것이다.</p>` },
   { tab:'② AI 연표', title:'“AI는 하루아침에 오지 않았다”', meta:'— 알고리즘 추천에서 생성형 AI까지, 15년에 걸친 업무 환경의 이동 · 크리스티안 톰슨',
     body:`
     <p>기술 도입 연표를 따라가 보면, 현재의 변화는 돌발 사태가 아니라 15년 넘게 축적된 흐름의 결과였다.</p>
-    <p>출발점은 <mark>2010년</mark>이었다. 알고리즘 기반 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 이어 <mark>2017년부터 2022년까지</mark>는 기업 단위의 AI 도입이 본격적으로 증가한 시기로 분류된다.</p>
-    <p>분기점은 <mark>2022년</mark>이었다. 챗지피티(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 일반 대중의 도구로 단숨에 옮겨왔다. 이후 <mark>2023년</mark>은 생성형 AI가 실제 업무에 본격적으로 진입한 해로 평가되며, <mark>2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로</mark> 활용 범위가 빠르게 확대됐다.</p>
-    <p>전문가들은 이 연표가 보여주는 핵심이 <mark>‘대체’가 아닌 ‘재배치’</mark>라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다.</p>` },
+    <p>출발점은 2010년이었다. 알고리즘 기반 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 이어 2017년부터 2022년까지는 기업 단위의 AI 도입이 본격적으로 증가한 시기로 분류된다.</p>
+    <p>분기점은 2022년이었다. 챗지피티(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 일반 대중의 도구로 단숨에 옮겨왔다. 이후 2023년은 생성형 AI가 실제 업무에 본격적으로 진입한 해로 평가되며, 2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로 활용 범위가 빠르게 확대됐다.</p>
+    <p>전문가들은 이 연표가 보여주는 핵심이 ‘대체’가 아닌 ‘재배치’라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다.</p>` },
   { tab:'⑤ 인터뷰', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다', meta:'마커스 벨(Marcus Bell)',
     body:`
     <p><b>Q. 비서가 AI시대에 밀려나지 않으려면 무엇을 갖춰야 할까요?</b></p>
-    <p>A. 요즘 상사들이 어떤 비서를 우수하다고 평가하는지 아세요? <mark>하나하나 지시하지 않아도 상사의 니즈에 맞게 능동적으로 움직이는 비서</mark>예요. 상사들도 잘 알고 있어요. <mark>전표처리나 계산 같은 단순 복잡 업무는 AI가 훨씬 빠르고 정확하게 처리</mark>한다는 걸요. 하지만 <mark>사람과 직접 대면하고 교감하며 상황을 이해하고 해결하는 건 AI가 할 수 없는 사람만의 영역</mark>이죠. 결국 AI기술을 발판삼아 판단력을 보이는 비서가 되는 것이 중요하죠. AI는 도구일 뿐 본질이 변하지는 않으니까요.</p>` }
+    <p>A. 요즘 상사들이 어떤 비서를 우수하다고 평가하는지 아세요? 하나하나 지시하지 않아도 상사의 니즈에 맞게 능동적으로 움직이는 비서예요. 상사들도 잘 알고 있어요. <mark>전표처리나 계산 같은 단순 복잡 업무는 AI가 훨씬 빠르고 정확하게 처리</mark>한다는 걸요. 하지만 <mark>사람과 직접 대면하고 교감하며 상황을 이해하고 해결하는 건 AI가 할 수 없는 사람만의 영역</mark>이죠. 결국 AI기술을 발판삼아 판단력을 보이는 비서가 되는 것이 중요하죠. AI는 도구일 뿐 본질이 변하지는 않으니까요.</p>` }
 ];
 
 /* =====================================================================
    ⚙️ 게임 기본 설정 — 숫자만 바꾸면 난이도를 조절할 수 있어요
    ===================================================================== */
 const CONFIG = {
-  totalSeconds: 180,     // 전체 제한 시간(초)
-  hintCost: 10,          // 힌트를 누르면 줄어드는 시간(초)
+  hintCost: 5,           // 힌트를 누르면 줄어드는 멘탈 (시간제한 없음 · 멘탈이 0이 되면 실패)
   code: ['2','5','4'],   // 금고 비밀번호 세 자리
-  pileFirst: 45,         // 한 잠금장치에서 이 시간(초) 이상 지나면 '업무 폭주' 경고
-  pileEvery: 20,         // 그 뒤로 이 간격마다 다시 경고
+  pileFirst: 90,         // 한 잠금장치에서 이 시간(초) 이상 머무르면 '업무 폭주' (멘탈 -5)
+  pileEvery: 45,         // 그 뒤로 이 간격마다 다시
   coffeeHeal: 15,        // 커피 한 잔으로 회복하는 멘탈
   coffeeRecharge: 25,    // 커피가 다시 채워지는 시간(초)
   coffeeAlertHp: 50,     // 멘탈이 이 숫자 이하가 되면 "커피를 마셔요" 안내
   issueDate: '2026년 3월 4일',  // 신문(뉴욕 미러) 발행일 — 마지막 금고 숫자 문제의 정답 단서
-  bossRetrySeconds: 100, // 보스전부터 다시 할 때 주어지는 시간(초)
-  autoHomeSeconds: 10,   // 게임이 끝나고 홈페이지로 돌아가기까지의 시간(초)
+  autoHomeSeconds: 20,   // 게임이 끝나고 화면이 닫히기(홈페이지로 돌아가기)까지의 시간(초)
+  playIdleSeconds: 180,  // 게임 중 이 시간(초) 동안 아무 조작이 없으면 홈페이지로 (자리를 비운 경우)
   idleSeconds: 60        // 시작 화면에서 아무 조작이 없으면 홈페이지로 돌아가는 시간(초)
 };
 
@@ -751,13 +755,13 @@ const FRAGS = [
 const DRAFT = [
   { t:'AI 시대, 비서는 사라지지 않는다', title:true },
   { t:'2022년 챗지피티 공개 이후, AI는 전문가의 도구에서 일반 대중의 도구로 옮겨왔다.' },
-  { t:'인터뷰에 응한 VIP 고객 김가명(010-0000-0000)은 “AI 덕분에 편해졌다”고 말했다.', ok:['mask'],
+  { t:'인터뷰에 응한 VIP 고객 김가명(010-0000-0000)은 “AI 덕분에 편해졌다”고 말했다.', bad:'김가명(010-0000-0000)', ok:['mask'],
     fixed:'인터뷰에 응한 VIP 고객 <span class="mask">김가명(010-0000-0000)</span>은 “AI 덕분에 편해졌다”고 말했다.', stamp:['black','비식별화 완료'] },
-  { t:'한 조사에 따르면 3년 안에 비서의 99%가 AI로 대체된다.', ok:['flag','source'], stamp:['','검증되지 않음'] },
+  { t:'한 조사에 따르면 3년 안에 비서의 99%가 AI로 대체된다.', bad:'3년 안에 비서의 99%가 AI로 대체된다', ok:['flag','source'], stamp:['','검증되지 않음'] },
   { t:'AI는 반복 업무를, 인간 비서는 판단과 소통을 맡는 구조로 일터가 재편되고 있다.' },
-  { t:'※ 팩트체크: AI에게 같은 질문을 세 번 해서 같은 답을 받았으므로 사실로 확인함.', ok:['source'], stamp:['blue','1차 출처 확인 필요'],
+  { t:'※ 팩트체크: AI에게 같은 질문을 세 번 해서 같은 답을 받았으므로 사실로 확인함.', bad:'같은 질문을 세 번 해서 같은 답을 받았으므로 사실로 확인함', ok:['source'], stamp:['blue','1차 출처 확인 필요'],
     whyFlag:'같은 질문 반복은 검증이 아니에요! 🔍 1차 출처를 확인해야 해요' },
-  { t:'첨부: 런웨이 내부 계약서·인사정보 원문', ok:['mask'], fixed:'첨부: <span class="mask">런웨이 내부 계약서·인사정보 원문</span>', stamp:['black','기밀 비식별화'] }
+  { t:'첨부: 런웨이 내부 계약서·인사정보 원문', bad:'런웨이 내부 계약서·인사정보 원문', ok:['mask'], fixed:'첨부: <span class="mask">런웨이 내부 계약서·인사정보 원문</span>', stamp:['black','기밀 비식별화'] }
 ];
 const TOOLS = [
   { k:'mask',   icon:'🖍️', name:'비식별화',     sub:'개인정보·기밀 가리기' },
@@ -775,9 +779,8 @@ const DMG = {
   bad: 12,    // 잘못된 보고 → 내 멘탈 감소
   ox: 12,     // OX 정답 → 미란다 HP 감소
   oxWrong: 12,// OX 오답 → 내 멘탈 감소
-  timeout: 10 // 시간 초과 → 내 멘탈 감소
 };
-const ROUND_TIME = 15;   // 보고 한 번에 주어지는 시간(초)
+
 const REPORTS = [
   { type:'pick', title:'업무 폭탄 보고', ask:'전표 처리 30건에, 디자이너는 쇼에 안 오겠다고 화를 내고 있어. 어떻게 할 거지?',
     opts:[
@@ -812,7 +815,7 @@ const REPORTS = [
 const HINTS = {
   1:  '기사 <b>③ 비서의 역할</b> 속 <b>표</b>를 보세요.<br>왼쪽 칸(AI의 역할)은 반복·정형화된 일, 오른쪽 칸(인간 비서)은 <b>사람의 마음과 판단</b>이 필요한 일이에요.',
   2:  '기사 <b>④</b>에서 좋은 프롬프트의 <b>다섯 가지 요소</b>를 찾아보세요.<br>‘역할’은 AI에게 맡길 역할, ‘배경’은 상황, ‘지시’는 할 일, ‘제약’은 지킬 조건, ‘출력 형식’은 결과의 모양!<br>막연한 말이나 개인정보가 든 문장은 넣으면 안 돼요.',
-  3:  '<b style="color:#c8102e">빨간 글씨</b>가 문제 있는 부분이에요. 각 문장 아래에서 알맞은 도구를 고르세요.<br>개인정보·기밀 → <b>가리기</b> / 근거 없는 숫자 → <b>검증되지 않음</b> / “같은 질문 반복” → <b>1차 출처 확인</b>!',
+  3:  '<b style="color:#c8102e">빨간 글씨</b>가 문제 있는 부분이에요. 위에서 도구를 고른 뒤 빨간 글씨를 누르세요.<br>개인정보·기밀 → <b>가리기</b> / 근거 없는 숫자 → <b>검증되지 않음</b> / “같은 질문 반복” → <b>1차 출처 확인</b>!',
   '3b':'📰 <b>신문기사</b>를 열면 맨 위에 <b>신문 이름과 발행 날짜</b>가 적혀 있어요. 몇 월 <b>며칠</b>에 나온 신문인가요?',
   door:'모든 잠금을 풀었어요! 오른쪽 <b>출구(빨간 문)</b>를 눌러 미란다에게 보고하러 가세요.',
   4:  '가장 좋은 보고는 <b>AI에게 맡길 일은 맡기고, 판단·소통·검증은 사람이</b> 하는 답이에요.<br>OX 문제의 단서는 📰 <b>기사 ④</b>에 있어요. 멘탈이 낮으면 ☕ <b>커피</b>!'
@@ -1013,8 +1016,8 @@ const GOAL_TEXT = {
 /* ---------- HUD ---------- */
 function renderTime() {
   $('#h-time').textContent = fmt(S.timeLeft); $('#cu-time').textContent = fmt(S.timeLeft); $('#cu-hp').textContent = S.hp;
-  document.body.classList.toggle('danger', S.running && S.timeLeft <= 30);
-  document.body.classList.toggle('critical', S.running && S.timeLeft <= 10);
+  document.body.classList.toggle('danger', S.running && S.hp <= 30);
+  document.body.classList.toggle('critical', S.running && S.hp <= 15);
 }
 function renderHUD() {
   renderTime();
@@ -1035,15 +1038,9 @@ function startTimer() { stopTimer(); timerId = setInterval(tick, 200); }
 function stopTimer() { if (timerId) clearInterval(timerId); timerId = null; }
 function tick() {
   if (!S.running) return;
-  const left = Math.max(0, Math.ceil((S.deadline - Date.now()) / 1000));
-  if (left !== S.timeLeft) { S.timeLeft = left; renderTime(); if (left <= 10 && left > 0) sfx.tick(); onSecond(); }
-  if (left <= 0) { gameOver('time'); return; }
+  const el = Math.floor((Date.now() - S.startAt) / 1000);   // 플레이 시간 (제한 없음)
+  if (el !== S.timeLeft) { S.timeLeft = el; renderTime(); onSecond(); }
   updateCoffeeUI();
-  if (S.phase === 'boss' && S.roundData && !S.answered) {
-    const remain = S.roundEnd - Date.now(), bar = $('#wave-bar');
-    if (bar) bar.style.width = Math.max(0, remain / (ROUND_TIME * 1000) * 100) + '%';
-    if (remain <= 0) roundTimeout();
-  }
 }
 function onSecond() {
   const w = $('#win'); if (w) w.className = 'window ' + skyClass();
@@ -1086,7 +1083,7 @@ function hitBoss(n) {
 /* ---------- 시작 / 초기화 ---------- */
 function resetState() {
   Object.assign(S, {
-    runId: S.runId + 1, running: false, deadline: 0, timeLeft: CONFIG.totalSeconds,
+    runId: S.runId + 1, running: false, startAt: Date.now(), timeLeft: 0,
     hp: 100, boss: 100, digits: [null, null, null], combo: 0, mistakes: 0, hintsUsed: 0, lockMistakes: 0,
     elapsed: 0, nextPile: CONFIG.pileFirst, phase: 'room', open: 0, coffeeReadyAt: 0, coffeeAlertAt: 0,
     round: 0, roundEnd: 0, roundData: null, answered: false, bossEntry: null,
@@ -1100,7 +1097,7 @@ function resetState() {
 function startGame() {
   cancelAutoHome(); stopTimer(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
   resetState();
-  S.running = true; S.deadline = Date.now() + CONFIG.totalSeconds * 1000;
+  S.running = true; S.startAt = Date.now();
   showScreen('game');
   S.dialog = '📱 <b>미란다의 메모</b> “내일 아침까지 ‘AI 시대의 비서’ 특집 기사를 완성해 둬. 퇴근은 그다음이야.” …먼저 반짝이는 <b>서류함</b>부터 열어 보자!';
   renderRoom(); renderHUD(); startTimer(); sfx.unlock();
@@ -1187,7 +1184,7 @@ function coffeeAlert() {
   if (S.phase === 'room') say('머리가 지끈거린다… 책상 위 <b>☕ 커피</b>를 마시고 정신을 차리자!');
 }
 /* ---------- 창밖 시간대: 낮 → 초저녁 → 저녁 ---------- */
-function skyClass() { return S.timeLeft > 120 ? 'day' : S.timeLeft > 60 ? 'dusk' : 'night'; }
+function skyClass() { if (S.phase === 'boss') return 'night'; const g = goal(); return g <= 2 ? 'day' : 'dusk'; }   // 진행할수록 낮 → 초저녁 → 저녁(보스전)
 function say(html) { S.dialog = html; const d = $('#dlg'); if (d) { d.innerHTML = html; d.parentElement.classList.remove('typing'); void d.offsetWidth; d.parentElement.classList.add('typing'); } }
 function clickObj(id, el) {
   if (!S.running || S.phase !== 'room') return;
@@ -1292,21 +1289,26 @@ function renderL3() {
   if (L.done) return;
   const n = Object.keys(L.fixed).length;
   body.innerHTML = `
-    <p class="lead">AI가 쓴 초안이 나왔다. 하지만 ${art(1, '기사 ④')}는 말한다 — <b>“그대로 믿지 마라.”</b> <b style="color:#c8102e">빨간 글씨</b>가 문제 있는 부분이에요. 문장 아래에서 <b>알맞은 도구</b>를 고르세요.</p>
+    <p class="lead">AI가 쓴 초안이 나왔다. 하지만 ${art(1, '기사 ④')}는 말한다 — <b>“그대로 믿지 마라.”</b> <b>① 위에서 도구를 고르고 → ② <span style="color:#c8102e">빨간 글씨</span></b>를 누르세요. 빨간 글씨가 문제 있는 부분이에요.</p>
+    <div class="tools">${TOOLS.map(t => `<button class="tool ${L.tool === t.k ? 'on' : ''}" data-k="${t.k}"><span>${t.icon}</span>${t.name}<small>${t.sub}</small></button>`).join('')}</div>
     <div class="draft" id="draft">
       <div class="draft-head"><b>RUNWAY DAILY</b><small>AI 작성 초안 · 검토 전</small></div>
       ${DRAFT.map((l, i) => {
         const f = L.fixed[i];
         if (!l.ok) return `<div class="dline ${l.title ? 'title-line' : ''} fixed">${l.t}</div>`;
         if (f) return `<div class="dline fixed">${l.fixed || l.t}<span class="stampmini ${l.stamp[0]}">${l.stamp[1]}</span></div>`;
-        return `<div class="dline risk" data-i="${i}"><span class="bad-txt">${l.t}</span>
-          <div class="pick-tool">${TOOLS.map(t => `<button data-i="${i}" data-k="${t.k}"><span>${t.icon}</span>${t.name}</button>`).join('')}</div></div>`;
+        const [pre, post] = l.t.split(l.bad);
+        return `<div class="dline risk" data-i="${i}">${pre}<button class="bad-seg" data-i="${i}">${l.bad}</button>${post}</div>`;
       }).join('')}
       ${L.sub === 'code' ? '<div class="approved"><div>APPROVED<small>검증 완료 기사</small></div></div>' : ''}
     </div>
     <p class="note">※ 문서 속 인물·연락처·통계는 게임을 위해 만든 가상의 내용입니다. · 처리한 문제: <b>${n}</b> / 4</p>
     <div id="code-area"></div>`;
-  body.querySelectorAll('.pick-tool button').forEach(b => b.onclick = () => { L.tool = b.dataset.k; fixLine(+b.dataset.i, b.closest('.dline')); });
+  body.querySelectorAll('.tool').forEach(t => t.onclick = () => { sfx.click(); L.tool = t.dataset.k; body.querySelectorAll('.tool').forEach(x => x.classList.toggle('on', x === t)); });
+  body.querySelectorAll('.bad-seg').forEach(b => b.onclick = () => {
+    if (!L.tool) { toast('먼저 위에서 도구를 골라 주세요 👆'); shakeEl($('.tools')); return; }
+    fixLine(+b.dataset.i, b.closest('.dline'));
+  });
   if (L.sub === 'code') renderCode();
 }
 function fixLine(i, d) {
@@ -1405,10 +1407,11 @@ function mirandaSay(t) { const b = $('#m-say'); if (b) b.textContent = '“' + t
 function startRound(i) {
   if (!S.running || S.boss <= 0) return;
   const r = REPORTS[i % REPORTS.length];
-  S.round = i; S.roundData = r; S.answered = false; S.roundEnd = Date.now() + ROUND_TIME * 1000;
+  S.round = i; S.roundData = r; S.answered = false;
   const me = $('.fighter.me'); if (me) { me.classList.remove('walk-in', 'step'); void me.offsetWidth; me.classList.add('step'); }
   $('#wave-name').textContent = (i >= REPORTS.length ? '추가 보고 · ' : `보고 ${i + 1} · `) + r.title;
-  $('#wave-no').textContent = `제한 ${ROUND_TIME}초 · ${r.type === 'ox' ? 'OX 퀴즈' : '보고 방식을 고르세요'}`;
+  $('#wave-no').textContent = r.type === 'ox' ? 'OX 퀴즈' : '보고 방식을 고르세요';
+  const bar = $('#wave-bar'); if (bar) bar.style.width = Math.round((i % REPORTS.length) / REPORTS.length * 100) + '%';
   $('#ask').innerHTML = `<span class="q-who">미란다</span>${r.ask}`;
   $('#fb').innerHTML = ''; $('#fb').className = 'feedback';
   mirandaSay(r.type === 'ox' ? 'O야, X야? 빨리.' : '…그래서?');
@@ -1448,26 +1451,12 @@ function answer(btn) {
   fb.className = 'feedback ' + (kind === 'bad' ? 'bad' : kind === 'good' ? 'meh' : 'good');
   if (S.running && S.boss > 0) later(() => startRound(S.round + 1), 2300);
 }
-function roundTimeout() {
-  if (S.answered || !S.roundData) return;
-  S.answered = true;
-  const r = S.roundData;
-  $('#opts').querySelectorAll('.ropt').forEach(b => b.disabled = true);
-  const right = r.type === 'ox' ? $('#opts').querySelector(`[data-v="${r.answer}"]`) : $('#opts').querySelector(`[data-k="${r.opts.findIndex(x => x.g === 'best')}"]`);
-  if (right) right.classList.add('right');
-  $('#fb').className = 'feedback bad';
-  $('#fb').innerHTML = `<b>⏰ 시간 초과 · 멘탈 -${DMG.timeout}</b><span>${r.type === 'ox' ? r.why : r.opts.find(x => x.g === 'best').why}</span>`;
-  damageMe(DMG.timeout, `⏰ 보고가 늦었어요! (멘탈 -${DMG.timeout})`);
-  mirandaSay('시간 끝. 다음.');
-  if (S.running) later(() => startRound(S.round + 1), 2300);
-}
 /* 보스전부터 다시 도전 (잠금 1~3은 이미 푼 상태로 시작) */
 function retryBoss() {
   cancelAutoHome();
   document.querySelectorAll('.confetti').forEach(c => c.remove());
   S.runId++; S.running = true; S.hp = 100; S.combo = 0;
   S.boss = S.bossEntry ? S.bossEntry.boss : 55;
-  S.deadline = Date.now() + CONFIG.bossRetrySeconds * 1000; S.timeLeft = CONFIG.bossRetrySeconds;
   S.coffeeReadyAt = 0; S.roundData = null; S.answered = false; S.phase = 'boss';
   showScreen('game'); renderHUD(); startTimer(); sfx.boss();
   renderBoss(); later(() => startRound(0), 1300);
@@ -1483,7 +1472,8 @@ function startAutoHome(elId) {
   cancelAutoHome();
   let n = CONFIG.autoHomeSeconds;
   const el = $('#' + elId);
-  const draw = () => { if (el) el.innerHTML = `⏱ <b>${n}초</b> 후 홈페이지로 돌아갑니다 <button class="ah-stop">여기 머무르기</button>`; if (el) el.querySelector('.ah-stop').onclick = cancelAutoHome; };
+  const msg = elId === 'ah-win' ? '🔐 비밀번호를 지금 확인하세요!' : '다음 참가자를 위해 화면이 닫혀요';
+  const draw = () => { if (el) el.innerHTML = `<span class="ah-msg">${msg}</span><span class="ah-count"><b>${n}</b>초 후 화면이 닫힙니다</span><i class="ah-bar" style="width:${n / CONFIG.autoHomeSeconds * 100}%"></i>`; };
   draw();
   autoHomeTimer = setInterval(() => { n--; if (n <= 0) { cancelAutoHome(); goSite(); } else draw(); }, 1000);
 }
@@ -1501,7 +1491,7 @@ function endRun() {
 function gameOver(reason) {
   if (!S.running) return;
   endRun();
-  $('#fail-title').textContent = reason === 'time' ? 'TIME OVER' : '멘탈 붕괴';
+  $('#fail-title').textContent = '멘탈 붕괴';
   $('#fail-chars').innerHTML = `<div>${spr(meName())}</div><div class="mir">${mirandaSpr(true)}</div>`;
   $('#fail-quote').textContent = reason === 'time' ? '“18시 정각. 자네는 아직 내 사무실에 있군. 내일도 출근하게.”' : '“그 정도로 무너지다니. 내일 아침 7시에 다시 보지.”';
   const where = S.phase === 'boss' ? '보스전' : ['', '잠금 1', '잠금 2', '잠금 3', '출구 앞'][goal()];
@@ -1518,8 +1508,8 @@ function win() {
   $('#bigcode').innerHTML = `<div class="n">${CONFIG.code[0]}</div><span class="sl">/</span><div class="n">${CONFIG.code[1]}</div><span class="sl">/</span><div class="n">${CONFIG.code[2]}</div>`;
   renderCredits();
   stat('rw_wins');
-  try { if (S.timeLeft > +(localStorage.getItem('rw_best') || 0)) stat('rw_best', S.timeLeft); } catch (e) {}
-  $('#win-stats').textContent =`남은 시간 ${fmt(S.timeLeft)} · 내 멘탈 ${S.hp} · 실수 ${S.mistakes}회 · 힌트 ${S.hintsUsed}회`;
+  try { const b = +(localStorage.getItem('rw_best') || 0); if (!b || S.timeLeft < b) stat('rw_best', S.timeLeft); } catch (e) {}
+  $('#win-stats').textContent =`플레이 시간 ${fmt(S.timeLeft)} · 내 멘탈 ${S.hp} · 실수 ${S.mistakes}회 · 힌트 ${S.hintsUsed}회`;
   showScreen('win'); sfx.win(); startAutoHome('ah-win');
   const colors = ['#c8102e', '#3f7fd9', '#c99a3b', '#f7d3da', '#1d1a1c'];
   for (let i = 0; i < 90; i++) {
@@ -1563,35 +1553,33 @@ function hintKey() {
 function openHint() {
   if (!S.running || !$('#intro').classList.contains('hidden')) return;
   const key = hintKey();
-  S.deadline -= CONFIG.hintCost * 1000; S.hintsUsed++; tick();
-  floatText('-' + CONFIG.hintCost + '초', 40, 70, '#c8102e'); sfx.bad();
-  openModal('💡 HINT', `<p class="note" style="margin-top:0">남은 시간 -${CONFIG.hintCost}초</p><div class="hint-box">${HINTS[key]}</div>
+  S.hp = Math.max(1, S.hp - CONFIG.hintCost); S.hintsUsed++; renderHUD();
+  floatText('멘탈 -' + CONFIG.hintCost, 40, 70, '#c8102e'); sfx.bad();
+  openModal('💡 HINT', `<p class="note" style="margin-top:0">힌트 사용 · 멘탈 -${CONFIG.hintCost}</p><div class="hint-box">${HINTS[key]}</div>
     <p style="margin-top:16px"><button class="btn btn-red" id="hint-art">📰 관련 기사 열기</button></p>`);
   $('#hint-art').onclick = () => openArticles(articleForNow());
 }
 function openHowto() {
   sfx.click();
   openModal('HOW TO PLAY', `<div class="hint-box" style="font-size:16px">
-    <p>⏱ 제한 시간은 <b>180초</b>. 게임 시작을 누르면 시계가 움직여요.</p>
+    <p>❤️ <b>시간제한은 없어요!</b> 대신 <b>멘탈</b>이 0이 되면 실패예요. 멘탈을 지키며 끝까지 가 보세요.</p>
     <p>🏢 미란다의 사무실에서 <b>반짝이는 물건</b>을 눌러 조사하세요. (아래 버튼 목록으로 눌러도 돼요)</p>
     <p>🔓 <b>서류함 → 컴퓨터 → 검수 데스크</b> 순서로 잠금을 풀면 금고 숫자와 아이템을 얻어요. 단서는 모두 <b>📰 신문기사</b>에 있어요.</p>
     <p>👑 마지막으로 <b>출구</b>를 누르면 <b>미란다에게 보고</b>하러 가요. 질문마다 <b>가장 좋은 보고</b>를 고르고, <b>OX 퀴즈</b>도 풀어요. 답에 따라 데미지가 달라져요!</p>
     <p>☕ 멘탈이 낮아지면 <b>커피</b>를 마셔요. 커피는 <b>${CONFIG.coffeeRecharge}초</b>마다 다시 채워져요. 보스전에서 지면 <b>보스전부터 다시</b> 할 수 있어요.</p>
     <p>❤️ 실수하면 <b>내 멘탈</b>이 줄고, 잘 처리하면 <b>미란다 HP</b>가 줄어요. 실수해도 처음으로 돌아가진 않아요!</p>
-    <p>💡 <b>힌트</b>는 기사 속 찾을 곳을 알려 주지만 <b>시간이 10초</b> 줄어요. 🔥 연속 성공하면 <b>COMBO</b>!</p>
-    <p>💀 시간이 다 되거나 멘탈이 0이 되면 실패. 언제든 다시 도전할 수 있어요.</p></div>`);
+    <p>💡 <b>힌트</b>는 기사 속 찾을 곳을 알려 주지만 <b>멘탈이 5</b> 줄어요. 🔥 연속 성공하면 <b>COMBO</b>!</p>
+    <p>💀 멘탈이 0이 되면 실패. 언제든 다시 도전할 수 있어요.</p></div>`);
 }
 
 /* ---------- 버튼 연결 ---------- */
 function renderPicks() {
-  $('#pv-f').innerHTML = spr('fem'); $('#pv-m').innerHTML = spr('male');
   $('#hero').innerHTML = `<div class="clock">17:57</div><div class="who">${spr(meName())}</div><div class="who big">${mirandaSpr(false)}</div>`;
   $('#face-me').innerHTML = headOnly(meName()); $('#face-mir').innerHTML = headOnly('miranda');
 }
 document.querySelectorAll('.pick-card').forEach(c => c.onclick = () => {
-  GENDER = c.dataset.g; sfx.click();
-  document.querySelectorAll('.pick-card').forEach(x => x.classList.toggle('on', x === c));
-  renderPicks();
+  if (c.dataset.np === 'past') { sfx.bad(); toast('📜 과거 신문 버전은 곧 공개돼요! (COMING SOON)'); return; }
+  sfx.click();
 });
 $('#btn-start').onclick = startGame;
 $('#btn-howto').onclick = openHowto;
@@ -1610,16 +1598,6 @@ $('#cu-hint').onclick = openHint;
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 $('#cu-body').addEventListener('click', e => { const a = e.target.closest('.alink'); if (a) openArticles(+a.dataset.art); });
 
-/* ---------- 📰 옛날 신문 버전 (노란 필터) — 홈페이지에서 고른 값과 같이 움직여요 ---------- */
-function getPaper() { try { return localStorage.getItem('rw_paper') || 'new'; } catch (e) { return 'new'; } }
-function applyPaper(v) {
-  document.body.classList.toggle('old-paper', v === 'old');
-  document.querySelectorAll('[data-paper]').forEach(b => b.classList.toggle('on', b.dataset.paper === v));
-}
-document.querySelectorAll('[data-paper]').forEach(b => b.onclick = () => { try { localStorage.setItem('rw_paper', b.dataset.paper); } catch (e) {} applyPaper(b.dataset.paper); sfx.click(); });
-window.addEventListener('storage', e => { if (e.key === 'rw_paper') applyPaper(getPaper()); });
-applyPaper(getPaper());
-
 /* ---------- 자리를 비우면 홈페이지로 (시작 화면에서 아무 조작이 없을 때) ---------- */
 let lastAct = Date.now();
 ['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, () => {
@@ -1629,6 +1607,7 @@ let lastAct = Date.now();
 setInterval(() => {
   const onStart = $('#scr-start').classList.contains('active') && !S.running;
   if (onStart && Date.now() - lastAct > CONFIG.idleSeconds * 1000) { lastAct = Date.now(); goSite(); }
+  if (S.running && Date.now() - lastAct > CONFIG.playIdleSeconds * 1000) { lastAct = Date.now(); goSite(); }
 }, 1000);
 
 resetState(); renderPicks(); renderHUD();
