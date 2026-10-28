@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>런웨이 | RUNWAY 공식 홈페이지</title>
-<meta name="description" content="영화 《악마는 프라다를 입는다 2》에서 영감을 받은 전시용 가상 홈페이지 · 악프다 2: 퇴근까지 180초">
+<meta name="description" content="영화 《악마는 프라다를 입는다 2》에서 영감을 받은 전시용 가상 홈페이지 · 악프다 2: 미란다의 비서">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;600;900&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 <style>
@@ -612,10 +612,6 @@ footer a:hover,footer button:hover{color:#fff}
 /* =========================================================
    ✨ 수정사항: 신문 버전 · 플레이 버튼 · 메인 문구 · 게임 전체 화면
    ========================================================= */
-/* 신문 버전 선택 (헤더) */
-.paper-sw{display:flex;border:1.5px solid var(--ink);margin-right:6px}
-.paper-sw button{padding:7px 12px;font:700 12.5px var(--sans);color:var(--grey)}
-.paper-sw button.on{background:var(--ink);color:#fff}
 /* 메뉴 속 플레이 버튼 */
 nav.gnb a.nav-play{background:var(--red);color:#fff;padding:8px 16px 9px;margin:4px 0;border-radius:999px;display:flex;align-items:center;gap:8px}
 nav.gnb a.nav-play::after{display:none}
@@ -632,7 +628,7 @@ nav.gnb a.nav-play.on{color:#fff}
 .hero .b{align-items:center}
 /* 메인 문구: 특징 + 상품 */
 .feat-list{list-style:none;margin:0 0 18px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.feat-list li{border:1px solid var(--line);padding:10px 14px;background:#fff}
+.feat-list li{border:1px solid var(--line);padding:10px 14px;background:var(--bg)}
 .feat-list b{display:block;font-size:15px}
 .feat-list span{font-size:13px;color:var(--grey)}
 .prize{display:flex;gap:14px;align-items:center;background:#141414;color:#fff;padding:16px 18px;margin:0 0 24px;border-left:5px solid var(--red)}
@@ -648,20 +644,14 @@ nav.gnb a.nav-play.on{color:#fff}
 body.in-game .fab-play,body.in-game .totop{display:none}
 /* 게임: 새 창 없이 바로 전체 화면 */
 body.in-game{overflow:hidden}
-.game-full{position:fixed;inset:0;z-index:150;background:#fff;display:flex;flex-direction:column}
+.game-full{position:fixed;inset:0;z-index:150;background:#141414;display:flex;flex-direction:column}
 .gf-bar{display:flex;align-items:center;gap:14px;background:#141414;color:#fff;padding:8px 14px;font-size:13px;flex-wrap:wrap}
 .gf-home{border:1px solid #555;padding:5px 12px;font-weight:700}
 .gf-home:hover{background:#fff;color:#141414}
 .gf-bar b{font:900 15px var(--kserif)}
 .gf-rec{margin-left:auto;color:#a8a29d}
 .game-full iframe{flex:1;width:100%;border:0;display:block}
-/* 옛날 신문 버전: 노란 필터 */
-body.old-paper::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;background:radial-gradient(ellipse at center,rgba(240,200,90,.14),rgba(150,100,30,.30));mix-blend-mode:multiply}
-body.old-paper{--bg:#fbf4e2;--card:#fdf7e8;--soft:#f3e8cc;--newsprint:#ecdcb2}
-body.old-paper img{filter:sepia(.45) saturate(.85)}
-body.old-paper .paper,body.old-paper .clip{font-family:'Batang','Noto Serif KR',serif}
 @media (max-width:960px){
-  .paper-sw button{padding:6px 8px;font-size:11.5px}
   nav.gnb a.nav-play{margin:8px 24px;justify-content:center}
 }
 @media (max-width:600px){
@@ -670,8 +660,6 @@ body.old-paper .paper,body.old-paper .clip{font-family:'Batang','Noto Serif KR',
   .fab-play b{display:none}.fab-play{padding:8px}
   .gf-rec{display:none}
   .logo{font-size:26px}
-  .paper-sw{margin-right:2px}
-  .paper-sw button{padding:5px 6px;font-size:11px}
   #btn-search{display:none}
 }
 </style>
@@ -697,7 +685,7 @@ body.old-paper .paper,body.old-paper .clip{font-family:'Batang','Noto Serif KR',
       <button class="ib" id="btn-search" aria-label="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
     </div>
     <a class="logo" id="logo" href="#/">RUNWAY<small>런웨이 · ELIAS-CLARKE</small></a>
-    <div class="hd-r"><div class="paper-sw" role="group" aria-label="신문 버전 선택"><button data-paper="new" title="현재 신문">현재</button><button data-paper="old" title="옛날 신문 (노란 필터)">옛날</button></div><span id="hd-r"></span></div>
+    <div class="hd-r"><button class="ib" id="theme" aria-label="밝은/어두운 화면 바꾸기" title="밝은 화면 ↔ 어두운 화면"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></svg></button><span id="hd-r"></span></div>
   </div>
   <nav class="gnb" id="gnb"><ul>
     <li><a href="#/" data-nav="">홈</a></li>
@@ -956,13 +944,13 @@ function toon(o) {
 let AD_LEN = 24000;
 const SCENES = [
   { id:'clock', s:0,     e:2600,  sub:'오후 5시 57분.',                         say:'오후 다섯 시 오십칠 분.' },
-  { id:'heels', s:2600,  e:5400,  sub:'그녀가 돌아오기까지, 남은 시간은 단 3분.', say:'그녀가 돌아오기까지, 남은 시간은 단 삼 분.' },
+  { id:'heels', s:2600,  e:5400,  sub:'그녀가 돌아오기 전에, 모든 업무를 끝내야 한다.', say:'그녀가 돌아오기 전에, 모든 업무를 끝내야 한다.' },
   { id:'phone', s:5400,  e:7800,  sub:'쉴 새 없이 울리는 전화.',                 say:'쉴 새 없이 울리는 전화.' },
   { id:'keys',  s:7800,  e:10600, sub:'AI에게 일을 맡기는 시대.',                say:'에이아이에게 일을 맡기는 시대.' },
   { id:'paper', s:10600, e:13400, sub:'하지만, 답을 의심하는 사람만이 살아남는다.', say:'하지만, 답을 의심하는 사람만이 살아남는다.' },
   { id:'door',  s:13400, e:15800, sub:'“그게 최선인가?”',                        say:'그게, 최선인가?' },
   { id:'safe',  s:15800, e:19000, sub:'세 개의 잠금장치. 단 하나의 비밀번호.',     say:'세 개의 잠금장치. 단 하나의 비밀번호.' },
-  { id:'title', s:19000, e:24000, sub:'',                                       say:'악프다 투. 퇴근까지 백팔십 초.' }
+  { id:'title', s:19000, e:24000, sub:'',                                       say:'악프다 투. 미란다의 비서.' }
 ];
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 const ease = x => x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
@@ -1119,7 +1107,7 @@ const SC = {
     html: () => film(`<rect width="1600" height="900" fill="#050304"/><rect width="1600" height="900" fill="url(#tgG)"/><g class="cam">
       <rect class="ln" x="800" y="318" width="0" height="2" fill="#7a1124"/>
       <text class="t1" x="800" y="468" text-anchor="middle" ${KR} font-weight="900" font-size="150" fill="#f4f1ec" opacity="0">악프다 2</text>
-      <text class="t2" x="800" y="560" text-anchor="middle" ${KR} font-weight="600" font-size="62" letter-spacing="8" fill="#c8102e" opacity="0">퇴근까지 180초</text>
+      <text class="t2" x="800" y="560" text-anchor="middle" ${KR} font-weight="600" font-size="62" letter-spacing="8" fill="#c8102e" opacity="0">미란다의 비서</text>
       <text class="t3" x="800" y="638" text-anchor="middle" ${KS} font-size="28" fill="#bdb5ad" opacity="0">AI 시대, 당신은 끝까지 판단할 수 있는가</text>
       <text class="t4" x="800" y="770" text-anchor="middle" ${KS} font-size="18" fill="#7a726b" opacity="0">팬메이드 게임 홍보 영상 · 실제 영화 및 제작사와 관련이 없습니다</text></g>`,
       `<radialGradient id="tgG" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#3a0b16" stop-opacity=".8"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>`),
@@ -1280,8 +1268,8 @@ function pHome() {
   <section class="hero"><div class="wrap hero-grid">
     <div class="hero-tx fade">
       <div class="eyebrow">전시 특별 체험 · 방탈출 게임</div>
-      <h1>180초 안에<br><em>미란다의 사무실</em>을 탈출하라</h1>
-      <p class="dek"><b>악프다 2: 퇴근까지 180초</b> — 신문기사 속 단서로 잠금장치를 풀고, 편집장 미란다에게 보고까지 마치면 퇴근할 수 있어요.</p>
+      <h1>미란다의 비서가 되어<br><em>편집장실</em>을 탈출하라</h1>
+      <p class="dek"><b>악프다 2: 미란다의 비서</b> — 시간제한은 없어요. 대신 <b>멘탈</b>을 지키며 신문기사 속 단서로 잠금장치를 풀고, 편집장 미란다에게 보고까지 마치면 퇴근할 수 있어요.</p>
       <ul class="feat-list">
         <li><b>📰 신문기사 단서</b><span>기사 속에 정답이 숨어 있어요</span></li>
         <li><b>🔐 잠금장치 3개</b><span>업무 분배 · 프롬프트 · 팩트체크</span></li>
@@ -1289,13 +1277,13 @@ function pHome() {
         <li><b>☕ 커피 한 잔</b><span>멘탈이 흔들리면 충전!</span></li>
       </ul>
       <div class="prize"><span class="prize-ic">🎁</span><div><b>탈출 성공 시 금고 비밀번호 공개!</b><span>획득한 비밀번호로 전시장 금고를 열고 <em>상품</em>을 받아 가세요.</span></div></div>
-      <div class="b"><a class="btn-play" href="#/game"><span class="pi">▶</span><span><b>지금 바로 플레이</b><small>약 3분 · 누구나 참여 가능</small></span></a><a class="btn btn-out" href="#/careers/secretary">미란다의 비서 채용</a></div>
+      <div class="b"><a class="btn-play" href="#/game"><span class="pi">▶</span><span><b>지금 바로 플레이</b><small>약 10분 · 시간제한 없음 · 누구나 참여 가능</small></span></a><a class="btn btn-out" href="#/careers/secretary">미란다의 비서 채용</a></div>
     </div>
     <div class="stage" id="hero-stage" aria-label="악프다 2 홍보 영상"></div>
   </div></section>
 
   <nav class="quick wrap" aria-label="바로가기">
-    <a class="qk" href="#/game"><b>게임 하기</b><span>퇴근까지 180초, 편집장실 탈출</span></a>
+    <a class="qk" href="#/game"><b>게임 하기</b><span>미란다의 비서, 편집장실 탈출</span></a>
     <a class="qk" href="#/careers/secretary"><b>미란다의 비서</b><span>편집장 비서 채용 · 적성 테스트</span></a>
     <a class="qk" href="#/press"><b>언론 보도</b><span>뉴욕 미러가 다룬 AI 시대의 비서</span></a>
     <a class="qk" href="#/about"><b>회사 소개</b><span>편집장 인사말 · 조직도</span></a>
@@ -1436,7 +1424,7 @@ function jdSide(j) {
   const sec = j.id === 'secretary';
   return `<aside class="jd-side"><div class="eyebrow">채용 정보</div><h4 style="font:900 19px/1.45 var(--kserif);margin:8px 0 0">${j.title}</h4>
     <dl><dt>부서</dt><dd>${j.dept}</dd><dt>고용</dt><dd>${j.tags.join(' · ')}</dd><dt>근무지</dt><dd>뉴욕 본사</dd><dt>마감</dt><dd>편집장이 정할 때까지</dd></dl>
-    ${sec ? `<a class="btn btn-red" style="width:100%" href="#/game">▶ 실무 테스트(게임) 응시</a><p class="muted" style="font-size:13px;margin:10px 0 0">편집장 비서 지원자는 <b>악프다 2: 퇴근까지 180초</b>를 통과해야 해요.</p>`
+    ${sec ? `<a class="btn btn-red" style="width:100%" href="#/game">▶ 실무 테스트(게임) 응시</a><p class="muted" style="font-size:13px;margin:10px 0 0">편집장 비서 지원자는 <b>악프다 2: 미란다의 비서</b>를 통과해야 해요.</p>`
           : `<button class="btn btn-red" style="width:100%" onclick="document.getElementById('fit').scrollIntoView({behavior:'smooth'})">적합도 테스트 하기 ↓</button>`}
     <button class="btn btn-out" style="width:100%;margin-top:8px" id="share-job">공고 링크 복사</button></aside>`;
 }
@@ -1514,7 +1502,7 @@ function pSecretary() {
         <details><summary>AI가 비서 일을 다 하면, 비서는 필요 없지 않나요?</summary><p>AI는 반복적인 행정 업무를 빠르게 처리하지만, 맥락 이해·감정 조율·돌발 상황 대응·AI 결과물 검토는 사람의 몫입니다. 비서직은 사라지는 것이 아니라 ‘역할이 바뀌는 과정’에 있습니다.</p></details>
         <details><summary>코딩을 할 줄 알아야 하나요?</summary><p>아니요. 대신 AI에게 정확하게 일을 시키는 프롬프트 작성 능력(역할·배경·지시·제약·출력 형식)과 결과를 검증하는 안목이 필요합니다.</p></details>
         <details><summary>편집장은 정말 무섭나요?</summary><p>답변을 거부합니다. (이 질문은 기록되었습니다.)</p></details>
-        <details><summary>퇴근은 몇 시인가요?</summary><p>공식적으로는 18:00입니다. 단, 그 전에 <a class="lnk" href="#/game">180초 안에 모든 업무를 끝낼 수 있다면</a>요.</p></details>
+        <details><summary>퇴근은 몇 시인가요?</summary><p>공식적으로는 18:00입니다. 단, 그 전에 <a class="lnk" href="#/game">멘탈을 지키며 모든 업무를 끝낼 수 있다면</a>요.</p></details>
       </div>
     </div>
     ${jdSide(j)}
@@ -1525,7 +1513,7 @@ function pSecretary() {
 function pGame() {
   const plays = +(store.raw('rw_plays') || 0), wins = +(store.raw('rw_wins') || 0), best = +(store.raw('rw_best') || 0);
   return `<div class="game-full">
-    <div class="gf-bar"><a class="gf-home" href="#/">← 홈페이지</a><b>악프다 2: 퇴근까지 180초</b><span class="gf-rec">플레이 ${plays}회 · 탈출 ${wins}회${best ? ' · 최고 기록 ' + Math.floor(best / 60) + ':' + String(best % 60).padStart(2, '0') : ''}</span></div>
+    <div class="gf-bar"><a class="gf-home" href="#/">← 홈페이지</a><b>악프다 2: 미란다의 비서</b><span class="gf-rec">플레이 ${plays}회 · 탈출 ${wins}회${best ? ' · 최단 기록 ' + Math.floor(best / 60) + ':' + String(best % 60).padStart(2, '0') : ''}</span></div>
     <iframe src="game/" title="악프다 2 게임" allow="autoplay; fullscreen"></iframe>
   </div>`;
 }
@@ -1724,7 +1712,7 @@ function openSearch() {
   openModal(`<div class="search-box"><input id="sq" placeholder="무엇을 찾으세요?" aria-label="검색"><div class="sr" id="sr"><p class="muted" style="margin-top:14px">추천 검색어: 비서 · 프롬프트 · 미란다 · 앤디 · 세룰리안 · 게임</p></div></div>`, 'wide');
   const idx = [...ARTICLES.map(a => ({ t: a.title, s: '언론 보도 · ' + a.sub, h: '#/press/' + a.id, x: a.body.join(' ') })), ...JOBS.map(j => ({ t: j.title, s: '채용 · ' + j.dept, h: '#/careers/' + j.id, x: j.short })),
     ...STORIES.map((s, i) => ({ t: s.title, s: '매거진 · ' + s.tag, js: i, x: s.lead })), ...CAST.map(c => ({ t: c.name, s: '런웨이 사람들 · ' + c.role, h: '#/about', x: c.desc })),
-    { t: '악프다 2: 퇴근까지 180초', s: '게임', h: '#/game', x: '게임 방탈출 미란다' }, { t: '편집장 인사말 · 조직도', s: '회사 소개', h: '#/about', x: '미란다 편집장 인사말 조직도' }];
+    { t: '악프다 2: 미란다의 비서', s: '게임', h: '#/game', x: '게임 방탈출 미란다' }, { t: '편집장 인사말 · 조직도', s: '회사 소개', h: '#/about', x: '미란다 편집장 인사말 조직도' }];
   $('#sq').oninput = () => {
     const q = $('#sq').value.trim(); if (!q) return;
     const r = idx.filter(i => (i.t + i.s + i.x).includes(q));
@@ -1795,20 +1783,9 @@ function tickClocks() {
   const lh = $('#left-home'); if (lh) { const n = new Date(), end = new Date(n); end.setHours(18, 0, 0, 0); const m = Math.round((end - n) / 60000); lh.textContent = m > 0 ? `${Math.floor(m / 60)}시간 ${m % 60}분` : '야근 중'; }
 }
 setInterval(tickClocks, 15000);
-document.documentElement.dataset.theme = 'light';
-
-/* ---------- 📰 신문 버전: 현재 / 옛날 (옛날은 노란 필터 · 게임에도 똑같이 적용) ---------- */
-function getPaper() { try { return localStorage.getItem('rw_paper') || 'new'; } catch (e) { return 'new'; } }
-function applyPaper(v) {
-  document.body.classList.toggle('old-paper', v === 'old');
-  $$('.paper-sw [data-paper]').forEach(b => b.classList.toggle('on', b.dataset.paper === v));
-}
-$$('.paper-sw [data-paper]').forEach(b => b.onclick = () => {
-  try { localStorage.setItem('rw_paper', b.dataset.paper); } catch (e) {}
-  applyPaper(b.dataset.paper); toast(b.dataset.paper === 'old' ? '📜 옛날 신문 버전으로 바꿨어요.' : '📰 현재 신문 버전으로 바꿨어요.');
-});
-window.addEventListener('storage', e => { if (e.key === 'rw_paper') applyPaper(getPaper()); });
-applyPaper(getPaper());
+function setTheme(t) { document.documentElement.dataset.theme = t; store.set('rw_theme', t); }
+setTheme(store.get('rw_theme', 'light'));
+$('#theme').onclick = () => { setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'); toast(document.documentElement.dataset.theme === 'dark' ? '어두운 화면으로 바꿨어요.' : '밝은 화면으로 바꿨어요.'); };
 
 /* ---------- ⏱ 자리를 비우면 홈으로 (IDLE_SECONDS 동안 아무 조작이 없을 때) ---------- */
 const IDLE_SECONDS = 60;
