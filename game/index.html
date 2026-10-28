@@ -405,6 +405,113 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
 .intro-box .say{color:var(--ink);font-size:17px;margin:12px 0}
 .intro-box p{color:#f3dfe3}
 
+/* =========================================================
+   ✨ 수정사항 디자인 (커피 · 창밖 시간대 · 신문 · 문서 검증 · 보스 보고)
+   ========================================================= */
+/* 창밖: 낮 → 초저녁 → 저녁 */
+.window{transition:background 2s}
+.window .sun{transition:top 3s ease,left 3s ease,background 2s,width 2s}
+.window .stars,.window .lights{position:absolute;inset:0;opacity:0;transition:opacity 2s;pointer-events:none}
+.window .stars{background:radial-gradient(1.5px 1.5px at 12% 18%,#fff,transparent),radial-gradient(1.5px 1.5px at 30% 10%,#fff,transparent),radial-gradient(1px 1px at 46% 26%,#fff,transparent),radial-gradient(1.5px 1.5px at 70% 14%,#fff,transparent),radial-gradient(1px 1px at 86% 30%,#fff,transparent),radial-gradient(1px 1px at 58% 8%,#fff,transparent)}
+.window .lights{top:auto;height:46%;z-index:1;background:radial-gradient(2px 2px at 8% 60%,#ffe08a,transparent),radial-gradient(2px 2px at 19% 40%,#ffe08a,transparent),radial-gradient(2px 2px at 31% 70%,#ffe08a,transparent),radial-gradient(2px 2px at 44% 30%,#ffe08a,transparent),radial-gradient(2px 2px at 58% 55%,#ffe08a,transparent),radial-gradient(2px 2px at 73% 45%,#ffe08a,transparent),radial-gradient(2px 2px at 88% 35%,#ffe08a,transparent),radial-gradient(2px 2px at 92% 70%,#ffe08a,transparent)}
+.window.day{background:linear-gradient(#78b2ee,#cfe4fb 60%,#eef6ff)}
+.window.day .sun{top:14%;left:66%;background:#ffd34d;box-shadow:0 0 18px #ffe58a}
+.window.dusk{background:linear-gradient(#f0745a,#ffb27a 55%,#ffe0bd)}
+.window.dusk .sun{top:52%;left:58%;background:#ff5a3a;box-shadow:0 0 20px #ff8a5c}
+.window.night{background:linear-gradient(#0d1636,#232c58 60%,#3d3f72)}
+.window.night .sun{top:10%;left:16%;width:12%;background:#f4f0cf;box-shadow:0 0 14px #fffbe0}
+.window.night .stars,.window.night .lights{opacity:1}
+.window.night .city{filter:brightness(.45)}
+.window.dusk .city{filter:brightness(.8) saturate(.9)}
+
+/* 커피: 글씨 없이 알아보기 쉽게 + 충전 게이지 */
+.obj-coffee .spr{filter:drop-shadow(0 3px 0 rgba(0,0,0,.15))}
+.obj-coffee:not(.ready) .spr{opacity:.45;filter:grayscale(.6)}
+.cf-ring{position:absolute;left:50%;top:50%;width:150%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+  background:conic-gradient(#2e9a5a calc(var(--p,100)*1%),rgba(0,0,0,.14) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px))}
+.ready .cf-ring{opacity:0}
+.need .cf-ring{opacity:1;animation:cfPulse 1s infinite}
+@keyframes cfPulse{50%{transform:translate(-50%,-50%) scale(1.15)}}
+.steam{position:absolute;left:18%;right:18%;bottom:88%;height:70%;display:flex;justify-content:space-around;pointer-events:none;opacity:0}
+.ready .steam{opacity:1}
+.steam i{display:block;width:12%;height:100%;border-radius:99px;background:linear-gradient(transparent,rgba(160,150,170,.75));animation:steam 1.8s ease-in-out infinite}
+.steam i:nth-child(2){animation-delay:.5s}.steam i:nth-child(3){animation-delay:1s}
+@keyframes steam{0%{transform:translateY(30%) scaleY(.6);opacity:0}40%{opacity:1}100%{transform:translateY(-40%) scaleY(1);opacity:0}}
+.cf-badge{position:absolute;right:-30%;top:-30%;background:#2e9a5a;color:#fff;font:900 clamp(8px,1vw,12px) var(--sans);padding:1px 5px;border-radius:99px;opacity:0;pointer-events:none}
+.need .cf-badge{opacity:1}
+.obj-coffee.need::before{content:"☕ 마셔요!";position:absolute;left:50%;bottom:150%;transform:translateX(-50%);white-space:nowrap;background:#2e9a5a;color:#fff;font:900 clamp(9px,1.2vw,13px) var(--sans);padding:2px 8px;border-radius:99px;animation:bounce .8s infinite}
+/* 신문 더미: 반짝임 */
+.obj-news .spr{filter:drop-shadow(0 3px 0 rgba(0,0,0,.15))}
+.news-glint{position:absolute;right:-6%;top:-26%;color:var(--gold);font-size:clamp(10px,1.8vw,20px);animation:glintA 1.6s ease-in-out infinite;pointer-events:none}
+@keyframes glintA{0%,100%{opacity:.2;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(20deg)}}
+
+/* 신문 머리글 (발행일) */
+.np-mast{display:flex;flex-direction:column;align-items:center;border-top:3px double var(--ink);border-bottom:3px double var(--ink);padding:6px 0;margin-bottom:12px}
+.np-mast b{font:900 26px var(--kserif);letter-spacing:.1em}
+.np-mast span{font:700 12.5px var(--sans);color:var(--red);letter-spacing:.06em}
+
+/* AI 문서작성기 빈칸 예시 */
+.pslot .val .ex{font-style:normal;color:#9fb0d8}
+.pslot .val .here{color:#ffd166;margin-left:6px}
+
+/* 문서 검증: 빨간 글씨 + 도구만 고르기 */
+.dline.risk{cursor:default;background:#fff5f6;border-left:4px solid var(--red);margin:6px 0;padding-bottom:10px}
+.dline.risk:hover{background:#fff5f6}
+.bad-txt{color:var(--red);font-weight:700;text-decoration:underline wavy rgba(200,16,46,.5);text-underline-offset:4px}
+.pick-tool{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.pick-tool button{min-height:44px;border:2px solid var(--ink);border-radius:10px;background:#fff;font:700 13px var(--sans);display:flex;align-items:center;justify-content:center;gap:4px}
+.pick-tool button:hover{background:var(--ink);color:#fff}
+.pick-tool span{font-size:16px}
+
+/* 보스전: 미란다에게 보고하기 */
+.fighter.me.walk-in{animation:walkIn 1.2s ease-out both}
+@keyframes walkIn{from{transform:translateX(-60%);opacity:0}to{transform:none;opacity:1}}
+.fighter.me.step{animation:stepUp .5s ease-out}
+@keyframes stepUp{40%{transform:translateX(18%)}100%{transform:none}}
+.fighter .doc{position:absolute;right:-6%;top:42%;font-size:clamp(16px,3vw,28px);animation:bounce 1s infinite}
+.ask{background:var(--ivory);border:2px solid var(--ink);border-radius:14px;padding:12px 16px;font:600 clamp(15px,2vw,18px)/1.6 var(--kserif);margin-bottom:12px}
+.ask .q-who{display:inline-block;background:var(--ink);color:#fff;font:900 11px var(--sans);letter-spacing:.1em;padding:2px 8px;border-radius:99px;margin-right:8px;vertical-align:2px}
+.ropts{display:grid;gap:8px}
+.ropts.ox{grid-template-columns:1fr 1fr}
+.ropt{display:flex;gap:10px;align-items:flex-start;text-align:left;background:#fff;border:2px solid var(--ink);border-radius:12px;padding:12px 14px;font:500 15px/1.5 var(--kserif);box-shadow:3px 3px 0 var(--ink)}
+.ropt:hover:not(:disabled){background:#fff6d6}
+.ropt .abc{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:900 13px var(--sans)}
+.ropt.oxb{justify-content:center;align-items:center;font:900 clamp(40px,8vw,64px)/1 var(--serif);min-height:100px}
+.ropt.oxb[data-v="O"]{color:#1d6fd1}.ropt.oxb[data-v="X"]{color:var(--red)}
+.ropt:disabled{cursor:default;opacity:.55;box-shadow:none}
+.ropt.right{opacity:1!important;border-color:var(--green);background:#e7f6ec;box-shadow:0 0 0 3px rgba(46,154,90,.25)}
+.ropt.right .abc{background:var(--green)}
+.ropt.meh{opacity:1!important;border-color:var(--gold);background:#fff6e0}
+.ropt.wrong-pick{opacity:1!important;border-color:var(--red);background:var(--red-soft)}
+.feedback{margin-top:10px;border-radius:12px;font-size:14px}
+.feedback b{display:block;font-size:16px}
+.feedback.good,.feedback.meh,.feedback.bad{padding:10px 14px;animation:fadeIn .3s}
+.feedback.good{background:#e7f6ec;color:#1f6b3f}.feedback.meh{background:#fff3d6;color:#7a5a12}.feedback.bad{background:var(--red-soft);color:var(--red-d)}
+.boss-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.cf-btn,.art-btn{position:relative;min-height:62px;border:2px solid var(--ink);border-radius:14px;background:#fff;font:700 15px var(--sans);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 0 var(--ink);overflow:hidden}
+.cf-btn .ic{font-size:24px;position:relative;z-index:1}
+.cf-ico{position:relative;width:46px;height:46px;display:grid;place-items:center;flex:none}
+.cf-ico .cf-ring{left:0;top:0;width:100%;height:100%;transform:none}
+.cf-btn.ready .cf-ico .cf-ring{opacity:1}
+.cf-btn.ready .cf-ring{opacity:1}
+.cf-btn .steam,.cf-btn .cf-badge{display:none}
+.cf-btn:not(.ready){color:var(--muted)}
+.cf-btn.need{background:#e7f6ec;border-color:var(--green);animation:glowBtn 1s infinite}
+.cf-btn.need .cf-ring{animation:none}
+
+/* 게임 종료 후 홈페이지 자동 이동 */
+.auto-home{margin:14px 0 0;font-size:14px;color:var(--muted);min-height:20px}
+.auto-home b{color:var(--red)}
+.ah-stop{margin-left:8px;border:1.5px solid var(--ink);border-radius:99px;padding:2px 10px;font-size:12.5px;font-weight:700;background:#fff}
+
+/* 신문 버전 선택 + 옛날 신문(노란 필터) */
+.paper-pick{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:16px;font-size:13.5px;font-weight:700;flex-wrap:wrap}
+.paper-pick button{border:1.5px solid var(--ink);border-radius:99px;padding:6px 14px;font-weight:700;font-size:13px;background:#fff}
+.paper-pick button.on{background:var(--ink);color:#fff}
+body.old-paper::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;background:radial-gradient(ellipse at center,rgba(240,200,90,.16),rgba(150,100,30,.32));mix-blend-mode:multiply}
+body.old-paper .modal-box,body.old-paper .news{background-color:#f4e9c8}
+body.old-paper .news,body.old-paper .np-mast b{font-family:'Batang','Noto Serif KR',serif}
+
 /* ---------- 휴대전화 화면 ---------- */
 @media (max-width:760px){
   .cover-grid{grid-template-columns:1fr}
@@ -485,6 +592,7 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
       <button class="btn btn-line" id="btn-howto">게임 방법</button>
       <button class="btn btn-line" id="btn-news">📰 신문기사 열람</button>
     </div>
+    <div class="paper-pick"><span>📰 신문 버전</span><button data-paper="new" class="on">현재 신문</button><button data-paper="old">옛날 신문</button></div>
     <p style="text-align:center;margin:16px 0 0"><a href="../" target="_top" style="color:var(--muted);font-weight:700;font-size:14px">← RUNWAY 홈페이지로</a></p>
   </div>
 </section>
@@ -520,9 +628,11 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
     <div class="quote" id="fail-quote"></div>
     <p class="stats" id="fail-stats"></p>
     <div class="btns">
+      <button class="btn btn-red hidden" id="btn-retry-boss">👑 보스전부터 다시 도전</button>
       <button class="btn btn-red" id="btn-retry">↻ 처음부터 다시 도전</button>
       <button class="btn btn-line" id="btn-home1">시작 화면</button>
     </div>
+    <p class="auto-home" id="ah-fail"></p>
   </div>
 </section>
 
@@ -541,6 +651,7 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
       <p>반복 업무는 AI에게, 판단·소통·검증은 사람에게. 당신이 완성한 특집 기사가 내일 아침 1면에 실립니다.</p></div>
     <p class="stats" id="win-stats"></p>
     <div class="btns"><button class="btn btn-line" id="btn-home2">처음 화면으로 (다음 참가자)</button></div>
+    <p class="auto-home" id="ah-win"></p>
   </div>
 </section>
 
@@ -601,7 +712,14 @@ const CONFIG = {
   hintCost: 10,          // 힌트를 누르면 줄어드는 시간(초)
   code: ['2','5','4'],   // 금고 비밀번호 세 자리
   pileFirst: 45,         // 한 잠금장치에서 이 시간(초) 이상 지나면 '업무 폭주' 경고
-  pileEvery: 20          // 그 뒤로 이 간격마다 다시 경고
+  pileEvery: 20,         // 그 뒤로 이 간격마다 다시 경고
+  coffeeHeal: 15,        // 커피 한 잔으로 회복하는 멘탈
+  coffeeRecharge: 25,    // 커피가 다시 채워지는 시간(초)
+  coffeeAlertHp: 50,     // 멘탈이 이 숫자 이하가 되면 "커피를 마셔요" 안내
+  issueDate: '2026년 3월 4일',  // 신문(뉴욕 미러) 발행일 — 마지막 금고 숫자 문제의 정답 단서
+  bossRetrySeconds: 100, // 보스전부터 다시 할 때 주어지는 시간(초)
+  autoHomeSeconds: 10,   // 게임이 끝나고 홈페이지로 돌아가기까지의 시간(초)
+  idleSeconds: 60        // 시작 화면에서 아무 조작이 없으면 홈페이지로 돌아가는 시간(초)
 };
 
 /* ---------------- 잠금 1: 업무 분배 (기사 ③ 표) ---------------- */
@@ -618,6 +736,7 @@ const TASKS = [
 
 /* ---------------- 잠금 2: 프롬프트 5요소 (기사 ④) ---------------- */
 const P_SLOTS = ['역할','배경','지시','제약','출력 형식'];
+const P_EX = ['예) “너는 ○○이야!”', '예) “지금 ○○ 상황이야.”', '예) “○○을(를) 해 줘.”', '예) “○○은(는) 꼭 지켜 줘.”', '예) “○○ 모양으로 보여 줘.”'];
 const FRAGS = [
   { t:'너는 패션 매거진의 베테랑 편집 기자야.', slot:0 },
   { t:'런웨이가 ‘AI 시대의 비서’ 특집호를 준비하고 있어.', slot:1 },
@@ -646,44 +765,46 @@ const TOOLS = [
   { k:'source', icon:'🔍', name:'1차 출처 확인', sub:'원문 출처로 재검증' }
 ];
 
-/* ---------------- 보스전 ---------------- */
-const SKILLS = [
-  { k:'auto',    icon:'⚙️', name:'AI 자동화',    from:'반복 업무 처리' },
-  { k:'judge',   icon:'🤝', name:'비서의 판단',   from:'조율·돌발 대응' },
-  { k:'connect', icon:'🔌', name:'커넥터 연결',   from:'일정표·메일함(MCP)' },
-  { k:'shield',  icon:'🛡️', name:'팩트체크 실드', from:'검증·정보 보호' }
-];
-const TAGS = { routine:'반복 업무', human:'사람의 일', connect:'도구 연결', block:'위험 지시' };
-const NEED = { routine:'auto', human:'judge', connect:'connect', block:'shield' };
-const WRONG = {
-  routine:['정형화된 반복 업무는 ⚙️ AI 자동화에 맡기세요!', 6],
-  human:  ['감정 조율·돌발 상황은 AI가 대신 못 해요! 🤝 비서의 판단으로', 8],
-  connect:['일정표·메일함은 🔌 커넥터로 AI에 연결하면 한 번에 처리돼요!', 6],
-  block:  ['이건 따르면 안 되는 지시예요! 🛡️ 팩트체크 실드로 막으세요', 10]
+/* ---------------- 보스전: 미란다에게 보고하기 ----------------
+   type:'pick' → 세 가지 보고 중 하나 고르기 (best/good/bad 에 따라 데미지가 달라요)
+   type:'ox'   → O / X 퀴즈 (answer: 'O' 또는 'X')
+   DMG 숫자를 바꾸면 난이도가 바뀌어요. */
+const DMG = {
+  best: 13,   // 최고의 보고 → 미란다 HP 감소
+  good: 6,    // 그럭저럭 보고 → 미란다 HP 조금 감소
+  bad: 12,    // 잘못된 보고 → 내 멘탈 감소
+  ox: 12,     // OX 정답 → 미란다 HP 감소
+  oxWrong: 12,// OX 오답 → 내 멘탈 감소
+  timeout: 10 // 시간 초과 → 내 멘탈 감소
 };
-const WAVES = [
-  { name:'업무 폭탄', time:17, line:'이 많은 일을 언제 다 할 건가? 당장 처리해!',
-    tip:'반복 업무는 ⚙️ 한 번에! 사람 마음을 다루는 일은 🤝 직접!',
-    items:[
-      { type:'routine', tx:'전표 처리 30건', dmg:3 },
-      { type:'human',   tx:'화가 난 디자이너가 쇼 불참을 선언했다!', dmg:7 },
-      { type:'routine', tx:'오전 회의록 정리', dmg:3 },
-      { type:'human',   tx:'편집팀과 광고팀이 표지 문제로 대립 중', dmg:6 },
-      { type:'routine', tx:'촬영 참고 자료 검색', dmg:2 }
+const ROUND_TIME = 15;   // 보고 한 번에 주어지는 시간(초)
+const REPORTS = [
+  { type:'pick', title:'업무 폭탄 보고', ask:'전표 처리 30건에, 디자이너는 쇼에 안 오겠다고 화를 내고 있어. 어떻게 할 거지?',
+    opts:[
+      { t:'전표는 AI 자동화로 처리하고, 디자이너는 제가 직접 만나 감정을 조율하겠습니다.', g:'best', why:'반복 업무는 AI에게, 감정 조율은 사람이! (기사 ③)' },
+      { t:'전표부터 제가 손으로 처리하고, 디자이너는 나중에 연락하겠습니다.', g:'good', why:'일은 하지만 느려요. 반복 업무는 AI에게 맡겨도 돼요.' },
+      { t:'둘 다 AI에게 맡겨 두었습니다.', g:'bad', why:'감정 조율·돌발 상황은 AI가 대신할 수 없어요.' }
     ]},
-  { name:'일정 지옥', time:16, line:'다음 주 내 일정, 왜 이렇게 겹쳐 있지?',
-    tip:'일정표·메일함은 🔌 커넥터로! 단, 공개가 제한된 자료는 연결하면 안 돼요.',
-    items:[
-      { type:'connect', tx:'다음 주 임원 일정 중 겹치는 건을 찾아 대안 정리', dmg:8, ok:'📅 일정표 연결! 겹친 일정 3건과 대안 정리 완료' },
-      { type:'block',   tx:'미란다: “인사·계약 폴더도 AI에 전부 연결해!”', dmg:6, ok:'🛡️ 접근 권한은 꼭 필요한 범위만! 인사·계약 정보는 연결 제외' },
-      { type:'connect', tx:'메일함에 흩어진 촬영 일정 모으기', dmg:7, ok:'📧 메일함 연결! 촬영 일정 자동 정리' }
+  { type:'ox', title:'편집장의 OX 질문', ask:'AI에게 같은 질문을 세 번 해서 답이 같으면, 검증은 끝난 거지?', answer:'X', why:'같은 질문 반복은 검증이 아니에요. 1차 출처를 확인해야 해요. (기사 ④)' },
+  { type:'pick', title:'일정 보고', ask:'다음 주 내 일정이 왜 이렇게 겹쳐 있지?',
+    opts:[
+      { t:'일정표를 AI 커넥터로 연결해 겹치는 일정과 대안을 정리했습니다. 최종 결정은 편집장님께 받겠습니다.', g:'best', why:'MCP로 일정표를 연결하고, 최종 판단은 사람이! (기사 ④)' },
+      { t:'제가 하나하나 비교해서 오늘 밤까지 정리하겠습니다.', g:'good', why:'정성은 좋지만, 도구를 쓰면 훨씬 빨라요.' },
+      { t:'인사·계약 폴더까지 전부 AI에 연결해서 한 번에 처리하겠습니다.', g:'bad', why:'공개가 제한된 인사·계약 정보는 연결하면 안 돼요!' }
     ]},
-  { name:'갑질 모드', time:16, line:'출처? 그런 건 필요 없어. 이 보고서 지금 당장 제출해!',
-    tip:'출처 없는 보고서·개인정보 입력은 🛡️ 실드로 막고, 상사의 속뜻은 🤝 직접 파악!',
-    items:[
-      { type:'block', tx:'출처 확인 안 된 AI 통계 보고서를 그대로 제출하라!', dmg:8, ok:'🛡️ 1차 출처 확인 전엔 제출 불가! ‘검증되지 않음’ 표시' },
-      { type:'block', tx:'고객 이름·전화번호를 그대로 AI에 넣고 요약시켜라!', dmg:7, ok:'🛡️ 개인정보는 비식별화한 뒤에만!' },
-      { type:'human', tx:'미란다가 말하지 않은 진짜 의도 파악하기', dmg:6 }
+  { type:'ox', title:'편집장의 OX 질문', ask:'고객 이름과 전화번호는 그대로 AI에 넣어도 괜찮다.', answer:'X', why:'개인정보는 비식별화한 뒤에만 활용해요. (기사 ④)' },
+  { type:'pick', title:'갑질 모드', ask:'출처? 그런 건 필요 없어. 이 AI 통계 보고서, 지금 당장 제출해!',
+    opts:[
+      { t:'1차 출처를 확인하고, 확인 안 된 수치는 ‘검증되지 않음’으로 표시해 바로 올리겠습니다.', g:'best', why:'빠르면서도 검증까지! 결과를 걸러내는 사람이 경쟁력이에요.' },
+      { t:'제출은 잠시 미루고, 출처부터 알아보겠습니다.', g:'good', why:'검증은 좋지만, 편집장은 기다려 주지 않아요.' },
+      { t:'네! 그대로 바로 제출하겠습니다.', g:'bad', why:'출처 없는 AI 결과를 그대로 내면 안 돼요!' }
+    ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'좋은 프롬프트는 역할·배경·지시·제약·출력 형식, 이렇게 다섯 가지 요소로 이루어진다.', answer:'O', why:'맞아요! 좋은 프롬프트의 5요소예요. (기사 ④)' },
+  { type:'pick', title:'마지막 질문', ask:'그렇다면 하나만 묻지. 자네가 AI보다 나은 점이 뭐지?',
+    opts:[
+      { t:'AI의 결과를 검증하고, 사람의 마음을 읽고, 최종 판단에 책임을 질 수 있다는 점입니다.', g:'best', why:'AI 시대 비서는 ‘의사결정 지원 파트너’! (기사 ③)' },
+      { t:'AI를 누구보다 잘 다룰 수 있다는 점입니다.', g:'good', why:'중요한 능력이지만, 그것만으로는 부족해요.' },
+      { t:'타자를 AI보다 빨리 칩니다.', g:'bad', why:'…그건 AI가 더 빨라요.' }
     ]}
 ];
 
@@ -691,10 +812,10 @@ const WAVES = [
 const HINTS = {
   1:  '기사 <b>③ 비서의 역할</b> 속 <b>표</b>를 보세요.<br>왼쪽 칸(AI의 역할)은 반복·정형화된 일, 오른쪽 칸(인간 비서)은 <b>사람의 마음과 판단</b>이 필요한 일이에요.',
   2:  '기사 <b>④</b>에서 좋은 프롬프트의 <b>다섯 가지 요소</b>를 찾아보세요.<br>‘역할’은 AI에게 맡길 역할, ‘배경’은 상황, ‘지시’는 할 일, ‘제약’은 지킬 조건, ‘출력 형식’은 결과의 모양!<br>막연한 말이나 개인정보가 든 문장은 넣으면 안 돼요.',
-  3:  '기사 <b>④</b>를 떠올려 보세요.<br>개인정보·기밀 → <b>가리기</b> / 근거 없는 숫자 → <b>표시</b> / “같은 질문 반복”은 검증이 아니에요 → <b>원문 출처</b>!<br>문제 있는 문장은 <b>4개</b>예요.',
-  '3b':'기사 <b>② AI 연표</b>에서 ‘<b>사무 업무 전반</b>’이라는 표현이 나오는 해를 찾아보세요.',
-  door:'모든 잠금을 풀었어요! 오른쪽 <b>출구(빨간 문)</b>를 눌러 미란다에게 기사를 제출하세요.',
-  4:  '스킬을 먼저 누르고 → 업무 카드를 누르세요.<br>반복 업무 ⚙️ / 사람의 일 🤝 / 일정표·메일함 🔌 / 위험한 지시 🛡️<br>⚙️ 자동화는 반복 업무를 <b>한 번에</b> 처리해요!'
+  3:  '<b style="color:#c8102e">빨간 글씨</b>가 문제 있는 부분이에요. 각 문장 아래에서 알맞은 도구를 고르세요.<br>개인정보·기밀 → <b>가리기</b> / 근거 없는 숫자 → <b>검증되지 않음</b> / “같은 질문 반복” → <b>1차 출처 확인</b>!',
+  '3b':'📰 <b>신문기사</b>를 열면 맨 위에 <b>신문 이름과 발행 날짜</b>가 적혀 있어요. 몇 월 <b>며칠</b>에 나온 신문인가요?',
+  door:'모든 잠금을 풀었어요! 오른쪽 <b>출구(빨간 문)</b>를 눌러 미란다에게 보고하러 가세요.',
+  4:  '가장 좋은 보고는 <b>AI에게 맡길 일은 맡기고, 판단·소통·검증은 사람이</b> 하는 답이에요.<br>OX 문제의 단서는 📰 <b>기사 ④</b>에 있어요. 멘탈이 낮으면 ☕ <b>커피</b>!'
 };
 
 /* =====================================================================
@@ -885,8 +1006,8 @@ const GOAL_TEXT = {
   1: '목표 1/4 · 서류함을 열어 미란다의 업무를 분배하라',
   2: '목표 2/4 · 컴퓨터의 AI 문서작성기에 프롬프트를 입력하라',
   3: '목표 3/4 · 검수 데스크에서 AI 초안을 검증하라',
-  4: '목표 4/4 · 출구로 가서 미란다에게 기사를 제출하라',
-  5: 'BOSS · 미란다의 갑질 모드를 버텨라!'
+  4: '목표 4/4 · 출구로 가서 미란다에게 보고하라',
+  5: 'BOSS · 미란다에게 보고하고 살아남아라!'
 };
 
 /* ---------- HUD ---------- */
@@ -917,13 +1038,16 @@ function tick() {
   const left = Math.max(0, Math.ceil((S.deadline - Date.now()) / 1000));
   if (left !== S.timeLeft) { S.timeLeft = left; renderTime(); if (left <= 10 && left > 0) sfx.tick(); onSecond(); }
   if (left <= 0) { gameOver('time'); return; }
-  if (S.phase === 'boss' && S.wave) {
-    const remain = S.waveEnd - Date.now(), bar = $('#wave-bar');
-    if (bar) bar.style.width = Math.max(0, remain / (S.wave.time * 1000) * 100) + '%';
-    if (remain <= 0) waveTimeout();
+  updateCoffeeUI();
+  if (S.phase === 'boss' && S.roundData && !S.answered) {
+    const remain = S.roundEnd - Date.now(), bar = $('#wave-bar');
+    if (bar) bar.style.width = Math.max(0, remain / (ROUND_TIME * 1000) * 100) + '%';
+    if (remain <= 0) roundTimeout();
   }
 }
 function onSecond() {
+  const w = $('#win'); if (w) w.className = 'window ' + skyClass();
+  coffeeAlert();
   if (S.phase !== 'room') return;
   S.elapsed++;
   if (S.elapsed >= S.nextPile) {
@@ -956,7 +1080,7 @@ function hitBoss(n) {
   if (S.combo >= 2) bigFx('COMBO ×' + S.combo);
   floatText('미란다 -' + (n + bonus), window.innerWidth / 2 - 50, 120, '#c99a3b');
   renderHUD();
-  if (S.phase === 'boss') { shakeEl($('.fighter.miranda'), 'hurt'); if (S.boss <= 0) { S.wave = null; later(win, 700); } }
+  if (S.phase === 'boss') { shakeEl($('.fighter.miranda'), 'hurt'); if (S.boss <= 0) { S.roundData = null; S.answered = true; later(win, 900); } }
 }
 
 /* ---------- 시작 / 초기화 ---------- */
@@ -964,16 +1088,17 @@ function resetState() {
   Object.assign(S, {
     runId: S.runId + 1, running: false, deadline: 0, timeLeft: CONFIG.totalSeconds,
     hp: 100, boss: 100, digits: [null, null, null], combo: 0, mistakes: 0, hintsUsed: 0, lockMistakes: 0,
-    elapsed: 0, nextPile: CONFIG.pileFirst, phase: 'room', open: 0, coffee: false,
+    elapsed: 0, nextPile: CONFIG.pileFirst, phase: 'room', open: 0, coffeeReadyAt: 0, coffeeAlertAt: 0,
+    round: 0, roundEnd: 0, roundData: null, answered: false, bossEntry: null,
     inv: { pen: false, draft: false, article: false },
     l1: { done: false, order: shuffle(TASKS.map((_, i) => i)), placed: {} },
     l2: { done: false, order: shuffle(FRAGS.map((_, i) => i)), slots: [null, null, null, null, null], sel: null, rejected: {}, ran: false },
     l3: { done: false, tool: null, fixed: {}, sub: 'doc' },
-    wave: null, waveIdx: 0, skill: null, dialog: ''
+    optOrder: [], dialog: ''
   });
 }
 function startGame() {
-  stopTimer(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
+  cancelAutoHome(); stopTimer(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
   resetState();
   S.running = true; S.deadline = Date.now() + CONFIG.totalSeconds * 1000;
   showScreen('game');
@@ -986,7 +1111,7 @@ function stat(key, val) {
   try { localStorage.setItem(key, val !== undefined ? val : (+(localStorage.getItem(key) || 0) + 1)); } catch (e) {}
 }
 function goHome() {
-  stopTimer(); resetState(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
+  cancelAutoHome(); stopTimer(); resetState(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
   document.body.classList.remove('danger', 'critical');
   document.querySelectorAll('.confetti').forEach(c => c.remove());
   showScreen('start');
@@ -997,9 +1122,9 @@ function goHome() {
    ===================================================================== */
 const OBJECTS = [
   { id:'cabinet', label:'서류함',       icon:'🗄️', spr:'cabinet',   x:4,    y:40,   w:11,  lock:1 },
-  { id:'news',    label:'신문 더미',     icon:'📰', spr:'news',      x:29.5, y:50.6, w:8 },
+  { id:'news',    label:'신문 더미',     icon:'📰', spr:'news',      x:28,   y:48.2, w:11, noTag:true },
   { id:'pc',      label:'AI 문서작성기', icon:'💻', spr:'pc',        x:40,   y:41.6, w:12,  lock:2 },
-  { id:'coffee',  label:'커피',         icon:'☕', spr:'coffee',    x:55,   y:52.6, w:4 },
+  { id:'coffee',  label:'커피',         icon:'☕', spr:'coffee',    x:54.5, y:49.6, w:6,  noTag:true },
   { id:'check',   label:'검수 데스크',   icon:'🔍', spr:'magnifier', x:76.5, y:51,   w:5,   lock:3 },
   { id:'door',    label:'출구',         icon:'🚪', spr:'door',      x:86.5, y:27.5, w:11.5, lock:4 }
 ];
@@ -1015,29 +1140,61 @@ function renderRoom() {
   main.innerHTML = `
     <div class="room" id="room">
       <div class="room-sign">MIRANDA'S OFFICE</div>
-      <div class="window"><div class="sun"></div><div class="city"></div></div>
+      <div class="window ${skyClass()}" id="win"><div class="sun"></div><div class="stars"></div><div class="city"></div><div class="lights"></div></div>
       <div class="frames"><div class="frame">RUNWAY<i></i></div><div class="frame">RUNWAY<i></i></div><div class="frame">RUNWAY<i></i></div></div>
       <div class="wainscot"></div><div class="floor"></div><div class="rug"></div>
       <div class="desk"></div><div class="side"></div><div class="paper-sheet"></div>
       <div class="obj" style="left:17.5%;top:49%;width:5%">${spr('plant')}</div>
-      ${OBJECTS.map(o => `<button class="obj ${objState(o)}" data-o="${o.id}" style="left:${o.x}%;top:${o.y}%;width:${o.w}%" aria-label="${o.label}">${spr(o.spr)}<span class="tag">${o.label}</span></button>`).join('')}
+      ${OBJECTS.map(o => `<button class="obj obj-${o.id} ${objState(o)}" data-o="${o.id}" style="left:${o.x}%;top:${o.y}%;width:${o.w}%" aria-label="${o.label}">${o.id === 'coffee' ? coffeeDeco() : ''}${o.id === 'news' ? '<span class="news-glint">✦</span>' : ''}${spr(o.spr)}${o.noTag ? '' : `<span class="tag">${o.label}</span>`}</button>`).join('')}
       <div class="me-spr">${spr(meName())}</div>
     </div>
     <div class="dialog typing"><div class="av">${headOnly(meName())}</div><p id="dlg">${S.dialog}</p></div>
     <div class="objlist">${OBJECTS.map(o => `<button class="${objState(o)}" data-o="${o.id}"><span>${o.icon}</span>${o.label}</button>`).join('')}</div>`;
   main.querySelectorAll('[data-o]').forEach(b => b.onclick = () => clickObj(b.dataset.o, b));
 }
+/* ---------- ☕ 커피 (멘탈 회복 · 시간이 지나면 다시 충전) ---------- */
+function coffeeReady() { return Date.now() >= S.coffeeReadyAt; }
+function coffeePct() { if (coffeeReady()) return 100; return Math.round(100 - (S.coffeeReadyAt - Date.now()) / (CONFIG.coffeeRecharge * 1000) * 100); }
+function coffeeDeco() { return `<span class="cf-ring" style="--p:${coffeePct()}"></span><span class="steam"><i></i><i></i><i></i></span><span class="cf-badge">+${CONFIG.coffeeHeal}</span>`; }
+function drinkCoffee() {
+  if (!S.running) return;
+  if (!coffeeReady()) {
+    const s = Math.ceil((S.coffeeReadyAt - Date.now()) / 1000);
+    toast(`☕ 커피를 새로 내리는 중… ${s}초 뒤에 마실 수 있어요`);
+    if (S.phase === 'room') say(`커피 머신이 돌아가는 중… <b>${s}초</b>만 기다리자.`);
+    return;
+  }
+  if (S.hp >= 100) { toast('☕ 아직 멘탈이 가득해요! 필요할 때 마셔요'); return; }
+  const before = S.hp;
+  S.hp = Math.min(100, S.hp + CONFIG.coffeeHeal);
+  S.coffeeReadyAt = Date.now() + CONFIG.coffeeRecharge * 1000;
+  sfx.good(); floatText('+' + (S.hp - before), 40, 100, '#2e9a5a');
+  toast(`☕ 뜨거운 라떼 한 모금… 멘탈 +${S.hp - before}`, 'good');
+  if (S.phase === 'room') say(`편집장님 몰래 라떼 한 모금… <b>멘탈 +${S.hp - before}</b>. 커피는 <b>${CONFIG.coffeeRecharge}초</b> 뒤에 다시 채워져요.`);
+  if (S.phase === 'boss') mirandaSay('…지금 커피를 마시는 건가?');
+  renderHUD(); updateCoffeeUI();
+}
+function updateCoffeeUI() {
+  const p = coffeePct(), ready = p >= 100;
+  document.querySelectorAll('.cf-ring').forEach(r => r.style.setProperty('--p', p));
+  document.querySelectorAll('.obj-coffee, .cf-btn').forEach(el => { el.classList.toggle('ready', ready); el.classList.toggle('need', ready && S.hp <= CONFIG.coffeeAlertHp); });
+  const t = $('#cf-txt'); if (t) t.textContent = ready ? `커피 (+${CONFIG.coffeeHeal})` : `충전 ${Math.ceil((S.coffeeReadyAt - Date.now()) / 1000)}초`;
+}
+function coffeeAlert() {
+  if (S.hp > CONFIG.coffeeAlertHp || !coffeeReady() || Date.now() < S.coffeeAlertAt) return;
+  S.coffeeAlertAt = Date.now() + 15000;
+  toast('😵 멘탈이 흔들려요! <b>☕ 커피</b>를 마시면 멘탈이 회복돼요', 'bad');
+  if (S.phase === 'room') say('머리가 지끈거린다… 책상 위 <b>☕ 커피</b>를 마시고 정신을 차리자!');
+}
+/* ---------- 창밖 시간대: 낮 → 초저녁 → 저녁 ---------- */
+function skyClass() { return S.timeLeft > 120 ? 'day' : S.timeLeft > 60 ? 'dusk' : 'night'; }
 function say(html) { S.dialog = html; const d = $('#dlg'); if (d) { d.innerHTML = html; d.parentElement.classList.remove('typing'); void d.offsetWidth; d.parentElement.classList.add('typing'); } }
 function clickObj(id, el) {
   if (!S.running || S.phase !== 'room') return;
   sfx.click();
   const o = OBJECTS.find(x => x.id === id), g = goal();
   if (id === 'news') { say('수상한 신문기사 더미다. <b>문제의 단서</b>가 모두 여기 있어!'); openArticles(0); return; }
-  if (id === 'coffee') {
-    if (!S.coffee) { S.coffee = true; S.hp = Math.min(100, S.hp + 5); renderHUD(); toast('☕ 뜨거운 커피 한 모금… 멘탈 +5', 'good'); say('미란다의 커피를 몰래 한 모금… <b>멘탈 +5</b>. 식기 전에 서두르자!'); }
-    else say('컵이 비었다. 미란다에게 들키기 전에 일이나 하자.');
-    return;
-  }
+  if (id === 'coffee') { drinkCoffee(); return; }
   if (o.lock < g) { say(`${o.label}은(는) 이미 해결했다. ✔`); if (o.lock !== 4) return; }
   if (o.lock > g) {
     const need = { 2: '✏️ <b>만년필</b>이 없어 프롬프트를 쓸 수 없다. 먼저 <b>서류함</b>을 열자.',
@@ -1097,7 +1254,7 @@ function renderL1() {
 function renderL2() {
   const L = S.l2, body = $('#cu-body');
   if (L.done) return;
-  const placedFrag = s => L.slots[s] !== null ? FRAGS[L.slots[s]].t : (L.sel !== null ? '👉 여기에 넣기' : '비어 있음');
+  const placedFrag = s => L.slots[s] !== null ? FRAGS[L.slots[s]].t : `<em class="ex">${P_EX[s]}</em>${L.sel !== null ? ' <b class="here">👉 여기에 넣기</b>' : ''}`;
   body.innerHTML = `
     <p class="lead">✏️ 만년필로 AI에게 특집 기사를 맡기자! ${art(1, '기사 ④')}에 나온 <b>좋은 프롬프트 5요소</b>에 맞게 <b>① 아래 문장을 고르고 → ② 알맞은 칸</b>을 누르세요.</p>
     <div class="screen-pc">
@@ -1135,29 +1292,27 @@ function renderL3() {
   if (L.done) return;
   const n = Object.keys(L.fixed).length;
   body.innerHTML = `
-    <p class="lead">AI가 쓴 초안이 나왔다. 하지만 ${art(1, '기사 ④')}는 말한다 — <b>“그대로 믿지 마라.”</b> <b>① 도구를 고르고 → ② 문제 있는 문장</b>을 눌러 처리하세요.</p>
-    <div class="tools">${TOOLS.map(t => `<button class="tool ${L.tool === t.k ? 'on' : ''}" data-k="${t.k}"><span>${t.icon}</span>${t.name}<small>${t.sub}</small></button>`).join('')}</div>
+    <p class="lead">AI가 쓴 초안이 나왔다. 하지만 ${art(1, '기사 ④')}는 말한다 — <b>“그대로 믿지 마라.”</b> <b style="color:#c8102e">빨간 글씨</b>가 문제 있는 부분이에요. 문장 아래에서 <b>알맞은 도구</b>를 고르세요.</p>
     <div class="draft" id="draft">
       <div class="draft-head"><b>RUNWAY DAILY</b><small>AI 작성 초안 · 검토 전</small></div>
       ${DRAFT.map((l, i) => {
         const f = L.fixed[i];
-        const inner = f ? (l.fixed || l.t) + `<span class="stampmini ${l.stamp[0]}">${l.stamp[1]}</span>` : l.t;
-        return `<button class="dline ${l.title ? 'title-line' : ''} ${f ? 'fixed' : ''}" data-i="${i}">${inner}</button>`;
+        if (!l.ok) return `<div class="dline ${l.title ? 'title-line' : ''} fixed">${l.t}</div>`;
+        if (f) return `<div class="dline fixed">${l.fixed || l.t}<span class="stampmini ${l.stamp[0]}">${l.stamp[1]}</span></div>`;
+        return `<div class="dline risk" data-i="${i}"><span class="bad-txt">${l.t}</span>
+          <div class="pick-tool">${TOOLS.map(t => `<button data-i="${i}" data-k="${t.k}"><span>${t.icon}</span>${t.name}</button>`).join('')}</div></div>`;
       }).join('')}
       ${L.sub === 'code' ? '<div class="approved"><div>APPROVED<small>검증 완료 기사</small></div></div>' : ''}
     </div>
     <p class="note">※ 문서 속 인물·연락처·통계는 게임을 위해 만든 가상의 내용입니다. · 처리한 문제: <b>${n}</b> / 4</p>
     <div id="code-area"></div>`;
-  body.querySelectorAll('.tool').forEach(t => t.onclick = () => { sfx.click(); L.tool = t.dataset.k; body.querySelectorAll('.tool').forEach(x => x.classList.toggle('on', x === t)); });
-  body.querySelectorAll('.dline').forEach(d => d.onclick = () => fixLine(+d.dataset.i, d));
+  body.querySelectorAll('.pick-tool button').forEach(b => b.onclick = () => { L.tool = b.dataset.k; fixLine(+b.dataset.i, b.closest('.dline')); });
   if (L.sub === 'code') renderCode();
 }
 function fixLine(i, d) {
   const L = S.l3, l = DRAFT[i];
-  if (L.sub !== 'doc' || L.fixed[i]) return;
-  if (!L.tool) { toast('먼저 위에서 도구를 골라 주세요 👆'); return; }
-  if (!l.ok) { shakeEl(d); damageMe(5, '이 문장은 기사 내용과 맞는 사실이에요. 문제가 없어요! (멘탈 -5)'); return; }
-  if (!l.ok.includes(L.tool)) { shakeEl(d); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '문제 있는 문장은 맞지만, 도구가 맞지 않아요! (멘탈 -5)'); return; }
+  if (L.sub !== 'doc' || L.fixed[i] || !l.ok) return;
+  if (!l.ok.includes(L.tool)) { shakeEl(d); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '이 문장에는 다른 도구가 필요해요! (멘탈 -5)'); return; }
   L.fixed[i] = true; hitBoss(2);
   if (Object.keys(L.fixed).length === 4) { L.sub = 'code'; sfx.unlock(); bigFx('PERFECT CHECK'); renderL3(); later(() => { const c = $('#code-area'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300); }
   else renderL3();
@@ -1167,22 +1322,22 @@ function renderCode() {
     <div class="codebox">
       <h3>🔐 기사 보관함 잠금</h3>
       <p>검증된 기사를 보관함에 넣으려면 코드가 필요하다.<br>
-      <b>“AI 활용이 문서 작성·요약·번역·자료조사 등 사무 업무 전반으로 확대되기 시작한 해의 끝자리 숫자는?”</b></p>
-      <p>${art(2, '기사 ② AI 연표에서 단서 확인하기')}</p>
+      <b>“우리 신문(뉴욕 미러)이 발행된 날짜는 3월 며칠일까?”</b></p>
+      <p>${art(0, '신문을 열어 발행 날짜 확인하기')}</p>
       <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => `<button class="key" data-n="${n}">${n}</button>`).join('')}</div>
     </div>`;
   $('#code-area').querySelectorAll('.key').forEach(k => k.onclick = () => {
     if (S.l3.done) return;
     if (k.dataset.n === CONFIG.code[2]) { S.l3.done = true; hitBoss(3); lockClear(3); }
-    else { shakeEl(k); damageMe(8, '코드가 틀렸어요! 기사 ② 연표를 다시 확인하세요 (멘탈 -8)'); }
+    else { shakeEl(k); damageMe(8, '코드가 틀렸어요! 신문 맨 위의 발행 날짜를 확인하세요 (멘탈 -8)'); }
   });
 }
 
 /* ---------- 잠금 해제 보상 ---------- */
 const REWARD = {
-  1: { item:'pen',     itemTxt:'✏️ 만년필',     skill:'🤝 비서의 판단', say:'서랍 속에서 <b>✏️ 만년필</b>을 찾았다! 이제 <b>컴퓨터의 AI 문서작성기</b>에 프롬프트를 써 보자.' },
-  2: { item:'draft',   itemTxt:'📄 AI 초안',    skill:'⚙️ AI 자동화',  say:'프린터에서 <b>📄 AI 기사 초안</b>이 나왔다! 하지만 AI의 결과를 그대로 믿으면 안 돼. <b>검수 데스크</b>로 가자.' },
-  3: { item:'article', itemTxt:'📰 완성 기사',  skill:'🛡️ 팩트체크 실드 · 🔌 커넥터', say:'검증을 마친 <b>📰 완성 기사</b>를 손에 넣었다! 이제 <b>출구</b>로 가서 미란다에게 제출하고 탈출하자!' }
+  1: { item:'pen',     itemTxt:'✏️ 만년필',     skill:'🤝 업무 분배 노하우', say:'서랍 속에서 <b>✏️ 만년필</b>을 찾았다! 이제 <b>컴퓨터의 AI 문서작성기</b>에 프롬프트를 써 보자.' },
+  2: { item:'draft',   itemTxt:'📄 AI 초안',    skill:'⚙️ 프롬프트 작성법',  say:'프린터에서 <b>📄 AI 기사 초안</b>이 나왔다! 하지만 AI의 결과를 그대로 믿으면 안 돼. <b>검수 데스크</b>로 가자.' },
+  3: { item:'article', itemTxt:'📰 완성 기사',  skill:'🛡️ 팩트체크 안목', say:'검증을 마친 <b>📰 완성 기사</b>를 손에 넣었다! 이제 <b>출구</b>로 가서 미란다에게 보고하러 가자!' }
 };
 function lockClear(n) {
   const R = REWARD[n];
@@ -1208,98 +1363,137 @@ function lockClear(n) {
    👑 최종 보스 — 미란다의 갑질 모드
    ===================================================================== */
 function bossIntro() {
-  S.phase = 'boss'; sfx.boss(); renderHUD();
+  S.phase = 'boss'; sfx.boss();
+  if (!S.bossEntry) S.bossEntry = { boss: S.boss };   // 보스전부터 다시 할 때 쓰는 기록
+  renderHUD();
   const it = $('#intro');
   it.innerHTML = `<div class="intro-box">
-      <div class="badge" style="background:#c8102e">FINAL BOSS</div>
+      <div class="badge" style="background:#c8102e">FINAL BOSS · 보고 시간</div>
       ${mirandaSpr(true)}
       <h2>MIRANDA</h2>
-      <div class="say">“자네가 일을 모두 처리했다고? 그렇다면 마지막 시험을 통과해 봐.”</div>
-      <p><b>스킬</b>을 눌러 고르고 → 몰려오는 <b>업무 카드</b>를 눌러 처리하세요.<br>미란다의 HP를 0으로 만들면 탈출!</p>
-      <button class="btn btn-red" id="go-boss">⚔️ 마지막 시험 시작</button></div>`;
+      <div class="say">“자네가 일을 모두 처리했다고? 그렇다면 하나씩 보고해 봐.”</div>
+      <p>완성한 기사를 들고 <b>편집장실로 보고하러</b> 갑니다.<br>미란다의 질문마다 <b>가장 좋은 보고</b>를 고르세요. 고른 답에 따라 <b>데미지가 달라져요</b>.<br>중간중간 <b>OX 퀴즈</b>도 나와요. 멘탈이 낮으면 <b>☕ 커피</b>!</p>
+      <button class="btn btn-red" id="go-boss">📄 보고하러 가기</button></div>`;
   it.classList.remove('hidden');
-  $('#go-boss').onclick = () => { it.classList.add('hidden'); renderBoss(); startWave(0); };
+  $('#go-boss').onclick = () => { it.classList.add('hidden'); renderBoss(); later(() => startRound(0), 1300); };
 }
 function renderBoss() {
   main.innerHTML = `
     <div class="arena">
       <div class="stage-top">
-        <div class="fighter me">${spr(meName())}<div class="nm">ME</div></div>
+        <div class="fighter me walk-in">${spr(meName())}<span class="doc">📄</span><div class="nm">ME</div></div>
         <div class="vs">VS</div>
-        <div class="fighter miranda"><div class="say" id="m-say">…</div>${mirandaSpr(true)}<div class="nm">MIRANDA</div></div>
+        <div class="fighter miranda"><div class="say" id="m-say">“들어와.”</div>${mirandaSpr(true)}<div class="nm">MIRANDA</div></div>
       </div>
       <div class="wave-wrap">
-        <div class="wave-head"><h3 id="wave-name">-</h3><small id="wave-no"></small></div>
+        <div class="wave-head"><h3 id="wave-name">편집장실로 가는 중…</h3><small id="wave-no"></small></div>
         <div class="wavebar"><i id="wave-bar"></i></div>
-        <div class="items" id="items"></div>
-        <p class="tip" id="wave-tip"></p>
+        <div class="ask" id="ask"><span class="q-who">미란다</span>…</div>
+        <div class="ropts" id="opts"></div>
+        <div class="feedback" id="fb"></div>
       </div>
     </div>
-    <div class="skills">${SKILLS.map(s => `<button class="skill" data-k="${s.k}"><span>${s.icon}</span><b>${s.name}</b><small>${s.from}</small></button>`).join('')}</div>`;
-  main.querySelectorAll('.skill').forEach(b => b.onclick = () => {
-    sfx.click(); S.skill = S.skill === b.dataset.k ? null : b.dataset.k;
-    main.querySelectorAll('.skill').forEach(x => x.classList.toggle('on', x.dataset.k === S.skill));
-  });
+    <div class="boss-bar">
+      <button class="cf-btn" id="cf-btn"><span class="cf-ico">${coffeeDeco()}<span class="ic">☕</span></span><b id="cf-txt">커피</b></button>
+      <button class="art-btn" id="art-btn">📰 기사 보기</button>
+    </div>`;
+  $('#cf-btn').onclick = drinkCoffee;
+  $('#art-btn').onclick = () => openArticles(1);
+  updateCoffeeUI();
 }
 function mirandaSay(t) { const b = $('#m-say'); if (b) b.textContent = '“' + t + '”'; }
-function startWave(i) {
+function startRound(i) {
   if (!S.running || S.boss <= 0) return;
-  const base = WAVES[i % WAVES.length];
-  S.waveIdx = i;
-  S.wave = { ...base, items: base.items.map(it => ({ ...it, done: false })) };
-  S.waveEnd = Date.now() + base.time * 1000;
-  $('#wave-name').textContent = (i >= WAVES.length ? '앙코르! ' : '') + base.name;
-  $('#wave-no').textContent = `WAVE ${i + 1} · 제한 ${base.time}초`;
-  $('#wave-tip').textContent = '💡 ' + base.tip;
-  mirandaSay(base.line); sfx.boss(); bigFx(base.name, '#c8102e');
-  renderItems();
-}
-function renderItems() {
-  const box = $('#items'); if (!box || !S.wave) return;
-  box.innerHTML = S.wave.items.map((it, i) => `
-    <button class="bitem t-${it.type} ${it.done ? 'done' : ''}" data-i="${i}">
-      <span class="tg">${it.done ? '처리 완료 ✔' : TAGS[it.type]}</span>
-      <span class="tx">${it.done && it.ok ? it.ok : it.tx}</span></button>`).join('');
-  box.querySelectorAll('.bitem').forEach(b => b.onclick = () => useSkillOn(+b.dataset.i, b));
-}
-function useSkillOn(i, el) {
-  if (!S.wave) return;
-  const it = S.wave.items[i];
-  if (it.done) return;
-  if (!S.skill) { toast('먼저 아래에서 스킬을 골라 주세요 👇'); shakeEl(el); return; }
-  if (S.skill !== NEED[it.type]) { shakeEl(el); damageMe(WRONG[it.type][1], WRONG[it.type][0] + ` (멘탈 -${WRONG[it.type][1]})`); return; }
-  if (S.skill === 'auto') {                   // 자동화: 반복 업무를 한 번에
-    let sum = 0, cnt = 0;
-    S.wave.items.forEach(x => { if (x.type === 'routine' && !x.done) { x.done = true; sum += x.dmg; cnt++; } });
-    toast(`⚙️ AI 자동화! 반복 업무 ${cnt}건 일괄 처리`, 'good'); hitBoss(sum);
+  const r = REPORTS[i % REPORTS.length];
+  S.round = i; S.roundData = r; S.answered = false; S.roundEnd = Date.now() + ROUND_TIME * 1000;
+  const me = $('.fighter.me'); if (me) { me.classList.remove('walk-in', 'step'); void me.offsetWidth; me.classList.add('step'); }
+  $('#wave-name').textContent = (i >= REPORTS.length ? '추가 보고 · ' : `보고 ${i + 1} · `) + r.title;
+  $('#wave-no').textContent = `제한 ${ROUND_TIME}초 · ${r.type === 'ox' ? 'OX 퀴즈' : '보고 방식을 고르세요'}`;
+  $('#ask').innerHTML = `<span class="q-who">미란다</span>${r.ask}`;
+  $('#fb').innerHTML = ''; $('#fb').className = 'feedback';
+  mirandaSay(r.type === 'ox' ? 'O야, X야? 빨리.' : '…그래서?');
+  sfx.boss();
+  if (r.type === 'ox') {
+    $('#opts').className = 'ropts ox';
+    $('#opts').innerHTML = ['O', 'X'].map(v => `<button class="ropt oxb" data-v="${v}">${v}</button>`).join('');
   } else {
-    it.done = true;
-    toast({ judge: '🤝 사람만 할 수 있는 일! 비서의 판단으로 해결', connect: '🔌 커넥터 연결 성공!', shield: '🛡️ 팩트체크 실드 발동!' }[S.skill], 'good');
-    if (S.skill === 'shield') mirandaSay('…흥, 원칙을 지키겠다?');
-    hitBoss(it.dmg);
+    $('#opts').className = 'ropts';
+    S.optOrder = shuffle(r.opts.map((_, k) => k));
+    $('#opts').innerHTML = S.optOrder.map((k, n) => `<button class="ropt" data-k="${k}"><span class="abc">${'ABC'[n]}</span>${r.opts[k].t}</button>`).join('');
   }
-  if (!S.running || S.boss <= 0) { renderItems(); return; }
-  renderItems();
-  if (S.wave.items.every(x => x.done)) {
-    mirandaSay(['흠. 나쁘지 않군.', '…그 정도는 기본이지.', '좋아, 다음이다.'][S.waveIdx % 3]);
-    bigFx('WAVE CLEAR');
-    const nextI = S.waveIdx + 1; S.wave = null;
-    later(() => startWave(nextI), 1300);
+  $('#opts').querySelectorAll('.ropt').forEach(b => b.onclick = () => answer(b));
+}
+function answer(btn) {
+  if (S.answered || !S.roundData) return;
+  S.answered = true;
+  const r = S.roundData, fb = $('#fb');
+  $('#opts').querySelectorAll('.ropt').forEach(b => b.disabled = true);
+  let kind, why;
+  if (r.type === 'ox') {
+    const ok = btn.dataset.v === r.answer; kind = ok ? 'best' : 'bad'; why = r.why;
+    $('#opts').querySelector(`[data-v="${r.answer}"]`).classList.add('right');
+    if (!ok) btn.classList.add('wrong-pick');
+    if (ok) { bigFx('정답!'); hitBoss(DMG.ox); mirandaSay('…맞아.'); }
+    else damageMe(DMG.oxWrong, `땡! 정답은 ${r.answer} (멘탈 -${DMG.oxWrong})`);
+    fb.innerHTML = `<b>${ok ? `⭕ 정답! 미란다 -${DMG.ox}` : `❌ 오답! 정답은 ${r.answer} · 멘탈 -${DMG.oxWrong}`}</b><span>${why}</span>`;
+  } else {
+    const o = r.opts[+btn.dataset.k]; kind = o.g; why = o.why;
+    const best = r.opts.findIndex(x => x.g === 'best');
+    $('#opts').querySelector(`[data-k="${best}"]`).classList.add('right');
+    if (kind === 'best') { bigFx('PERFECT 보고!'); hitBoss(DMG.best); mirandaSay(['흠. 나쁘지 않군.', '…계속해.', '좋아. 다음.'][S.round % 3]); }
+    else if (kind === 'good') { btn.classList.add('meh'); bigFx('GOOD', '#c99a3b'); hitBoss(DMG.good); mirandaSay('그럭저럭이군.'); }
+    else { btn.classList.add('wrong-pick'); damageMe(DMG.bad, `그게 최선인가? (멘탈 -${DMG.bad})`); }
+    fb.innerHTML = `<b>${kind === 'best' ? `★ PERFECT · 미란다 -${DMG.best}` : kind === 'good' ? `△ 그럭저럭 · 미란다 -${DMG.good}` : `✕ 잘못된 보고 · 멘탈 -${DMG.bad}`}</b><span>${why}</span>`;
   }
+  fb.className = 'feedback ' + (kind === 'bad' ? 'bad' : kind === 'good' ? 'meh' : 'good');
+  if (S.running && S.boss > 0) later(() => startRound(S.round + 1), 2300);
 }
-function waveTimeout() {
-  const left = S.wave.items.filter(x => !x.done).length, dmg = Math.min(20, left * 6);
-  const nextI = S.waveIdx + 1; S.wave = null;
-  mirandaSay('시간 끝. 일이 이렇게 쌓여 있는데 뭐 하고 있었지?');
-  damageMe(dmg, `⏰ 처리 못 한 업무 ${left}건이 쌓였어요! (멘탈 -${dmg})`);
-  later(() => startWave(nextI), 1300);
+function roundTimeout() {
+  if (S.answered || !S.roundData) return;
+  S.answered = true;
+  const r = S.roundData;
+  $('#opts').querySelectorAll('.ropt').forEach(b => b.disabled = true);
+  const right = r.type === 'ox' ? $('#opts').querySelector(`[data-v="${r.answer}"]`) : $('#opts').querySelector(`[data-k="${r.opts.findIndex(x => x.g === 'best')}"]`);
+  if (right) right.classList.add('right');
+  $('#fb').className = 'feedback bad';
+  $('#fb').innerHTML = `<b>⏰ 시간 초과 · 멘탈 -${DMG.timeout}</b><span>${r.type === 'ox' ? r.why : r.opts.find(x => x.g === 'best').why}</span>`;
+  damageMe(DMG.timeout, `⏰ 보고가 늦었어요! (멘탈 -${DMG.timeout})`);
+  mirandaSay('시간 끝. 다음.');
+  if (S.running) later(() => startRound(S.round + 1), 2300);
 }
+/* 보스전부터 다시 도전 (잠금 1~3은 이미 푼 상태로 시작) */
+function retryBoss() {
+  cancelAutoHome();
+  document.querySelectorAll('.confetti').forEach(c => c.remove());
+  S.runId++; S.running = true; S.hp = 100; S.combo = 0;
+  S.boss = S.bossEntry ? S.bossEntry.boss : 55;
+  S.deadline = Date.now() + CONFIG.bossRetrySeconds * 1000; S.timeLeft = CONFIG.bossRetrySeconds;
+  S.coffeeReadyAt = 0; S.roundData = null; S.answered = false; S.phase = 'boss';
+  showScreen('game'); renderHUD(); startTimer(); sfx.boss();
+  renderBoss(); later(() => startRound(0), 1300);
+}
+
+/* ---------- 게임이 끝나면 잠시 뒤 홈페이지로 ---------- */
+let autoHomeTimer = null;
+function goSite() {
+  const url = new URL('../#/', location.href).href;
+  try { (window.top || window).location.href = url; } catch (e) { location.href = url; }
+}
+function startAutoHome(elId) {
+  cancelAutoHome();
+  let n = CONFIG.autoHomeSeconds;
+  const el = $('#' + elId);
+  const draw = () => { if (el) el.innerHTML = `⏱ <b>${n}초</b> 후 홈페이지로 돌아갑니다 <button class="ah-stop">여기 머무르기</button>`; if (el) el.querySelector('.ah-stop').onclick = cancelAutoHome; };
+  draw();
+  autoHomeTimer = setInterval(() => { n--; if (n <= 0) { cancelAutoHome(); goSite(); } else draw(); }, 1000);
+}
+function cancelAutoHome() { if (autoHomeTimer) clearInterval(autoHomeTimer); autoHomeTimer = null; document.querySelectorAll('.auto-home').forEach(e => e.innerHTML = ''); }
 
 /* =====================================================================
    결과 화면
    ===================================================================== */
 function endRun() {
-  S.running = false; stopTimer(); S.wave = null;
+  S.running = false; stopTimer(); S.roundData = null;
   closeModal(); closeCU(true); $('#intro').classList.add('hidden');
   document.body.classList.remove('danger', 'critical');
   $('#toasts').innerHTML = '';
@@ -1312,7 +1506,10 @@ function gameOver(reason) {
   $('#fail-quote').textContent = reason === 'time' ? '“18시 정각. 자네는 아직 내 사무실에 있군. 내일도 출근하게.”' : '“그 정도로 무너지다니. 내일 아침 7시에 다시 보지.”';
   const where = S.phase === 'boss' ? '보스전' : ['', '잠금 1', '잠금 2', '잠금 3', '출구 앞'][goal()];
   $('#fail-stats').textContent = `도달한 단계: ${where} · 미란다 남은 HP ${S.boss}`;
-  sfx.bad(); showScreen('fail');
+  const atBoss = S.phase === 'boss';
+  $('#btn-retry-boss').classList.toggle('hidden', !atBoss);
+  $('#btn-retry').classList.toggle('btn-red', !atBoss); $('#btn-retry').classList.toggle('btn-line', atBoss);
+  sfx.bad(); showScreen('fail'); startAutoHome('ah-fail');
 }
 function win() {
   if (!S.running) return;
@@ -1323,7 +1520,7 @@ function win() {
   stat('rw_wins');
   try { if (S.timeLeft > +(localStorage.getItem('rw_best') || 0)) stat('rw_best', S.timeLeft); } catch (e) {}
   $('#win-stats').textContent =`남은 시간 ${fmt(S.timeLeft)} · 내 멘탈 ${S.hp} · 실수 ${S.mistakes}회 · 힌트 ${S.hintsUsed}회`;
-  showScreen('win'); sfx.win();
+  showScreen('win'); sfx.win(); startAutoHome('ah-win');
   const colors = ['#c8102e', '#3f7fd9', '#c99a3b', '#f7d3da', '#1d1a1c'];
   for (let i = 0; i < 90; i++) {
     const c = document.createElement('div'); c.className = 'confetti';
@@ -1342,7 +1539,8 @@ function closeModal() { $('#modal').classList.add('hidden'); }
 function openArticles(idx = 0) {
   sfx.click();
   const a = ARTICLES[idx];
-  openModal('RUNWAY DAILY', `
+  openModal('THE NEW YORK MIRROR', `
+    <div class="np-mast"><b>뉴욕 미러</b><span>THE NEW YORK MIRROR · ${CONFIG.issueDate} 발행 · 특집호</span></div>
     <div class="tabs">${ARTICLES.map((x, i) => `<button class="tab ${i === idx ? 'on' : ''}" data-t="${i}">${x.tab}</button>`).join('')}</div>
     <article class="news"><h3>${a.title}</h3><div class="meta">${a.meta}</div>${a.body}
     <div class="src">※ 형광펜은 게임에 필요한 핵심 문장입니다.${S.running ? ' 기사를 읽는 동안에도 시간은 흐릅니다!' : ''}</div></article>`);
@@ -1352,7 +1550,7 @@ function articleForNow() {
   if (S.phase === 'boss') return 0;
   const n = S.open || goal();
   if (n === 1) return 0;
-  if (n === 3 && S.l3.sub === 'code') return 2;
+  if (n === 3 && S.l3.sub === 'code') return 0;
   return 1;
 }
 function hintKey() {
@@ -1377,7 +1575,8 @@ function openHowto() {
     <p>⏱ 제한 시간은 <b>180초</b>. 게임 시작을 누르면 시계가 움직여요.</p>
     <p>🏢 미란다의 사무실에서 <b>반짝이는 물건</b>을 눌러 조사하세요. (아래 버튼 목록으로 눌러도 돼요)</p>
     <p>🔓 <b>서류함 → 컴퓨터 → 검수 데스크</b> 순서로 잠금을 풀면 금고 숫자와 아이템을 얻어요. 단서는 모두 <b>📰 신문기사</b>에 있어요.</p>
-    <p>👑 마지막으로 <b>출구</b>를 누르면 <b>미란다</b>가 나타나요. 얻은 <b>스킬을 고르고 → 업무 카드</b>를 눌러 처리하세요.</p>
+    <p>👑 마지막으로 <b>출구</b>를 누르면 <b>미란다에게 보고</b>하러 가요. 질문마다 <b>가장 좋은 보고</b>를 고르고, <b>OX 퀴즈</b>도 풀어요. 답에 따라 데미지가 달라져요!</p>
+    <p>☕ 멘탈이 낮아지면 <b>커피</b>를 마셔요. 커피는 <b>${CONFIG.coffeeRecharge}초</b>마다 다시 채워져요. 보스전에서 지면 <b>보스전부터 다시</b> 할 수 있어요.</p>
     <p>❤️ 실수하면 <b>내 멘탈</b>이 줄고, 잘 처리하면 <b>미란다 HP</b>가 줄어요. 실수해도 처음으로 돌아가진 않아요!</p>
     <p>💡 <b>힌트</b>는 기사 속 찾을 곳을 알려 주지만 <b>시간이 10초</b> 줄어요. 🔥 연속 성공하면 <b>COMBO</b>!</p>
     <p>💀 시간이 다 되거나 멘탈이 0이 되면 실패. 언제든 다시 도전할 수 있어요.</p></div>`);
@@ -1398,6 +1597,7 @@ $('#btn-start').onclick = startGame;
 $('#btn-howto').onclick = openHowto;
 $('#btn-news').onclick = () => openArticles(0);
 $('#btn-retry').onclick = startGame;
+$('#btn-retry-boss').onclick = retryBoss;
 $('#btn-home1').onclick = goHome;
 $('#btn-home2').onclick = goHome;
 $('#b-article').onclick = () => openArticles(articleForNow());
@@ -1409,6 +1609,27 @@ $('#cu-x').onclick = () => closeCU();
 $('#cu-hint').onclick = openHint;
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 $('#cu-body').addEventListener('click', e => { const a = e.target.closest('.alink'); if (a) openArticles(+a.dataset.art); });
+
+/* ---------- 📰 옛날 신문 버전 (노란 필터) — 홈페이지에서 고른 값과 같이 움직여요 ---------- */
+function getPaper() { try { return localStorage.getItem('rw_paper') || 'new'; } catch (e) { return 'new'; } }
+function applyPaper(v) {
+  document.body.classList.toggle('old-paper', v === 'old');
+  document.querySelectorAll('[data-paper]').forEach(b => b.classList.toggle('on', b.dataset.paper === v));
+}
+document.querySelectorAll('[data-paper]').forEach(b => b.onclick = () => { try { localStorage.setItem('rw_paper', b.dataset.paper); } catch (e) {} applyPaper(b.dataset.paper); sfx.click(); });
+window.addEventListener('storage', e => { if (e.key === 'rw_paper') applyPaper(getPaper()); });
+applyPaper(getPaper());
+
+/* ---------- 자리를 비우면 홈페이지로 (시작 화면에서 아무 조작이 없을 때) ---------- */
+let lastAct = Date.now();
+['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, () => {
+  lastAct = Date.now();
+  if (window.parent !== window) try { window.parent.postMessage({ rw: 'activity' }, '*'); } catch (e) {}
+}, { passive: true }));
+setInterval(() => {
+  const onStart = $('#scr-start').classList.contains('active') && !S.running;
+  if (onStart && Date.now() - lastAct > CONFIG.idleSeconds * 1000) { lastAct = Date.now(); goSite(); }
+}, 1000);
 
 resetState(); renderPicks(); renderHUD();
 </script>
