@@ -974,7 +974,7 @@ body{background:#fff;letter-spacing:-.005em}
 <div id="intro" class="intro hidden"></div>
 <div id="toasts"></div>
 <div id="flash"></div>
-<div id="idle-warn" class="idle-warn hidden"><div class="iw-box"><small>잠시 자리를 비우셨나요?</small><div class="iw-n" id="iw-n">5</div><p id="iw-msg"></p><button class="btn btn-red" id="iw-btn"></button></div></div>
+<div id="idle-warn" class="idle-warn hidden"><div class="iw-box"><small>잠시 자리를 비우셨나요?</small><div class="iw-n" id="iw-n">10</div><p id="iw-msg"></p><button class="btn btn-red" id="iw-btn"></button></div></div>
 <div id="bigfx"></div>
 
 <script>
@@ -1054,8 +1054,9 @@ const CONFIG = {
   issueDate: 'August 29, 2026',  // 신문(뉴욕 미러) 발행일
   autoHomeSeconds: 20,   // 게임이 끝나고 화면이 닫히기(홈페이지로 돌아가기)까지의 시간(초)
   playIdleSeconds: 30,   // 게임 중 이 시간(초) 동안 아무 조작이 없으면 홈페이지로 (자리를 비운 경우)
+  newsIdleSeconds: 30,   // 신문기사를 읽는 중일 때도 30초
   idleSeconds: 30,       // 시작 화면에서 아무 조작이 없으면 홈페이지로 돌아가는 시간(초)
-  idleWarnSeconds: 5     // 홈페이지로 돌아가기 몇 초 전에 안내창을 띄울지
+  idleWarnSeconds: 10    // 홈페이지로 돌아가기 몇 초 전에 안내창을 띄울지
 };
 
 /* ---------------- 잠금 1: 업무 분배 (기사 ‘비서의 역할’ 표) ---------------- */
@@ -2179,6 +2180,7 @@ const josa = w => { const c = w.charCodeAt(w.length - 1); return c >= 0xAC00 && 
 // 지금 게임 상황에 맞는 ‘눌러야 할 것’
 function idleTarget() {
   if (!S.running) return { name: '게임 시작', act: startGame };
+  if (!$('#modal').classList.contains('hidden')) return { name: '신문 계속 읽기', act: () => {} };
   if (S.phase === 'boss') return { name: '보고 계속하기', act: () => {} };
   if (S.open) return { name: { 1: '업무 분배표', 2: 'AI 문서작성기', 3: '검수 데스크' }[S.open] || '업무 계속하기', act: () => {} };
   const o = OBJECTS.find(x => x.lock === goal());
@@ -2188,7 +2190,8 @@ function hideIdle() { $('#idle-warn').classList.add('hidden'); }
 $('#iw-btn').onclick = () => { const t = idleTarget(); hideIdle(); lastAct = Date.now(); t.act(); };
 setInterval(() => {
   const onStart = $('#scr-start').classList.contains('active') && !S.running;
-  const limit = onStart ? CONFIG.idleSeconds : S.running ? CONFIG.playIdleSeconds : 0;   // 결과 화면은 따로 20초 뒤에 닫혀요
+  const reading = !$('#modal').classList.contains('hidden');
+  const limit = onStart ? CONFIG.idleSeconds : S.running ? (reading ? CONFIG.newsIdleSeconds : CONFIG.playIdleSeconds) : 0;   // 결과 화면은 따로 20초 뒤에 닫혀요
   if (!limit) { hideIdle(); return; }
   const left = Math.ceil((limit * 1000 - (Date.now() - lastAct)) / 1000);
   if (left <= 0) { lastAct = Date.now(); hideIdle(); goSite(); return; }
