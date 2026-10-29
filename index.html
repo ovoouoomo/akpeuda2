@@ -1449,7 +1449,7 @@ function pPress(id) {
       <h1>${a.title}</h1><p class="sub">${a.sub}</p><div class="by">${a.by}</div>
       <div class="body">${a.body.map(p => `<p class="${a.interview && p.startsWith('Q.') ? 'q' : ''}">${p}</p>`).join('')}</div>
       ${a.table ? `<table><tr><th>AI의 역할</th><th>인간 비서의 역할</th></tr><tr><td>일정 관리<br>반복적인 행정업무<br>문서 초안 작성<br>자료 검색<br>회의록 작성/요약<br>데이터 처리<br>정보 통합</td><td>맥락 이해<br>상황 판단<br>감정 조율<br>대인관계 관리<br>조직 내 커뮤니케이션<br>예외적인 상황 대응<br>AI 결과물 검토 및 수정</td></tr></table>` : ''}
-      <div class="tools"><a class="btn btn-out btn-sm" href="#/press">← 목록으로</a><span style="display:flex;gap:8px"><button class="btn btn-out btn-sm" id="copy-link">링크 복사</button><a class="btn btn-red btn-sm" href="#/press/${next.id}">다음 기사 →</a></span></div>
+      <div class="tools"><a class="btn btn-out btn-sm" href="#/press">← 목록으로</a><span style="display:flex;gap:8px"><a class="btn btn-red btn-sm" href="#/press/${next.id}">다음 기사 →</a></span></div>
     </article></div></section>`;
   }
   return `
@@ -1712,7 +1712,7 @@ function afterRender(p, id) {
     }
   }
   if ($('#share-job')) $('#share-job').onclick = copyLink;
-  if ($('#copy-link')) $('#copy-link').onclick = copyLink;
+
   const me = ACCOUNTS[sess.get()];
   if (p === 'intranet' && id === 'tasks' && me) renderTodo();
   if (p === 'intranet' && id === 'msg' && me) $('#msg-send').onclick = () => {
