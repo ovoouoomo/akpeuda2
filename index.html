@@ -854,6 +854,24 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 .seat.talk .sit{animation:leanTalk .7s ease-in-out 3}
 @keyframes leanTalk{50%{transform:translateY(-2%) rotate(-1.5deg)}}
 .seat b{margin-top:6px!important}
+
+/* ✍️ 관리자: 관람객 후기 */
+.rv-card h3{align-items:center}
+.rv-top{display:grid;grid-template-columns:180px 1fr 1fr;gap:20px;align-items:start;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.rv-avg{text-align:center;border:1px solid var(--line);padding:16px 8px}
+.rv-avg b{display:block;font:400 54px/1 var(--didone)}
+.rv-avg small{display:block;margin-top:6px;font-size:12px;color:var(--grey)}
+.rv-st{color:var(--red);letter-spacing:2px}.rv-st i{font-style:normal;color:var(--line)}
+.rv-h{margin:0 0 8px;font:700 12px var(--sans);letter-spacing:.06em;color:var(--grey)}
+.rv-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;max-height:520px;overflow-y:auto}
+.rv-item{border:1px solid var(--line);border-left:3px solid var(--ink);padding:10px 12px;background:var(--bg)}
+.rv-meta{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.rv-meta small{font-size:11.5px;color:var(--grey)}
+.rv-item p{margin:6px 0 0;font:15px/1.65 var(--kserif)}
+.rv-tg{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.rv-tg span{font-size:11.5px;border:1px solid var(--line);padding:1px 8px;border-radius:99px;color:var(--grey)}
+.rs-l{display:block;font:700 12px var(--sans);letter-spacing:.1em;margin:12px 0 6px}
+@media (max-width:860px){.rv-top{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -2153,7 +2171,8 @@ function initAdmin() {
   const draw = () => {
     const recs = sample ? SAMPLE_LOG() : store.get('rw_log', []);
     const site = sample ? SAMPLE_SITE() : store.get('rw_site', { views: {}, ad: 0, idle: 0 });
-    $('#report').innerHTML = renderReport(recs, site, sample);
+    const revs = sample ? SAMPLE_REVIEWS() : store.get('rw_reviews', []);
+    $('#report').innerHTML = renderReport(recs, site, sample, revs);
     $('#adm-sample').textContent = sample ? '실제 데이터로 돌아가기' : '샘플 데이터 미리보기';
     $('#adm-sample').classList.toggle('on', sample);
     requestAnimationFrame(() => $$('#report .hb i, #report .cb i').forEach(i => i.style.setProperty('--on', 1)));
@@ -2167,22 +2186,34 @@ function initAdmin() {
     const rows = recs.map(r => [new Date(r.t0).toLocaleString('ko-KR'), RESULT_KO[r.result] || r.result, r.retry ? 'Y' : '', r.sec, STAGE_KO[r.reached] || r.reached, r.hp, r.mistakes, r.hints, r.coffee, (r.news || []).length, (r.errs || []).map(e => e[1]).join(' / ')]);
     download('runway-game-log.csv', '﻿' + [head, ...rows].map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n'), 'text/csv');
   };
-  $('#adm-backup').onclick = () => download(`runway-backup-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify({ rw_log: store.get('rw_log', []), rw_site: store.get('rw_site', {}) }), 'application/json');
+  $('#adm-backup').onclick = () => download(`runway-backup-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify({ rw_log: store.get('rw_log', []), rw_site: store.get('rw_site', {}), rw_reviews: store.get('rw_reviews', []) }), 'application/json');
   $('#adm-import').onchange = e => {
     const f = e.target.files[0]; if (!f) return;
     f.text().then(t => {
       const d = JSON.parse(t), mine = store.get('rw_log', []), ids = new Set(mine.map(r => r.id));
       const add = (d.rw_log || []).filter(r => r && r.id && !ids.has(r.id));
       store.set('rw_log', mine.concat(add).sort((a, b) => a.t0 - b.t0));
-      toast(`다른 기기 기록 ${add.length}건을 합쳤어요.`); sample = false; draw();
+      const myR = store.get('rw_reviews', []), rIds = new Set(myR.map(r => r.id));
+      const addR = (d.rw_reviews || []).filter(r => r && r.id && !rIds.has(r.id));
+      store.set('rw_reviews', myR.concat(addR).sort((a, b) => a.t - b.t));
+      toast(`다른 기기 기록 ${add.length}건 · 후기 ${addR.length}개를 합쳤어요.`); sample = false; draw();
     }).catch(() => toast('백업 파일을 읽을 수 없어요.'));
   };
   $('#adm-reset').onclick = () => {
-    if (!confirm('이 기기의 게임 기록과 홈페이지 이용 기록을 모두 지울까요?\n(지우기 전에 “백업 저장”을 먼저 해 두세요)')) return;
-    if (!confirm('정말 지울까요? 되돌릴 수 없어요.')) return;
-    store.set('rw_log', []); store.set('rw_site', { views: {}, ad: 0, idle: 0, since: Date.now() });
-    ['rw_plays', 'rw_wins', 'rw_best'].forEach(k => { try { localStorage.removeItem(k); } catch (err) {} });
-    toast('기록을 초기화했어요.'); draw();
+    if (!confirm('정말 이 기기의 기록을 모두 지울까요?\n(게임 기록 · 관람객 후기 · 홈페이지 이용 기록)\n\n지우기 전에 “백업 저장”을 먼저 해 두세요.')) return;
+    openModal(`<div class="src-box"><div class="eyebrow">Reset · 마지막 확인</div><h2>기록 초기화</h2>
+      <p class="muted">관리자 비밀번호를 한 번 더 입력하면 이 기기의 기록이 <b style="color:var(--red)">모두 지워져요.</b> 되돌릴 수 없어요.</p>
+      <form id="rs-form" autocomplete="off"><label class="rs-l" for="rs-pw">관리자 비밀번호</label><div class="al-row"><input type="password" id="rs-pw" inputmode="numeric" maxlength="12" required><button class="btn btn-red" type="submit">초기화</button></div></form>
+      <p class="al-msg" id="rs-msg"></p></div>`);
+    $('#rs-pw').focus();
+    $('#rs-form').onsubmit = async e => {
+      e.preventDefault();
+      let h = ''; try { h = await sha256($('#rs-pw').value.trim()); } catch (err) {}
+      if (h !== ADMIN_HASH) { $('#rs-msg').textContent = '비밀번호가 맞지 않아 초기화하지 않았어요.'; $('#rs-pw').value = ''; return; }
+      store.set('rw_log', []); store.set('rw_reviews', []); store.set('rw_site', { views: {}, ad: 0, idle: 0, since: Date.now() });
+      ['rw_plays', 'rw_wins', 'rw_best'].forEach(k => { try { localStorage.removeItem(k); } catch (err) {} });
+      closeModal(); sample = false; toast('기록을 모두 초기화했어요.'); draw();
+    };
   };
   draw();
 }
@@ -2213,10 +2244,10 @@ function cbars(rows) {
   return `<div class="cbars">${rows.map(([lab, v]) => `<div class="cb ${v === top && v > 0 ? 'top' : ''}" tabindex="0" data-tip="${esc(lab)} · ${v}명"><span class="cb-v">${v || ''}</span><i style="--h:${v / max * 100}%"></i><span class="cb-l">${esc(lab)}</span></div>`).join('')}</div>`;
 }
 
-function renderReport(all, site, sample) {
+function renderReport(all, site, sample, revs = []) {
   const main = all.filter(r => !r.retry), retry = all.filter(r => r.retry);
   const n = main.length;
-  if (!all.length) return `<div class="adm-empty"><b>아직 게임 기록이 없어요.</b><p>이 기기에서 게임을 하면 한 판이 끝날 때마다 기록이 쌓여요.<br>전시 전에 화면 구성을 보고 싶다면 위의 <b>“샘플 데이터 미리보기”</b>를 눌러 보세요.</p></div>`;
+  if (!all.length) return (revs.length ? reviewCard(revs) : '') + `<div class="adm-empty"><b>아직 게임 기록이 없어요.</b><p>이 기기에서 게임을 하면 한 판이 끝날 때마다 기록이 쌓여요.<br>전시 전에 화면 구성을 보고 싶다면 위의 <b>“샘플 데이터 미리보기”</b>를 눌러 보세요.</p></div>`;
   const wins = main.filter(r => r.result === 'win'), fails = main.filter(r => r.result === 'fail'), quits = main.filter(r => r.result === 'quit');
   const retryWins = retry.filter(r => r.result === 'win').length;
   const done = main.filter(r => r.result !== 'quit');
@@ -2268,7 +2299,8 @@ function renderReport(all, site, sample) {
     `관람객이 가장 어려워한 단계는 <b>${hardest[0]}</b>로, 이 단계에 도달한 사람은 평균 <b>${hardest[1]}회</b> 실수했습니다.`,
     topErr.length ? `가장 많이 틀린 문제는 <b>“${topErr[0][0]}”</b>(${topErr[0][1]}회)였습니다.` : '',
     `평균 플레이 시간은 <b>${mmss(avg(done.map(r => r.sec)))}</b>이며, 관람객이 가장 많이 몰린 시간대는 <b>${peak[0]}</b>입니다.`,
-    `플레이어의 <b>${pct(main.filter(r => (r.news || []).length).length, n)}%</b>가 게임 중 신문기사를 직접 펼쳐 읽으며 단서를 찾았습니다.`
+    `플레이어의 <b>${pct(main.filter(r => (r.news || []).length).length, n)}%</b>가 게임 중 신문기사를 직접 펼쳐 읽으며 단서를 찾았습니다.`,
+    revs.filter(r => r.stars).length ? `관람객 <b>${revs.length}명</b>이 후기를 남겼고, 평균 별점은 <b>${r1(avg(revs.filter(r => r.stars).map(r => r.stars)))}점</b>(5점 만점)입니다.` : ''
   ].filter(Boolean);
 
   return `
@@ -2278,6 +2310,7 @@ function renderReport(all, site, sample) {
   <div class="adm-card adm-sum"><h3>포트폴리오 한 줄 요약 <small>숫자는 기록에 따라 자동으로 바뀌어요</small></h3><ul>${summary.map(t => `<li>${t}</li>`).join('')}</ul>
     <button class="btn btn-out btn-sm" id="adm-copy" type="button">요약 문장 복사</button></div>
 
+  ${reviewCard(revs)}
   <div class="adm-grid">
     <div class="adm-card"><h3>단계별 도달률 <small>게임을 시작한 사람 중 각 단계까지 간 비율</small></h3>
       ${hbars([['게임 시작', 100], ['잠금 1 통과', pct(reach(2), n)], ['잠금 2 통과', pct(reach(3), n)], ['잠금 3 통과', pct(reach(4), n)], ['보스전 도달', pct(reach(5), n)], ['탈출 성공', winRate]], { max: 100, fmt: v => v + '%', hl: false })}</div>
@@ -2304,6 +2337,39 @@ function renderReport(all, site, sample) {
     <div class="tbl-wrap"><table class="adm-tb"><tr><th>시작 시각</th><th>결과</th><th>도달 단계</th><th>시간</th><th>멘탈</th><th>실수</th><th>힌트</th><th>커피</th></tr>
     ${all.slice(-20).reverse().map(r => `<tr><td>${new Date(r.t0).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}${r.retry ? ' <small>(재도전)</small>' : ''}</td><td><span class="rs ${r.result}">${RESULT_KO[r.result] || r.result}</span></td><td>${r.result === 'win' ? '탈출' : STAGE_KO[r.reached] || '-'}</td><td>${mmss(r.sec || 0)}</td><td>${r.hp ?? '-'}</td><td>${r.mistakes ?? 0}</td><td>${r.hints ?? 0}</td><td>${r.coffee ?? 0}</td></tr>`).join('')}</table></div></div>
   <p class="adm-foot">※ 기록은 게임을 한 기기의 브라우저에만 저장돼요. 여러 기기를 썼다면 각 기기에서 “백업 저장” 후 한 기기에서 “백업 합치기”를 하세요. 이름·연락처 같은 개인정보는 저장하지 않아요.</p>`;
+}
+// ✍️ 관람객 후기 (게임 결과 화면에서 남긴 것 · 관리자만 볼 수 있어요)
+function reviewCard(revs) {
+  if (!revs.length) return `<div class="adm-card rv-card"><h3>관람객 후기 <small>게임이 끝난 뒤 남긴 후기가 여기에 모여요 · 제작진만 볼 수 있어요</small></h3><p class="muted" style="margin:0">아직 후기가 없어요.</p></div>`;
+  const rated = revs.filter(r => r.stars), mean = r1(avg(rated.map(r => r.stars)));
+  const dist = [5, 4, 3, 2, 1].map(k => [k + '점', rated.filter(r => r.stars === k).length]);
+  const tagC = {}; revs.forEach(r => (r.tags || []).forEach(t => tagC[t] = (tagC[t] || 0) + 1));
+  const tags = Object.entries(tagC).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const stars = k => '★★★★★'.slice(0, k) + '<i>' + '★★★★★'.slice(0, 5 - k) + '</i>';
+  return `<div class="adm-card rv-card"><h3>관람객 후기 <small>제작진만 볼 수 있어요 · 총 ${revs.length}개</small><button class="btn btn-out btn-sm" id="adm-rv-csv" type="button" style="margin-left:auto">후기 CSV 내보내기</button></h3>
+    <div class="rv-top">
+      <div class="rv-avg"><b>${rated.length ? mean : '-'}</b><span class="rv-st">${stars(Math.round(mean))}</span><small>평균 별점 · ${rated.length}명 참여</small></div>
+      <div><p class="rv-h">별점 분포</p>${hbars(dist, { fmt: v => v + '명' })}</div>
+      <div><p class="rv-h">많이 고른 한마디</p>${tags.length ? hbars(tags, { fmt: v => v + '명' }) : '<p class="muted">-</p>'}</div>
+    </div>
+    <div class="rv-list">${revs.slice().reverse().slice(0, 40).map(r => `<div class="rv-item">
+      <div class="rv-meta"><span class="rv-st">${r.stars ? stars(r.stars) : '<i>별점 없음</i>'}</span><small>${new Date(r.t).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })} · ${RESULT_KO[r.result] || ''}</small></div>
+      ${r.text ? `<p>${esc(r.text)}</p>` : ''}${(r.tags || []).length ? `<div class="rv-tg">${r.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>` : ''}</div>`).join('')}</div>
+    ${revs.length > 40 ? `<p class="adm-foot">최근 40개만 보여요. 전체는 “후기 CSV 내보내기”로 받으세요.</p>` : ''}</div>`;
+}
+document.addEventListener('click', e => {
+  if (e.target.id !== 'adm-rv-csv') return;
+  const revs = $('#adm-sample') && $('#adm-sample').classList.contains('on') ? SAMPLE_REVIEWS() : store.get('rw_reviews', []);
+  const rows = revs.map(r => [new Date(r.t).toLocaleString('ko-KR'), r.stars || '', RESULT_KO[r.result] || '', (r.tags || []).join(' / '), r.text || '']);
+  download('runway-reviews.csv', '\ufeff' + [['작성 시각', '별점', '게임 결과', '고른 한마디', '후기'], ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n'), 'text/csv');
+});
+function SAMPLE_REVIEWS() {
+  const T = ['재밌어요', '또 하고 싶어요', '어려웠어요', '쉬웠어요', '신문 단서가 좋았어요', 'AI 공부가 됐어요', '미란다가 무서워요', '디자인이 예뻐요'];
+  const X = ['미란다가 서류 던질 때 진짜 깜짝 놀랐어요 ㅋㅋ', '검수 데스크에서 같은 질문 세 번 물어보는 게 왜 틀린지 처음 알았어요.', '신문을 읽어야 풀리는 게 방탈출 같아서 좋았어요!', '프롬프트 5요소 외워서 갑니다.', '마지막 보스전이 제일 어려웠어요. 다시 할래요!', '', '친구랑 기록 대결했어요. 제가 이김', '영화 좋아해서 반가웠어요. 런웨이 홈페이지도 예뻐요.', ''];
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const base = new Date(2026, 7, 29, 10).getTime();
+  return Array.from({ length: 63 }, (_, i) => ({ id: 'sr' + i, t: base + Math.floor(i / 13) * 864e5 + Math.floor(rnd() * 8 * 36e5), stars: [5, 5, 5, 4, 4, 4, 5, 3, 4, 5, 2][Math.floor(rnd() * 11)],
+    tags: T.filter(() => rnd() < .22), text: X[Math.floor(rnd() * X.length)], result: rnd() < .8 ? 'win' : 'fail' })).sort((a, b) => a.t - b.t);
 }
 function median(a) { if (!a.length) return 0; const b = a.slice().sort((x, y) => x - y), m = b.length >> 1; return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2; }
 document.addEventListener('click', e => {
