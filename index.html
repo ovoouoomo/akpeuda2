@@ -848,7 +848,7 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 .seat.talk b{color:var(--red)}
 
 .seat .sit{display:block;width:100%;overflow:visible}
-.seat .shoe{transform-origin:142px 212px}
+.seat .shoe{transform-origin:152px 220px}
 .seat.talk .shoe{animation:tapShoe .45s ease-in-out infinite alternate}
 @keyframes tapShoe{to{transform:rotate(-12deg)}}
 .seat.talk .sit{animation:leanTalk .7s ease-in-out 3}
@@ -2104,7 +2104,7 @@ function pAdmin() {
 // x · y : 머리 그림을 놓는 자리 (목 끝이 어깨선에 오도록 사람마다 맞춤)
 var HEADS = [
   { img: 'img/head-yeju.png',    x: 27, y: -34, top: 'jacket' },   // 예주: 블랙 재킷 + 흰 이너
-  { img: 'img/head-eunbin.png',  x: 25, y: -18, top: 'shirt' },    // 은빈: 흰 셔츠 (단추)
+  { img: 'img/head-eunbin.png',  x: 25, y: -30, top: 'shirt', neck: true },   // 은빈: 흰 셔츠 (원래 그림의 목이 짧아서 목을 새로 그려 이었어요)
   { img: 'img/head-sihyeon.png', x: 27, y: -12, top: 'suit' },     // 시현: 블랙 수트 + 금색 명찰
   { img: 'img/head-eunchae.png', x: 29, y: -16, w: 168, top: 'blouse' }   // 은채: 흰 블라우스 + 리본 끈 (원본 그림이 작아서 조금 크게)
 ];
@@ -2112,7 +2112,8 @@ function seatedSVG(t, i) {
   const H = HEADS[i], ink = '#1a1a1a', pants = '#2c2c30', chair = '#efe6d8', chairD = '#ddd0bd', skin = '#fff1ea';
   const dark = H.top === 'jacket' || H.top === 'suit', cloth = dark ? '#2b2b2b' : '#ffffff';
   const limb = (d, w, c) => `<path d="${d}" fill="none" stroke="${ink}" stroke-width="${w + 5}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  const torso = `<path d="M58 114 Q60 100 80 98 L100 104 L120 98 Q140 100 142 114 L136 154 H64 Z" fill="${cloth}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`;
+  const torso = `<path d="M55 128 C55 110 66 101 84 98 L100 104 L116 98 C134 101 145 110 145 128 L139 156 H61 Z" fill="${cloth}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`;
+  const neck = H.neck ? `<path d="M92 80 V104 L100 108 L108 104 V80 Z" fill="${skin}" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>` : '';
   const detail = {
     jacket: `<path d="M84 99 L100 105 L116 99 L112 136 H88 Z" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>
              <path d="M80 99 L90 124 L84 130 M120 99 L110 124 L116 130" fill="none" stroke="#6a6a6a" stroke-width="2.5" stroke-linejoin="round"/>
@@ -2120,7 +2121,7 @@ function seatedSVG(t, i) {
     suit:   `<path d="M90 101 L100 106 L110 101 L104 128 H96 Z" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>
              <path d="M82 99 L93 126 L87 132 M118 99 L107 126 L113 132" fill="none" stroke="#6a6a6a" stroke-width="2.5" stroke-linejoin="round"/>
              <rect x="114" y="124" width="13" height="4" rx="1" fill="#e3b23c"/><circle cx="100" cy="140" r="2.2" fill="#8a8a8a"/>`,
-    shirt:  `<path d="M100 106 V152" stroke="#d6d6d6" stroke-width="2"/><circle cx="100" cy="118" r="2.3" fill="${ink}"/><circle cx="100" cy="131" r="2.3" fill="${ink}"/><circle cx="100" cy="144" r="2.3" fill="${ink}"/>`,
+    shirt:  `<path d="M84 98 L100 108 L92 117 L82 104 Z M116 98 L100 108 L108 117 L118 104 Z" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/><path d="M100 110 V152" stroke="#d6d6d6" stroke-width="2"/><circle cx="100" cy="118" r="2.3" fill="${ink}"/><circle cx="100" cy="131" r="2.3" fill="${ink}"/><circle cx="100" cy="144" r="2.3" fill="${ink}"/>`,
     blouse: `<path d="M88 100 L100 107 L95 112 Z M112 100 L100 107 L105 112 Z" fill="#fff" stroke="${ink}" stroke-width="2" stroke-linejoin="round"/>
              <path d="M100 108 q-9 2 -7 8 q4 4 7 -8 q3 12 7 8 q2 -6 -7 -8" fill="none" stroke="${ink}" stroke-width="2"/>
              <path d="M98 112 q-5 10 -2 22 q2 6 -1 12 M102 112 q5 10 2 22 q-2 6 1 12" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round"/>`
@@ -2133,17 +2134,17 @@ function seatedSVG(t, i) {
     <path d="M12 134 Q12 118 30 118 Q48 118 48 134 V210 H12 Z" fill="${chair}" stroke="${ink}" stroke-width="3"/>
     <path d="M152 134 Q152 118 170 118 Q188 118 188 134 V210 H152 Z" fill="${chair}" stroke="${ink}" stroke-width="3"/>
     <path d="M20 128 Q24 122 32 122" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-    ${limb('M64 108 Q50 116 34 124', 15, cloth)}<ellipse cx="29" cy="126" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
-    ${limb('M136 108 Q150 116 166 124', 15, cloth)}<ellipse cx="171" cy="126" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
-    ${torso}${detail}
+    ${limb('M64 116 Q50 120 34 126', 15, cloth)}<ellipse cx="29" cy="127" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
+    ${limb('M136 116 Q150 120 166 126', 15, cloth)}<ellipse cx="171" cy="127" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
+    ${torso}${neck}${detail}
     <image href="${H.img}" x="${H.x}" y="${H.y}" width="${H.w || 150}" height="${(H.w || 150) * 520 / 420}"/>
     <path d="M66 148 H134 L138 172 Q100 182 62 172 Z" fill="${pants}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
-    ${limb('M80 170 L82 224', 19, pants)}
-    <path d="M81 182 L82 220" stroke="#55555b" stroke-width="1.5"/>
-    <path d="M66 231 Q68 220 84 222 L94 224 Q99 232 90 234 H68 Z" fill="${ink}"/><path d="M72 226 L80 225" stroke="#888" stroke-width="2" stroke-linecap="round"/>
-    <g class="xleg">${limb('M122 160 Q104 168 90 174 L146 216', 19, pants)}
-      <path d="M100 182 L140 212" stroke="#55555b" stroke-width="1.5"/>
-      <g class="shoe"><path d="M140 208 L162 214 Q176 218 170 228 L148 228 Q137 223 140 208 Z" fill="${ink}"/><path d="M154 217 L165 220" stroke="#888" stroke-width="2" stroke-linecap="round"/></g></g>
+    ${limb('M116 168 L118 226', 19, pants)}
+    <path d="M117 182 L118 222" stroke="#55555b" stroke-width="1.5"/>
+    <path d="M104 233 Q106 222 120 224 L130 226 Q134 234 126 236 H106 Z" fill="${ink}"/><path d="M110 228 L118 227" stroke="#888" stroke-width="2" stroke-linecap="round"/>
+    <g class="xleg">${limb('M80 162 Q112 156 150 164 L154 222', 21, pants)}
+      <path d="M96 160 Q122 157 146 163" stroke="#55555b" stroke-width="1.5" fill="none"/><path d="M153 176 L154 216" stroke="#55555b" stroke-width="1.5"/>
+      <g class="shoe"><path d="M144 226 Q146 216 158 218 L170 222 Q176 230 168 232 H146 Z" fill="${ink}"/><path d="M150 222 L160 221" stroke="#888" stroke-width="2" stroke-linecap="round"/></g></g>
   </svg>`;
 }
 var CROSSED_LEGS = `<svg viewBox="0 0 120 80" aria-hidden="true">
