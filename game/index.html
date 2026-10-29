@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>악프다 2: 미란다의 비서</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
    🎨 색상 설정 — 여기 색 코드를 바꾸면 게임 전체 색이 바뀝니다
@@ -121,13 +121,13 @@ body.critical #game-main{animation:pulseRed .7s infinite}
 .window::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:5px;margin-left:-2px;background:#fff;z-index:2}
 .window .sun{position:absolute;left:62%;top:38%;width:18%;aspect-ratio:1;border-radius:50%;background:#ff7a59}
 .window .city{position:absolute;left:0;right:0;bottom:0;height:46%;background:
-  linear-gradient(#8a7fa8,#8a7fa8) 4% 100%/10% 70% no-repeat,
-  linear-gradient(#a397c0,#a397c0) 16% 100%/8% 95% no-repeat,
-  linear-gradient(#7c7199,#7c7199) 27% 100%/12% 55% no-repeat,
-  linear-gradient(#9b8fb8,#9b8fb8) 42% 100%/7% 100% no-repeat,
-  linear-gradient(#8a7fa8,#8a7fa8) 54% 100%/12% 75% no-repeat,
-  linear-gradient(#a397c0,#a397c0) 70% 100%/9% 60% no-repeat,
-  linear-gradient(#7c7199,#7c7199) 82% 100%/14% 85% no-repeat}
+  linear-gradient(#8592a3,#8592a3) 4% 100%/10% 70% no-repeat,
+  linear-gradient(#a3adba,#a3adba) 16% 100%/8% 95% no-repeat,
+  linear-gradient(#6f7b8b,#6f7b8b) 27% 100%/12% 55% no-repeat,
+  linear-gradient(#97a2b0,#97a2b0) 42% 100%/7% 100% no-repeat,
+  linear-gradient(#8592a3,#8592a3) 54% 100%/12% 75% no-repeat,
+  linear-gradient(#a3adba,#a3adba) 70% 100%/9% 60% no-repeat,
+  linear-gradient(#6f7b8b,#6f7b8b) 82% 100%/14% 85% no-repeat}
 .frames{position:absolute;left:62%;top:9%;display:flex;gap:1.4%;width:21%}
 .frame{flex:1;aspect-ratio:3/4;background:#fff;border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:4% 2%;font:900 clamp(5px,1vw,10px) var(--serif);color:var(--red)}
 .frame i{display:block;width:60%;flex:1;margin:6% 0;border-radius:40% 40% 10% 10%;background:var(--blue)}
@@ -500,7 +500,7 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
 .cf-btn.need .cf-ring{animation:none}
 
 /* 틀리면 시각 힌트 */
-.hint-glow{animation:hintGlow .5s ease-in-out 6!important;outline:4px solid #ffd166!important;outline-offset:3px;position:relative;z-index:4}
+.hint-glow{animation:hintGlow .5s ease-in-out 4!important;outline:4px solid #ffd166!important;outline-offset:3px;position:relative;z-index:4}
 @keyframes hintGlow{50%{outline-color:#ff9f1c;box-shadow:0 0 0 10px rgba(255,209,102,.55),0 0 24px #ffd166}}
 .hint-arrow{position:fixed;z-index:9500;transform:translateX(-50%);font-size:40px;pointer-events:none;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35));animation:hintBob .45s ease-in-out infinite alternate}
 @keyframes hintBob{from{margin-top:2px}to{margin-top:16px}}
@@ -570,6 +570,127 @@ body.shake #game-main,body.shake .cu-box{animation:shake .4s}
   .cu-box{max-height:100vh;height:100%;border-radius:0;box-shadow:none}
   #toasts{top:130px}
 }
+
+/* =========================================================
+   👠 RUNWAY 스타일 — 홈페이지와 같은 잡지 분위기
+   (흰 바탕 · 검정 · 런웨이 레드 · 각진 모서리 · 보도니 세리프)
+   ========================================================= */
+:root{
+  --ivory:#f7f5f2; --ink:#141414; --muted:#6e6e6e; --line:#e6e1da;
+  --red:#d0021b; --red-d:#8f0013; --red-soft:#ffe9ec;
+  --blue:#2a6fc9; --blue-soft:#eef3fb;            /* 세룰리안 블루 (영화 속 그 색) */
+  --pink:#ece6df; --gold:#b08a3e;
+  --serif:'Bodoni Moda','Playfair Display','Noto Serif KR',Georgia,serif;
+}
+body{background:#fff;letter-spacing:-.005em}
+/* 각진 모서리 + 납작한 그림자 */
+.btn,.room,.dialog,.objlist button,.cu-box,.cu-top button,.tray,.task,.frag,.pslot,.tool,.pick-card,.key,.bitem,.skill,
+.result,.modal-box,.toast,.ropt,.cf-btn,.art-btn,.hud-time,.hud-actions button,.digit,.inv span,.codebox,.say,.arena,.ask,.dline,.auto-home{border-radius:0!important}
+.btn{min-height:50px;padding:12px 28px;font-size:15px;letter-spacing:.12em;border-width:1.5px}
+.btn-red{background:var(--ink);color:#fff;box-shadow:none;border:1.5px solid var(--ink)}
+.btn-red:hover{background:var(--red);border-color:var(--red);filter:none}
+.btn-red:active{box-shadow:none;transform:scale(.98)}
+.btn-line{border:1.5px solid var(--ink)}
+.cover{border:none;border-top:6px solid var(--ink);box-shadow:0 30px 80px rgba(20,20,20,.12);padding-top:26px}
+.cover::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--red)}
+.mast{border-bottom:1px solid var(--ink)}
+.mast h1{font-weight:400;color:var(--ink);letter-spacing:.06em;font-family:'Bodoni Moda',serif}
+.mast .issue{color:var(--ink)}
+.kicker{color:var(--red);letter-spacing:.35em}
+.title{font-weight:900}
+.title em{color:var(--red)}
+.subtitle{color:var(--ink);font-weight:400;font-style:italic}
+.story{background:#fff;border:1px solid var(--line);border-left:3px solid var(--red)}
+.story b{color:var(--ink);box-shadow:inset 0 -.45em 0 var(--red-soft)}
+/* 표지 속 캐릭터: 런웨이 무대 위 스포트라이트 */
+.hero{border-radius:0;aspect-ratio:4/5;background:
+  radial-gradient(ellipse 50% 70% at 50% 0,rgba(255,255,255,.95),transparent 70%),
+  linear-gradient(#e4dfd8,#cfc9c1);border:1px solid var(--ink);padding-bottom:12%}
+.hero::before{content:"";position:absolute;left:35%;right:35%;bottom:0;height:22%;background:var(--red);clip-path:polygon(20% 0,80% 0,100% 100%,0 100%)}
+.hero::after{content:"RUNWAY";position:absolute;left:0;right:0;top:4%;text-align:center;font:400 clamp(28px,6vw,46px) 'Bodoni Moda',serif;letter-spacing:.2em;color:rgba(20,20,20,.13)}
+.hero .who{position:relative;z-index:1}
+.hero .clock{top:auto;bottom:4%;left:auto;right:5%;transform:none;font:700 13px var(--sans);letter-spacing:.15em;color:#fff;background:var(--red);border:none;padding:4px 10px}
+.pick h3{letter-spacing:.2em;font-size:12.5px}
+.pick-card{border:1px solid var(--line)}
+.pick-card.on{border-color:var(--ink);background:#fff;box-shadow:inset 0 -4px 0 var(--red)}
+/* HUD */
+#hud{background:rgba(255,255,255,.97);border-bottom:1px solid var(--ink)}
+.hud-time{border:1px solid var(--ink);background:#fff}
+#h-time{font-weight:400}
+.bar{border:1px solid var(--ink);border-radius:0;background:#f1efec;height:11px}
+.bar i{border-radius:0;background:var(--ink)}
+.bar-row.boss .bar i{background:var(--red)}
+.digit{border:1px solid var(--ink);background:#fff;font-weight:400}
+.digit.got{background:var(--red)}
+.inv span{border:1px dashed #c9c2b8}
+.inv span.has{border:1px solid var(--ink);background:#fff}
+.hud-actions button{border:1px solid var(--ink)}
+.hud-actions button:hover small{color:#ff9aa7}
+.quest{font-size:13px;letter-spacing:.02em}
+/* 사무실: 하얀 편집장실 + 레드 런웨이 카펫 */
+.room{border:1px solid var(--ink);box-shadow:0 24px 60px rgba(20,20,20,.12);
+  background:linear-gradient(90deg,transparent 0 99.4%,rgba(20,20,20,.05) 99.4%) 0 0/12.5% 100%,linear-gradient(#ffffff,#f4f2ef)}
+.wainscot{background:linear-gradient(#fbfaf8,#eeebe7);border-top:1px solid #d9d4cc;border-bottom:2px solid var(--ink)}
+.floor{background:
+  linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px) 0 0/10% 100%,
+  linear-gradient(#d9d5cf,#c9c4bd)}
+.floor::after{background:linear-gradient(rgba(0,0,0,.10),transparent 45%)}
+.rug{left:30%;top:64%;width:32%;height:36%;border-radius:0;background:var(--red);box-shadow:inset 3px 0 0 #fff,inset -3px 0 0 #fff;clip-path:polygon(28% 0,72% 0,100% 100%,0 100%)}
+.window{border:5px solid var(--ink);outline:none}
+.window::before{background:var(--ink);width:4px}
+.frame{border:2px solid var(--ink);font-family:'Bodoni Moda',serif;font-weight:400;color:var(--ink);letter-spacing:.05em}
+.frame i{background:var(--red)}
+.frame:nth-child(2) i{background:var(--ink)}
+.frame:nth-child(3) i{background:var(--blue)}
+.desk::before{background:#fff;border:1.5px solid var(--ink);border-radius:0;box-shadow:inset 0 -3px 0 #e8e4de}
+.side::before{background:var(--ink);border-radius:0}
+.room-sign{background:none;color:var(--ink);font:400 clamp(9px,1.5vw,15px) 'Bodoni Moda',serif;letter-spacing:.3em;border-bottom:1px solid var(--ink);padding:2px 0}
+.obj .tag{border:1px solid var(--ink);border-radius:0;letter-spacing:.04em;background:#fff}
+.obj:hover .spr{filter:drop-shadow(0 0 6px rgba(208,2,27,.6))}
+.objlist button{border:1px solid var(--ink)}
+.objlist button.target{background:var(--red);border-color:var(--red)}
+.dialog{border:1px solid var(--ink);border-left:4px solid var(--red);box-shadow:0 10px 30px rgba(20,20,20,.08)}
+/* 퍼즐 창 · 신문 · 팝업 */
+.cu{background:rgba(10,10,10,.6)}
+.cu-box{background:#fff;border:1px solid var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35);border-top:5px solid var(--red)}
+.cu-top{background:#fff;color:var(--ink);border-bottom:1px solid var(--ink)}
+.cu-top .lt{border-radius:0;background:var(--ink);color:#fff}
+.cu-top button{border:1px solid var(--ink)}
+.cu-time{background:#f1efec}
+.tray,.task,.frag,.pslot,.tool,.key,.bitem,.ropt{border-width:1.5px!important;box-shadow:none!important}
+.task:hover,.frag:hover,.ropt:hover:not(:disabled){box-shadow:0 8px 20px rgba(20,20,20,.1)!important}
+.tray.ai{background:var(--blue-soft)}
+.chip{border-radius:0;border-width:1px}
+.draft{border:1px solid var(--ink);box-shadow:0 14px 34px rgba(20,20,20,.1)}
+.tool.on{box-shadow:inset 0 -4px 0 var(--red)!important;background:var(--ink)}
+.modal-box{border:1px solid var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.toast{border:1px solid var(--ink);box-shadow:0 10px 26px rgba(0,0,0,.15)}
+/* 보스전: 런웨이 무대 */
+.arena{border:1px solid var(--ink)}
+.stage-top{background:
+  radial-gradient(ellipse 40% 80% at 25% 0,rgba(255,255,255,.18),transparent 70%),
+  radial-gradient(ellipse 40% 80% at 75% 0,rgba(255,255,255,.18),transparent 70%),
+  linear-gradient(#141414,#050505)}
+.stage-top::after{height:26px;background:var(--red);box-shadow:inset 0 3px 0 rgba(255,255,255,.5)}
+.vs{color:#fff;font-weight:400;font-style:italic}
+.say{border:none;border-left:3px solid var(--red)}
+.ask{background:#fff;border:1px solid var(--ink);border-left:4px solid var(--red)}
+.ask .q-who{border-radius:0}
+.ropt .abc{border-radius:0}
+.cf-btn,.art-btn{border:1px solid var(--ink);box-shadow:none}
+.wavebar{border-radius:0;border:1px solid var(--ink)}
+.wavebar i{background:var(--red)}
+/* 결과 화면 */
+.result{border:none;border-top:6px solid var(--ink);box-shadow:0 30px 80px rgba(20,20,20,.14)}
+.result.win-box,.result.fail-box{box-shadow:0 30px 80px rgba(20,20,20,.14)}
+.result.win-box{border-bottom:4px solid var(--gold)}
+.result.fail-box{border-bottom:4px solid var(--red)}
+.badge{border-radius:0}
+.result h1{font-weight:400}
+.win-box h1{background:linear-gradient(90deg,var(--ink),var(--red),var(--ink));-webkit-background-clip:text;background-clip:text;background-size:200% 100%}
+.quote{background:#fff;border:1px solid var(--line);border-left:3px solid var(--red)}
+.reward h3,.perfect{font-weight:400}
+.lbody{border-radius:0}
 </style>
 </head>
 <body>
@@ -831,27 +952,29 @@ const HINTS = {
    🧍 픽셀 캐릭터 그림 — 글자 하나가 네모 한 칸이에요 (. 은 빈칸)
    ===================================================================== */
 const SPR = {
-  fem: { pal:{K:'#2a2226',S:'#ffe0cc',E:'#2a2226',P:'#ffb3c1',M:'#d64561',J:'#3f7fd9',W:'#ffffff',R:'#c8102e',D:'#2a2226',L:'#3a3035',k:'#c8102e'}, rows:[
-    "....KKKKKKKK....",
+  // 신입 비서: 깔끔한 올림머리 · 검정 테일러드 재킷 · 흰 블라우스 · 빨간 사원증 목걸이 · 펜슬 스커트 · 빨간 구두
+  fem: { pal:{K:'#1e1a1c',S:'#ffe0cc',E:'#1e1a1c',P:'#ffb3c1',M:'#c0283c',B:'#141414',g:'#4a4a4a',W:'#ffffff',R:'#d0021b',I:'#ffffff',i:'#d0021b',D:'#2e2e2e',T:'#4b3f3d',r:'#d0021b'}, rows:[
+    "......KKKK......",
+    ".....KKKKKK.....",
+    "...KKKKKKKKKK...",
     "..KKKKKKKKKKKK..",
-    ".KKKKKKKKKKKKKK.",
-    ".KKKKKKKKKKKKKK.",
-    ".KKKSSSSSSSSKKK.",
-    ".KKSSSSSSSSSSKK.",
-    ".KKSSEESSEESSKK.",
-    ".KKSSEESSEESSKK.",
-    ".KKSPSSSSSSPSKK.",
-    ".KKSSSSMMSSSSKK.",
-    ".KKKSSSSSSSSKKK.",
-    ".KKK..SSSS..KKK.",
-    ".KKJJJWWWWJJJKK.",
-    "..JJJJWRRWJJJJ..",
-    ".SJJJJWWRWJJJJS.",
-    ".SJJJJWWWWJJJJS.",
-    "..JJJJJJJJJJJJ..",
+    "..KKKKKSSSSSKK..",
+    "..KKSSSSSSSSSK..",
+    "..KSSEESSEESSK..",
+    "..KSSEESSEESSK..",
+    "..KSPSSSSSSPSK..",
+    "..KSSSSMMSSSSK..",
+    "...SSSSSSSSSS...",
+    "......SSSS......",
+    "..BBBgWWWWgBBB..",
+    ".BBBBgRWWRgBBBB.",
+    ".BBBBBgRRgBBBBB.",
+    ".SBBBBBIIBBBBBS.",
+    ".SBBBBBiiBBBBBS.",
+    "..BBBBBBBBBBBB..",
     "...DDDDDDDDDD...",
-    "....LL....LL....",
-    "....kk....kk...."]},
+    "....TT....TT....",
+    "....rr....rr...."]},
   male: { pal:{K:'#2a2226',S:'#ffe0cc',E:'#2a2226',P:'#ffc2b0',M:'#b8475b',J:'#3f7fd9',W:'#ffffff',R:'#c8102e',D:'#2a2226',k:'#2a2226'}, rows:[
     "................",
     "...KKKKKKKKKK...",
@@ -895,7 +1018,7 @@ const SPR = {
     "..CCCCCCCCCCCC..",
     "...LL......LL...",
     "...rr......rr..."]},
-  cabinet: { pal:{k:'#1d1a1c',g:'#cfd8e8',w:'#ffffff',y:'#c99a3b'}, rows:[
+  cabinet: { pal:{k:'#141414',g:'#ebe7e1',w:'#ffffff',y:'#b08a3e'}, rows:[
     "kkkkkkkkkkkk","kggggggggggk","kgkkkkkkkkgk","kgkwwwwwwkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kggggggggggk","kgkkkkkkkkgk",
     "kgkwwwwwwkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kggggggggggk","kgkkkkkkkkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kkkkkkkkkkkk"]},
   pc: { pal:{k:'#1d1a1c',g:'#f1ece6',b:'#3f7fd9',w:'#cfe2ff',r:'#c8102e'}, rows:[
@@ -1064,19 +1187,28 @@ function onSecond() {
 
 /* ---------- HP 변화 ---------- */
 /* ---------- 👆 틀리면 시각 힌트: 정답 쪽을 반짝이고 손가락으로 가리켜요 ---------- */
-function showHint(el) {
-  if (!el) return;
+let hintTimers = [];
+function clearHint() {
+  hintTimers.forEach(clearTimeout); hintTimers = [];
   document.querySelectorAll('.hint-arrow').forEach(a => a.remove());
-  el.classList.remove('hint-glow'); void el.offsetWidth; el.classList.add('hint-glow');
-  setTimeout(() => el.classList.remove('hint-glow'), 3000);
-  setTimeout(() => {
+  document.querySelectorAll('.hint-glow').forEach(e => e.classList.remove('hint-glow'));
+}
+function showHint(el) {
+  clearHint();
+  if (!el) return;
+  void el.offsetWidth; el.classList.add('hint-glow');
+  hintTimers.push(setTimeout(() => el.classList.remove('hint-glow'), 2000));
+  hintTimers.push(setTimeout(() => {
     el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     const r = el.getBoundingClientRect(), a = document.createElement('div');
     a.className = 'hint-arrow'; a.textContent = '👆';
     a.style.left = (r.left + r.width / 2) + 'px'; a.style.top = Math.min(r.bottom, innerHeight - 50) + 'px';
-    document.body.appendChild(a); setTimeout(() => a.remove(), 2600);
-  }, 450);
+    document.body.appendChild(a); hintTimers.push(setTimeout(() => a.remove(), 1600));
+  }, 250));
 }
+const HINT_AFTER = 3;   // 몇 번 틀리면 힌트를 보여 줄지
+function miss(el) { S.missCount = (S.missCount || 0) + 1; if (S.missCount >= HINT_AFTER) { showHint(el); return true; } return false; }
+function gotIt() { S.missCount = 0; clearHint(); }
 function damageMe(n, msg) {
   if (!S.running) return;
   S.hp = Math.max(0, S.hp - n); S.combo = 0; S.lockMistakes++; S.mistakes++;
@@ -1104,7 +1236,7 @@ function hitBoss(n) {
 function resetState() {
   Object.assign(S, {
     runId: S.runId + 1, running: false, startAt: Date.now(), timeLeft: 0,
-    hp: 100, boss: 100, digits: [null, null, null], combo: 0, mistakes: 0, hintsUsed: 0, lockMistakes: 0, dateHint: false,
+    hp: 100, boss: 100, digits: [null, null, null], combo: 0, mistakes: 0, hintsUsed: 0, lockMistakes: 0, dateHint: false, missCount: 0,
     elapsed: 0, nextPile: CONFIG.pileFirst, phase: 'room', open: 0, coffeeReadyAt: 0, coffeeAlertAt: 0,
     round: 0, roundEnd: 0, roundData: null, answered: false, bossEntry: null,
     inv: { pen: false, draft: false, article: false },
@@ -1227,7 +1359,7 @@ function clickObj(id, el) {
    🔎 클로즈업 (퍼즐 창)
    ===================================================================== */
 function openLock(n) {
-  S.open = n; S.lockMistakes = 0;
+  S.open = n; S.lockMistakes = 0; S.missCount = 0; clearHint();
   const t = { 1: ['LOCK 01', '서류함 — 업무 분배표'], 2: ['LOCK 02', 'AI 문서작성기 — 프롬프트 입력'], 3: ['LOCK 03', '검수 데스크 — AI 초안 검증'] }[n];
   $('#cu-lt').textContent = t[0]; $('#cu-title').textContent = t[1];
   $('#cu').classList.remove('hidden'); $('#cu-body').scrollTop = 0;
@@ -1257,11 +1389,11 @@ function renderL1() {
   body.querySelectorAll('.task button').forEach(b => b.onclick = () => {
     const card = b.closest('.task'), i = +card.dataset.i;
     if (TASKS[i].to === b.dataset.to) {
-      L.placed[i] = b.dataset.to; hitBoss(1);
+      L.placed[i] = b.dataset.to; hitBoss(1); gotIt();
       if (Object.keys(L.placed).length === TASKS.length) { L.done = true; lockClear(1); }
       else renderL1();
     } else {
-      shakeEl(card); showHint(card.querySelector(`[data-to="${TASKS[i].to}"]`));
+      shakeEl(card); miss(card.querySelector(`[data-to="${TASKS[i].to}"]`));
       damageMe(7, TASKS[i].to === 'ai' ? `‘${TASKS[i].k}’은(는) 정형화된 업무! AI에게 맡겨도 돼요 (멘탈 -7)` : `‘${TASKS[i].k}’은(는) 사람만 할 수 있는 일이에요! (멘탈 -7)`);
     }
   });
@@ -1289,9 +1421,9 @@ function renderL2() {
     if (L.slots[s] !== null) return;
     if (L.sel === null) { toast('먼저 아래에서 문장을 골라 주세요 👇'); return; }
     const f = FRAGS[L.sel];
-    if (f.slot === -1) { L.rejected[L.sel] = true; L.sel = null; renderL2(); shakeEl($(`.pslot[data-s="${s}"]`)); damageMe(8, f.why + ' (멘탈 -8)'); return; }
-    if (f.slot !== s) { shakeEl(b); showHint($(`.pslot[data-s="${f.slot}"]`)); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ④의 설명을 확인하세요 (멘탈 -6)`); return; }
-    L.slots[s] = L.sel; L.sel = null; hitBoss(2); renderL2();
+    if (f.slot === -1) { miss(null); L.rejected[L.sel] = true; L.sel = null; renderL2(); shakeEl($(`.pslot[data-s="${s}"]`)); damageMe(8, f.why + ' (멘탈 -8)'); return; }
+    if (f.slot !== s) { shakeEl(b); miss($(`.pslot[data-s="${f.slot}"]`)); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ④의 설명을 확인하세요 (멘탈 -6)`); return; }
+    L.slots[s] = L.sel; L.sel = null; hitBoss(2); gotIt(); renderL2();
     if (L.slots.every(x => x !== null)) runAI();
   });
 }
@@ -1326,7 +1458,7 @@ function renderL3() {
     <div id="code-area"></div>`;
   body.querySelectorAll('.tool').forEach(t => t.onclick = () => { sfx.click(); L.tool = t.dataset.k; body.querySelectorAll('.tool').forEach(x => x.classList.toggle('on', x === t)); });
   body.querySelectorAll('.bad-seg').forEach(b => b.onclick = () => {
-    if (!L.tool) { toast('먼저 위에서 도구를 골라 주세요 👆'); showHint($(`.tool[data-k="${DRAFT[+b.dataset.i].ok[0]}"]`)); return; }
+    if (!L.tool) { toast('먼저 위에서 도구를 골라 주세요 👆'); shakeEl($('.tools')); return; }
     fixLine(+b.dataset.i, b.closest('.dline'));
   });
   if (L.sub === 'code') renderCode();
@@ -1334,8 +1466,8 @@ function renderL3() {
 function fixLine(i, d) {
   const L = S.l3, l = DRAFT[i];
   if (L.sub !== 'doc' || L.fixed[i] || !l.ok) return;
-  if (!l.ok.includes(L.tool)) { shakeEl(d); showHint($(`.tool[data-k="${l.ok[0]}"]`)); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '이 문장에는 다른 도구가 필요해요! (멘탈 -5)'); return; }
-  L.fixed[i] = true; hitBoss(2);
+  if (!l.ok.includes(L.tool)) { shakeEl(d); const j = DRAFT.findIndex((x, k) => x.ok && !L.fixed[k] && x.ok.includes(L.tool)); miss(j >= 0 ? $(`.bad-seg[data-i="${j}"]`) : null); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '이 문장에는 다른 도구가 필요해요! (멘탈 -5)'); return; }
+  L.fixed[i] = true; hitBoss(2); gotIt();
   if (Object.keys(L.fixed).length === 4) { L.sub = 'code'; sfx.unlock(); bigFx('PERFECT CHECK'); renderL3(); later(() => { const c = $('#code-area'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300); }
   else renderL3();
 }
@@ -1350,8 +1482,8 @@ function renderCode() {
     </div>`;
   $('#code-area').querySelectorAll('.key').forEach(k => k.onclick = () => {
     if (S.l3.done) return;
-    if (k.dataset.n === CONFIG.code[2]) { S.l3.done = true; hitBoss(3); lockClear(3); }
-    else { shakeEl(k); S.dateHint = true; showHint($('#code-area .alink')); damageMe(8, '코드가 틀렸어요! 신문 맨 위의 발행 날짜를 확인하세요 (멘탈 -8)'); }
+    if (k.dataset.n === CONFIG.code[2]) { S.l3.done = true; hitBoss(3); gotIt(); lockClear(3); }
+    else { shakeEl(k); if (miss($('#code-area .alink'))) S.dateHint = true; damageMe(8, '코드가 틀렸어요! 신문 맨 위의 발행 날짜를 확인하세요 (멘탈 -8)'); }
   });
 }
 
@@ -1455,17 +1587,17 @@ function answer(btn) {
   if (r.type === 'ox') {
     const ok = btn.dataset.v === r.answer; kind = ok ? 'best' : 'bad'; why = r.why;
     $('#opts').querySelector(`[data-v="${r.answer}"]`).classList.add('right');
-    if (!ok) { btn.classList.add('wrong-pick'); showHint($('#opts').querySelector(`[data-v="${r.answer}"]`)); }
-    if (ok) { bigFx('정답!'); hitBoss(DMG.ox); mirandaSay('…맞아.'); }
+    if (!ok) { btn.classList.add('wrong-pick'); miss($('#opts').querySelector(`[data-v="${r.answer}"]`)); }
+    if (ok) { gotIt(); bigFx('정답!'); hitBoss(DMG.ox); mirandaSay('…맞아.'); }
     else damageMe(DMG.oxWrong, `땡! 정답은 ${r.answer} (멘탈 -${DMG.oxWrong})`);
     fb.innerHTML = `<b>${ok ? `⭕ 정답! 미란다 -${DMG.ox}` : `❌ 오답! 정답은 ${r.answer} · 멘탈 -${DMG.oxWrong}`}</b><span>${why}</span>`;
   } else {
     const o = r.opts[+btn.dataset.k]; kind = o.g; why = o.why;
     const best = r.opts.findIndex(x => x.g === 'best');
     $('#opts').querySelector(`[data-k="${best}"]`).classList.add('right');
-    if (kind === 'best') { bigFx('PERFECT 보고!'); hitBoss(DMG.best); mirandaSay(['흠. 나쁘지 않군.', '…계속해.', '좋아. 다음.'][S.round % 3]); }
-    else if (kind === 'good') { btn.classList.add('meh'); bigFx('GOOD', '#c99a3b'); hitBoss(DMG.good); mirandaSay('그럭저럭이군.'); }
-    else { btn.classList.add('wrong-pick'); showHint($('#opts').querySelector(`[data-k="${best}"]`)); damageMe(DMG.bad, `그게 최선인가? (멘탈 -${DMG.bad})`); }
+    if (kind === 'best') { gotIt(); bigFx('PERFECT 보고!'); hitBoss(DMG.best); mirandaSay(['흠. 나쁘지 않군.', '…계속해.', '좋아. 다음.'][S.round % 3]); }
+    else if (kind === 'good') { gotIt(); btn.classList.add('meh'); bigFx('GOOD', '#c99a3b'); hitBoss(DMG.good); mirandaSay('그럭저럭이군.'); }
+    else { btn.classList.add('wrong-pick'); miss($('#opts').querySelector(`[data-k="${best}"]`)); damageMe(DMG.bad, `그게 최선인가? (멘탈 -${DMG.bad})`); }
     fb.innerHTML = `<b>${kind === 'best' ? `★ PERFECT · 미란다 -${DMG.best}` : kind === 'good' ? `△ 그럭저럭 · 미란다 -${DMG.good}` : `✕ 잘못된 보고 · 멘탈 -${DMG.bad}`}</b><span>${why}</span>`;
   }
   fb.className = 'feedback ' + (kind === 'bad' ? 'bad' : kind === 'good' ? 'meh' : 'good');
