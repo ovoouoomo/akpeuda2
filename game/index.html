@@ -117,7 +117,7 @@ body.critical #game-main{animation:pulseRed .7s infinite}
   repeating-linear-gradient(45deg,#e7c9a3 0 14px,#dcb98f 14px 28px)}
 .floor::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.08),transparent 40%)}
 .rug{position:absolute;left:24%;top:72%;width:44%;height:20%;border-radius:50%;background:var(--red);box-shadow:inset 0 0 0 6px #e8475f,inset 0 0 0 9px #fff}
-.window{position:absolute;left:21%;top:5%;width:38%;height:38%;border:6px solid #fff;outline:2px solid var(--ink);background:linear-gradient(#ffb48a,#ffd8b0 55%,#fde9d0);overflow:hidden}
+.window{position:absolute;left:17%;top:2.5%;width:66%;height:43.5%;border:6px solid #fff;outline:2px solid var(--ink);background:linear-gradient(#ffb48a,#ffd8b0 55%,#fde9d0);overflow:hidden}
 .window::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:5px;margin-left:-2px;background:#fff;z-index:2}
 .window .sun{position:absolute;left:62%;top:38%;width:18%;aspect-ratio:1;border-radius:50%;background:#ff7a59}
 .window .city{position:absolute;left:0;right:0;bottom:0;height:46%;background:
@@ -128,7 +128,7 @@ body.critical #game-main{animation:pulseRed .7s infinite}
   linear-gradient(#8592a3,#8592a3) 54% 100%/12% 75% no-repeat,
   linear-gradient(#a3adba,#a3adba) 70% 100%/9% 60% no-repeat,
   linear-gradient(#6f7b8b,#6f7b8b) 82% 100%/14% 85% no-repeat}
-.frames{position:absolute;left:62%;top:9%;display:flex;gap:1.4%;width:21%}
+.frames{position:absolute;left:2.5%;top:12%;display:flex;gap:1.4%;width:13%}
 .frame{flex:1;aspect-ratio:3/4;background:#fff;border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:4% 2%;font:900 clamp(5px,1vw,10px) var(--serif);color:var(--red)}
 .frame i{display:block;width:60%;flex:1;margin:6% 0;border-radius:40% 40% 10% 10%;background:var(--blue)}
 .frame:nth-child(2) i{background:var(--ink)}
@@ -691,6 +691,23 @@ body{background:#fff;letter-spacing:-.005em}
 .quote{background:#fff;border:1px solid var(--line);border-left:3px solid var(--red)}
 .reward h3,.perfect{font-weight:400}
 .lbody{border-radius:0}
+
+/* 🏙️ 통창 (벽 전체 유리창) */
+.window{border:4px solid var(--ink)!important;outline:none;box-shadow:inset 0 0 0 2px #3a3a3a}
+.window::before{display:none}
+.window .city{height:78%;background:none}
+.window .city svg{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+.window .lights{display:none}
+.mullions{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,transparent calc(100% - 3px),var(--ink) 0) 0 0/20% 100%,
+             linear-gradient(transparent calc(100% - 3px),var(--ink) 0) 0 0/100% 22% no-repeat}
+.mullions::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(115deg,transparent 18%,rgba(255,255,255,.22) 22%,transparent 27%,transparent 58%,rgba(255,255,255,.14) 61%,transparent 64%)}
+.window .city .bf{fill:#b8c4d3}.window .city .bm{fill:#7f8ea3}.window .city .bn{fill:#56637a}.window .city .wl{fill:#e6eef8}
+.window.dusk .city{filter:none}.window.dusk .city .bf{fill:#c99a99}.window.dusk .city .bm{fill:#8f6878}.window.dusk .city .bn{fill:#5e4558}.window.dusk .city .wl{fill:#ffd59a}
+.window.night .city{filter:none}.window.night .city .bf{fill:#2e3657}.window.night .city .bm{fill:#20263f}.window.night .city .bn{fill:#141829}.window.night .city .wl{fill:#ffd76a}
+.window .sun{z-index:0}.window .stars{z-index:0}
+.room-sign{width:13%;white-space:normal;line-height:1.5;z-index:4;font-size:clamp(7px,1.15vw,12px)!important;letter-spacing:.22em!important}
 </style>
 </head>
 <body>
@@ -1018,23 +1035,108 @@ const SPR = {
     "..CCCCCCCCCCCC..",
     "...LL......LL...",
     "...rr......rr..."]},
-  cabinet: { pal:{k:'#141414',g:'#ebe7e1',w:'#ffffff',y:'#b08a3e'}, rows:[
-    "kkkkkkkkkkkk","kggggggggggk","kgkkkkkkkkgk","kgkwwwwwwkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kggggggggggk","kgkkkkkkkkgk",
-    "kgkwwwwwwkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kggggggggggk","kgkkkkkkkkgk","kgkwwyywwkgk","kgkkkkkkkkgk","kkkkkkkkkkkk"]},
-  pc: { pal:{k:'#1d1a1c',g:'#f1ece6',b:'#3f7fd9',w:'#cfe2ff',r:'#c8102e'}, rows:[
-    "kkkkkkkkkkkkkk","kggggggggggggk","kgbbbbbbbbbbgk","kgbwwbbbbbbbgk","kgbbbwwwwbbbgk","kgbwwwbbbbbbgk","kgbbbbbbbrrbgk","kggggggggggggk",
-    "kkkkkkkkkkkkkk","......kk......","....kkkkkk....","..kggggggggk.."]},
+  // 서류함: 금속 서랍장 (명암 + 황동 손잡이 + 라벨)
+  cabinet: { pal:{'k':'#141414','w':'#f6f4f0','g':'#dcd7cf','s':'#b5ada2','l':'#ffffff','y':'#9c7630','Y':'#e3c27a'}, rows:[
+    "kkkkkkkkkkkkkkkk",
+    "kwwwwwwwwwwwwwsk",
+    "kwkkkkkkkkkkkksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwyYYYywwgksk",
+    "kwkgggggggggsksk",
+    "kwkkkkkkkkkkkksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwyYYYywwgksk",
+    "kwkgggggggggsksk",
+    "kwkkkkkkkkkkkksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwwwwwwwwgksk",
+    "kwkwwyYYYywwgksk",
+    "kwkgggggggggsksk",
+    "kwkkkkkkkkkkkksk",
+    "kwwwwwwwwwwwwwsk",
+    "kssssssssssssssk",
+    "kkkkkkkkkkkkkkkk",
+    ".kk..........kk."]},
+  // AI 문서작성기: 얇은 모니터
+  pc: { pal:{'k':'#141414','f':'#2b2b2b','r':'#d0021b','s':'#1d3557','b':'#4f86d6','w':'#e8f0ff','g':'#d6d1c9','G':'#9a948c'}, rows:[
+    "kkkkkkkkkkkkkkkkkk",
+    "kffffffffffffffffk",
+    "kfrrrrrrrrrrrrrrfk",
+    "kfsssssssssssssbfk",
+    "kfswwwwwwwssbbbsfk",
+    "kfswwwwwssssbbbsfk",
+    "kfssssssssssssssfk",
+    "kfswwwwwwwwwssssfk",
+    "kfswwwwsssssswwsfk",
+    "kfssssssssssssssfk",
+    "kffffffffffffffffk",
+    "kfffffffrrfffffffk",
+    "kkkkkkkkkkkkkkkkkk",
+    ".......kGGk.......",
+    "......kgggGk......",
+    "....kkggggggkk....",
+    "....kkkkkkkkkk...."]},
   news: { pal:{k:'#1d1a1c',w:'#ffffff',g:'#b9b1c4',r:'#c8102e'}, rows:[
     "kkkkkkkkkkk.","kwrrrrrrrwk.","kwkkkwgggwk.","kwgggwgggwkk","kwkkkwgggwwk","kwgggwwwwwwk","kkkkkkkkkkwk",".kkkkkkkkkkk"]},
-  coffee: { pal:{k:'#1d1a1c',w:'#ffffff',s:'#d6cfd8',r:'#c8102e'}, rows:[
-    "..s.s...","...s.s..","kkkkkk..","kwwwwkkk","krrrrk.k","kwwwwkkk","kwwwwk..",".kkkk..."]},
+  // 커피: 런웨이 슬리브 테이크아웃 컵
+  coffee: { pal:{'k':'#141414','w':'#ffffff','g':'#d9d4cc','r':'#d0021b','s':'#cfc8d0'}, rows:[
+    "..s..s....",
+    "...s..s...",
+    ".kkkkkkkk.",
+    "kwwwwwwwwk",
+    ".kwwwwwwk.",
+    ".krrrrrrk.",
+    ".krrwwrrk.",
+    ".krrrrrrk.",
+    ".kwwwwwgk.",
+    "..kwwwgk..",
+    "..kkkkkk.."]},
   magnifier: { pal:{k:'#1d1a1c',s:'#cfe8ff',w:'#ffffff',y:'#c99a3b'}, rows:[
     "..kkkk....",".kssssk...","ksswsssk..","kswssssk..","kssssssk..",".kssssk...","..kkkkyy..","......yy..",".......yy.","........yy"]},
-  door: { pal:{k:'#1d1a1c',r:'#c8102e',d:'#9a0c23',w:'#fde9d0',y:'#e0b252'}, rows:[
-    "kkkkkkkkkk","krrrrrrrrk","krkkkkkkrk","krkwwwwkrk","krkwwwwkrk","krkkkkkkrk","krrrrrrrrk","krrrrrryrk","krrrrrryrk",
-    "krrrrrrrrk","krkkkkkkrk","krkddddkrk","krkddddkrk","krkddddkrk","krkkkkkkrk","krrrrrrrrk","krrrrrrrrk","kkkkkkkkkk"]},
-  plant: { pal:{L:'#3d7a4a',l:'#5fae6e',n:'#ffffff',N:'#3f7fd9'}, rows:[
-    "...LL...",".L.LL.L.",".LLlLLL.","LLlLLlLL",".LlLLlL.","..LLLL..","...ll...","..nnnn..",".nNNNNn.",".nnnnnn.",".nNNNNn.","..nnnn.."]}
+  // 출구: 빨간 래커 문 + 반투명 유리
+  door: { pal:{'k':'#141414','f':'#2b2b2b','r':'#d0021b','d':'#8f0013','h':'#ff5a6e','y':'#9c7630','Y':'#f0d28a','w':'#efe9e1'}, rows:[
+    "kkkkkkkkkkkkkk",
+    "kffffffffffffk",
+    "kfkkkkkkkkkkfk",
+    "kfkhrrrrrrdkfk",
+    "kfkhkkkkkkdkfk",
+    "kfkhkwwwwkdkfk",
+    "kfkhkwwwwkdkfk",
+    "kfkhkwwwwkdkfk",
+    "kfkhkkkkkkdkfk",
+    "kfkhrrrrrrdkfk",
+    "kfkhrrrrrydkfk",
+    "kfkhrrrrrYdkfk",
+    "kfkhrrrrrydkfk",
+    "kfkhrrrrrrdkfk",
+    "kfkhkkkkkkdkfk",
+    "kfkhkddddkdkfk",
+    "kfkhkddddkdkfk",
+    "kfkhkddddkdkfk",
+    "kfkhkkkkkkdkfk",
+    "kfkhrrrrrrdkfk",
+    "kfkddddddddkfk",
+    "kkkkkkkkkkkkkk"]},
+  // 화분: 몬스테라
+  plant: { pal:{'L':'#2f6b3f','m':'#46914f','l':'#6fbf7c','k':'#141414','p':'#f6f4f0','P':'#cfc8be'}, rows:[
+    "....L..l....",
+    "..LLl.lLL...",
+    ".LlmL.LmlL..",
+    "LlmmLLLmmlL.",
+    ".LmmlLlmmL..",
+    "..LLmLmLL.l.",
+    ".l..LmL..lL.",
+    ".....m......",
+    "...kkkkkk...",
+    "..kppppppk..",
+    "..kpppppPk..",
+    "...kpppPk...",
+    "...kkkkkk..."]}
 };
 function spr(name, opt = {}) {
   const s = SPR[name], pal = Object.assign({}, s.pal, opt.pal || {});
@@ -1050,6 +1152,24 @@ function mirandaSpr(boss) {
   if (boss) { rows[0] = HORNS[0]; rows[1] = HORNS[1]; rows[2] = "..XHHHHHHHHHHX.."; }
   return spr('miranda', { rows, pal: { X: '#c8102e' } });
 }
+/* ---------- 🏙️ 통창 밖 뉴욕 빌딩 (픽셀) — 창문 불빛은 시간대에 따라 색이 바뀌어요 ---------- */
+const CITY_SVG = (() => {
+  let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  const W = 160, H = 48; let r = '';
+  const layer = (cls, minH, maxH, win) => {
+    let x = -2;
+    while (x < W) {
+      const w = 5 + Math.floor(rnd() * 9), h = minH + Math.floor(rnd() * (maxH - minH)), y = H - h;
+      r += `<rect class="${cls}" x="${x}" y="${y}" width="${w}" height="${h}"/>`;
+      if (rnd() < .25) r += `<rect class="${cls}" x="${x + Math.floor(w / 2)}" y="${y - 4}" width="1" height="4"/>`;   // 안테나
+      if (rnd() < .3) r += `<rect class="${cls}" x="${x + 1}" y="${y - 2}" width="${w - 2}" height="2"/>`;             // 옥상
+      if (win) for (let yy = y + 2; yy < H - 1; yy += 3) for (let xx = x + 1; xx < x + w - 1; xx += 2) if (rnd() < .5) r += `<rect class="wl" x="${xx}" y="${yy}" width="1" height="1"/>`;
+      x += w + (rnd() < .3 ? 1 : 0);
+    }
+  };
+  layer('bf', 18, 40, false); layer('bm', 10, 30, true); layer('bn', 5, 16, true);
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
+})();
 function headOnly(name) { return spr(name, { rows: SPR[name].rows.slice(0, 11) }); }
 /* =====================================================================
    👥 만든 사람들 — 이름(name)과 소개(role)를 바꾸면 승리 화면에 반영돼요
@@ -1289,7 +1409,7 @@ function renderRoom() {
   main.innerHTML = `
     <div class="room" id="room">
       <div class="room-sign">MIRANDA'S OFFICE</div>
-      <div class="window ${skyClass()}" id="win"><div class="sun"></div><div class="stars"></div><div class="city"></div><div class="lights"></div></div>
+      <div class="window ${skyClass()}" id="win"><div class="sun"></div><div class="stars"></div><div class="city">${CITY_SVG}</div><div class="mullions"></div></div>
       <div class="frames"><div class="frame">RUNWAY<i></i></div><div class="frame">RUNWAY<i></i></div><div class="frame">RUNWAY<i></i></div></div>
       <div class="wainscot"></div><div class="floor"></div><div class="rug"></div>
       <div class="desk"></div><div class="side"></div><div class="paper-sheet"></div>
