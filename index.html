@@ -715,6 +715,26 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 .src-box dt{font-weight:700;color:var(--grey)}
 .src-box dd{margin:0}
 .src-box .url{font-family:monospace;word-break:break-all}
+/* 필요 역량 가로 막대그래프 */
+.skill-fig{padding:20px 22px 16px;background:var(--card)!important}
+.sk-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:10px}
+.sk-head b{font:600 17px var(--kserif)}
+.sk-head span{font-size:12px;color:var(--grey)}
+.sk-chart{position:relative;padding-bottom:22px}
+.sk-row{display:grid;grid-template-columns:minmax(120px,30%) 1fr;align-items:center;gap:12px;padding:4px 0;outline:none;position:relative}
+.sk-lab{font-size:13.5px;color:var(--ink);text-align:right}
+.sk-row.top .sk-lab{font-weight:700}
+.sk-track{position:relative;height:22px;display:flex;align-items:center;background:linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/25% 100%}
+.sk-track i{display:block;height:16px;width:0;background:#c9c3bb;border-radius:0 4px 4px 0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.sk-row.top .sk-track i{background:var(--red)}
+.skill-fig.on .sk-track i{width:var(--w)}
+.sk-track b{margin-left:8px;font:400 15px var(--didone);color:var(--ink)}
+.sk-row.top .sk-track b{font-weight:700}
+.sk-row:hover .sk-track i,.sk-row:focus .sk-track i{filter:brightness(.88)}
+.sk-row[data-tip]:hover::after,.sk-row[data-tip]:focus::after{content:attr(data-tip);position:absolute;left:32%;top:-30px;z-index:3;background:var(--ink);color:var(--bg);font-size:12.5px;padding:4px 10px;white-space:nowrap;pointer-events:none}
+.sk-axis{position:absolute;left:calc(30% + 12px);right:0;bottom:0;height:18px}
+.sk-axis span{position:absolute;transform:translateX(-50%);font-size:11px;color:var(--grey)}
+@media (max-width:600px){.sk-row{grid-template-columns:1fr}.sk-lab{text-align:left}.sk-axis{display:none}.sk-row[data-tip]:hover::after{left:0}}
 </style>
 </head>
 <body>
@@ -1504,6 +1524,7 @@ const SEC_RULES = [
   ['전화는 두 번 울리기 전에', '긴급한 전화는 직접, 일반 문의는 자동화로.'],
   ['말하기 전에 준비하라', '하나하나 지시받지 않아도 상사의 니즈를 먼저 읽는 비서.']
 ];
+const WEF_SKILLS = [['분석적 사고', 69], ['회복탄력성·유연성·민첩성', 67], ['리더십·사회적 영향력', 61], ['창의적 사고', 57], ['동기부여·자기인식', 52], ['공감·경청', 50], ['호기심·평생학습', 50], ['고객 서비스', 47]];   // WEF Future of Jobs Report 2025, p.35
 const SEC_SKILLS = [['프롬프트 작성', 92], ['검증 안목 (팩트체크)', 98], ['커뮤니케이션 조율', 95], ['상황 판단', 90], ['데이터 리터러시', 80], ['자기주도성', 88]];
 const SEC_QUIZ = [
   { q:'편집장이 출처 없는 AI 보고서를 “지금 당장 제출해”라고 한다면?', o:[['바로 제출한다. 편집장의 지시니까.',0],['1차 출처를 확인하고, 확인 안 된 부분은 ‘검증되지 않음’으로 표시해 보고한다.',3],['AI에게 같은 질문을 세 번 해서 확인한다.',1]] },
@@ -1539,9 +1560,16 @@ function pSecretary() {
 
       <h3>필요 역량</h3>
       <figure class="skill-fig">
-        <img src="img/skills-wef2025.png" alt="2025년 고용주가 꼽은 핵심 역량 Top 8: 분석적 사고 69%, 회복탄력성·유연성·민첩성 67%, 리더십·사회적 영향력 61%, 창의적 사고 57%, 동기부여·자기인식 52%, 공감·경청 50%, 호기심·평생학습 50%, 고객 서비스 47%" loading="lazy">
+        <div class="sk-head"><b>2025년 고용주가 꼽은 핵심 역량 Top 8</b><span>‘핵심 역량’으로 꼽은 고용주 비율 (%)</span></div>
+        <div class="sk-chart" role="table" aria-label="2025년 고용주가 꼽은 핵심 역량 Top 8">${WEF_SKILLS.map((d, i) => `
+          <div class="sk-row ${i === 0 ? 'top' : ''}" role="row" tabindex="0" data-tip="${d[0]} · 고용주 ${d[1]}%가 핵심 역량으로 꼽음">
+            <span class="sk-lab" role="rowheader">${d[0]}</span>
+            <span class="sk-track" role="cell"><i style="--w:${d[1] / 80 * 100}%"></i><b>${d[1]}%</b></span>
+          </div>`).join('')}
+          <div class="sk-axis" aria-hidden="true">${[0, 20, 40, 60, 80].map(v => `<span style="left:${v / 80 * 100}%">${v}</span>`).join('')}</div>
+        </div>
         <figcaption><b>세계경제포럼 『Future of Jobs Report 2025』 — 고용주 10곳 중 7곳이 ‘분석적 사고’를 핵심 역량으로 꼽았습니다.</b>
-          출처: World Economic Forum (2025). <i>The Future of Jobs Report 2025</i>. Geneva: World Economic Forum, 2025년 1월 발간 · 55개국, 22개 산업 분야, 1,000여 개 글로벌 고용주(근로자 1,400만 명 이상) 대상 설문.
+          출처: World Economic Forum (2025). <i>The Future of Jobs Report 2025</i>, p.35. Geneva: World Economic Forum · 55개국, 22개 산업 분야, 1,000여 개 글로벌 고용주(근로자 1,400만 명 이상) 대상 설문.
           <button class="lnk" type="button" onclick="openSource()">출처 자세히 보기 →</button></figcaption>
       </figure>
 
@@ -1680,6 +1708,7 @@ function afterRender(p, id) {
     if (id === 'secretary') {
       const setT = t => { $$('#asst-tabs button').forEach(b => b.classList.toggle('on', +b.dataset.t === t)); const a = ASST[t]; $('#asst-body').innerHTML = `<p style="font:17px/1.95 var(--kserif);margin:0 0 6px"><b>${a.t}</b> — ${a.d}</p><ul class="chk">${a.li.map(x => `<li>${x}</li>`).join('')}</ul>`; };
       $$('#asst-tabs button').forEach(b => b.onclick = () => setT(+b.dataset.t)); setT(1);
+      const sf = $('.skill-fig'); if (sf) { const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { sf.classList.add('on'); so.disconnect(); } }), { threshold: .3 }); so.observe(sf); }
     }
   }
   if ($('#share-job')) $('#share-job').onclick = copyLink;
@@ -1853,14 +1882,14 @@ function openSource() {
     <dt>발행</dt><dd>World Economic Forum (세계경제포럼), Geneva · 2025년 1월</dd>
     <dt>조사 대상</dt><dd>55개국, 22개 산업 분야의 1,000여 개 글로벌 고용주 (근로자 1,400만 명 이상)</dd>
     <dt>내용</dt><dd>2025년 고용주가 꼽은 핵심 역량 — 분석적 사고 69%, 회복탄력성·유연성·민첩성 67%, 리더십·사회적 영향력 61%, 창의적 사고 57%, 동기부여·자기인식 52%, 공감·경청 50%, 호기심·평생학습 50%, 고객 서비스 47%</dd>
-    <dt>원문 주소</dt><dd class="url">weforum.org/publications/the-future-of-jobs-report-2025</dd></dl></div>`);
+    <dt>쪽수</dt><dd>35쪽 (핵심 역량 · Core skills)</dd><dt>원문 주소</dt><dd class="url">reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf</dd></dl></div>`);
 }
 
-/* ---------- ⏱ 전시용 자동 복귀: 30초 동안 아무도 만지지 않으면 첫 화면으로 ----------
+/* ---------- ⏱ 전시용 자동 복귀: 1분 동안 아무도 만지지 않으면 첫 화면으로 ----------
    첫 화면 맨 위가 아닌 곳(기사 · 채용 · 회사 소개 · 팝업 · 첫 화면 아래쪽)에서
    HOME_WARN_AFTER 초가 지나면 안내가 나오고, HOME_IDLE_SECONDS 초가 되면 첫 화면 맨 위로 돌아가요. */
-const HOME_IDLE_SECONDS = 30;
-const HOME_WARN_AFTER = 10;
+const HOME_IDLE_SECONDS = 60;   // 1분 동안 아무도 만지지 않으면 첫 화면으로
+const HOME_WARN_AFTER = 40;     // 40초가 지나면 안내 (남은 20초 카운트다운)
 let lastAct = Date.now();
 ['pointerdown', 'keydown', 'touchstart', 'touchmove', 'wheel'].forEach(ev => document.addEventListener(ev, () => { lastAct = Date.now(); }, { passive: true }));
 window.addEventListener('message', e => { if (e.data && e.data.rw === 'activity') lastAct = Date.now(); });
