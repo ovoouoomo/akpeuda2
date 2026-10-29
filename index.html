@@ -684,6 +684,9 @@ body.in-game{overflow:hidden}
 nav.gnb a.nav-play{border-radius:0;background:var(--ink)}
 nav.gnb a.nav-play:hover{background:var(--red)}
 nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
+.toon-card img{width:82%;max-width:140px;aspect-ratio:1;object-fit:cover;display:block;margin:0 auto;border-radius:50%;animation:bob 2.4s ease-in-out infinite}
+.egg .heads span{background:#fff}
+.egg .heads img{width:100%;height:100%;object-fit:cover}
 </style>
 </head>
 <body>
@@ -773,11 +776,11 @@ const CAST = [
 ];
 
 /* ---------- 만든 사람들 (이스터에그) ---------- */
-const TEAM = [
-  { name:'예주', desc:'긴 생머리 · 검은 정장', say:'That’s all!', hair:'#2a2226', style:'long' },
-  { name:'은빈', desc:'단발머리 · 검은 정장',   say:'커피 주문 완료!', hair:'#7a4a2e', style:'bob' },
-  { name:'은채', desc:'리본 똥머리 · 검은 정장', say:'팩트체크 끝!', hair:'#4a2c22', style:'bun', ribbon:'#c8102e' },
-  { name:'시현', desc:'막내 · 양갈래 리본',       say:'막내 출근했어요!', hair:'#2a2226', style:'twin', ribbon:'#ff8fb1', young:true }
+const TEAM = [   // 왼쪽부터 예주 · 은빈 · 시현 · 은채 (직접 그린 그림: img/team-*.jpg)
+  { name:'예주', desc:'긴 생머리 · 블랙 재킷',     say:'That’s all!',      img:'img/team-yeju.jpg' },
+  { name:'은빈', desc:'앞머리 · 화이트 셔츠',      say:'커피 주문 완료!',   img:'img/team-eunbin.jpg' },
+  { name:'시현', desc:'긴 생머리 · 블랙 수트',     say:'팩트체크 끝!',      img:'img/team-sihyeon.jpg' },
+  { name:'은채', desc:'포니테일 · 리본 블라우스',  say:'오늘도 출근 완료!', img:'img/team-eunchae.jpg' }
 ];
 
 /* ---------- 읽을거리 (짧게) ---------- */
@@ -1751,7 +1754,7 @@ function openSearch() {
 function openCredits() {
   const sp = Array.from({ length: 12 }, () => `<span class="spark" style="left:${Math.random() * 96}%;top:${Math.random() * 90}%;animation-delay:${Math.random() * 1.6}s">✦</span>`).join('');
   openModal(`<div class="credit-wrap">${sp}<div class="k">BEHIND THE RUNWAY · 숨은 제작진</div><h2>이 사무실을 만든 사람들</h2><p class="s">축하해요, 숨겨진 크레딧을 찾았어요!</p>
-    <div class="toons">${TEAM.map((t, i) => `<div class="toon-card" style="animation-delay:${.2 + i * .18}s"><span class="say">${t.say}</span>${toon(t)}<b>${t.name}</b><small>${t.desc}</small></div>`).join('')}</div>
+    <div class="toons">${TEAM.map((t, i) => `<div class="toon-card" style="animation-delay:${.2 + i * .18}s"><span class="say">${t.say}</span><img src="${t.img}" alt="${t.name}"><b>${t.name}</b><small>${t.desc}</small></div>`).join('')}</div>
     <p style="margin:24px 0 0;font:italic 400 20px var(--didone);color:var(--gold)">“흥미롭군. 자네들, 생각보다 쓸 만한 팀이었어.” — M.P.</p></div>`, 'wide');
 }
 let logoClicks = 0, logoTimer;
@@ -1761,7 +1764,7 @@ $('#logo').addEventListener('click', () => {
   if (logoClicks >= 5) { logoClicks = 0; openCredits(); }
 });
 $('#egg').onclick = openCredits;
-$('#egg-heads').innerHTML = TEAM.map(t => `<span>${toon(t)}</span>`).join('');
+$('#egg-heads').innerHTML = TEAM.map(t => `<span><img src="${t.img}" alt=""></span>`).join('');
 let typed = '';
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
