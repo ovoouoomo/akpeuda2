@@ -915,6 +915,24 @@ body{background:#fff;letter-spacing:-.005em}
 .chat .frag.sel{border-color:var(--red)!important;background:#fff7f8;box-shadow:0 0 0 3px rgba(208,2,27,.15)!important;transform:none}
 .chat .frag.rejected{background:#f3f1ee;color:#b5ada2;border-style:dashed!important}
 @media (max-width:600px){.msg .bub{max-width:88%}.chat .pslot{grid-template-columns:70px 1fr}.comp-bar .send-hint{display:none}}
+
+/* ✍️ 후기 */
+.rv{text-align:center;padding:6px 4px 4px}
+.rv-k{margin:0;font:700 11px var(--sans);letter-spacing:.3em;color:var(--red)}
+.rv h3{margin:4px 0 12px;font:600 22px var(--kserif)}
+.rv-stars{display:flex;justify-content:center;gap:6px;margin-bottom:12px}
+.rv-stars button{font-size:40px;line-height:1;color:#d9d4cc;padding:0 2px}
+.rv-stars button.on{color:var(--red)}
+.rv-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:12px}
+.rv-tags button{border:1px solid var(--line);padding:6px 12px;font-size:13.5px;background:#fff;border-radius:99px}
+.rv-tags button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+#rv-text{width:100%;min-height:110px;border:1px solid var(--ink);padding:10px 12px;font:15px/1.6 var(--kserif);resize:vertical}
+.rv-row{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:4px 0 12px;font-size:12px;color:var(--muted)}
+.rv-time b{color:var(--red)}
+.rv-note{font-size:12px;color:var(--muted);margin:8px 0 0}
+.rv-done{padding:30px 0}
+.rv-done p:last-child{font:italic 400 18px 'Bodoni Moda',serif}
+.rv-open:disabled{opacity:.6;cursor:default}
 </style>
 </head>
 <body>
@@ -989,6 +1007,7 @@ body{background:#fff;letter-spacing:-.005em}
       <button class="btn btn-red hidden" id="btn-retry-boss">보스전부터 다시 도전</button>
       <button class="btn btn-red" id="btn-retry">처음부터 다시 도전</button>
       <button class="btn btn-line" id="btn-home1">시작 화면</button>
+      <button class="btn btn-line rv-open" type="button">후기 남기기</button>
     </div>
     <div class="auto-home" id="ah-fail"></div>
   </div>
@@ -1013,7 +1032,7 @@ body{background:#fff;letter-spacing:-.005em}
     <p class="notice">획득한 비밀번호를 전시장 금고에 입력하고 <b>한정 상품</b>을 받아 가세요.</p>
     <div class="auto-home big" id="ah-win"></div>
     <div class="credits"><div class="cr-title">MADE BY · 만든 사람들</div><div class="cr-row" id="credits"></div></div>
-    <div class="btns"><button class="btn btn-line" id="btn-home2">처음 화면으로 (다음 참가자)</button></div>
+    <div class="btns"><button class="btn btn-red rv-open" type="button">후기 남기기</button><button class="btn btn-line" id="btn-home2">처음 화면으로 (다음 참가자)</button></div>
   </div>
 </section>
 
@@ -2152,6 +2171,53 @@ function startAutoHome(elId) {
 }
 function cancelAutoHome() { if (autoHomeTimer) clearInterval(autoHomeTimer); autoHomeTimer = null; document.querySelectorAll('.auto-home').forEach(e => e.innerHTML = ''); }
 
+/* ---------- ✍️ 게임 후기 (관리자 화면에서만 볼 수 있어요) ----------
+   후기를 쓰는 동안에는 화면이 닫히지 않아요. REVIEW_SECONDS 동안 아무 입력이 없을 때만 닫혀요. */
+const REVIEW_SECONDS = 120;
+const REVIEW_TAGS = ['재밌어요', '또 하고 싶어요', '어려웠어요', '쉬웠어요', '신문 단서가 좋았어요', 'AI 공부가 됐어요', '미란다가 무서워요', '디자인이 예뻐요'];
+let reviewTimer = null, reviewLeft = 0;
+function stopReviewTimer() { clearInterval(reviewTimer); reviewTimer = null; }
+function resetReviewBtn() { document.querySelectorAll('.rv-open').forEach(b => { b.disabled = false; b.textContent = '후기 남기기'; }); }
+function openReview() {
+  cancelAutoHome();
+  const R = { stars: 0, tags: [] };
+  openModal('REVIEW · 후기', `<div class="rv">
+    <p class="rv-k">YOUR REVIEW</p><h3>오늘의 실무 테스트, 어땠나요?</h3>
+    <div class="rv-stars" role="radiogroup" aria-label="별점">${[1, 2, 3, 4, 5].map(n => `<button type="button" data-s="${n}" aria-label="${n}점">★</button>`).join('')}</div>
+    <div class="rv-tags">${REVIEW_TAGS.map(t => `<button type="button" data-t="${t}">${t}</button>`).join('')}</div>
+    <textarea id="rv-text" maxlength="300" placeholder="자유롭게 남겨 주세요. (이름·연락처는 적지 말아 주세요)"></textarea>
+    <div class="rv-row"><small id="rv-cnt">0 / 300</small><small class="rv-time">⏱ <b id="rv-left">${REVIEW_SECONDS}</b>초 동안 입력이 없으면 화면이 닫혀요</small></div>
+    <button class="btn btn-red" id="rv-send" type="button">후기 보내기</button>
+    <p class="rv-note">후기는 제작진만 볼 수 있어요.</p></div>`);
+  const box = $('#modal-body');
+  reviewLeft = REVIEW_SECONDS; stopReviewTimer();
+  const bump = () => { reviewLeft = REVIEW_SECONDS; const l = $('#rv-left'); if (l) l.textContent = reviewLeft; };
+  reviewTimer = setInterval(() => { reviewLeft--; const l = $('#rv-left'); if (l) l.textContent = reviewLeft; if (reviewLeft <= 0) { stopReviewTimer(); goSite(); } }, 1000);
+  ['input', 'pointerdown', 'keydown'].forEach(ev => box.addEventListener(ev, bump));
+  box.querySelectorAll('.rv-stars button').forEach(b => b.onclick = () => {
+    R.stars = +b.dataset.s; sfx.click();
+    box.querySelectorAll('.rv-stars button').forEach(x => x.classList.toggle('on', +x.dataset.s <= R.stars));
+  });
+  box.querySelectorAll('.rv-tags button').forEach(b => b.onclick = () => {
+    const t = b.dataset.t, i = R.tags.indexOf(t); i < 0 ? R.tags.push(t) : R.tags.splice(i, 1); b.classList.toggle('on', i < 0); sfx.click();
+  });
+  $('#rv-text').oninput = e => { $('#rv-cnt').textContent = e.target.value.length + ' / 300'; };
+  $('#rv-send').onclick = () => {
+    const text = $('#rv-text').value.trim();
+    if (!R.stars && !text && !R.tags.length) { toast('별점이나 한 줄 후기를 남겨 주세요 ✍️'); return; }
+    try {
+      const all = JSON.parse(localStorage.getItem('rw_reviews') || '[]');
+      all.push({ id: Date.now().toString(36), t: Date.now(), stars: R.stars, tags: R.tags, text, result: S.endEl === 'ah-win' ? 'win' : 'fail', play: S.rec ? S.rec.id : null });
+      localStorage.setItem('rw_reviews', JSON.stringify(all.slice(-3000)));
+    } catch (e) {}
+    stopReviewTimer(); sfx.win();
+    box.innerHTML = '<div class="rv rv-done"><p class="rv-k">THANK YOU</p><h3>소중한 후기 고마워요!</h3><p>“That’s all.” — 제작진 일동</p></div>';
+    document.querySelectorAll('.rv-open').forEach(b => { b.disabled = true; b.textContent = '후기 감사합니다 ✓'; });
+    setTimeout(() => { $('#modal').classList.add('hidden'); if (S.endEl) startAutoHome(S.endEl); }, 1800);
+  };
+}
+document.querySelectorAll('.rv-open').forEach(b => b.onclick = openReview);
+
 /* =====================================================================
    결과 화면
    ===================================================================== */
@@ -2173,6 +2239,7 @@ function gameOver(reason) {
   const atBoss = S.phase === 'boss';
   $('#btn-retry-boss').classList.toggle('hidden', !atBoss);
   $('#btn-retry').classList.toggle('btn-red', !atBoss); $('#btn-retry').classList.toggle('btn-line', atBoss);
+  S.endEl = 'ah-fail'; resetReviewBtn();
   sfx.bad(); showScreen('fail'); startAutoHome('ah-fail');
 }
 /* 승리 직전 장면: 미란다가 선글라스를 올리고 “That's all.” → 카메라 플래시 */
@@ -2205,6 +2272,7 @@ function win() {
   stat('rw_wins');
   try { const b = +(localStorage.getItem('rw_best') || 0); if (!b || S.timeLeft < b) stat('rw_best', S.timeLeft); } catch (e) {}
   $('#win-stats').innerHTML = [['플레이 시간', fmt(S.timeLeft)], ['남은 멘탈', S.hp], ['실수', S.mistakes + '회'], ['힌트', S.hintsUsed + '회']].map(([k, v]) => `<li><span>${k}</span><b>${v}</b></li>`).join('');
+  S.endEl = 'ah-win'; resetReviewBtn();
   showScreen('win'); sfx.win(); startAutoHome('ah-win');
   cameraFlash(6);   // 런웨이 포토월처럼 카메라 플래시
 }
@@ -2213,7 +2281,7 @@ function win() {
    팝업창: 기사 / 힌트 / 게임 방법
    ===================================================================== */
 function openModal(title, html) { $('#modal-title').textContent = title; $('#modal-body').innerHTML = html; $('#modal').classList.remove('hidden'); $('.modal-box').scrollTop = 0; }
-function closeModal() { $('#modal').classList.add('hidden'); }
+function closeModal() { $('#modal').classList.add('hidden'); if (reviewTimer) { stopReviewTimer(); if (S.endEl) startAutoHome(S.endEl); } }
 function openArticles(idx = 0) {
   sfx.click();
   if (S.running && S.rec && !S.rec.news.includes(idx)) S.rec.news.push(idx);
