@@ -2100,11 +2100,32 @@ function pAdmin() {
 
 /* 비밀번호가 틀리면: 제작진 4명이 팔걸이 의자에 기대 다리를 꼬고 앉아 한마디
    얼굴·상반신은 직접 그린 그림(img/team-*.png), 팔·의자·정장 바지·구두는 같은 선 느낌으로 그려 붙였어요. */
-var TOPS = ['#2b2b2b', '#ffffff', '#2b2b2b', '#ffffff'];   // 예주 재킷 · 은빈 셔츠 · 시현 수트 · 은채 블라우스
+// 얼굴·머리(img/head-*.png)는 직접 그린 그림 그대로, 목 아래 몸 · 옷 · 의자 · 정장 바지는 같은 선 느낌으로 그렸어요.
+// x · y : 머리 그림을 놓는 자리 (목 끝이 어깨선에 오도록 사람마다 맞춤)
+var HEADS = [
+  { img: 'img/head-yeju.png',    x: 27, y: -34, top: 'jacket' },   // 예주: 블랙 재킷 + 흰 이너
+  { img: 'img/head-eunbin.png',  x: 25, y: -18, top: 'shirt' },    // 은빈: 흰 셔츠 (단추)
+  { img: 'img/head-sihyeon.png', x: 27, y: -12, top: 'suit' },     // 시현: 블랙 수트 + 금색 명찰
+  { img: 'img/head-eunchae.png', x: 29, y: -16, w: 168, top: 'blouse' }   // 은채: 흰 블라우스 + 리본 끈 (원본 그림이 작아서 조금 크게)
+];
 function seatedSVG(t, i) {
-  const top = TOPS[i], ink = '#1a1a1a', pants = '#2c2c30', chair = '#efe6d8', chairD = '#ddd0bd', skin = '#fff1ea';
+  const H = HEADS[i], ink = '#1a1a1a', pants = '#2c2c30', chair = '#efe6d8', chairD = '#ddd0bd', skin = '#fff1ea';
+  const dark = H.top === 'jacket' || H.top === 'suit', cloth = dark ? '#2b2b2b' : '#ffffff';
   const limb = (d, w, c) => `<path d="${d}" fill="none" stroke="${ink}" stroke-width="${w + 5}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  return `<svg class="sit" viewBox="0 0 200 250" role="img" aria-label="${t.name}">
+  const torso = `<path d="M58 114 Q60 100 80 98 L100 104 L120 98 Q140 100 142 114 L136 154 H64 Z" fill="${cloth}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`;
+  const detail = {
+    jacket: `<path d="M84 99 L100 105 L116 99 L112 136 H88 Z" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>
+             <path d="M80 99 L90 124 L84 130 M120 99 L110 124 L116 130" fill="none" stroke="#6a6a6a" stroke-width="2.5" stroke-linejoin="round"/>
+             <circle cx="96" cy="144" r="2.2" fill="#8a8a8a"/>`,
+    suit:   `<path d="M90 101 L100 106 L110 101 L104 128 H96 Z" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>
+             <path d="M82 99 L93 126 L87 132 M118 99 L107 126 L113 132" fill="none" stroke="#6a6a6a" stroke-width="2.5" stroke-linejoin="round"/>
+             <rect x="114" y="124" width="13" height="4" rx="1" fill="#e3b23c"/><circle cx="100" cy="140" r="2.2" fill="#8a8a8a"/>`,
+    shirt:  `<path d="M100 106 V152" stroke="#d6d6d6" stroke-width="2"/><circle cx="100" cy="118" r="2.3" fill="${ink}"/><circle cx="100" cy="131" r="2.3" fill="${ink}"/><circle cx="100" cy="144" r="2.3" fill="${ink}"/>`,
+    blouse: `<path d="M88 100 L100 107 L95 112 Z M112 100 L100 107 L105 112 Z" fill="#fff" stroke="${ink}" stroke-width="2" stroke-linejoin="round"/>
+             <path d="M100 108 q-9 2 -7 8 q4 4 7 -8 q3 12 7 8 q2 -6 -7 -8" fill="none" stroke="${ink}" stroke-width="2"/>
+             <path d="M98 112 q-5 10 -2 22 q2 6 -1 12 M102 112 q5 10 2 22 q-2 6 1 12" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round"/>`
+  }[H.top];
+  return `<svg class="sit" viewBox="0 -40 200 290" role="img" aria-label="${t.name}">
     <ellipse cx="104" cy="240" rx="86" ry="7" fill="rgba(0,0,0,.12)"/>
     <path d="M36 182 V94 Q36 66 62 64 H138 Q164 66 164 94 V182 Z" fill="${chair}" stroke="${ink}" stroke-width="3"/>
     <path d="M50 98 Q52 80 68 78" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
@@ -2112,12 +2133,11 @@ function seatedSVG(t, i) {
     <path d="M12 134 Q12 118 30 118 Q48 118 48 134 V210 H12 Z" fill="${chair}" stroke="${ink}" stroke-width="3"/>
     <path d="M152 134 Q152 118 170 118 Q188 118 188 134 V210 H152 Z" fill="${chair}" stroke="${ink}" stroke-width="3"/>
     <path d="M20 128 Q24 122 32 122" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <path d="M66 96 Q100 86 134 96 L131 152 H69 Z" fill="${top}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
-    ${top === '#ffffff' ? '<path d="M100 104 V150" stroke="#cfcfcf" stroke-width="2"/>' : '<path d="M100 104 V150" stroke="#555" stroke-width="2"/><circle cx="105" cy="124" r="2.2" fill="#8a8a8a"/><circle cx="105" cy="138" r="2.2" fill="#8a8a8a"/>'}
-    ${limb('M70 102 Q52 114 34 124', 15, top)}<ellipse cx="29" cy="126" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
-    ${limb('M130 102 Q148 114 166 124', 15, top)}<ellipse cx="171" cy="126" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
-    <image href="${t.img}" x="40" y="-6" width="120" height="120"/>
-    <path d="M68 146 H132 L138 172 Q100 182 62 172 Z" fill="${pants}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
+    ${limb('M64 108 Q50 116 34 124', 15, cloth)}<ellipse cx="29" cy="126" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
+    ${limb('M136 108 Q150 116 166 124', 15, cloth)}<ellipse cx="171" cy="126" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
+    ${torso}${detail}
+    <image href="${H.img}" x="${H.x}" y="${H.y}" width="${H.w || 150}" height="${(H.w || 150) * 520 / 420}"/>
+    <path d="M66 148 H134 L138 172 Q100 182 62 172 Z" fill="${pants}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
     ${limb('M80 170 L82 224', 19, pants)}
     <path d="M81 182 L82 220" stroke="#55555b" stroke-width="1.5"/>
     <path d="M66 231 Q68 220 84 222 L94 224 Q99 232 90 234 H68 Z" fill="${ink}"/><path d="M72 226 L80 225" stroke="#888" stroke-width="2" stroke-linecap="round"/>
