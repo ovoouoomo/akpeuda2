@@ -692,6 +692,10 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 
 .credit-wrap .k{color:#fff!important;opacity:.9}
 .credit-wrap .cr-quote{color:#fff!important}
+.skill-fig{margin:0 0 8px;border:1px solid var(--line);background:#fff;padding:10px}
+.skill-fig img{display:block;width:100%;height:auto}
+.skill-fig figcaption{margin-top:10px;font-size:13px;line-height:1.75;color:var(--grey)}
+.skill-fig figcaption b{display:block;color:var(--ink);font:600 15px/1.6 var(--kserif);margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -798,14 +802,14 @@ const STORIES = [
 
 /* ---------- 언론 보도 (THE NEW YORK MIRROR) — 팀이 쓴 신문기사 ---------- */
 const ARTICLES = [
-  { id:'ai-timeline', date:'2026. 3. 4', sec:'TECHNOLOGY', title:'“AI는 하루아침에 오지 않았다”', sub:'알고리즘 추천에서 생성형 AI까지, 15년에 걸친 업무 환경의 이동', by:'크리스티안 톰슨 (Christian Thompson) · 프리랜스 저널리스트', featured:true,
+  { id:'ai-timeline', date:'2026. 8. 29', sec:'TECHNOLOGY', title:'“AI는 하루아침에 오지 않았다”', sub:'알고리즘 추천에서 생성형 AI까지, 15년에 걸친 업무 환경의 이동', by:'크리스티안 톰슨 (Christian Thompson) · 프리랜스 저널리스트', featured:true,
     body:[
       '런웨이 미디어 그룹의 인력 교체 논란이 이어지는 가운데, 정작 주목해야 할 것은 ‘AI의 등장’이 아니라 ‘AI가 업무에 들어온 속도’라는 지적이 나온다. 기술 도입 연표를 따라가 보면, 현재의 변화는 돌발 사태가 아니라 15년 넘게 축적된 흐름의 결과였다.',
       '출발점은 2010년이었다. 알고리즘 기반 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 이어 2017년부터 2022년까지는 기업 단위의 AI 도입이 본격적으로 증가한 시기로 분류된다. 다만 이 단계까지의 AI는 대중이 체감하기 어려운 ‘배후 기술’에 머물렀다.',
       '분기점은 2022년이었다. 챗지피티(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 일반 대중의 도구로 단숨에 옮겨왔다. 이후 2023년은 생성형 AI가 실제 업무에 본격적으로 진입한 해로 평가되며, 2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로 활용 범위가 빠르게 확대됐다.',
       '전문가들은 이 연표가 보여주는 핵심이 ‘대체’가 아닌 ‘재배치’라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다. 15년의 흐름을 놓친 조직이 기술을 인력 감축의 명분으로만 읽는 순간, 가장 먼저 사라지는 것은 비용이 아니라 조직의 축적된 경험이라는 지적이 뒤따른다.'
     ]},
-  { id:'secretary-survive', date:'2026. 3. 6', sec:'CAREER', title:'AI 시대에 비서라는 직업은 어떻게 살아남나?', sub:'‘행정 보조자’에서 ‘의사결정 지원 파트너’로', by:'THE NEW YORK MIRROR 편집부', featured:true, table:true,
+  { id:'secretary-survive', date:'2026. 8. 29', sec:'CAREER', title:'AI 시대에 비서라는 직업은 어떻게 살아남나?', sub:'‘행정 보조자’에서 ‘의사결정 지원 파트너’로', by:'THE NEW YORK MIRROR 편집부', featured:true, table:true,
     body:[
       '인공지능(AI)이 처음 등장했을 때만 해도, 비서는 가장 먼저 사라질 대표적인 직업으로 꼽혔다. 일정 관리부터 문서 작성, 자료 검색과 회의록 요약까지 비서가 하던 일들을 AI가 순식간에 처리해 버렸기 때문이다. 하지만 실제 현장에서 일어난 변화는 직업이 사라지는 것이 아니라 ‘역할이 바뀌는 과정’이었다. AI가 반복적인 행정 업무를 대신해 주면서, 인간 비서의 역할은 판단과 소통 중심으로 이동했다.',
       '실제로 AI는 일정 관리나 반복 행정, 문서 초안 작성, 회의록 정리, 데이터 통합처럼 정형화된 업무를 빠르고 정확하게 자동화하는 데 특화되어 있다. 반면 인간 비서는 조직 내 커뮤니케이션을 조율하고 예외적인 돌발 상황에 유연하게 대응하며, AI가 내놓은 결과물을 검토하고 수정하는 고차원적 역할을 수행한다.',
@@ -813,7 +817,7 @@ const ARTICLES = [
       '이제 비서에게는 AI를 다루는 프롬프트 작성 능력과 데이터 리터러시는 물론, AI가 제시한 결과물의 오류를 검증하고 수정하는 정교한 안목이 필수가 되었다. AI의 빠른 자료 정리에 무비판적으로 의존하기보다 정확한 정보를 가려내고, 이를 바탕으로 리더와 조직 사이를 매끄럽게 잇는 전략적 커뮤니케이션 능력이 핵심 경쟁력으로 떠오른 것이다.',
       '결국 AI 시대의 비서는 단순한 ‘행정 보조자’에서 AI 도구를 자유롭게 활용하고 최종 판단을 내리는 ‘의사결정 지원 파트너’로 전환을 이루어냈다. AI라는 강력한 도구를 지휘하며 판단과 책임의 몫을 지켜낸 비서직은, 기술 변화 속에서 직업의 미래를 스스로 재정의한 대표적인 사례다.'
     ]},
-  { id:'prompt-check', date:'2026. 3. 9', sec:'BUSINESS', title:'“AI에게 시키면 끝?” … 결과를 걸러내는 사람이 경쟁력을 갖는다', sub:'좋은 프롬프트의 5요소, 환각 검증, 개인정보 보호, 그리고 MCP', by:'앤드리아 삭스 (Andrea Sachs) · 프리랜스 저널리스트', featured:true,
+  { id:'prompt-check', date:'2026. 8. 29', sec:'BUSINESS', title:'“AI에게 시키면 끝?” … 결과를 걸러내는 사람이 경쟁력을 갖는다', sub:'좋은 프롬프트의 5요소, 환각 검증, 개인정보 보호, 그리고 MCP', by:'앤드리아 삭스 (Andrea Sachs) · 프리랜스 저널리스트', featured:true,
     body:[
       'AI가 문서 작성과 자료 조사, 정보 정리 등 다양한 업무에 활용되면서 직장인들의 업무 방식도 빠르게 달라지고 있다. 하지만 AI를 단순히 사용하는 것만으로는 원하는 결과를 얻기 어렵다는 지적이 나온다. AI에게 정확하게 지시하고, 결과를 검토하는 능력까지 갖추는 것이 중요해지고 있기 때문이다.',
       'AI를 효과적으로 활용하기 위해서는 먼저 프롬프트를 구체적으로 작성해야 한다. 좋은 프롬프트는 크게 다섯 가지 요소로 구성된다. AI에게 어떤 역할을 맡길 것인지 정하는 ‘역할’, 업무의 상황을 설명하는 ‘배경’, 원하는 작업을 구체적으로 제시하는 ‘지시’, 결과물에서 지켜야 할 조건을 정하는 ‘제약’, 그리고 원하는 결과의 형태를 알려주는 ‘출력 형식’이다.',
@@ -822,21 +826,21 @@ const ARTICLES = [
       '최근에는 AI를 업무 도구와 직접 연결해 쓰는 방식이 주목받고 있다. MCP(Model Context Protocol)는 AI가 일정표나 메일함, 사내 문서함 같은 실제 업무 도구에 직접 접근하도록 연결해 주는 ‘공통 규격’으로, 서로 다른 기기를 하나의 USB 단자로 잇듯 여러 업무 프로그램을 AI에 같은 방식으로 연결해 준다. 다만 AI의 접근 권한은 업무에 꼭 필요한 범위로만 설정하고, 인사·계약 정보처럼 공개가 제한된 자료는 연결 대상에서 제외해야 한다. 이 기능은 클로드(Claude)에서는 ‘커넥터’, 챗GPT에서는 ‘플러그인’으로 불린다.',
       '결국 가장 중요한 것은 AI가 만들어낸 결과를 그대로 믿지 않는 태도다. 확인되지 않은 내용은 ‘검증되지 않음’으로 표시하는 방식이다. AI를 가장 잘 활용하는 사람은 답을 가장 빨리 받아들이는 사람이 아니라, 그 답을 한 번 더 의심하고 확인할 수 있는 사람일 것이다.'
     ]},
-  { id:'interview-amari', date:'2026. 3. 11', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 정체성은 어떻게 변하는가?', sub:'AI 도입에 따른 비서 직무의 시사점 — 현직 비서 아마리', by:'올리비아 첸 (Olivia Chen)', interview:true,
+  { id:'interview-amari', date:'2026. 8. 29', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 정체성은 어떻게 변하는가?', sub:'AI 도입에 따른 비서 직무의 시사점 — 현직 비서 아마리', by:'올리비아 첸 (Olivia Chen)', interview:true,
     body:[
       'Q. 최근 기업 현장에 AI 바람이 거세게 불고 있습니다. 상사를 보좌하며 업무를 조율해온 비서 직무에 실제로 어떤 변화가 일어나고 있나요?',
       'A. 사실 현장에서는 기대와 걱정이 동시에 존재해요. AI는 인공지능 기술을 기반으로 명령을 이해하고 일을 돕는 시스템이고, 저희 같은 인간 비서는 상사의 일정이나 소통을 챙기며 전체 업무 흐름을 조율하는 사람이에요. AI와 인간 비서 사이에 확실한 역할 분담이 생기고 있어요. 쉬운 사무 업무를 AI에게 맡기는 대신 저희는 관계적인 역할을 맡아서 서로 부족한 점을 보완하는 관계가 됩니다.',
       'Q. 앞으로 비서에게 필요한 가장 중요한 능력은 무엇일까요?',
       'A. AI 협업은 직무에 대한 불안감을 주죠. 하지만 동시에 비서라는 직업의 전문성을 끌어올리기도 합니다. 이제는 단순히 일처리가 빠르다고 인정받는 시대가 아니에요. 얼마나 AI를 잘 다루고 윤리적인 문제까지 감지해내는 민첩성이 새로운 무기가 되어야 합니다. 앞으로의 비서는 기술 뒤에 숨는 것이 아닌 본질을 상기시키는 자리가 되어야 한다고 생각합니다.'
     ]},
-  { id:'interview-emily', date:'2026. 3. 13', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다', sub:'업무 시 AI 사용은 자기주도성에 영향을 미칠까?', by:'마커스 벨 (Marcus Bell)', interview:true,
+  { id:'interview-emily', date:'2026. 8. 29', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다', sub:'업무 시 AI 사용은 자기주도성에 영향을 미칠까?', by:'마커스 벨 (Marcus Bell)', interview:true,
     body:[
       'Q. 직장 내에서 AI나 디지털 업무 환경을 활용하는 일들이 늘어났습니다. 이러한 도구들이 비서의 미래에 영향을 미친다고 보시나요?',
       'A. 당연히 엄청난 영향을 미치죠! 생성형 AI는 목표를 세우거나 실행, 평가하는 능력을 끌어올려줘요. 일터에서 능동적으로 문제를 해결하도록 자극을 주는 거죠. 이렇게 배운 자기주도성이 발판이 되어 자연스럽게 직무 성과로 이어집니다. 다만 비대면 텍스트 소통이 늘어나면서 오프라인에서의 대응이나 달라진 환경에 대한 적응 등의 문제점 또한 존재하지요.',
       'Q. 비서가 AI시대에 밀려나지 않고 자신의 경력을 만들어가려면 무엇을 갖춰야 할까요?',
       'A. 요즘 상사들이 어떤 비서를 우수하다고 평가하는지 아세요? 하나하나 지시하지 않아도 상사의 니즈에 맞게 능동적으로 움직이는 비서예요. 전표처리나 계산 같은 단순 복잡 업무는 AI가 훨씬 빠르고 정확하게 처리한다는 걸 상사들도 잘 알고 있어요. 하지만 사람과 직접 대면하고 교감하며 상황을 이해하고 해결하는 건 AI가 할 수 없는 사람만의 영역이죠. AI는 도구일 뿐 본질이 변하지는 않으니까요.'
     ]},
-  { id:'chairman', date:'2026. 3. 2', sec:'MEDIA', title:'“낡은 방식에 매달리는 조직에는 미래가 없다”', sub:'런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', by:'크리스티안 톰슨 (Christian Thompson) · 프리랜스 저널리스트',
+  { id:'chairman', date:'2026. 8. 29', sec:'MEDIA', title:'“낡은 방식에 매달리는 조직에는 미래가 없다”', sub:'런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', by:'크리스티안 톰슨 (Christian Thompson) · 프리랜스 저널리스트',
     body:[
       '런웨이 미디어 그룹 신임 회장 제이가 또다시 논란의 중심에 섰다. 제이 회장은 지난주 조직을 20년 넘게 지탱해온 시니어 비서진과 편집 보조 인력 상당수를 한꺼번에 해고하며 “낡은 방식에 매달리는 조직에는 미래가 없다”고 밝혔다. 그는 해당 자리를 생성형 AI 도구로 대체하겠다는 계획도 함께 발표했다.',
       '그러나 현장의 흐름은 회장의 판단과 다른 방향으로 나타나고 있다. AI를 도입한 조직에서 비서직은 사라지기보다 ‘조정자’ 및 ‘판단 파트너’로 재편되는 추세다. 생성형 AI를 적극적으로 활용하는 직원일수록 자기주도적 학습 역량이 높아지고 실제 업무 성과도 함께 향상된다는 분석도 제기됐다. AI가 사람을 대체하는 도구가 아니라, 숙련도를 끌어올리는 도구로 기능하고 있다는 해석이다.',
@@ -1516,7 +1520,12 @@ function pSecretary() {
       <p class="muted" style="font-size:13px;margin-top:8px">출처: 뉴욕 미러 <a class="lnk" href="#/press/secretary-survive">「AI 시대에 비서라는 직업은 어떻게 살아남나?」</a></p>
 
       <h3>필요 역량</h3>
-      <div class="bars" id="bars">${SEC_SKILLS.map(s => `<div class="bar"><span>${s[0]}</span><div class="tr"><i data-w="${s[1]}"></i></div><b>${s[1]}</b></div>`).join('')}</div>
+      <figure class="skill-fig">
+        <img src="img/skills-wef2025.png" alt="2025년 고용주가 꼽은 핵심 역량 Top 8: 분석적 사고 69%, 회복탄력성·유연성·민첩성 67%, 리더십·사회적 영향력 61%, 창의적 사고 57%, 동기부여·자기인식 52%, 공감·경청 50%, 호기심·평생학습 50%, 고객 서비스 47%" loading="lazy">
+        <figcaption><b>세계경제포럼 『Future of Jobs Report 2025』 — 고용주 10곳 중 7곳이 ‘분석적 사고’를 핵심 역량으로 꼽았습니다.</b>
+          출처: World Economic Forum (2025). <i>The Future of Jobs Report 2025</i>. Geneva: World Economic Forum, 2025년 1월 발간 · 55개국, 22개 산업 분야, 1,000여 개 글로벌 고용주(근로자 1,400만 명 이상) 대상 설문.
+          <a class="lnk" href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">보고서 원문 보기 ↗</a></figcaption>
+      </figure>
 
       <h3>편집장 비서 생존 매뉴얼</h3>
       <div class="rules">${SEC_RULES.map(r => `<div class="rule fade"><b>${r[0]}</b>${r[1]}</div>`).join('')}</div>
@@ -1653,8 +1662,6 @@ function afterRender(p, id) {
     if (id === 'secretary') {
       const setT = t => { $$('#asst-tabs button').forEach(b => b.classList.toggle('on', +b.dataset.t === t)); const a = ASST[t]; $('#asst-body').innerHTML = `<p style="font:17px/1.95 var(--kserif);margin:0 0 6px"><b>${a.t}</b> — ${a.d}</p><ul class="chk">${a.li.map(x => `<li>${x}</li>`).join('')}</ul>`; };
       $$('#asst-tabs button').forEach(b => b.onclick = () => setT(+b.dataset.t)); setT(1);
-      const bo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { $$('#bars i').forEach(i => i.style.width = i.dataset.w + '%'); bo.disconnect(); } }));
-      bo.observe($('#bars'));
     }
   }
   if ($('#share-job')) $('#share-job').onclick = copyLink;
