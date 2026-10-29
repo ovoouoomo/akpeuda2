@@ -735,6 +735,90 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 .sk-axis{position:absolute;left:calc(30% + 12px);right:0;bottom:0;height:18px}
 .sk-axis span{position:absolute;transform:translateX(-50%);font-size:11px;color:var(--grey)}
 @media (max-width:600px){.sk-row{grid-template-columns:1fr}.sk-lab{text-align:left}.sk-axis{display:none}.sk-row[data-tip]:hover::after{left:0}}
+
+/* 🔐 관리자 로그인 */
+.adm-login{min-height:70vh;display:grid;place-items:center;padding:60px 16px;background:var(--soft)}
+.al-box{width:min(440px,100%);background:var(--card);border-top:6px solid var(--ink);padding:34px 30px 28px;box-shadow:0 30px 70px rgba(0,0,0,.12)}
+.al-box h1{margin:8px 0 6px;font:400 44px/1 var(--didone);letter-spacing:.06em}
+.al-box h1 em{font-style:italic;color:var(--red)}
+.al-box p{color:var(--grey);margin:0 0 20px}
+.al-box label{display:block;font:700 12px var(--sans);letter-spacing:.12em;margin-bottom:6px}
+.al-row{display:flex;gap:8px}
+.al-row input{flex:1;min-width:0;height:48px;border:1px solid var(--ink);padding:0 14px;font:700 20px var(--sans);letter-spacing:.4em;background:var(--bg);color:var(--ink)}
+.al-row .btn{border-radius:0}
+.al-msg{min-height:22px;color:var(--red)!important;font-weight:700;font-size:14px;margin:10px 0 14px!important}
+.al-box.shake{animation:alShake .4s}
+@keyframes alShake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* 📊 운영 리포트 */
+.adm{padding:34px 0 60px;background:var(--soft)}
+.adm-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:18px}
+.adm-head h1{margin:6px 0 4px;font:600 clamp(28px,4vw,40px) var(--kserif);letter-spacing:-.03em}
+.adm-head p{margin:0;font-size:13.5px}
+.adm-tools{display:flex;gap:6px;flex-wrap:wrap}
+.adm-tools .btn{border-radius:0;min-height:38px;padding:0 14px;cursor:pointer}
+.adm-tools .btn.on{background:var(--red);border-color:var(--red);color:#fff}
+.adm-sample{background:#fff4cc;border-left:4px solid #e3b23c;padding:10px 14px;margin-bottom:14px;font-weight:700;font-size:14px;color:#5a4400}
+.adm-empty{background:var(--card);border:1px dashed var(--line);padding:50px 20px;text-align:center}
+.adm-empty b{font:600 20px var(--kserif)}
+.adm-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:16px}
+.ak{background:var(--card);padding:16px 18px}
+.ak small{display:block;font:700 11.5px var(--sans);letter-spacing:.08em;color:var(--grey)}
+.ak b{display:block;font:400 clamp(30px,3.4vw,40px)/1.15 var(--didone);margin:4px 0 2px;color:var(--ink)}
+.ak:nth-child(2) b{color:var(--red)}
+.ak span{font-size:12px;color:var(--grey)}
+.adm-card{background:var(--card);border:1px solid var(--line);padding:18px 20px;margin-bottom:16px}
+.adm-card h3{margin:0 0 14px;font:600 17px var(--kserif);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.adm-card h3 small{font:400 12px var(--sans);color:var(--grey)}
+.adm-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.adm-grid .wide{grid-column:1/-1}
+.adm-sum{border-left:4px solid var(--red)}
+.adm-sum ul{margin:0 0 12px;padding-left:18px}
+.adm-sum li{font:400 15.5px/1.85 var(--kserif)}
+.adm-sum li b{color:var(--red)}
+.adm-note{margin:10px 0 0;font-size:13px;color:var(--grey)}
+.adm-note b{color:var(--red)}
+.hbars{display:grid;gap:6px}
+.hb,.st-row{display:grid;grid-template-columns:minmax(110px,36%) 1fr;align-items:center;gap:10px;position:relative;outline:none}
+.st-row{grid-template-columns:minmax(110px,36%) 1fr 44px}
+.hb-l{font-size:13px;text-align:right;color:var(--ink);line-height:1.3}
+.hb-t{position:relative;height:22px;display:flex;align-items:center}
+.hb-t i{display:block;height:14px;width:calc(var(--w) * var(--on, 0));min-width:2px;background:#bdb6ad;border-radius:0 4px 4px 0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.hb.top .hb-t i{background:var(--red)}
+.hb-t b{margin-left:8px;font:400 14px var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap}
+.hb.top .hb-t b{font-weight:700}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--grey);margin-bottom:10px}
+.legend i{display:inline-block;width:12px;height:12px;margin-right:5px;vertical-align:-1px}
+.l-best,.s-best{background:var(--ink)}.l-good,.s-good{background:#bdb6ad}.l-bad,.s-bad{background:var(--red)}
+.stack{display:grid;gap:7px}
+.st-bar{display:flex;height:16px;gap:2px}
+.st-bar i{display:block;height:100%}
+.st-bar i:last-child{border-radius:0 4px 4px 0}
+.st-row>b{font-size:13px;color:var(--red);text-align:right}
+.cbars{display:flex;align-items:flex-end;gap:4px;height:180px;padding-top:18px}
+.cb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;outline:none;min-width:0}
+.cb i{display:block;width:72%;height:calc(var(--h) * var(--on, 0));min-height:2px;background:#bdb6ad;border-radius:4px 4px 0 0;transition:height .9s cubic-bezier(.2,.8,.2,1)}
+.cb.top i{background:var(--red)}
+.cb-v{font-size:11px;color:var(--grey);margin-bottom:3px}
+.cb-l{font-size:11px;color:var(--grey);margin-top:5px;white-space:nowrap;border-top:1px solid var(--ink);width:100%;text-align:center;padding-top:4px}
+.hb[data-tip]:hover::after,.hb[data-tip]:focus::after,.st-row[data-tip]:hover::after,.cb[data-tip]:hover::after,.cb[data-tip]:focus::after{content:attr(data-tip);position:absolute;left:36%;bottom:100%;z-index:5;background:var(--ink);color:var(--bg);font-size:12px;padding:4px 9px;white-space:nowrap;pointer-events:none}
+.cb[data-tip]:hover::after{left:50%;transform:translateX(-50%)}
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.mini div{background:var(--card);padding:14px}
+.mini b{display:block;font:400 30px var(--didone)}
+.mini span{font-size:12.5px;color:var(--grey)}
+.tbl-wrap{overflow-x:auto}
+.adm-tb{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px}
+.adm-tb th{text-align:left;font:700 11.5px var(--sans);letter-spacing:.06em;color:var(--grey);border-bottom:1px solid var(--ink);padding:8px}
+.adm-tb td{border-bottom:1px solid var(--line);padding:8px;font-variant-numeric:tabular-nums}
+.rs{font-weight:700;font-size:12.5px}.rs.win{color:var(--green)}.rs.fail{color:var(--red)}.rs.quit{color:var(--grey)}
+.adm-foot{font-size:12.5px;color:var(--grey);margin:6px 0 0}
+@media (max-width:860px){.adm-kpis{grid-template-columns:1fr 1fr}.adm-grid{grid-template-columns:1fr}}
+@media print{
+  header,footer,.fab-play,.totop,.idle-bar,.adm-tools,#toasts,.topbar,.cookie{display:none!important}
+  .adm{background:#fff;padding:0}.adm-card,.ak{break-inside:avoid}
+  .hb-t i,.cb i{--on:1;transition:none}
+}
 </style>
 </head>
 <body>
@@ -777,7 +861,7 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
       <div><a class="logo" href="#/">RUNWAY</a><p style="margin:8px 0 0">엘리아스-클라크 퍼블리케이션 · 뉴욕</p><p style="margin:4px 0 0">This season’s color <span class="swatch" id="swatch" title="눌러 보세요"></span> <span style="color:#6fa3e8">Cerulean</span></p></div>
       <div><h5>회사</h5><ul><li><a href="#/about">회사 소개</a></li><li><a href="#/about">편집장 인사말</a></li><li><a href="#/about">조직도</a></li><li><a href="#/about">오피스</a></li></ul></div>
       <div><h5>채용</h5><ul><li><a href="#/careers/secretary">미란다의 비서 ★</a></li><li><a href="#/game">실무 테스트 (게임)</a></li></ul></div>
-      <div><h5>더 보기</h5><ul><li><a href="#/press">언론 보도</a></li><li><a href="#/game">악프다 2 게임</a></li><li><a href="#/intranet">임직원 전용</a></li><li><button id="replay-ad">광고 다시 보기 ▸</button></li></ul></div>
+      <div><h5>더 보기</h5><ul><li><a href="#/press">언론 보도</a></li><li><a href="#/game">악프다 2 게임</a></li><li><a href="#/intranet">임직원 전용</a></li><li><a href="#/admin">관리자</a></li><li><button id="replay-ad">광고 다시 보기 ▸</button></li></ul></div>
     </div>
     <button class="egg" id="egg"><span class="heads" id="egg-heads"></span><span><b>숨은 제작진을 찾아보세요</b><br><span style="font-size:13px">이 사무실 어딘가에 비서 4명이 숨어 있어요. 힌트: 맨 위 <b>RUNWAY 로고를 빠르게 5번</b></span></span><span class="go">바로 보기 →</span></button>
     <div class="fb"><span>© 2026 Elias-Clarke Publications · <i>“Everybody wants to be us.”</i></span><span>영화 《악마는 프라다를 입는다 2》에서 영감을 받은 <b style="color:#ccc">전시용 가상 홈페이지</b>입니다. 실제 회사·인물·배우와 관련이 없으며, 인물 사진과 영상은 팀이 AI로 제작한 팬메이드 콘텐츠입니다.</span></div>
@@ -926,7 +1010,7 @@ const ACCOUNTS = {
   andy:    { pw:'cerulean', name:'앤디 삭스',       role:'피처 에디터',   cast:'andy' },
   jin:     { pw:'recorder', name:'진 차오',         role:'앤디의 어시스턴트', cast:'jin' },
   nigel:   { pw:'belts',    name:'나이젤',          role:'아트 디렉터',   cast:'nigel' },
-  miranda: { pw:'thatsall', name:'미란다 프리슬리', role:'편집장 · 관리자', cast:'miranda', admin:true }
+  miranda: { pw:'thatsall', name:'미란다 프리슬리', role:'편집장', cast:'miranda' }
 };
 
 /* =====================================================================
@@ -1328,6 +1412,7 @@ function route() {
   const bad = !fn || (p === 'press' && id && !ARTICLES.find(a => a.id === id)) || (p === 'careers' && id && !JOBS.find(j => j.id === id));
   if (heroPlayer) { heroPlayer.stop(); heroPlayer = null; }
   app.innerHTML = bad ? pNotFound() : fn(id);
+  if (!bad) siteBump('views', p || 'home');
   window.scrollTo(0, 0);
   document.title = bad ? '페이지를 찾을 수 없어요 | 런웨이' : TITLES[p];
   afterRender(p, id);
@@ -1661,38 +1746,6 @@ function pIntranet(sub) {
     <div class="panel"><h3>바로가기</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-out btn-sm" href="#/press/prompt-check">AI 사용 가이드</a><a class="btn btn-out btn-sm" href="#/careers">채용 현황</a><button class="btn btn-out btn-sm" onclick="toast('편집장 커피 주문 완료 — 뜨거운 라떼, 엑스트라 핫.')">커피 주문</button></div></div>`);
 }
 
-/* ---------- 관리자 (편집장만) ---------- */
-function pAdmin(sub) {
-  if (!sess.get()) return needLogin(true);
-  if (!ACCOUNTS[sess.get()].admin) return dashShell('', needLogin(true));
-  if (sub === 'staff') return dashShell('admin/staff', `<div class="panel"><h3>직원 관리</h3><table class="tb"><tr><th>이름</th><th>직무</th><th>AI 역량</th><th>상태</th></tr>
-    <tr><td>아마리</td><td>1st 어시스턴트</td><td>★★★★★</td><td><span class="stt g">근무 중</span></td></tr>
-    <tr><td>앤디 삭스</td><td>피처 에디터</td><td>★★★★☆</td><td><span class="stt g">근무 중</span></td></tr>
-    <tr><td>진 차오</td><td>앤디의 어시스턴트</td><td>★★★★☆</td><td><span class="stt y">녹음기 설치 중(?)</span></td></tr>
-    <tr><td>나이젤</td><td>아트 디렉터</td><td>★★★☆☆</td><td><span class="stt g">근무 중</span></td></tr>
-    <tr><td>에밀리 찰턴</td><td>외부 · 럭셔리 브랜드 임원</td><td>-</td><td><span class="stt r">광고 협상 중</span></td></tr></table></div>
-    <div class="panel"><h3>제작진 <button class="btn btn-red btn-sm" onclick="openCredits()">크레딧 보기</button></h3><table class="tb"><tr><th>이름</th><th>모습</th></tr>${TEAM.map(t => `<tr><td>${t.name}</td><td>${t.desc}</td></tr>`).join('')}</table></div>`);
-  if (sub === 'notice') return dashShell('admin/notice', `<div class="panel"><h3>공지 관리 <small>이 기기에 저장 · 인트라넷에 반영</small></h3>
-    <div class="field"><label for="nt-in">새 공지</label><input id="nt-in" class="inp" placeholder="예: 가을호 마감 연장 없음"></div>
-    <label style="display:flex;gap:8px;align-items:center;font-size:14px;margin-bottom:14px"><input type="checkbox" id="nt-pin"> 필독으로 고정</label>
-    <div style="display:flex;gap:8px"><button class="btn btn-red btn-sm" id="nt-add">등록</button><button class="btn btn-out btn-sm" id="nt-reset">기본값으로</button></div>
-    <ul class="nlist" id="nt-list" style="margin-top:18px"></ul></div>`);
-  if (sub === 'log') return dashShell('admin/log', `<div class="panel"><h3>보안 로그</h3><div class="log" id="log"></div></div>`);
-  const plays = +(store.raw('rw_plays') || 0), wins = +(store.raw('rw_wins') || 0);
-  const week = [['월', 320], ['화', 410], ['수', 380], ['목', 520], ['금', 690], ['토', 840], ['일', 760]];
-  return dashShell('admin', `
-    <div class="panel red"><h3>편집장 관리자 콘솔</h3><p>“숫자는 거짓말을 하지 않아. 사람이 할 뿐이지.”</p></div>
-    <div class="kpis">
-      <div class="kpi"><small>게임 플레이 (이 기기)</small><b>${plays}</b><em class="up">실제 기록</em></div>
-      <div class="kpi"><small>탈출 성공 (이 기기)</small><b>${wins}</b><em class="up">성공률 ${plays ? Math.round(wins / plays * 100) : 0}%</em></div>
-      <div class="kpi"><small>이번 주 방문자</small><b>3,920</b><em class="up">▲ 18% (데모)</em></div>
-      <div class="kpi"><small>비서 지원자</small><b>1,204</b><em class="dn">합격 1명 (데모)</em></div>
-    </div>
-    <div class="panel"><h3>주간 방문자 <small>데모 데이터</small></h3><div class="chart">${week.map(w => `<div class="c"><b>${w[1]}</b><i data-h="${w[1] / 9}"></i><span>${w[0]}</span></div>`).join('')}</div></div>
-    <div class="panel"><h3>AI 사용 현황</h3><table class="tb"><tr><th>항목</th><th>건수</th></tr><tr><td>AI 초안 작성</td><td>128</td></tr><tr><td>1차 출처 확인 완료</td><td>121</td></tr><tr><td>‘검증되지 않음’ 표시</td><td>7</td></tr><tr><td>개인정보 비식별화</td><td>42</td></tr></table></div>
-    <div class="panel"><h3>승인 대기</h3><ul class="nlist"><li>출처 미확인 통계 보고서 <span class="stt r">반려</span></li><li>인사 폴더 AI 연결 요청 <span class="stt r">거부</span></li><li>가을호 표지 시안 B — “Florals? For spring?” <span class="stt y">검토</span></li><li>앤디의 기획 기사 초안 <span class="stt g">승인</span></li></ul></div>`);
-}
-
 /* ---------- 없는 페이지 ---------- */
 function pNotFound() { return `<section class="nf"><b>404</b><h2>편집장이 이 페이지를 해고했어요.</h2><p class="q">“Details of your incompetence do not interest me.”</p><a class="btn btn-red" href="#/">홈으로 돌아가기</a></section>`; }
 
@@ -1721,9 +1774,8 @@ function afterRender(p, id) {
     $('#msg-in').value = '';
     setTimeout(() => { const box = $('#msg-new'); if (box) box.insertAdjacentHTML('beforeend', `<div class="msg"><div class="av">${faceOf('miranda')}</div><div class="bb"><small>미란다 프리슬리 · 방금</small>${['That’s all.', '…그래서?', 'By all means, move at a glacial pace.', '좋아. 다음.'][Math.floor(Math.random() * 4)]}</div></div>`); }, 1200);
   };
-  if (p === 'admin' && !id && me?.admin) setTimeout(() => $$('.chart i').forEach(i => i.style.height = i.dataset.h + '%'), 60);
-  if (p === 'admin' && id === 'notice' && me?.admin) renderNoticeAdmin();
-  if (p === 'admin' && id === 'log' && me?.admin) {
+  if (p === 'admin') initAdmin();
+  if (false) {
     const now = new Date(), f = m => new Date(now - m * 60000).toTimeString().slice(0, 8);
     $('#log').innerHTML = [[1, 'LOGIN  miranda  OK (편집장 콘솔)'], [3, 'MCP    calendar.connect  OK  (범위: 일정표 읽기)'], [5, 'MCP    hr_folder.connect  DENIED  (공개 제한 자료)'], [9, 'AI     draft#128  FLAG  출처 미확인 → 검증되지 않음'], [14, 'DLP    고객 전화번호 감지 → 비식별화 처리'], [18, 'DEVICE recorder@features-desk  감지됨 (진 차오)'], [31, 'LOGIN  unknown  FAIL x3  (“By all means, move at a glacial pace.”)']]
       .map(l => `[${f(l[0])}] ${esc(l[1])}`).join('<br>');
@@ -1838,6 +1890,7 @@ $('#swatch').onclick = () => toast('그 스웨터, 그냥 파란색이 아니에
 const AD = { player: null };
 function playAd() {
   if (heroPlayer && heroPlayer.sound) heroPlayer.setSound(false);
+  siteBump('ad');
   $('#ad').classList.remove('hidden'); document.body.style.overflow = 'hidden'; $('#ad-pause').textContent = '❚❚';
   AD.player = makePlayer($('#ad-stage'), { onTick: adTick, onEnd: () => setTimeout(() => { if (AD.player && AD.player.ended) closeAd(); }, 2500) });
   const go = $('#ad-stage .cta'); if (go) go.addEventListener('click', () => closeAd());
@@ -1898,6 +1951,7 @@ document.body.insertAdjacentHTML('beforeend', `<div class="idle-bar hidden" id="
   <button class="btn btn-red" id="idle-stay" type="button">계속 보기</button><i class="ib-bar" id="idle-prog"></i></div>`);
 $('#idle-stay').onclick = () => { lastAct = Date.now(); $('#idle-bar').classList.add('hidden'); };
 function goHomeTop() {
+  adminAuth.set(false); siteBump('idle');
   closeModal(); $('#gnb').classList.remove('open'); $('#idle-bar').classList.add('hidden');
   if (location.hash !== '' && location.hash !== '#/' && location.hash !== '#') location.hash = '#/';
   window.scrollTo({ top: 0, behavior: 'instant' }); setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 80);
@@ -1909,11 +1963,13 @@ setInterval(() => {
     && $('#modal').classList.contains('hidden') && !$('#gnb').classList.contains('open');
   if (atHomeTop) { lastAct = Date.now(); bar.classList.add('hidden'); return; }       // 첫 화면 맨 위는 그대로 둬요
   const idle = (Date.now() - lastAct) / 1000;
-  if (idle >= HOME_IDLE_SECONDS) { lastAct = Date.now(); goHomeTop(); return; }
-  if (idle >= HOME_WARN_AFTER) {
-    const left = Math.ceil(HOME_IDLE_SECONDS - idle);
+  const adminView = location.hash.startsWith('#/admin') && adminAuth.ok();
+  const LIMIT = adminView ? 180 : HOME_IDLE_SECONDS, WARN = LIMIT - (HOME_IDLE_SECONDS - HOME_WARN_AFTER);   // 리포트를 읽는 관리자는 3분
+  if (idle >= LIMIT) { lastAct = Date.now(); goHomeTop(); return; }
+  if (idle >= WARN) {
+    const left = Math.ceil(LIMIT - idle);
     $('#idle-n').textContent = left;
-    $('#idle-prog').style.width = (left / (HOME_IDLE_SECONDS - HOME_WARN_AFTER) * 100) + '%';
+    $('#idle-prog').style.width = (left / (LIMIT - WARN) * 100) + '%';
     bar.classList.remove('hidden');
   } else bar.classList.add('hidden');
 }, 250);
@@ -1926,9 +1982,280 @@ window.addEventListener('scroll', () => $('#totop').classList.toggle('show', scr
 $('#totop').onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
 S.user = sess.get();
-renderHeader(); route();
 let seen = null; try { seen = sessionStorage.getItem('rw_ad'); } catch (e) {}
 if (!seen) playAd(); else if (store.get('rw_cookie', null) === null) $('#cookie').classList.remove('hidden');
+
+/* =====================================================================
+   🔐 관리자 · 운영 리포트 (포트폴리오용)
+   - 비밀번호 486 을 입력해야만 들어올 수 있어요.
+   - 비밀번호는 코드에 그대로 적지 않고 SHA-256 지문(해시)으로만 비교해요.
+   - 데이터는 게임을 한 이 기기의 브라우저(localStorage)에 쌓여요. 이름 같은 개인정보는 저장하지 않아요.
+   ===================================================================== */
+var ADMIN_HASH = '86b700fab5db37977a73700b53a0654b21bdad0896914cc19ad70dee5f5fb3f6';
+var adminAuth = {
+  ok() { try { return sessionStorage.getItem('rw_admin') === ADMIN_HASH.slice(0, 20); } catch (e) { return false; } },
+  set(v) { try { v ? sessionStorage.setItem('rw_admin', ADMIN_HASH.slice(0, 20)) : sessionStorage.removeItem('rw_admin'); } catch (e) {} }
+};
+async function sha256(t) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+// 홈페이지 이용 기록 (페이지별 조회 · 광고 재생 · 자동 복귀)
+function siteBump(key, sub) {
+  const d = store.get('rw_site', { views: {}, ad: 0, idle: 0, since: Date.now() });
+  if (sub !== undefined) d[key][sub] = (d[key][sub] || 0) + 1; else d[key] = (d[key] || 0) + 1;
+  store.set('rw_site', d);
+}
+
+function pAdmin() {
+  if (!adminAuth.ok()) return `
+  <section class="adm-login"><div class="al-box">
+    <div class="eyebrow">Restricted · 관리자 전용</div>
+    <h1>RUNWAY <em>STUDIO</em></h1>
+    <p>전시 운영 리포트는 관리자만 볼 수 있어요.<br>관리자 비밀번호를 입력해 주세요.</p>
+    <form id="adm-form" autocomplete="off">
+      <label for="adm-pw">관리자 비밀번호</label>
+      <div class="al-row"><input type="password" id="adm-pw" inputmode="numeric" maxlength="12" autocomplete="off" required><button class="btn btn-ink" type="submit">로그인</button></div>
+    </form>
+    <p class="al-msg" id="adm-msg" role="alert"></p>
+    <a class="lnk" href="#/">← 홈페이지로</a>
+  </div></section>`;
+  return `
+  <section class="adm"><div class="wrap">
+    <div class="adm-head">
+      <div><div class="eyebrow">RUNWAY STUDIO · Exhibition Report</div><h1>전시 운영 리포트</h1><p class="muted" id="adm-range"></p></div>
+      <div class="adm-tools">
+        <button class="btn btn-out btn-sm" id="adm-sample" type="button">샘플 데이터 미리보기</button>
+        <button class="btn btn-out btn-sm" id="adm-csv" type="button">CSV 내보내기</button>
+        <button class="btn btn-out btn-sm" id="adm-backup" type="button">백업 저장</button>
+        <label class="btn btn-out btn-sm" for="adm-import">백업 합치기<input type="file" id="adm-import" accept="application/json" hidden></label>
+        <button class="btn btn-out btn-sm" id="adm-print" type="button">인쇄 · PDF</button>
+        <button class="btn btn-out btn-sm" id="adm-reset" type="button">기록 초기화</button>
+        <button class="btn btn-ink btn-sm" id="adm-out" type="button">로그아웃</button>
+      </div>
+    </div>
+    <div id="report"></div>
+  </div></section>`;
+}
+
+function initAdmin() {
+  if (!adminAuth.ok()) {
+    const f = $('#adm-form'); if (!f) return;
+    $('#adm-pw').focus();
+    f.onsubmit = async e => {
+      e.preventDefault();
+      const lock = +(sessionStorage.getItem('rw_admin_lock') || 0);
+      if (Date.now() < lock) { $('#adm-msg').textContent = `너무 많이 틀렸어요. ${Math.ceil((lock - Date.now()) / 1000)}초 뒤에 다시 시도해 주세요.`; return; }
+      let h = '';
+      try { h = await sha256($('#adm-pw').value.trim()); } catch (err) { $('#adm-msg').textContent = '이 브라우저에서는 로그인할 수 없어요. (보안 연결 https 필요)'; return; }
+      if (h === ADMIN_HASH) { sessionStorage.removeItem('rw_admin_fail'); adminAuth.set(true); route(); return; }
+      const n = +(sessionStorage.getItem('rw_admin_fail') || 0) + 1;
+      sessionStorage.setItem('rw_admin_fail', n);
+      if (n >= 5) { sessionStorage.setItem('rw_admin_lock', Date.now() + 60000); sessionStorage.setItem('rw_admin_fail', 0); }
+      $('#adm-pw').value = ''; $('#adm-msg').textContent = n >= 5 ? '5번 틀려서 1분 동안 잠겼어요.' : `비밀번호가 맞지 않아요. (${n}/5)`;
+      $('.al-box').classList.remove('shake'); void $('.al-box').offsetWidth; $('.al-box').classList.add('shake');
+    };
+    return;
+  }
+  let sample = false;
+  const draw = () => {
+    const recs = sample ? SAMPLE_LOG() : store.get('rw_log', []);
+    const site = sample ? SAMPLE_SITE() : store.get('rw_site', { views: {}, ad: 0, idle: 0 });
+    $('#report').innerHTML = renderReport(recs, site, sample);
+    $('#adm-sample').textContent = sample ? '실제 데이터로 돌아가기' : '샘플 데이터 미리보기';
+    $('#adm-sample').classList.toggle('on', sample);
+    requestAnimationFrame(() => $$('#report .hb i, #report .cb i').forEach(i => i.style.setProperty('--on', 1)));
+  };
+  $('#adm-sample').onclick = () => { sample = !sample; draw(); };
+  $('#adm-out').onclick = () => { adminAuth.set(false); location.hash = '#/'; toast('로그아웃했어요.'); };
+  $('#adm-print').onclick = () => window.print();
+  $('#adm-csv').onclick = () => {
+    const recs = sample ? SAMPLE_LOG() : store.get('rw_log', []);
+    const head = ['시작 시각', '결과', '보스전 재도전', '플레이 시간(초)', '도달 단계', '남은 멘탈', '실수', '힌트', '커피', '읽은 기사 수', '틀린 문제'];
+    const rows = recs.map(r => [new Date(r.t0).toLocaleString('ko-KR'), RESULT_KO[r.result] || r.result, r.retry ? 'Y' : '', r.sec, STAGE_KO[r.reached] || r.reached, r.hp, r.mistakes, r.hints, r.coffee, (r.news || []).length, (r.errs || []).map(e => e[1]).join(' / ')]);
+    download('runway-game-log.csv', '﻿' + [head, ...rows].map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n'), 'text/csv');
+  };
+  $('#adm-backup').onclick = () => download(`runway-backup-${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify({ rw_log: store.get('rw_log', []), rw_site: store.get('rw_site', {}) }), 'application/json');
+  $('#adm-import').onchange = e => {
+    const f = e.target.files[0]; if (!f) return;
+    f.text().then(t => {
+      const d = JSON.parse(t), mine = store.get('rw_log', []), ids = new Set(mine.map(r => r.id));
+      const add = (d.rw_log || []).filter(r => r && r.id && !ids.has(r.id));
+      store.set('rw_log', mine.concat(add).sort((a, b) => a.t0 - b.t0));
+      toast(`다른 기기 기록 ${add.length}건을 합쳤어요.`); sample = false; draw();
+    }).catch(() => toast('백업 파일을 읽을 수 없어요.'));
+  };
+  $('#adm-reset').onclick = () => {
+    if (!confirm('이 기기의 게임 기록과 홈페이지 이용 기록을 모두 지울까요?\n(지우기 전에 “백업 저장”을 먼저 해 두세요)')) return;
+    if (!confirm('정말 지울까요? 되돌릴 수 없어요.')) return;
+    store.set('rw_log', []); store.set('rw_site', { views: {}, ad: 0, idle: 0, since: Date.now() });
+    ['rw_plays', 'rw_wins', 'rw_best'].forEach(k => { try { localStorage.removeItem(k); } catch (err) {} });
+    toast('기록을 초기화했어요.'); draw();
+  };
+  draw();
+}
+function download(name, text, type) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+var STAGE_KO = { 1: '잠금 1 · 업무 분배', 2: '잠금 2 · 프롬프트', 3: '잠금 3 · AI 초안 검증', 4: '출구', 5: '보스전 · 미란다 보고', 6: '탈출 성공' };
+var RESULT_KO = { win: '탈출 성공', fail: '멘탈 붕괴', quit: '중도 이탈' };
+var NEWS_KO = ['1면 · 회장 논란', '비서의 역할', 'AI 활용법', 'AI 15년 연표', '인터뷰 · 아마리', '인터뷰 · 에밀리'];
+var PAGE_KO = { home: '홈', about: '회사 소개', press: '언론 보도', careers: '채용 (미란다의 비서)', game: '게임', intranet: '임직원 전용', admin: '관리자' };
+var mmss = s => (s >= 3600 ? Math.floor(s / 3600) + ':' : '') + String(Math.floor(s % 3600 / 60)).padStart(s >= 3600 ? 2 : 1, '0') + ':' + String(Math.round(s % 60)).padStart(2, '0');
+var pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+var avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
+var r1 = v => Math.round(v * 10) / 10;
+
+// 가로 막대 (값이 가장 큰 막대만 빨간색으로 강조)
+function hbars(rows, opt = {}) {
+  const max = opt.max || Math.max(1, ...rows.map(r => r[1]));
+  const top = Math.max(...rows.map(r => r[1]));
+  return `<div class="hbars">${rows.map(([lab, v, tip]) => `<div class="hb ${opt.hl !== false && v === top && v > 0 ? 'top' : ''}" tabindex="0" data-tip="${esc(tip || lab + ' · ' + (opt.fmt ? opt.fmt(v) : v))}">
+    <span class="hb-l">${esc(lab)}</span><span class="hb-t"><i style="--w:${v / max * 100}%"></i><b>${opt.fmt ? opt.fmt(v) : v}</b></span></div>`).join('')}</div>`;
+}
+// 세로 막대 (시간대 · 날짜)
+function cbars(rows) {
+  const max = Math.max(1, ...rows.map(r => r[1])), top = Math.max(...rows.map(r => r[1]));
+  return `<div class="cbars">${rows.map(([lab, v]) => `<div class="cb ${v === top && v > 0 ? 'top' : ''}" tabindex="0" data-tip="${esc(lab)} · ${v}명"><span class="cb-v">${v || ''}</span><i style="--h:${v / max * 100}%"></i><span class="cb-l">${esc(lab)}</span></div>`).join('')}</div>`;
+}
+
+function renderReport(all, site, sample) {
+  const main = all.filter(r => !r.retry), retry = all.filter(r => r.retry);
+  const n = main.length;
+  if (!all.length) return `<div class="adm-empty"><b>아직 게임 기록이 없어요.</b><p>이 기기에서 게임을 하면 한 판이 끝날 때마다 기록이 쌓여요.<br>전시 전에 화면 구성을 보고 싶다면 위의 <b>“샘플 데이터 미리보기”</b>를 눌러 보세요.</p></div>`;
+  const wins = main.filter(r => r.result === 'win'), fails = main.filter(r => r.result === 'fail'), quits = main.filter(r => r.result === 'quit');
+  const retryWins = retry.filter(r => r.result === 'win').length;
+  const done = main.filter(r => r.result !== 'quit');
+  const reach = k => main.filter(r => r.reached >= k || r.result === 'win').length;
+  const days = new Set(all.map(r => new Date(r.t0).toDateString())).size;
+  const first = new Date(Math.min(...all.map(r => r.t0))), last = new Date(Math.max(...all.map(r => r.t0)));
+  setTimeout(() => { const el = $('#adm-range'); if (el) el.textContent = `${sample ? '샘플 데이터 · ' : ''}기록 기간 ${first.toLocaleDateString('ko-KR')} ~ ${last.toLocaleDateString('ko-KR')} · 운영 ${days}일 · 이 기기 기준`; }, 0);
+
+  // 단계별 실수 · 시간
+  const stages = [1, 2, 3, 5];
+  const stErr = stages.map(k => { const who = main.filter(r => r.reached >= k); return [STAGE_KO[k], r1(avg(who.map(r => (r.stageErr || {})[k] || 0)))]; });
+  const stSec = stages.map(k => { const who = main.filter(r => (r.stageSec || {})[k] && (r.reached > k || r.result === 'win')); return [STAGE_KO[k], Math.round(avg(who.map(r => r.stageSec[k])))]; });
+  const hardest = stErr.slice().sort((a, b) => b[1] - a[1])[0];
+  // 틀린 문제 Top
+  const errCount = {}; all.forEach(r => (r.errs || []).forEach(([, it]) => errCount[it] = (errCount[it] || 0) + 1));
+  const topErr = Object.entries(errCount).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  // 보스전 질문별
+  const bq = {}; all.forEach(r => (r.boss || []).forEach(([q, k]) => { bq[q] = bq[q] || { best: 0, good: 0, bad: 0 }; bq[q][k]++; }));
+  const bossRows = Object.entries(bq).map(([q, c]) => { const t = c.best + c.good + c.bad; return { q, t, best: pct(c.best, t), good: pct(c.good, t), bad: 100 - pct(c.best, t) - pct(c.good, t) }; }).sort((a, b) => b.bad - a.bad);
+  // 실패 지점
+  const failAt = [1, 2, 3, 5].map(k => [STAGE_KO[k], fails.filter(r => r.reached === k || (k === 5 && r.reached >= 4)).length + quits.filter(r => r.reached === k || (k === 5 && r.reached >= 4)).length]);
+  // 시간대 · 날짜
+  const hours = Array.from({ length: 24 }, (_, h) => [h + '시', all.filter(r => !r.retry && new Date(r.t0).getHours() === h).length]);
+  const usedH = hours.filter(h => h[1] > 0).map(h => +h[0].replace('시', ''));
+  const hrRows = usedH.length ? hours.slice(Math.min(...usedH), Math.max(...usedH) + 1) : hours.slice(9, 19);
+  const byDay = {}; main.forEach(r => { const d = new Date(r.t0); const k = `${d.getMonth() + 1}/${d.getDate()}`; byDay[k] = (byDay[k] || 0) + 1; });
+  const dayRows = Object.entries(byDay).slice(-14);
+  const peak = hours.slice().sort((a, b) => b[1] - a[1])[0];
+  // 기사 열람
+  const newsRows = NEWS_KO.map((t, i) => [t, pct(main.filter(r => (r.news || []).includes(i)).length, n)]);
+  // 홈페이지
+  const views = site.views || {};
+  const pageRows = Object.entries(views).map(([k, v]) => [PAGE_KO[k] || k, v]).sort((a, b) => b[1] - a[1]);
+  const totalViews = pageRows.reduce((x, y) => x + y[1], 0);
+
+  const winRate = pct(wins.length, n);
+  const kpis = [
+    ['총 플레이', n.toLocaleString(), `보스전 재도전 ${retry.length}회 (성공 ${retryWins})`],
+    ['탈출 성공률', winRate + '%', `${wins.length}명 탈출 · 금고 비밀번호 획득`],
+    ['평균 플레이 시간', mmss(avg(done.map(r => r.sec))), `중간값 ${mmss(median(done.map(r => r.sec)))}`],
+    ['최단 탈출 기록', wins.length ? mmss(Math.min(...wins.map(r => r.sec))) : '-', '가장 빨리 탈출한 플레이'],
+    ['1인당 평균 실수', r1(avg(done.map(r => r.mistakes || 0))) + '회', `실수 0회 완벽 탈출 ${wins.filter(r => !r.mistakes).length}명`],
+    ['힌트 사용률', pct(main.filter(r => r.hints > 0).length, n) + '%', `평균 ${r1(avg(main.map(r => r.hints || 0)))}회 사용`],
+    ['탈출자 평균 멘탈', wins.length ? Math.round(avg(wins.map(r => r.hp))) : '-', `커피 평균 ${r1(avg(main.map(r => r.coffee || 0)))}잔`],
+    ['중도 이탈률', pct(quits.length, n) + '%', `자리 비움 등 ${quits.length}건`]
+  ];
+  const summary = [
+    `전시 기간 동안 총 <b>${n.toLocaleString()}명</b>이 「악프다 2: 미란다의 비서」를 플레이했고, 그중 <b>${winRate}%</b>(${wins.length}명)가 미란다에게 보고를 마치고 탈출했습니다.`,
+    `관람객이 가장 어려워한 단계는 <b>${hardest[0]}</b>로, 이 단계에 도달한 사람은 평균 <b>${hardest[1]}회</b> 실수했습니다.`,
+    topErr.length ? `가장 많이 틀린 문제는 <b>“${topErr[0][0]}”</b>(${topErr[0][1]}회)였습니다.` : '',
+    `평균 플레이 시간은 <b>${mmss(avg(done.map(r => r.sec)))}</b>이며, 관람객이 가장 많이 몰린 시간대는 <b>${peak[0]}</b>입니다.`,
+    `플레이어의 <b>${pct(main.filter(r => (r.news || []).length).length, n)}%</b>가 게임 중 신문기사를 직접 펼쳐 읽으며 단서를 찾았습니다.`
+  ].filter(Boolean);
+
+  return `
+  ${sample ? '<div class="adm-sample">샘플 데이터 미리보기 중이에요 — 실제 전시 기록이 아니에요. 화면 구성 확인용입니다.</div>' : ''}
+  <div class="adm-kpis">${kpis.map(k => `<div class="ak"><small>${k[0]}</small><b>${k[1]}</b><span>${k[2]}</span></div>`).join('')}</div>
+
+  <div class="adm-card adm-sum"><h3>포트폴리오 한 줄 요약 <small>숫자는 기록에 따라 자동으로 바뀌어요</small></h3><ul>${summary.map(t => `<li>${t}</li>`).join('')}</ul>
+    <button class="btn btn-out btn-sm" id="adm-copy" type="button">요약 문장 복사</button></div>
+
+  <div class="adm-grid">
+    <div class="adm-card"><h3>단계별 도달률 <small>게임을 시작한 사람 중 각 단계까지 간 비율</small></h3>
+      ${hbars([['게임 시작', 100], ['잠금 1 통과', pct(reach(2), n)], ['잠금 2 통과', pct(reach(3), n)], ['잠금 3 통과', pct(reach(4), n)], ['보스전 도달', pct(reach(5), n)], ['탈출 성공', winRate]], { max: 100, fmt: v => v + '%', hl: false })}</div>
+    <div class="adm-card"><h3>어디서 가장 어려워했나 <small>단계별 평균 실수 횟수 (그 단계에 도달한 사람 기준)</small></h3>
+      ${hbars(stErr, { fmt: v => v + '회' })}<p class="adm-note">가장 어려운 단계: <b>${hardest[0]}</b></p></div>
+    <div class="adm-card"><h3>단계별 평균 소요 시간 <small>그 단계를 통과한 사람 기준</small></h3>${hbars(stSec, { fmt: mmss })}</div>
+    <div class="adm-card"><h3>가장 많이 틀린 문제 Top ${topErr.length} <small>전체 오답 횟수</small></h3>${topErr.length ? hbars(topErr.map(([k, v]) => [k, v]), { fmt: v => v + '회' }) : '<p class="muted">아직 틀린 기록이 없어요.</p>'}</div>
+    <div class="adm-card wide"><h3>보스전 질문별 보고 결과 <small>오답(잘못된 보고) 비율이 높은 순</small></h3>
+      <div class="legend"><span><i class="l-best"></i>최고의 보고 · 정답</span><span><i class="l-good"></i>그럭저럭</span><span><i class="l-bad"></i>잘못된 보고 · 오답</span></div>
+      <div class="stack">${bossRows.map(b => `<div class="st-row" tabindex="0" data-tip="${esc(b.q)} · 정답 ${b.best}% · 그럭저럭 ${b.good}% · 오답 ${b.bad}% (${b.t}회)"><span class="hb-l">${esc(b.q)}</span><span class="st-bar"><i class="s-best" style="width:${b.best}%"></i><i class="s-good" style="width:${b.good}%"></i><i class="s-bad" style="width:${b.bad}%"></i></span><b>${b.bad}%</b></div>`).join('') || '<p class="muted">보스전 기록이 아직 없어요.</p>'}</div></div>
+    <div class="adm-card"><h3>멈춘 지점 <small>실패 · 중도 이탈한 플레이가 마지막으로 있던 단계</small></h3>${hbars(failAt, { fmt: v => v + '명' })}</div>
+    <div class="adm-card"><h3>게임 중 신문기사 열람률 <small>플레이어 중 그 기사를 펼쳐 본 비율</small></h3>${hbars(newsRows, { max: 100, fmt: v => v + '%' })}</div>
+    <div class="adm-card wide"><h3>시간대별 플레이 <small>관람객이 몰린 시간 · 가장 많은 시간대 ${peak[0]}</small></h3>${cbars(hrRows)}</div>
+    <div class="adm-card wide"><h3>날짜별 플레이 <small>최근 14일</small></h3>${cbars(dayRows)}</div>
+    <div class="adm-card"><h3>홈페이지 페이지별 조회 <small>총 ${totalViews.toLocaleString()}회</small></h3>${pageRows.length ? hbars(pageRows, { fmt: v => v.toLocaleString() + '회' }) : '<p class="muted">아직 기록이 없어요.</p>'}</div>
+    <div class="adm-card"><h3>홈페이지 운영 지표</h3><div class="mini">
+      <div><b>${(site.ad || 0).toLocaleString()}</b><span>광고 영상 재생</span></div>
+      <div><b>${(site.idle || 0).toLocaleString()}</b><span>자동으로 첫 화면 복귀</span></div>
+      <div><b>${totalViews ? pct(views.game || 0, totalViews) : 0}%</b><span>조회 중 게임 화면 비율</span></div>
+      <div><b>${(views.careers || 0).toLocaleString()}</b><span>‘미란다의 비서’ 채용 조회</span></div></div></div>
+  </div>
+
+  <div class="adm-card"><h3>최근 플레이 기록 <small>최근 20건 · 전체는 CSV로 내보내기</small></h3>
+    <div class="tbl-wrap"><table class="adm-tb"><tr><th>시작 시각</th><th>결과</th><th>도달 단계</th><th>시간</th><th>멘탈</th><th>실수</th><th>힌트</th><th>커피</th></tr>
+    ${all.slice(-20).reverse().map(r => `<tr><td>${new Date(r.t0).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}${r.retry ? ' <small>(재도전)</small>' : ''}</td><td><span class="rs ${r.result}">${RESULT_KO[r.result] || r.result}</span></td><td>${r.result === 'win' ? '탈출' : STAGE_KO[r.reached] || '-'}</td><td>${mmss(r.sec || 0)}</td><td>${r.hp ?? '-'}</td><td>${r.mistakes ?? 0}</td><td>${r.hints ?? 0}</td><td>${r.coffee ?? 0}</td></tr>`).join('')}</table></div></div>
+  <p class="adm-foot">※ 기록은 게임을 한 기기의 브라우저에만 저장돼요. 여러 기기를 썼다면 각 기기에서 “백업 저장” 후 한 기기에서 “백업 합치기”를 하세요. 이름·연락처 같은 개인정보는 저장하지 않아요.</p>`;
+}
+function median(a) { if (!a.length) return 0; const b = a.slice().sort((x, y) => x - y), m = b.length >> 1; return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2; }
+document.addEventListener('click', e => {
+  if (e.target.id !== 'adm-copy') return;
+  const t = $$('.adm-sum li').map(li => li.textContent).join('\n');
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast('요약 문장을 복사했어요.'), () => toast('복사할 수 없어요. 직접 드래그해서 복사해 주세요.'));
+});
+
+// 샘플 데이터 (화면 미리보기용 · 실제 기록 아님)
+function SAMPLE_LOG() {
+  let seed = 42; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const errPool = [[1, '업무 분배 · 감정 조율'], [1, '업무 분배 · AI 결과물 검토 및 수정'], [1, '업무 분배 · 예외적인 상황 대응'], [2, '프롬프트 · 쓰면 안 되는 문장'], [2, '프롬프트 · ‘제약’ 칸 헷갈림'], [2, '프롬프트 · ‘배경’ 칸 헷갈림'],
+    [3, 'AI 초안 검증 · 같은 질문 반복 검증'], [3, 'AI 초안 검증 · 근거 없는 통계'], [3, 'AI 초안 검증 · 개인정보·기밀'], [3, '금고 숫자 · 기자 수 세기'], [5, '보스전 · OX · AI에게 같은 질문을 세 번 해서…'], [5, '보스전 · 일정 보고'], [5, '보스전 · 갑질 모드']];
+  const bossQ = ['업무 폭탄 보고', 'OX · AI에게 같은 질문을 세 번 해서…', '일정 보고', 'OX · 고객 이름과 전화번호는 그대로…', '갑질 모드', 'OX · 좋은 프롬프트는 역할·배경·지시…', '마지막 질문'];
+  const hard = { '업무 폭탄 보고': .15, 'OX · AI에게 같은 질문을 세 번 해서…': .38, '일정 보고': .3, 'OX · 고객 이름과 전화번호는 그대로…': .12, '갑질 모드': .34, 'OX · 좋은 프롬프트는 역할·배경·지시…': .1, '마지막 질문': .08 };
+  const out = [], base = new Date(2026, 7, 29, 10, 0).getTime();
+  for (let i = 0; i < 148; i++) {
+    const day = Math.floor(i / 30), hour = [10, 11, 11, 12, 13, 14, 14, 15, 15, 15, 16, 16, 17, 18][Math.floor(rnd() * 14)];
+    const t0 = base + day * 864e5 + (hour - 10) * 36e5 + Math.floor(rnd() * 36e5);
+    let reached = 1; const stageErr = {}, stageSec = {}, errs = [];
+    const quit = rnd() < .07, failRoll = rnd();
+    for (const k of [1, 2, 3, 5]) {
+      const e = Math.floor(rnd() * ({ 1: 2.2, 2: 2.8, 3: 3.6, 5: 2.4 })[k]);
+      stageErr[k] = e; stageSec[k] = Math.round(({ 1: 70, 2: 95, 3: 120, 5: 110 })[k] * (.6 + rnd() * .9));
+      for (let j = 0; j < e; j++) { const pool = errPool.filter(x => x[0] === k); errs.push(pool[Math.floor(rnd() * pool.length)]); }
+      reached = k;
+      if (quit && rnd() < .35) break;
+      if (k === 3 && failRoll < .08) break;
+      if (k === 5) break;
+      reached = k === 3 ? 4 : k + 1;
+    }
+    if (reached === 4) reached = 5;
+    const mist = Object.values(stageErr).reduce((a, b) => a + b, 0);
+    const result = quit ? 'quit' : (reached === 5 && failRoll > .14) ? 'win' : 'fail';
+    const boss = reached >= 5 ? bossQ.map(q => [q, rnd() < hard[q] ? 'bad' : rnd() < .2 ? 'good' : 'best']) : [];
+    const news = [1, 2, 0, 3, 4, 5].filter((x, j) => rnd() < [.82, .78, .55, .3, .22, .25][j]);
+    out.push({ id: 's' + i, t0, reached, stageErr, stageSec, errs, result, sec: Object.values(stageSec).reduce((a, b) => a + b, 0) + 40, hp: result === 'win' ? Math.max(8, 100 - mist * 7 + Math.floor(rnd() * 30)) : result === 'fail' ? 0 : 60, mistakes: mist, hints: rnd() < .45 ? 1 + Math.floor(rnd() * 3) : 0, coffee: Math.floor(rnd() * 3), news, boss });
+    if (result === 'fail' && reached === 5 && rnd() < .5) out.push({ id: 'r' + i, t0: t0 + 6e5, retry: true, reached: 5, stageErr: { 5: 1 }, stageSec: { 5: 100 }, errs: [], result: rnd() < .7 ? 'win' : 'fail', sec: 120, hp: 40, mistakes: 1, hints: 0, coffee: 1, news: [], boss: [] });
+  }
+  return out.sort((a, b) => a.t0 - b.t0);
+}
+function SAMPLE_SITE() { return { views: { home: 1240, game: 610, careers: 388, press: 352, about: 214, intranet: 41, admin: 3 }, ad: 905, idle: 286 }; }
+
+renderHeader(); route();   // 모든 코드를 읽은 뒤 첫 화면을 그려요
 </script>
 </body>
 </html>
