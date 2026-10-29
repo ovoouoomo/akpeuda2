@@ -137,10 +137,10 @@ body.critical #game-main{animation:pulseRed .7s infinite}
 .desk::before{content:"";position:absolute;left:0;right:0;top:0;height:28%;background:#fff;border:2px solid var(--ink);border-radius:4px}
 .desk::after{content:"";position:absolute;left:6%;right:6%;top:28%;bottom:0;background:
   linear-gradient(var(--ink),var(--ink)) 0 0/4% 100% no-repeat,linear-gradient(var(--ink),var(--ink)) 100% 0/4% 100% no-repeat}
-.side{position:absolute;left:71%;top:59%;width:12%;height:13%}
+.side{position:absolute;left:66%;top:59%;width:12%;height:13%}
 .side::before{content:"";position:absolute;left:0;right:0;top:0;height:26%;background:var(--blue);border:2px solid var(--ink);border-radius:4px}
 .side::after{content:"";position:absolute;left:44%;width:12%;top:26%;bottom:0;background:var(--ink)}
-.paper-sheet{position:absolute;left:71.5%;top:55.6%;width:5%;height:4.6%;background:#fff;border:1.5px solid var(--ink);transform:rotate(-6deg)}
+.paper-sheet{position:absolute;left:66.5%;top:55.6%;width:5%;height:4.6%;background:#fff;border:1.5px solid var(--ink);transform:rotate(-6deg)}
 .lamp{position:absolute;left:62%;top:44%;width:5%}
 .obj{position:absolute;display:block;padding:0;z-index:3}
 .obj:hover .spr{filter:drop-shadow(0 0 0 #fff) drop-shadow(0 0 6px rgba(63,127,217,.9))}
@@ -708,6 +708,7 @@ body{background:#fff;letter-spacing:-.005em}
 .window.night .city{filter:none}.window.night .city .bf{fill:#2e3657}.window.night .city .bm{fill:#20263f}.window.night .city .bn{fill:#141829}.window.night .city .wl{fill:#ffd76a}
 .window .sun{z-index:0}.window .stars{z-index:0}
 .room-sign{width:13%;white-space:normal;line-height:1.5;z-index:4;font-size:clamp(7px,1.15vw,12px)!important;letter-spacing:.22em!important}
+.obj-door::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-3%;height:5%;background:rgba(0,0,0,.18);filter:blur(2px);z-index:-1}
 </style>
 </head>
 <body>
@@ -1394,8 +1395,8 @@ const OBJECTS = [
   { id:'news',    label:'신문 더미',     icon:'📰', spr:'news',      x:28,   y:48.2, w:11, noTag:true },
   { id:'pc',      label:'AI 문서작성기', icon:'💻', spr:'pc',        x:40,   y:41.6, w:12,  lock:2 },
   { id:'coffee',  label:'커피',         icon:'☕', spr:'coffee',    x:54.5, y:49.6, w:6,  noTag:true },
-  { id:'check',   label:'검수 데스크',   icon:'🔍', spr:'magnifier', x:76.5, y:51,   w:5,   lock:3 },
-  { id:'door',    label:'출구',         icon:'🚪', spr:'door',      x:86.5, y:27.5, w:11.5, lock:4 }
+  { id:'check',   label:'검수 데스크',   icon:'🔍', spr:'magnifier', x:71.5, y:51,   w:5,   lock:3 },
+  { id:'door',    label:'출구',         icon:'🚪', spr:'door',      x:83,   y:35.5, w:11.5, lock:4 }
 ];
 function objState(o) {
   if (!o.lock) return '';
@@ -1410,10 +1411,8 @@ function renderRoom() {
     <div class="room" id="room">
       <div class="room-sign">MIRANDA'S OFFICE</div>
       <div class="window ${skyClass()}" id="win"><div class="sun"></div><div class="stars"></div><div class="city">${CITY_SVG}</div><div class="mullions"></div></div>
-      <div class="frames"><div class="frame">RUNWAY<i></i></div><div class="frame">RUNWAY<i></i></div><div class="frame">RUNWAY<i></i></div></div>
       <div class="wainscot"></div><div class="floor"></div><div class="rug"></div>
       <div class="desk"></div><div class="side"></div><div class="paper-sheet"></div>
-      <div class="obj" style="left:17.5%;top:49%;width:5%">${spr('plant')}</div>
       ${OBJECTS.map(o => `<button class="obj obj-${o.id} ${objState(o)}" data-o="${o.id}" style="left:${o.x}%;top:${o.y}%;width:${o.w}%" aria-label="${o.label}">${o.id === 'coffee' ? coffeeDeco() : ''}${o.id === 'news' ? '<span class="news-glint">✦</span>' : ''}${spr(o.spr)}${o.noTag ? '' : `<span class="tag">${o.label}</span>`}</button>`).join('')}
       <div class="me-spr">${spr(meName())}</div>
     </div>
