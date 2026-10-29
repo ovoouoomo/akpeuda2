@@ -627,15 +627,21 @@ nav.gnb a.nav-play.on{color:#fff}
 @keyframes playPulse{0%,100%{box-shadow:0 10px 26px rgba(208,2,27,.35),0 0 0 0 rgba(208,2,27,.35)}50%{box-shadow:0 10px 26px rgba(208,2,27,.35),0 0 0 12px rgba(208,2,27,0)}}
 .hero .b{align-items:center}
 /* 메인 문구: 특징 + 상품 */
-.feat-list{list-style:none;margin:0 0 18px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.feat-list li{border:1px solid var(--line);padding:10px 14px;background:var(--bg)}
-.feat-list b{display:block;font-size:15px}
-.feat-list span{font-size:13px;color:var(--grey)}
-.prize{display:flex;gap:14px;align-items:center;background:#141414;color:#fff;padding:16px 18px;margin:0 0 24px;border-left:5px solid var(--red)}
-.prize-ic{font-size:34px;flex:none}
-.prize b{display:block;font:900 19px var(--kserif);color:#fff}
-.prize span{font-size:14px;color:#d8d2cc}
-.prize em{font-style:normal;color:#ff6b80;font-weight:900}
+.hero-en{margin:6px 0 0;font:italic 400 clamp(18px,1.9vw,24px)/1.2 var(--didone);color:var(--grey);letter-spacing:.01em}
+.hero h1{font-weight:600!important;letter-spacing:-.045em!important;line-height:1.16!important}
+.hero h1 em{font-weight:900}
+.hero .dek{font:400 16.5px/1.85 var(--kserif)}
+.hero .dek b{display:block;margin-top:8px;font:500 12px var(--sans);letter-spacing:.2em;color:var(--red)!important}
+.feat-list{list-style:none;margin:0 0 26px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--ink)}
+.feat-list li{display:grid;grid-template-columns:auto 1fr;column-gap:12px;padding:12px 4px;border-bottom:1px solid var(--line)}
+.feat-list li:nth-child(odd){border-right:1px solid var(--line);padding-right:14px}
+.feat-list li:nth-child(even){padding-left:14px}
+.feat-list i{grid-row:span 2;font:italic 400 26px/1 var(--didone);color:var(--red)}
+.feat-list b{font:600 15.5px var(--kserif);letter-spacing:-.02em}
+.feat-list span{font-size:12.5px;color:var(--grey)}
+.prize-note{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);font:400 14px/1.7 var(--kserif);color:var(--grey)}
+.prize-note span{display:inline-block;margin-right:10px;font:italic 400 15px var(--didone);color:var(--ink);border-bottom:1px solid var(--red)}
+.prize-note b{color:var(--red);font-weight:700;box-shadow:inset 0 -.4em 0 var(--red-soft)}
 /* 떠 있는 플레이 버튼 */
 .fab-play{position:fixed;right:20px;bottom:20px;z-index:72;display:flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:8px 18px 8px 8px;border-radius:999px;box-shadow:0 10px 26px rgba(208,2,27,.4);animation:playPulse 2.2s ease-in-out infinite}
 .fab-play .pi{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--red);display:grid;place-items:center;font-size:12px;padding-left:2px}
@@ -662,6 +668,17 @@ body.in-game{overflow:hidden}
   .logo{font-size:26px}
   #btn-search{display:none}
 }
+.btn-play{border-radius:0;animation:none;box-shadow:none;padding:10px 26px 10px 10px;background:var(--ink)}
+.btn-play:hover{background:var(--red);transform:none}
+.btn-play .pi{border-radius:0;width:44px;height:44px;font-size:14px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5)}
+.btn-play b{font:600 18px var(--kserif);letter-spacing:-.01em}
+.btn-play small{letter-spacing:.04em}
+.fab-play{border-radius:0;animation:none;background:var(--ink);box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.fab-play:hover{background:var(--red)}
+.fab-play .pi{border-radius:0;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5)}
+nav.gnb a.nav-play{border-radius:0;background:var(--ink)}
+nav.gnb a.nav-play:hover{background:var(--red)}
+nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 </style>
 </head>
 <body>
@@ -706,7 +723,7 @@ body.in-game{overflow:hidden}
       <div><h5>채용</h5><ul><li><a href="#/careers/secretary">미란다의 비서 ★</a></li><li><a href="#/game">실무 테스트 (게임)</a></li></ul></div>
       <div><h5>더 보기</h5><ul><li><a href="#/press">언론 보도</a></li><li><a href="#/game">악프다 2 게임</a></li><li><a href="#/intranet">임직원 전용</a></li><li><button id="replay-ad">광고 다시 보기 ▸</button></li></ul></div>
     </div>
-    <button class="egg" id="egg"><span class="heads" id="egg-heads"></span><span><b>✦ 숨은 제작진을 찾아보세요!</b><br><span style="font-size:13px">이 사무실 어딘가에 비서 4명이 숨어 있어요. 힌트: 맨 위 <b>RUNWAY 로고를 빠르게 5번</b></span></span><span class="go">바로 보기 →</span></button>
+    <button class="egg" id="egg"><span class="heads" id="egg-heads"></span><span><b>숨은 제작진을 찾아보세요</b><br><span style="font-size:13px">이 사무실 어딘가에 비서 4명이 숨어 있어요. 힌트: 맨 위 <b>RUNWAY 로고를 빠르게 5번</b></span></span><span class="go">바로 보기 →</span></button>
     <div class="fb"><span>© 2026 Elias-Clarke Publications · <i>“Everybody wants to be us.”</i></span><span>영화 《악마는 프라다를 입는다 2》에서 영감을 받은 <b style="color:#ccc">전시용 가상 홈페이지</b>입니다. 실제 회사·인물·배우와 관련이 없으며, 인물 사진과 영상은 팀이 AI로 제작한 팬메이드 콘텐츠입니다.</span></div>
   </div>
 </footer>
@@ -714,7 +731,7 @@ body.in-game{overflow:hidden}
 <a class="fab-play" href="#/game" aria-label="게임 플레이"><span class="pi">▶</span><b>게임 플레이</b></a>
 <button class="totop" id="totop" aria-label="맨 위로">↑</button>
 <div id="modal" class="modal hidden"><div class="mbox" id="mbox"><button class="mx" id="mx" aria-label="닫기">✕</button><div id="mbody"></div></div></div>
-<div id="cookie" class="cookie hidden"><p><b>🍪 쿠키 사용 안내</b><br>미란다의 취향과 여러분의 이용 기록을 기억하기 위해 쿠키를 사용해요. 전시용 데모라 어떤 정보도 외부로 보내지 않아요.</p><div class="row"><button class="btn btn-red btn-sm" data-ck="all">모두 허용</button><button class="btn btn-out btn-sm" data-ck="min">필수만 허용</button></div></div>
+<div id="cookie" class="cookie hidden"><p><b>쿠키 사용 안내</b><br>미란다의 취향과 여러분의 이용 기록을 기억하기 위해 쿠키를 사용해요. 전시용 데모라 어떤 정보도 외부로 보내지 않아요.</p><div class="row"><button class="btn btn-red btn-sm" data-ck="all">모두 허용</button><button class="btn btn-out btn-sm" data-ck="min">필수만 허용</button></div></div>
 <div id="toasts"></div>
 
 <script>
@@ -737,7 +754,7 @@ const QUOTES = [
   ['“By all means, move at a glacial pace.”', '— 엘리베이터 앞에서'],
   ['“A million girls would kill for this job.”', '— 채용팀'],
   ['“Everybody wants to be us.”', '— 밀라노에서'],
-  ['✦ 숨은 제작진: 로고를 빠르게 5번 눌러 보세요', '— 비서 4명이 기다리는 중']
+  ['숨은 제작진 — 로고를 빠르게 5번 눌러 보세요', '— 비서 4명이 기다리는 중']
 ];
 
 /* ---------- 등장인물 (《악마는 프라다를 입는다 2》 설정 참고) ---------- */
@@ -1172,12 +1189,12 @@ try { speechSynthesis.getVoices(); } catch (e) {}
 function makePlayer(el, opt = {}) {
   if (AD_VIDEO) {
     el.classList.add('vert');
-    el.innerHTML = `<video src="${AD_VIDEO}" autoplay muted playsinline preload="auto" ${opt.loop ? 'loop' : ''}></video><button class="snd">🔊 소리 켜고 보기</button>`;
+    el.innerHTML = `<video src="${AD_VIDEO}" autoplay muted playsinline preload="auto" ${opt.loop ? 'loop' : ''}></video><button class="snd">소리 켜고 보기</button>`;
     const v = el.querySelector('video'), btn = el.querySelector('.snd');
     const P = { sound: false, ended: false,
       get paused() { return v.paused; }, set paused(x) { x ? v.pause() : v.play().catch(() => {}); },
       stop() { v.pause(); v.removeAttribute('src'); v.load(); },
-      setSound(on) { P.sound = on; v.muted = !on; btn.textContent = on ? '🔇 소리 끄기' : '🔊 소리 켜고 보기'; if (on) { v.currentTime = 0; P.ended = false; v.play().catch(() => {}); } } };
+      setSound(on) { P.sound = on; v.muted = !on; btn.textContent = on ? '소리 끄기' : '소리 켜고 보기'; if (on) { v.currentTime = 0; P.ended = false; v.play().catch(() => {}); } } };
     btn.onclick = () => P.setSound(!P.sound);
     v.onloadedmetadata = () => { if (v.duration) AD_LEN = v.duration * 1000; };
     v.ontimeupdate = () => opt.onTick && opt.onTick(v.currentTime * 1000);
@@ -1185,7 +1202,7 @@ function makePlayer(el, opt = {}) {
     return P;
   }
   el.innerHTML = SCENES.map(s => `<div class="sc">${SC[s.id].html()}</div>`).join('') +
-    `<div class="vig"></div><div class="grain"></div><div class="lb t"></div><div class="lb b"></div><div class="flash"></div><div class="sub"></div><div class="fm">팬메이드 영상</div><button class="snd">🔊 소리 켜고 보기</button><a class="cta btn btn-red" href="#/game">게임 체험하기 →</a>`;
+    `<div class="vig"></div><div class="grain"></div><div class="lb t"></div><div class="lb b"></div><div class="flash"></div><div class="sub"></div><div class="fm">팬메이드 영상</div><button class="snd">소리 켜고 보기</button><a class="cta btn btn-red" href="#/game">게임 체험하기 →</a>`;
   const roots = [...el.querySelectorAll('.sc')], sub = el.querySelector('.sub'), flash = el.querySelector('.flash'), cta = el.querySelector('.cta'), snd = el.querySelector('.snd');
   const states = roots.map(() => ({}));
   const P = { t: 0, last: Date.now(), paused: false, sound: false, scene: -1, ended: false, stopped: false };
@@ -1213,7 +1230,7 @@ function makePlayer(el, opt = {}) {
     render(Math.min(P.t, AD_LEN - 1)); opt.onTick && opt.onTick(P.t);
   }
   P.setSound = on => {
-    P.sound = on; snd.textContent = on ? '🔇 소리 끄기' : '🔊 소리 켜고 보기';
+    P.sound = on; snd.textContent = on ? '소리 끄기' : '소리 켜고 보기';
     if (on) { FX.enable(); try { speechSynthesis.cancel(); } catch (e) {} P.t = 0; P.scene = -1; P.ended = false; P.last = Date.now(); }
     else FX.disable();
   };
@@ -1267,23 +1284,24 @@ function pHome() {
   return `
   <section class="hero"><div class="wrap hero-grid">
     <div class="hero-tx fade">
-      <div class="eyebrow">전시 특별 체험 · 방탈출 게임</div>
-      <h1>미란다의 비서가 되어<br><em>편집장실</em>을 탈출하라</h1>
-      <p class="dek"><b>악프다 2: 미란다의 비서</b> — 시간제한은 없어요. 대신 <b>멘탈</b>을 지키며 신문기사 속 단서로 잠금장치를 풀고, 편집장 미란다에게 보고까지 마치면 퇴근할 수 있어요.</p>
-      <ul class="feat-list">
-        <li><b>📰 신문기사 단서</b><span>기사 속에 정답이 숨어 있어요</span></li>
-        <li><b>🔐 잠금장치 3개</b><span>업무 분배 · 프롬프트 · 팩트체크</span></li>
-        <li><b>👑 미란다에게 보고</b><span>보고 방식과 OX 퀴즈로 승부</span></li>
-        <li><b>☕ 커피 한 잔</b><span>멘탈이 흔들리면 충전!</span></li>
-      </ul>
-      <div class="prize"><span class="prize-ic">🎁</span><div><b>탈출 성공 시 금고 비밀번호 공개!</b><span>획득한 비밀번호로 전시장 금고를 열고 <em>상품</em>을 받아 가세요.</span></div></div>
+      <div class="eyebrow">Exhibition Special · Interactive Story</div>
+      <p class="hero-en">A Day as Miranda&rsquo;s Assistant</p>
+      <h1>오늘 하루,<br><em>미란다의 비서</em>로 일하세요</h1>
+      <p class="dek">밀린 업무를 나누고, AI가 쓴 초안을 검증하고, 편집장에게 완벽한 보고를 올리는 일. 시간제한은 없지만, 당신의 멘탈은 단 하나뿐입니다. <b>악프다 2: 미란다의 비서</b></p>
+      <ol class="feat-list">
+        <li><i>01</i><b>업무 분배</b><span>AI에게 맡길 일과 사람이 할 일</span></li>
+        <li><i>02</i><b>프롬프트 작성</b><span>AI에게 정확하게 지시하기</span></li>
+        <li><i>03</i><b>팩트체크</b><span>그럴듯한 초안을 의심하기</span></li>
+        <li><i>04</i><b>편집장 보고</b><span>미란다 앞에서 살아남기</span></li>
+      </ol>
       <div class="b"><a class="btn-play" href="#/game"><span class="pi">▶</span><span><b>지금 바로 플레이</b><small>약 10분 · 시간제한 없음 · 누구나 참여 가능</small></span></a><a class="btn btn-out" href="#/careers/secretary">미란다의 비서 채용</a></div>
+      <p class="prize-note"><span>Reward</span>모든 업무를 마치면 <b>금고 비밀번호</b>가 공개됩니다. 전시장 금고를 열고 <b>한정 상품</b>을 받아 가세요.</p>
     </div>
     <div class="stage" id="hero-stage" aria-label="악프다 2 홍보 영상"></div>
   </div></section>
 
   <nav class="quick wrap" aria-label="바로가기">
-    <a class="qk" href="#/game"><b>게임 하기</b><span>미란다의 비서, 편집장실 탈출</span></a>
+    <a class="qk" href="#/game"><b>게임 하기</b><span>미란다의 비서로 보내는 하루</span></a>
     <a class="qk" href="#/careers/secretary"><b>미란다의 비서</b><span>편집장 비서 채용 · 적성 테스트</span></a>
     <a class="qk" href="#/press"><b>언론 보도</b><span>뉴욕 미러가 다룬 AI 시대의 비서</span></a>
     <a class="qk" href="#/about"><b>회사 소개</b><span>편집장 인사말 · 조직도</span></a>
@@ -1582,7 +1600,7 @@ function pAdmin(sub) {
     <tr><td>진 차오</td><td>앤디의 어시스턴트</td><td>★★★★☆</td><td><span class="stt y">녹음기 설치 중(?)</span></td></tr>
     <tr><td>나이젤</td><td>아트 디렉터</td><td>★★★☆☆</td><td><span class="stt g">근무 중</span></td></tr>
     <tr><td>에밀리 찰턴</td><td>외부 · 럭셔리 브랜드 임원</td><td>-</td><td><span class="stt r">광고 협상 중</span></td></tr></table></div>
-    <div class="panel"><h3>제작진 <button class="btn btn-red btn-sm" onclick="openCredits()">크레딧 보기 ✦</button></h3><table class="tb"><tr><th>이름</th><th>모습</th></tr>${TEAM.map(t => `<tr><td>${t.name}</td><td>${t.desc}</td></tr>`).join('')}</table></div>`);
+    <div class="panel"><h3>제작진 <button class="btn btn-red btn-sm" onclick="openCredits()">크레딧 보기</button></h3><table class="tb"><tr><th>이름</th><th>모습</th></tr>${TEAM.map(t => `<tr><td>${t.name}</td><td>${t.desc}</td></tr>`).join('')}</table></div>`);
   if (sub === 'notice') return dashShell('admin/notice', `<div class="panel"><h3>공지 관리 <small>이 기기에 저장 · 인트라넷에 반영</small></h3>
     <div class="field"><label for="nt-in">새 공지</label><input id="nt-in" class="inp" placeholder="예: 가을호 마감 연장 없음"></div>
     <label style="display:flex;gap:8px;align-items:center;font-size:14px;margin-bottom:14px"><input type="checkbox" id="nt-pin"> 필독으로 고정</label>
