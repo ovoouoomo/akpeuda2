@@ -696,6 +696,25 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 .skill-fig img{display:block;width:100%;height:auto}
 .skill-fig figcaption{margin-top:10px;font-size:13px;line-height:1.75;color:var(--grey)}
 .skill-fig figcaption b{display:block;color:var(--ink);font:600 15px/1.6 var(--kserif);margin-bottom:4px}
+/* 전시용 자동 복귀 안내 */
+.idle-bar{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:400;width:min(640px,calc(100% - 32px));display:flex;align-items:center;gap:18px;background:#141414;color:#fff;padding:18px 22px 22px;border-left:6px solid var(--red);box-shadow:0 20px 50px rgba(0,0,0,.35);overflow:hidden;animation:ibIn .35s ease-out}
+.idle-bar.hidden{display:none}
+@keyframes ibIn{from{transform:translate(-50%,30px);opacity:0}to{transform:translateX(-50%);opacity:1}}
+.ib-in{flex:1}
+.ib-in small{font:700 11px var(--sans);letter-spacing:.2em;color:#ff8a98}
+.ib-in p{margin:4px 0 2px;font:400 clamp(17px,2.2vw,21px)/1.45 var(--kserif);color:#fff}
+.ib-in p b{font:700 clamp(30px,4vw,40px)/1 var(--didone);color:#ff5a6e;margin-right:2px;vertical-align:-3px}
+.ib-in p em{font-style:normal;font-weight:700;border-bottom:2px solid var(--red)}
+.ib-in span{font-size:12.5px;color:#bdb6b0}
+.ib-bar{position:absolute;left:0;bottom:0;height:5px;background:var(--red);transition:width .25s linear}
+.idle-bar .btn{flex:none}
+@media (max-width:600px){.idle-bar{flex-direction:column;align-items:stretch;text-align:left}}
+.src-box{padding:28px 26px}
+.src-box h2{font:600 26px var(--kserif);margin:6px 0 16px}
+.src-box dl{display:grid;grid-template-columns:96px 1fr;gap:10px 14px;margin:0;font-size:14.5px;line-height:1.7}
+.src-box dt{font-weight:700;color:var(--grey)}
+.src-box dd{margin:0}
+.src-box .url{font-family:monospace;word-break:break-all}
 </style>
 </head>
 <body>
@@ -802,49 +821,48 @@ const STORIES = [
 
 /* ---------- 언론 보도 (THE NEW YORK MIRROR) — 팀이 쓴 신문기사 ---------- */
 const ARTICLES = [
-  { id:'ai-timeline', date:'2026. 8. 29', sec:'TECHNOLOGY', title:'“AI는 하루아침에 오지 않았다”', sub:'알고리즘 추천에서 생성형 AI까지, 15년에 걸친 업무 환경의 이동', by:'크리스티안 톰슨 (Christian Thompson) · 프리랜스 저널리스트', featured:true,
+  { id:'chairman', date:'2026. 8. 29', sec:'MEDIA', title:'“낡은 방식에 매달리는 조직에는 미래가 없다”', sub:'런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', by:'The Secretary Club · Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An', 
     body:[
-      '런웨이 미디어 그룹의 인력 교체 논란이 이어지는 가운데, 정작 주목해야 할 것은 ‘AI의 등장’이 아니라 ‘AI가 업무에 들어온 속도’라는 지적이 나온다. 기술 도입 연표를 따라가 보면, 현재의 변화는 돌발 사태가 아니라 15년 넘게 축적된 흐름의 결과였다.',
-      '출발점은 2010년이었다. 알고리즘 기반 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 이어 2017년부터 2022년까지는 기업 단위의 AI 도입이 본격적으로 증가한 시기로 분류된다. 다만 이 단계까지의 AI는 대중이 체감하기 어려운 ‘배후 기술’에 머물렀다.',
-      '분기점은 2022년이었다. 챗지피티(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 일반 대중의 도구로 단숨에 옮겨왔다. 이후 2023년은 생성형 AI가 실제 업무에 본격적으로 진입한 해로 평가되며, 2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로 활용 범위가 빠르게 확대됐다.',
-      '전문가들은 이 연표가 보여주는 핵심이 ‘대체’가 아닌 ‘재배치’라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다. 15년의 흐름을 놓친 조직이 기술을 인력 감축의 명분으로만 읽는 순간, 가장 먼저 사라지는 것은 비용이 아니라 조직의 축적된 경험이라는 지적이 뒤따른다.'
+      '런웨이 미디어 그룹 신임 회장 제이가 또 논란에 섰다. 그는 지난주 20년 넘게 조직을 지탱해 온 시니어 비서진과 편집 보조 인력 상당수를 해고하며 "낡은 방식에 매달리는 조직에는 미래가 없다"고 말했다. 해당 자리는 생성형 AI 도구로 대체하겠다는 계획도 함께 내놨다.',
+      '업계에서는 "전형적인 무책임"이라는 비판이 잇따른다. 오랜 신뢰를 쌓아온 인력을 ‘구시대적’이라는 한마디로 정리하면서도 공백을 메울 구체적 계획은 내놓지 않았기 때문이다. 한 관계자는 비용 절감 명분만 앞세운 결정이라고 지적했다.',
+      '그러나 현장의 흐름은 다르다. AI를 도입한 조직에서 비서직은 사라지기보다 ‘조정자’와 ‘판단 파트너’로 재편되는 추세다. 생성형 AI를 적극 활용하는 직원일수록 자기주도적 학습 역량과 업무 성과가 함께 높아진다는 분석도 있다. AI는 사람을 대체하기보다 숙련도를 끌어올리는 도구로 기능하고 있다.',
+      '전문가들은 문제의 본질이 AI 도입 자체가 아니라, 신기술을 명분으로 책임을 회피하는 태도에 있다고 지적한다. 체계를 정비하는 일과 검증된 신뢰를 ‘오래됐다’는 이유만으로 폐기하는 일은 전혀 다른 문제라는 것이다. 논란은 당분간 이어질 전망이다.'
     ]},
-  { id:'secretary-survive', date:'2026. 8. 29', sec:'CAREER', title:'AI 시대에 비서라는 직업은 어떻게 살아남나?', sub:'‘행정 보조자’에서 ‘의사결정 지원 파트너’로', by:'THE NEW YORK MIRROR 편집부', featured:true, table:true,
+  { id:'secretary-survive', date:'2026. 8. 29', sec:'CAREER', title:'“반복은 AI가, 판단은 비서가”', sub:'역할이 바뀌며 살아남은 비서직', by:'The Secretary Club · Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An', featured:true, table:true, 
     body:[
-      '인공지능(AI)이 처음 등장했을 때만 해도, 비서는 가장 먼저 사라질 대표적인 직업으로 꼽혔다. 일정 관리부터 문서 작성, 자료 검색과 회의록 요약까지 비서가 하던 일들을 AI가 순식간에 처리해 버렸기 때문이다. 하지만 실제 현장에서 일어난 변화는 직업이 사라지는 것이 아니라 ‘역할이 바뀌는 과정’이었다. AI가 반복적인 행정 업무를 대신해 주면서, 인간 비서의 역할은 판단과 소통 중심으로 이동했다.',
-      '실제로 AI는 일정 관리나 반복 행정, 문서 초안 작성, 회의록 정리, 데이터 통합처럼 정형화된 업무를 빠르고 정확하게 자동화하는 데 특화되어 있다. 반면 인간 비서는 조직 내 커뮤니케이션을 조율하고 예외적인 돌발 상황에 유연하게 대응하며, AI가 내놓은 결과물을 검토하고 수정하는 고차원적 역할을 수행한다.',
-      'AI가 정형화된 데이터를 빠르게 검색하고 요약하는 ‘기능적 보조자’라면, 인간 비서는 복잡한 맥락을 이해하고 정서를 다루는 ‘관계적·판단적 주체’다. 상사의 미세한 의도를 파악하고 부서 간 감정을 조율하는 일, 대인관계를 관리하며 규정만으로는 해결할 수 없는 돌발 상황에 대응하는 것은 오직 인간 비서만이 수행할 수 있는 고유한 영역이다.',
-      '이제 비서에게는 AI를 다루는 프롬프트 작성 능력과 데이터 리터러시는 물론, AI가 제시한 결과물의 오류를 검증하고 수정하는 정교한 안목이 필수가 되었다. AI의 빠른 자료 정리에 무비판적으로 의존하기보다 정확한 정보를 가려내고, 이를 바탕으로 리더와 조직 사이를 매끄럽게 잇는 전략적 커뮤니케이션 능력이 핵심 경쟁력으로 떠오른 것이다.',
-      '결국 AI 시대의 비서는 단순한 ‘행정 보조자’에서 AI 도구를 자유롭게 활용하고 최종 판단을 내리는 ‘의사결정 지원 파트너’로 전환을 이루어냈다. AI라는 강력한 도구를 지휘하며 판단과 책임의 몫을 지켜낸 비서직은, 기술 변화 속에서 직업의 미래를 스스로 재정의한 대표적인 사례다.'
+      'AI가 처음 등장했을 때 비서직은 가장 먼저 사라질 직업으로 꼽혔다. 일정 관리, 문서 작성, 자료 검색, 회의록 요약까지 AI가 순식간에 처리했기 때문이다. 그러나 현장에서 일어난 변화는 직업의 소멸이 아니라 역할이 바뀌는 과정이었다. AI가 반복적인 행정 업무를 맡으면서 인간 비서의 역할은 판단과 소통 중심으로 이동했고, 단순한 사무 보조에서 벗어난 비서직은 기계가 대체할 수 없는 가치에 집중하며 살아남았다.',
+      'AI는 일정 관리, 반복 행정, 문서 초안, 회의록 정리, 데이터 통합처럼 정형화된 업무를 빠르고 정확하게 자동화하는 데 특화되어 있다. 반면 인간 비서는 조직 내 커뮤니케이션을 조율하고, 돌발 상황에 유연하게 대응하며, AI 결과물을 검토하고 수정하는 고차원적 역할을 맡는다. 반복 업무는 AI에, 맥락과 소통은 사람에게 나뉘는 구조로 일터가 재편되었다.',
+      'AI가 정형화된 데이터를 빠르게 검색하고 요약하는 ‘기능적 보조자’라면, 인간 비서는 복잡한 맥락을 이해하고 정서를 다루는 ‘관계적·판단적 주체’다. 상사의 미세한 의도를 파악하고 부서 간 감정을 조율하며, 규정으로 해결되지 않는 상황에 대응하는 일은 인간 비서만이 할 수 있는 고유한 영역이다.',
+      '이 차이는 요구되는 역량도 바꿔 놓았다. 프롬프트 작성 능력과 데이터 리터러시는 물론, AI 결과물의 오류를 검증하고 수정하는 안목이 필수가 되었다. AI의 자료 정리에 무비판적으로 기대기보다 정확한 정보를 가려내고, 리더와 조직을 매끄럽게 잇는 전략적 커뮤니케이션 능력이 핵심 경쟁력으로 떠올랐다.',
+      '결국 AI 시대의 비서는 단순한 행정 보조자에서 AI를 활용해 최종 판단을 내리는 ‘의사결정 지원 파트너’로 전환했다. AI의 결과를 무작정 믿지 않고 검증하며 최종 책임을 지는 인간의 역할은 대체 불가능하다. AI라는 도구를 지휘하며 판단과 책임의 몫을 지켜낸 비서직은, 기술 변화 속에서 직업의 미래를 스스로 재정의한 대표적 사례다.'
     ]},
-  { id:'prompt-check', date:'2026. 8. 29', sec:'BUSINESS', title:'“AI에게 시키면 끝?” … 결과를 걸러내는 사람이 경쟁력을 갖는다', sub:'좋은 프롬프트의 5요소, 환각 검증, 개인정보 보호, 그리고 MCP', by:'앤드리아 삭스 (Andrea Sachs) · 프리랜스 저널리스트', featured:true,
+  { id:'prompt-check', date:'2026. 8. 29', sec:'BUSINESS', title:'AI에게 시키면 끝? … 결과를 걸러내는 사람이 경쟁력을 갖는다', sub:'좋은 프롬프트의 5요소, 환각 검증, 개인정보 보호, 그리고 MCP', by:'The Secretary Club · Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An', featured:true, 
     body:[
-      'AI가 문서 작성과 자료 조사, 정보 정리 등 다양한 업무에 활용되면서 직장인들의 업무 방식도 빠르게 달라지고 있다. 하지만 AI를 단순히 사용하는 것만으로는 원하는 결과를 얻기 어렵다는 지적이 나온다. AI에게 정확하게 지시하고, 결과를 검토하는 능력까지 갖추는 것이 중요해지고 있기 때문이다.',
-      'AI를 효과적으로 활용하기 위해서는 먼저 프롬프트를 구체적으로 작성해야 한다. 좋은 프롬프트는 크게 다섯 가지 요소로 구성된다. AI에게 어떤 역할을 맡길 것인지 정하는 ‘역할’, 업무의 상황을 설명하는 ‘배경’, 원하는 작업을 구체적으로 제시하는 ‘지시’, 결과물에서 지켜야 할 조건을 정하는 ‘제약’, 그리고 원하는 결과의 형태를 알려주는 ‘출력 형식’이다.',
-      '구체적인 프롬프트를 사용해도 AI가 항상 정확한 답을 내놓는 것은 아니다. AI는 사실이 아닌 내용을 사실처럼 제시하는 ‘환각(hallucination)’ 현상을 보일 수 있기 때문이다. 따라서 원문 출처와 수치·정보를 확인하고, 조사 대상·연도·표본 등을 검토하는 과정이 필요하다. AI에게 같은 질문을 반복하는 것만으로는 검증이 되지 않으며, 최종적으로 1차 출처를 확인해야 한다.',
-      '또한 AI를 업무에 활용할 때는 개인정보와 기밀정보를 그대로 입력해서도 안 된다. 고객의 이름이나 전화번호, 주민등록번호, 내부 계약서, 인사정보, 비밀번호와 같은 정보는 비식별화한 뒤 활용해야 한다.',
-      '최근에는 AI를 업무 도구와 직접 연결해 쓰는 방식이 주목받고 있다. MCP(Model Context Protocol)는 AI가 일정표나 메일함, 사내 문서함 같은 실제 업무 도구에 직접 접근하도록 연결해 주는 ‘공통 규격’으로, 서로 다른 기기를 하나의 USB 단자로 잇듯 여러 업무 프로그램을 AI에 같은 방식으로 연결해 준다. 다만 AI의 접근 권한은 업무에 꼭 필요한 범위로만 설정하고, 인사·계약 정보처럼 공개가 제한된 자료는 연결 대상에서 제외해야 한다. 이 기능은 클로드(Claude)에서는 ‘커넥터’, 챗GPT에서는 ‘플러그인’으로 불린다.',
-      '결국 가장 중요한 것은 AI가 만들어낸 결과를 그대로 믿지 않는 태도다. 확인되지 않은 내용은 ‘검증되지 않음’으로 표시하는 방식이다. AI를 가장 잘 활용하는 사람은 답을 가장 빨리 받아들이는 사람이 아니라, 그 답을 한 번 더 의심하고 확인할 수 있는 사람일 것이다.'
+      'AI가 문서 작성, 자료 조사, 정보 정리에 쓰이며 직장인의 업무 방식이 빠르게 바뀌고 있다. 그러나 사용만으로는 원하는 결과를 얻기 어렵다. 정확한 지시와 결과 검토 능력이 중요해지고 있다.',
+      'AI 활용의 출발점은 구체적인 프롬프트다. 좋은 프롬프트는 ‘역할’, ‘배경’, ‘지시’, ‘제약’, ‘출력 형식’의 다섯 요소로 이뤄진다. “광고 문구를 만들어줘”보다 대상, 목적, 글자 수, 형식을 제시할수록 결과가 좋아진다.',
+      '그래도 AI가 항상 정확하지는 않다. 사실이 아닌 내용을 사실처럼 말하는 ‘환각(hallucination)’ 현상이 있다. 출처, 수치, 조사 대상, 연도, 표본을 확인해야 하며, 같은 질문의 반복은 검증이 아니므로 결국 1차 출처를 봐야 한다. 고객 이름, 주민등록번호, 내부 계약서, 인사정보, 비밀번호 등 개인·기밀정보는 비식별화해 입력해야 한다.',
+      '최근엔 AI를 업무 도구와 직접 잇는 방식이 주목받는다. MCP(Model Context Protocol)는 일정표, 메일함, 사내 문서함 같은 도구에 AI가 직접 접근하도록 하는 ‘공통 규격’으로, 자료를 일일이 붙여 넣는 수고를 줄인다. 가령 “다음 주 임원 일정 중 겹치는 건을 찾아 대안을 정리해 달라”는 요청을 한 번에 처리할 수 있다. 접근 권한은 필요한 범위로만 두고, 인사·계약 등 공개가 제한된 자료는 연결에서 제외해야 한다. 클로드는 ‘커넥터’, 챗GPT는 ‘플러그인’이라 부른다.',
+      '결국 핵심은 AI 결과를 그대로 믿지 않는 태도다. 답변의 사실 주장을 나눠 1차·공식 출처와 비교하고, 확인되지 않은 내용은 ‘검증되지 않음’으로 표시하는 방식이 제시된다. AI 시대의 업무 능력은 ‘AI를 사용할 줄 아는가’를 넘어 ‘AI의 결과를 판단할 수 있는가’로 확장되고 있다. 가장 잘 활용하는 사람은 답을 빨리 받아들이는 사람이 아니라, 답을 한 번 더 의심하고 확인하는 사람이다.'
     ]},
-  { id:'interview-amari', date:'2026. 8. 29', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 정체성은 어떻게 변하는가?', sub:'AI 도입에 따른 비서 직무의 시사점 — 현직 비서 아마리', by:'올리비아 첸 (Olivia Chen)', interview:true,
+  { id:'ai-timeline', date:'2026. 8. 29', sec:'TECHNOLOGY', title:'“문제는 AI가 아니라 속도 였다”', sub:'15년 쌓인 흐름, 전문가는 ‘재배치’라 부른다', by:'The Secretary Club · Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An', featured:true, 
     body:[
-      'Q. 최근 기업 현장에 AI 바람이 거세게 불고 있습니다. 상사를 보좌하며 업무를 조율해온 비서 직무에 실제로 어떤 변화가 일어나고 있나요?',
-      'A. 사실 현장에서는 기대와 걱정이 동시에 존재해요. AI는 인공지능 기술을 기반으로 명령을 이해하고 일을 돕는 시스템이고, 저희 같은 인간 비서는 상사의 일정이나 소통을 챙기며 전체 업무 흐름을 조율하는 사람이에요. AI와 인간 비서 사이에 확실한 역할 분담이 생기고 있어요. 쉬운 사무 업무를 AI에게 맡기는 대신 저희는 관계적인 역할을 맡아서 서로 부족한 점을 보완하는 관계가 됩니다.',
-      'Q. 앞으로 비서에게 필요한 가장 중요한 능력은 무엇일까요?',
-      'A. AI 협업은 직무에 대한 불안감을 주죠. 하지만 동시에 비서라는 직업의 전문성을 끌어올리기도 합니다. 이제는 단순히 일처리가 빠르다고 인정받는 시대가 아니에요. 얼마나 AI를 잘 다루고 윤리적인 문제까지 감지해내는 민첩성이 새로운 무기가 되어야 합니다. 앞으로의 비서는 기술 뒤에 숨는 것이 아닌 본질을 상기시키는 자리가 되어야 한다고 생각합니다.'
+      '런웨이 미디어 그룹의 인력 교체 논란이 이어지는 가운데, 주목할 것은 AI의 등장이 아니라 업무에 들어온 속도라는 지적이 나온다. 기술 도입 연표를 보면 현재의 변화는 돌발 사태가 아니라 15년 넘게 쌓인 흐름의 결과다.',
+      '출발점은 2010년이다. 알고리즘 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 2017년부터 2022년까지는 기업 단위 AI 도입이 본격화된 시기로 분류된다. 다만 이 단계의 AI는 대중이 체감하기 어려운 ‘배후 기술’에 머물렀다. 분기점은 2022년이다. 챗지피(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 대중의 도구로 단숨에 옮겨왔다. 2023년에는 생성형 AI가 실제 업무에 본격 진입했고, 2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로 활용이 빠르게 확대됐다.',
+      '전문가들은 이 연표의 핵심이 ‘대체’가 아닌 ‘재배치’라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다. 15년의 흐름을 놓친 조직이 기술을 인력 감축의 명분으로만 읽는 순간, 가장 먼저 사라지는 것은 비용이 아니라 축적된 경험이라는 지적이 뒤따른다.'
     ]},
-  { id:'interview-emily', date:'2026. 8. 29', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다', sub:'업무 시 AI 사용은 자기주도성에 영향을 미칠까?', by:'마커스 벨 (Marcus Bell)', interview:true,
+  { id:'interview-amari', date:'2026. 8. 29', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 정체성은 어떻게 변하는가?', sub:'AI 도입에 따른 비서 직무의 시사점', by:'The Secretary Club · Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An', interview:true, 
     body:[
-      'Q. 직장 내에서 AI나 디지털 업무 환경을 활용하는 일들이 늘어났습니다. 이러한 도구들이 비서의 미래에 영향을 미친다고 보시나요?',
-      'A. 당연히 엄청난 영향을 미치죠! 생성형 AI는 목표를 세우거나 실행, 평가하는 능력을 끌어올려줘요. 일터에서 능동적으로 문제를 해결하도록 자극을 주는 거죠. 이렇게 배운 자기주도성이 발판이 되어 자연스럽게 직무 성과로 이어집니다. 다만 비대면 텍스트 소통이 늘어나면서 오프라인에서의 대응이나 달라진 환경에 대한 적응 등의 문제점 또한 존재하지요.',
-      'Q. 비서가 AI시대에 밀려나지 않고 자신의 경력을 만들어가려면 무엇을 갖춰야 할까요?',
-      'A. 요즘 상사들이 어떤 비서를 우수하다고 평가하는지 아세요? 하나하나 지시하지 않아도 상사의 니즈에 맞게 능동적으로 움직이는 비서예요. 전표처리나 계산 같은 단순 복잡 업무는 AI가 훨씬 빠르고 정확하게 처리한다는 걸 상사들도 잘 알고 있어요. 하지만 사람과 직접 대면하고 교감하며 상황을 이해하고 해결하는 건 AI가 할 수 없는 사람만의 영역이죠. AI는 도구일 뿐 본질이 변하지는 않으니까요.'
+      'Q. AI 바람이 거센 요즘, 상사를 보좌하며 업무를 조율하는 비서의 일은 어떻게 달라지고 있나요? 현직 아마리 씨의 솔직한 이야기가 궁금합니다.',
+      'A. 기대와 걱정이 공존해요. AI는 명령을 이해하고 일을 돕는 시스템이고, 비서는 상사의 일정과 소통을 챙기며 업무 흐름 전체를 조율하는 사람이에요. 가장 먼저 드는 불안은 AI가 일을 맡을수록 비서의 역할이 줄지 않을까 하는 점이에요. 주변 비서들을 보면 AI와 인간 사이에 확실한 역할 분담이 생기고 있어요. 모든 걸 AI에 맡기진 않아요. 쉬운 사무는 AI가, 관계적 역할은 저희가 맡아 서로 보완해요. 자동화가 진행될수록 저희 역할은 행정 보조를 넘어 완전히 확장되는 셈이에요.',
+      'Q. 자리를 빼앗길까 우려되는데, 현장 분위기는 어떤가요? 앞으로 비서에게 가장 중요한 능력은 무엇일까요?',
+      'A. 맞아요. AI 협업은 불안을 주지만 동시에 비서 직업의 전문성을 끌어올리기도 해요. 이제는 일처리가 빠른 것만으로 인정받지 못해요. AI를 잘 다루고 윤리적 문제까지 감지하는 민첩성이 새로운 무기예요. 앞으로의 비서는 기술 뒤에 숨기보다 업무의 본질을 상기시키는 자리가 돼야 한다고 생각해요.'
     ]},
-  { id:'chairman', date:'2026. 8. 29', sec:'MEDIA', title:'“낡은 방식에 매달리는 조직에는 미래가 없다”', sub:'런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', by:'크리스티안 톰슨 (Christian Thompson) · 프리랜스 저널리스트',
+  { id:'interview-emily', date:'2026. 8. 29', sec:'INTERVIEW', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다', sub:'업무 시 AI사용은 자기주도성의 영향을 미칠까?', by:'The Secretary Club · Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An', interview:true, 
     body:[
-      '런웨이 미디어 그룹 신임 회장 제이가 또다시 논란의 중심에 섰다. 제이 회장은 지난주 조직을 20년 넘게 지탱해온 시니어 비서진과 편집 보조 인력 상당수를 한꺼번에 해고하며 “낡은 방식에 매달리는 조직에는 미래가 없다”고 밝혔다. 그는 해당 자리를 생성형 AI 도구로 대체하겠다는 계획도 함께 발표했다.',
-      '그러나 현장의 흐름은 회장의 판단과 다른 방향으로 나타나고 있다. AI를 도입한 조직에서 비서직은 사라지기보다 ‘조정자’ 및 ‘판단 파트너’로 재편되는 추세다. 생성형 AI를 적극적으로 활용하는 직원일수록 자기주도적 학습 역량이 높아지고 실제 업무 성과도 함께 향상된다는 분석도 제기됐다. AI가 사람을 대체하는 도구가 아니라, 숙련도를 끌어올리는 도구로 기능하고 있다는 해석이다.',
-      '전문가들은 문제의 본질이 AI 도입 자체가 아니라, 신기술을 명분으로 책임을 회피하는 태도에 있다고 지적한다. 기존 체계를 정비하는 일과, 오래됐다는 이유만으로 검증된 신뢰를 폐기하는 일은 전혀 다른 문제라는 것이다.'
+      'Q. AI와 디지털 업무 환경이 늘면서 성과와 비서의 미래에 영향을 미친다고 보시나요?',
+      'A. 에밀리: 엄청난 영향을 미친다고 봐요. 현장 경험과 여러 조사로 확인된 사실이라 명쾌하게 답할 수 있어요. 생성형 AI는 목표 설정, 실행, 평가 능력을 끌어올려 일터에서 능동적으로 문제를 해결하게 해요. 이 자기주도성이 발판이 되어 직무 성과로 이어져요. 언제 어디서나 접속해 일하는 환경은 근무를 유연하게 만들었어요. 다만 비대면 텍스트 소통이 늘면서 오프라인 대응이나 환경 적응 같은 문제도 함께 있어요.',
+      'Q. AI 시대에 밀려나지 않고 경력을 만들려면 비서는 무엇을 갖춰야 할까요? 상사들이 원하는 비서상도 궁금합니다.',
+      'A. 먼저 자기 일과 행동을 객관적으로 점검하고 변화에 민첩하게 적응해야 해요. 요즘 상사들이 우수하다고 평가하는 비서는 지시가 없어도 상사의 니즈에 맞춰 능동적으로 움직이는 사람이에요. 상사들도 잘 알고 있어요. 전표 처리나 계산 같은 단순 업무는 AI가 훨씬 빠르고 정확하다는 것을요. 하지만 사람과 대면해 교감하고 상황을 이해하며 해결하는 일은 AI가 할 수 없는 영역이에요. 결국 중요한 건 AI가 비서를 대신하는 게 아니라, AI를 발판 삼아 판단력을 보여주는 비서가 되는 거예요. AI는 도구일 뿐 본질은 변하지 않으니까요.'
     ]}
 ];
 
@@ -1517,14 +1535,14 @@ function pSecretary() {
       <h3>AI와 비서, 누가 무엇을?</h3>
       <table class="vs"><tr><th class="ai">AI의 역할</th><th class="me">인간 비서의 역할</th></tr>
         ${[['일정 관리', '맥락 이해'], ['반복적인 행정업무', '상황 판단'], ['문서 초안 작성', '감정 조율'], ['자료 검색', '대인관계 관리'], ['회의록 작성/요약', '조직 내 커뮤니케이션'], ['데이터 처리', '예외적인 상황 대응'], ['정보 통합', 'AI 결과물 검토 및 수정']].map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>
-      <p class="muted" style="font-size:13px;margin-top:8px">출처: 뉴욕 미러 <a class="lnk" href="#/press/secretary-survive">「AI 시대에 비서라는 직업은 어떻게 살아남나?」</a></p>
+      <p class="muted" style="font-size:13px;margin-top:8px">출처: 뉴욕 미러 <a class="lnk" href="#/press/secretary-survive">「반복은 AI가, 판단은 비서가」</a></p>
 
       <h3>필요 역량</h3>
       <figure class="skill-fig">
         <img src="img/skills-wef2025.png" alt="2025년 고용주가 꼽은 핵심 역량 Top 8: 분석적 사고 69%, 회복탄력성·유연성·민첩성 67%, 리더십·사회적 영향력 61%, 창의적 사고 57%, 동기부여·자기인식 52%, 공감·경청 50%, 호기심·평생학습 50%, 고객 서비스 47%" loading="lazy">
         <figcaption><b>세계경제포럼 『Future of Jobs Report 2025』 — 고용주 10곳 중 7곳이 ‘분석적 사고’를 핵심 역량으로 꼽았습니다.</b>
           출처: World Economic Forum (2025). <i>The Future of Jobs Report 2025</i>. Geneva: World Economic Forum, 2025년 1월 발간 · 55개국, 22개 산업 분야, 1,000여 개 글로벌 고용주(근로자 1,400만 명 이상) 대상 설문.
-          <a class="lnk" href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">보고서 원문 보기 ↗</a></figcaption>
+          <button class="lnk" type="button" onclick="openSource()">출처 자세히 보기 →</button></figcaption>
       </figure>
 
       <h3>편집장 비서 생존 매뉴얼</h3>
@@ -1828,19 +1846,48 @@ function setTheme(t) { document.documentElement.dataset.theme = t; store.set('rw
 setTheme(store.get('rw_theme', 'light'));
 $('#theme').onclick = () => { setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'); toast(document.documentElement.dataset.theme === 'dark' ? '어두운 화면으로 바꿨어요.' : '밝은 화면으로 바꿨어요.'); };
 
-/* ---------- ⏱ 자리를 비우면 홈으로 (IDLE_SECONDS 동안 아무 조작이 없을 때) ---------- */
-const IDLE_SECONDS = 60;
+/* ---------- 📚 출처 자세히 보기 (전시용: 외부 사이트로 나가지 않아요) ---------- */
+function openSource() {
+  openModal(`<div class="src-box"><div class="eyebrow">Source</div><h2>필요 역량 그래프 출처</h2>
+    <dl><dt>보고서</dt><dd><i>The Future of Jobs Report 2025</i> (일자리의 미래 보고서 2025)</dd>
+    <dt>발행</dt><dd>World Economic Forum (세계경제포럼), Geneva · 2025년 1월</dd>
+    <dt>조사 대상</dt><dd>55개국, 22개 산업 분야의 1,000여 개 글로벌 고용주 (근로자 1,400만 명 이상)</dd>
+    <dt>내용</dt><dd>2025년 고용주가 꼽은 핵심 역량 — 분석적 사고 69%, 회복탄력성·유연성·민첩성 67%, 리더십·사회적 영향력 61%, 창의적 사고 57%, 동기부여·자기인식 52%, 공감·경청 50%, 호기심·평생학습 50%, 고객 서비스 47%</dd>
+    <dt>원문 주소</dt><dd class="url">weforum.org/publications/the-future-of-jobs-report-2025</dd></dl></div>`);
+}
+
+/* ---------- ⏱ 전시용 자동 복귀: 30초 동안 아무도 만지지 않으면 첫 화면으로 ----------
+   첫 화면 맨 위가 아닌 곳(기사 · 채용 · 회사 소개 · 팝업 · 첫 화면 아래쪽)에서
+   HOME_WARN_AFTER 초가 지나면 안내가 나오고, HOME_IDLE_SECONDS 초가 되면 첫 화면 맨 위로 돌아가요. */
+const HOME_IDLE_SECONDS = 30;
+const HOME_WARN_AFTER = 10;
 let lastAct = Date.now();
-['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(ev => document.addEventListener(ev, () => { lastAct = Date.now(); }, { passive: true }));
+['pointerdown', 'keydown', 'touchstart', 'touchmove', 'wheel'].forEach(ev => document.addEventListener(ev, () => { lastAct = Date.now(); }, { passive: true }));
 window.addEventListener('message', e => { if (e.data && e.data.rw === 'activity') lastAct = Date.now(); });
+document.body.insertAdjacentHTML('beforeend', `<div class="idle-bar hidden" id="idle-bar" role="status"><div class="ib-in"><small>잠시 자리를 비우셨나요?</small>
+  <p><b id="idle-n">20</b>초 후 <em>처음 홈페이지 화면</em>으로 돌아갑니다</p><span>화면을 클릭하거나 마우스 휠을 움직이면 계속 볼 수 있어요</span></div>
+  <button class="btn btn-red" id="idle-stay" type="button">계속 보기</button><i class="ib-bar" id="idle-prog"></i></div>`);
+$('#idle-stay').onclick = () => { lastAct = Date.now(); $('#idle-bar').classList.add('hidden'); };
+function goHomeTop() {
+  closeModal(); $('#gnb').classList.remove('open'); $('#idle-bar').classList.add('hidden');
+  if (location.hash !== '' && location.hash !== '#/' && location.hash !== '#') location.hash = '#/';
+  window.scrollTo({ top: 0, behavior: 'instant' }); setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 80);
+}
 setInterval(() => {
-  if (location.hash.startsWith('#/game')) return;               // 게임 중에는 게임이 알아서 처리해요
-  if (Date.now() - lastAct < IDLE_SECONDS * 1000) return;
-  lastAct = Date.now();
-  const atHome = location.hash === '' || location.hash === '#/' || location.hash === '#';
-  closeModal();
-  if (!atHome) location.hash = '#/'; else window.scrollTo({ top: 0, behavior: 'smooth' });
-}, 1000);
+  const bar = $('#idle-bar');
+  if (location.hash.startsWith('#/game')) { bar.classList.add('hidden'); return; }   // 게임은 게임 안에서 따로 처리해요
+  const atHomeTop = (location.hash === '' || location.hash === '#/' || location.hash === '#') && window.scrollY < 120
+    && $('#modal').classList.contains('hidden') && !$('#gnb').classList.contains('open');
+  if (atHomeTop) { lastAct = Date.now(); bar.classList.add('hidden'); return; }       // 첫 화면 맨 위는 그대로 둬요
+  const idle = (Date.now() - lastAct) / 1000;
+  if (idle >= HOME_IDLE_SECONDS) { lastAct = Date.now(); goHomeTop(); return; }
+  if (idle >= HOME_WARN_AFTER) {
+    const left = Math.ceil(HOME_IDLE_SECONDS - idle);
+    $('#idle-n').textContent = left;
+    $('#idle-prog').style.width = (left / (HOME_IDLE_SECONDS - HOME_WARN_AFTER) * 100) + '%';
+    bar.classList.remove('hidden');
+  } else bar.classList.add('hidden');
+}, 250);
 $('#burger').onclick = () => $('#gnb').classList.toggle('open');
 $('#btn-search').onclick = openSearch;
 $('#mx').onclick = closeModal;
