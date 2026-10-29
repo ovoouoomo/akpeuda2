@@ -687,6 +687,11 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 .toon-card img{width:82%;max-width:140px;aspect-ratio:1;object-fit:cover;display:block;margin:0 auto;border-radius:50%;animation:bob 2.4s ease-in-out infinite}
 .egg .heads span{background:#fff}
 .egg .heads img{width:100%;height:100%;object-fit:cover}
+.toon-card img{border-radius:0!important;object-fit:contain!important;image-rendering:pixelated}
+.toon-card .say{background:var(--red)!important;color:#fff!important}
+.egg .heads img{image-rendering:pixelated}
+.credit-wrap .k{color:#fff!important;opacity:.9}
+.credit-wrap .cr-quote{color:#fff!important}
 </style>
 </head>
 <body>
@@ -777,10 +782,10 @@ const CAST = [
 
 /* ---------- 만든 사람들 (이스터에그) ---------- */
 const TEAM = [   // 왼쪽부터 예주 · 은빈 · 시현 · 은채 (직접 그린 그림: img/team-*.jpg)
-  { name:'예주', desc:'긴 생머리 · 블랙 재킷',     say:'That’s all!',      img:'img/team-yeju.jpg' },
-  { name:'은빈', desc:'앞머리 · 화이트 셔츠',      say:'커피 주문 완료!',   img:'img/team-eunbin.jpg' },
-  { name:'시현', desc:'긴 생머리 · 블랙 수트',     say:'팩트체크 끝!',      img:'img/team-sihyeon.jpg' },
-  { name:'은채', desc:'포니테일 · 리본 블라우스',  say:'오늘도 출근 완료!', img:'img/team-eunchae.jpg' }
+  { name:'예주', desc:'긴 생머리 · 블랙 재킷',     say:'That’s all!',      img:'img/team-yeju.svg' },
+  { name:'은빈', desc:'앞머리 · 화이트 셔츠',      say:'커피 주문 완료!',   img:'img/team-eunbin.svg' },
+  { name:'시현', desc:'긴 생머리 · 블랙 수트',     say:'팩트체크 끝!',      img:'img/team-sihyeon.svg' },
+  { name:'은채', desc:'포니테일 · 리본 블라우스',  say:'오늘도 출근 완료!', img:'img/team-eunchae.svg' }
 ];
 
 /* ---------- 읽을거리 (짧게) ---------- */
@@ -1755,7 +1760,7 @@ function openCredits() {
   const sp = Array.from({ length: 12 }, () => `<span class="spark" style="left:${Math.random() * 96}%;top:${Math.random() * 90}%;animation-delay:${Math.random() * 1.6}s">✦</span>`).join('');
   openModal(`<div class="credit-wrap">${sp}<div class="k">BEHIND THE RUNWAY · 숨은 제작진</div><h2>이 사무실을 만든 사람들</h2><p class="s">축하해요, 숨겨진 크레딧을 찾았어요!</p>
     <div class="toons">${TEAM.map((t, i) => `<div class="toon-card" style="animation-delay:${.2 + i * .18}s"><span class="say">${t.say}</span><img src="${t.img}" alt="${t.name}"><b>${t.name}</b><small>${t.desc}</small></div>`).join('')}</div>
-    <p style="margin:24px 0 0;font:italic 400 20px var(--didone);color:var(--gold)">“흥미롭군. 자네들, 생각보다 쓸 만한 팀이었어.” — M.P.</p></div>`, 'wide');
+    <p class="cr-quote" style="margin:24px 0 0;font:italic 400 20px var(--didone)">“흥미롭군. 자네들, 생각보다 쓸 만한 팀이었어.” — M.P.</p></div>`, 'wide');
 }
 let logoClicks = 0, logoTimer;
 $('#logo').addEventListener('click', () => {
