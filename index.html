@@ -819,6 +819,33 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
   .adm{background:#fff;padding:0}.adm-card,.ak{break-inside:avoid}
   .hb-t i,.cb i{--on:1;transition:none}
 }
+
+/* 🔒 관리자 비밀번호가 틀렸을 때: 의자에 앉은 제작진 */
+.adm-login{display:flex;flex-direction:column;align-items:center;gap:22px}
+.al-crew{display:none;width:min(640px,100%);text-align:center}
+.al-crew.show{display:block}
+.crew-say{position:relative;display:block;margin:0 0 16px;background:var(--ink);color:var(--bg);padding:12px 18px;font:400 17px/1.6 var(--kserif);animation:sayIn .4s .55s both}
+.crew-say b{display:block;font:700 11px var(--sans);letter-spacing:.2em;color:#ff8a98;margin-bottom:2px}
+.crew-say::after{content:"";position:absolute;left:var(--x,50%);transition:left .3s;bottom:-9px;border:9px solid transparent;border-bottom:0;border-top-color:var(--ink);transform:translateX(-50%)}
+@keyframes sayIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.crew-row{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,2vw,18px)}
+.seat{position:relative;padding-top:8px;opacity:0;animation:sitDown .55s cubic-bezier(.2,1.3,.4,1) forwards}
+.seat:nth-child(2){animation-delay:.08s}.seat:nth-child(3){animation-delay:.16s}.seat:nth-child(4){animation-delay:.24s}
+@keyframes sitDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:none}}
+.chair-back{position:absolute;left:14%;right:14%;top:0;height:62%;background:linear-gradient(90deg,#141414,#2c2c2c 50%,#141414);border-radius:40px 40px 8px 8px;box-shadow:inset 0 0 0 3px #000}
+.bust{position:relative;display:block;width:86%;margin:0 auto;z-index:2}
+.lap{position:relative;z-index:3;width:88%;margin:-14% auto 0}
+.lap svg{display:block;width:100%}
+.lap .tap{transform-origin:33px 60px}
+.seat.talk .lap .tap{animation:tapToe .5s ease-in-out infinite alternate}
+@keyframes tapToe{to{transform:rotate(-14deg)}}
+.seat.talk .bust{animation:nodTalk .6s ease-in-out 3}
+@keyframes nodTalk{50%{transform:translateY(-3%) rotate(-2deg)}}
+.chair-base{position:relative;height:16px;margin:-24px auto 0;width:60%;z-index:1}
+.chair-base::before{content:"";position:absolute;left:0;right:0;top:0;height:9px;background:#141414;border-radius:6px}
+.chair-base i{position:absolute;left:50%;top:9px;width:5px;height:14px;margin-left:-2px;background:#9a9a9a}
+.seat b{display:block;margin-top:14px;font:700 13px var(--sans)}
+.seat.talk b{color:var(--red)}
 </style>
 </head>
 <body>
@@ -2009,7 +2036,17 @@ function siteBump(key, sub) {
 
 function pAdmin() {
   if (!adminAuth.ok()) return `
-  <section class="adm-login"><div class="al-box">
+  <section class="adm-login">
+  <div class="al-crew" id="al-crew" aria-live="polite">
+    <p class="crew-say" id="crew-say"></p>
+    <div class="crew-row">${TEAM.map((t, i) => `<div class="seat" data-i="${i}">
+      <div class="chair-back"></div>
+      <img class="bust" src="${t.img}" alt="${t.name}">
+      <div class="lap">${CROSSED_LEGS}</div>
+      <div class="chair-base"><i></i></div>
+      <b>${t.name}</b></div>`).join('')}</div>
+  </div>
+  <div class="al-box">
     <div class="eyebrow">Restricted · 관리자 전용</div>
     <h1>RUNWAY <em>STUDIO</em></h1>
     <p>전시 운영 리포트는 관리자만 볼 수 있어요.<br>관리자 비밀번호를 입력해 주세요.</p>
@@ -2038,6 +2075,30 @@ function pAdmin() {
   </div></section>`;
 }
 
+/* 비밀번호가 틀리면: 제작진 4명이 의자에 다리를 꼬고 앉아 한마디 */
+var CROSSED_LEGS = `<svg viewBox="0 0 120 80" aria-hidden="true">
+  <path d="M30 2 H90 L96 26 H24 Z" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M70 24 L72 70" stroke="#1a1a1a" stroke-width="13" stroke-linecap="round"/><path d="M70 24 L72 70" stroke="#fff1ea" stroke-width="8" stroke-linecap="round"/>
+  <path d="M64 75 Q74 70 84 76 L84 79 H64 Z" fill="#1a1a1a"/>
+  <path d="M50 22 Q62 30 52 44 L30 62" fill="none" stroke="#1a1a1a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M50 22 Q62 30 52 44 L30 62" fill="none" stroke="#fff1ea" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="tap" d="M33 58 L20 66 Q16 70 22 71 L36 64 Z" fill="#d0021b" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/>
+</svg>`;
+var CREW_LINES = [
+  '어머, 숫자가 틀렸네요. 이 방은 저희 넷의 작업실이에요.',
+  '여기까지 찾아온 건 인정할게요. 그래도 문은 안 열려요.',
+  '그 번호는 아니에요. 제작진끼리만 아는 숫자거든요.',
+  '관계자 외 출입 금지예요. 게임은 저쪽에서 하시면 돼요!',
+  'That’s all. 오늘은 여기까지예요.'
+];
+function crewScold(n) {
+  const crew = $('#al-crew'); if (!crew) return;
+  const who = (n - 1) % 4;
+  crew.classList.remove('show'); void crew.offsetWidth; crew.classList.add('show');
+  $$('#al-crew .seat').forEach((el, i) => el.classList.toggle('talk', i === who));
+  const say = $('#crew-say'); say.style.setProperty('--x', (who * 25 + 12.5) + '%');
+  say.innerHTML = `<b>${TEAM[who].name}</b> “${CREW_LINES[(n - 1) % CREW_LINES.length]}”`;
+}
 function initAdmin() {
   if (!adminAuth.ok()) {
     const f = $('#adm-form'); if (!f) return;
@@ -2053,6 +2114,7 @@ function initAdmin() {
       sessionStorage.setItem('rw_admin_fail', n);
       if (n >= 5) { sessionStorage.setItem('rw_admin_lock', Date.now() + 60000); sessionStorage.setItem('rw_admin_fail', 0); }
       $('#adm-pw').value = ''; $('#adm-msg').textContent = n >= 5 ? '5번 틀려서 1분 동안 잠겼어요.' : `비밀번호가 맞지 않아요. (${n}/5)`;
+      crewScold(n);
       $('.al-box').classList.remove('shake'); void $('.al-box').offsetWidth; $('.al-box').classList.add('shake');
     };
     return;
