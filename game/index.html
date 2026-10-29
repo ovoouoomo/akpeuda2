@@ -860,6 +860,61 @@ body{background:#fff;letter-spacing:-.005em}
 .sheet{position:absolute;z-index:6;width:3.4%;aspect-ratio:3/4;background:#fff;border:1px solid #141414;animation:sheetFall 1.1s ease-in forwards}
 .sheet::after{content:"";position:absolute;left:18%;right:18%;top:24%;height:2px;background:#bdbdbd;box-shadow:0 4px 0 #bdbdbd,0 8px 0 #bdbdbd}
 @keyframes sheetFall{0%{transform:translate(0,0) rotate(0)}30%{transform:translate(calc(var(--sx) * .5),-34px) rotate(calc(var(--sr) * .4))}100%{transform:translate(var(--sx),var(--sy)) rotate(var(--sr)) scaleY(.45)}}
+
+/* 🤖 AI 문서작성기: 실제 AI 채팅창처럼 */
+.chat{border:1px solid var(--ink);background:#fff;margin-bottom:6px}
+.chat-top{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:#fff}
+.ai-logo{width:34px;height:34px;flex:none;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ff5a6e,var(--red) 55%,#7a0010);color:#fff;display:grid;place-items:center;font:900 12px var(--sans);letter-spacing:.05em}
+.chat-top b{display:block;font:900 15px var(--sans);letter-spacing:.06em}
+.chat-top small{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.chat-top small i{width:7px;height:7px;border-radius:50%;background:#2e9a5a;display:inline-block}
+.chat-model{margin-left:auto;font:700 11px var(--sans);color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 10px}
+.chat-log{background:#f6f5f3;padding:16px 14px;max-height:300px;min-height:120px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.msg{display:flex;gap:8px;align-items:flex-end;animation:fadeIn .3s}
+.msg .av{width:28px;height:28px;flex:none;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font:900 10px var(--sans)}
+.msg .bub{max-width:80%;padding:10px 14px;font:15px/1.65 var(--kserif);border-radius:18px}
+.msg .bub small{display:block;margin-top:6px;font:12.5px/1.6 var(--sans);color:var(--muted)}
+.msg.ai .bub{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg.me{justify-content:flex-end}
+.msg.me .bub{background:var(--ink);color:#fff;border-bottom-right-radius:4px}
+.msg.me .bub small{color:#c9c3bb}
+.msg.me .bub p{margin:0 0 4px}.msg.me .bub p:last-child{margin:0}
+.msg.me .bub p b{display:inline-block;min-width:62px;font:700 11px var(--sans);color:#ff8a98;letter-spacing:.04em}
+.msg.me.pending .bub{background:#fff;color:var(--ink);border:1.5px dashed var(--ink)}
+.msg.me.pending .bub small{color:var(--muted)}
+.bub.typing{display:flex;gap:5px;padding:14px 16px}
+.bub.typing i{width:7px;height:7px;border-radius:50%;background:#b5ada2;animation:dot 1s infinite}
+.bub.typing i:nth-child(2){animation-delay:.15s}.bub.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+.doc-card{margin-top:8px;border:1px solid var(--line);border-left:3px solid var(--red);padding:8px 10px;background:#faf9f7;font-family:var(--sans)}
+.doc-card b{display:block;font-size:13.5px}.doc-card small{margin:0!important}
+.composer{margin:12px 14px 4px;border:1.5px solid var(--ink);border-radius:20px;padding:10px 10px 8px;background:#fff;box-shadow:0 6px 20px rgba(20,20,20,.06);transition:opacity .3s}
+.composer.sent{opacity:.45}
+.chat .pslots{gap:4px}
+.chat .pslot{border-radius:12px!important;background:#fff!important;border:1px dashed #cfc9c1!important;min-height:44px;grid-template-columns:86px 1fr;padding:6px 10px;color:var(--ink)}
+.chat .pslot .lab{color:var(--red);border-right:1px solid var(--line);font-size:13px}
+.chat .pslot .val{color:var(--muted);font-size:14px}
+.chat .pslot .val .ex{color:#b5ada2}
+.chat .pslot .val .here{color:var(--red);font-weight:700}
+.chat .pslot.armed{border-color:var(--red)!important;background:#fff7f8!important}
+.chat .pslot.filled{border:1px solid var(--ink)!important;background:#f6f5f3!important}
+.chat .pslot.filled .val{color:var(--ink)}
+.comp-bar{display:flex;align-items:center;gap:10px;padding:8px 4px 0}
+.comp-bar .cnt{font-size:12.5px;color:var(--muted)}.comp-bar .cnt b{color:var(--ink)}
+.comp-bar .send-hint{font-size:12px;color:var(--muted);margin-left:auto}
+.send{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font:900 18px var(--sans);flex:none}
+.send:disabled{background:#d9d4cc;cursor:default}
+.send.go{animation:sendGo .6s ease-out}
+@keyframes sendGo{50%{transform:translateY(-6px) scale(1.1);background:var(--red)}}
+.sugg{padding:10px 14px 14px}
+.sugg-h{font:700 13px var(--sans);margin-bottom:8px}
+.sugg-h small{font-weight:400;color:var(--muted);margin-left:6px}
+.chat .frags{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.chat .frag{border-radius:14px!important;border:1px solid var(--line)!important;background:#fff;font-size:14px;min-height:0;padding:10px 12px;box-shadow:none!important}
+.chat .frag:hover{border-color:var(--ink)!important}
+.chat .frag.sel{border-color:var(--red)!important;background:#fff7f8;box-shadow:0 0 0 3px rgba(208,2,27,.15)!important;transform:none}
+.chat .frag.rejected{background:#f3f1ee;color:#b5ada2;border-style:dashed!important}
+@media (max-width:600px){.msg .bub{max-width:88%}.chat .pslot{grid-template-columns:70px 1fr}.comp-bar .send-hint{display:none}}
 </style>
 </head>
 <body>
@@ -1753,15 +1808,25 @@ function renderL1() {
 function renderL2() {
   const L = S.l2, body = $('#cu-body');
   if (L.done) return;
-  const placedFrag = s => L.slots[s] !== null ? FRAGS[L.slots[s]].t : `<em class="ex">${P_EX[s]}</em>${L.sel !== null ? ' <b class="here">👉 여기에 넣기</b>' : ''}`;
+  const filled = L.slots.filter(x => x !== null).length;
+  const placedFrag = s => L.slots[s] !== null ? FRAGS[L.slots[s]].t : `<em class="ex">${P_EX[s]}</em>${L.sel !== null ? ' <b class="here">여기에 넣기</b>' : ''}`;
   body.innerHTML = `
-    <p class="lead">✏️ 만년필로 AI에게 특집 기사를 맡기자! ${art(2, '기사 ‘AI 활용법’')}에 나온 <b>좋은 프롬프트 5요소</b>에 맞게 <b>① 아래 문장을 고르고 → ② 알맞은 칸</b>을 누르세요.</p>
-    <div class="screen-pc">
-      <div class="bar-top"><i></i><i></i><i></i>&nbsp; RUNWAY AI WRITER</div>
-      <div class="pslots">${P_SLOTS.map((n, s) => `<button class="pslot ${L.slots[s] !== null ? 'filled' : (L.sel !== null ? 'armed' : '')}" data-s="${s}"><span class="lab">${n}</span><span class="val">${placedFrag(s)}</span></button>`).join('')}</div>
-      <div class="run" id="run">&gt; 입력 대기 중_</div>
-    </div>
-    <div class="frags">${L.order.map(i => `<button class="frag ${L.slots.includes(i) ? 'used' : ''} ${L.rejected[i] ? 'rejected' : ''} ${L.sel === i ? 'sel' : ''}" data-i="${i}">${FRAGS[i].t}</button>`).join('')}</div>`;
+    <p class="lead">만년필로 AI에게 특집 기사를 맡기자! ${art(2, '기사 ‘AI 활용법’')}에 나온 <b>좋은 프롬프트 5요소</b>에 맞게 <b>① 아래 추천 문장을 고르고 → ② 입력창의 알맞은 칸</b>을 누르세요.</p>
+    <div class="chat">
+      <div class="chat-top"><span class="ai-logo">AI</span><div><b>RUNWAY AI</b><small><i></i>편집장실 전용 어시스턴트</small></div><span class="chat-model">Writer · 특집 기사</span></div>
+      <div class="chat-log" id="chat-log">
+        <div class="msg ai"><span class="av">AI</span><div class="bub">안녕하세요! 런웨이 편집장실 AI예요. 오늘은 어떤 글을 써 드릴까요?
+          <small>더 정확하게 쓰려면 <b>역할 · 배경 · 지시 · 제약 · 출력 형식</b>을 알려 주세요.</small></div></div>
+        ${L.sel !== null ? `<div class="msg me pending"><div class="bub">${FRAGS[L.sel].t}<small>↑ 입력창에서 이 문장이 들어갈 칸을 누르세요</small></div></div>` : ''}
+      </div>
+      <div class="composer">
+        <div class="pslots">${P_SLOTS.map((n, s) => `<button class="pslot ${L.slots[s] !== null ? 'filled' : (L.sel !== null ? 'armed' : '')}" data-s="${s}"><span class="lab">${n}</span><span class="val">${placedFrag(s)}</span></button>`).join('')}</div>
+        <div class="comp-bar"><span class="cnt"><b>${filled}</b> / 5 요소 입력됨</span><span class="send-hint">${filled === 5 ? '보내는 중…' : '5개를 모두 채우면 자동으로 보내져요'}</span><button class="send" id="send" ${filled === 5 ? '' : 'disabled'} aria-label="보내기">↑</button></div>
+      </div>
+      <div class="sugg"><div class="sugg-h">추천 문장 <small>하나를 누른 뒤, 위 입력창의 칸을 눌러 넣으세요 · 쓰면 안 되는 문장도 섞여 있어요!</small></div>
+        <div class="frags">${L.order.map(i => `<button class="frag ${L.slots.includes(i) ? 'used' : ''} ${L.rejected[i] ? 'rejected' : ''} ${L.sel === i ? 'sel' : ''}" data-i="${i}">${FRAGS[i].t}</button>`).join('')}</div></div>
+    </div>`;
+  const log = $('#chat-log'); if (log) log.scrollTop = log.scrollHeight;
   body.querySelectorAll('.frag').forEach(b => b.onclick = () => {
     const i = +b.dataset.i; if (L.rejected[i]) return;
     sfx.click(); L.sel = L.sel === i ? null : i; renderL2();
@@ -1769,7 +1834,7 @@ function renderL2() {
   body.querySelectorAll('.pslot').forEach(b => b.onclick = () => {
     const s = +b.dataset.s;
     if (L.slots[s] !== null) return;
-    if (L.sel === null) { toast('먼저 아래에서 문장을 골라 주세요 👇'); return; }
+    if (L.sel === null) { toast('먼저 아래에서 추천 문장을 골라 주세요 👇'); return; }
     const f = FRAGS[L.sel];
     if (f.slot === -1) { miss(null); L.rejected[L.sel] = true; L.sel = null; renderL2(); shakeEl($(`.pslot[data-s="${s}"]`)); damageMe(8, f.why + ' (멘탈 -8)'); return; }
     if (f.slot !== s) { shakeEl(b); miss($(`.pslot[data-s="${f.slot}"]`)); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ‘AI 활용법’을 확인하세요 (멘탈 -6)`); return; }
@@ -1777,12 +1842,25 @@ function renderL2() {
     if (L.slots.every(x => x !== null)) runAI();
   });
 }
+/* 5요소가 다 채워지면: 내 메시지 전송 → AI가 입력 중… → 답장 */
 function runAI() {
   const L = S.l2; L.done = true;
-  const lines = ['> 프롬프트 분석 중...', '> 역할·배경·지시·제약·출력 형식 확인 ✔', '> 기사 초안 작성 중...', '> 프린터로 출력 완료! 📄'];
-  let k = 0;
-  const step = () => { const r = $('#run'); if (!r || !S.running) return; r.innerHTML = lines.slice(0, k + 1).join('<br>'); k++; if (k < lines.length) later(step, 380); else later(() => lockClear(2), 500); };
-  step();
+  const log = $('#chat-log'), send = $('#send'); if (!log) return;
+  if (send) send.classList.add('go');
+  const add = (html, cls) => { const d = document.createElement('div'); d.className = 'msg ' + cls; d.innerHTML = html; log.appendChild(d); log.scrollTop = log.scrollHeight; return d; };
+  later(() => {
+    add(`<div class="bub">${P_SLOTS.map((n, s) => `<p><b>${n}</b> ${FRAGS[L.slots[s]].t}</p>`).join('')}</div>`, 'me');
+    const c = $('.composer'); if (c) c.classList.add('sent');
+  }, 350);
+  let typing;
+  later(() => { typing = add('<span class="av">AI</span><div class="bub typing"><i></i><i></i><i></i></div>', 'ai'); }, 900);
+  later(() => {
+    if (typing) typing.remove();
+    add(`<span class="av">AI</span><div class="bub">좋아요! 요청하신 조건으로 특집 기사 초안을 작성했어요.
+      <div class="doc-card"><b>📄 특집 기사 초안.docx</b><small>RUNWAY DAILY · 검토 전</small></div>
+      <small>역할 · 배경 · 지시 · 제약 · 출력 형식 확인 완료 · 프린터로 출력했어요. <b>검수는 꼭 사람이 해 주세요!</b></small></div>`, 'ai');
+  }, 2300);
+  later(() => lockClear(2), 3300);
 }
 
 /* ---------- 잠금 3: 검증 ---------- */
