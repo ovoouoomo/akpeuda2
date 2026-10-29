@@ -1257,10 +1257,10 @@ const TEAM = [
 TEAM.forEach((t, i) => SPR['team' + i] = { pal: TEAM_PAL, rows: t.head.concat(SUIT) });
 // 만든 사람들: 직접 그린 그림 (왼쪽부터 예주 · 은빈 · 시현 · 은채)
 const CREDITS = [
-  { name:'예주', role:'긴 생머리 · 블랙 재킷', img:'../img/team-yeju.svg' },
-  { name:'은빈', role:'앞머리 · 화이트 셔츠', img:'../img/team-eunbin.svg' },
-  { name:'시현', role:'긴 생머리 · 블랙 수트', img:'../img/team-sihyeon.svg' },
-  { name:'은채', role:'포니테일 · 리본 블라우스', img:'../img/team-eunchae.svg' }
+  { name:'예주', role:'긴 생머리 · 블랙 재킷', img:'../img/team-yeju.png' },
+  { name:'은빈', role:'앞머리 · 화이트 셔츠', img:'../img/team-eunbin.png' },
+  { name:'시현', role:'긴 생머리 · 블랙 수트', img:'../img/team-sihyeon.png' },
+  { name:'은채', role:'포니테일 · 리본 블라우스', img:'../img/team-eunchae.png' }
 ];
 function renderCredits() {
   $('#credits').innerHTML = CREDITS.map((t, i) =>
