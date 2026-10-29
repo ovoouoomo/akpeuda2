@@ -733,6 +733,7 @@ body{background:#fff;letter-spacing:-.005em}
 .np-time>em{display:block;margin-top:8px;background:#1d3557;color:#fff;font:700 12.5px/1.6 var(--sans);font-style:normal;padding:8px 12px}
 .cr{background:#fff!important;border:1px solid var(--gold)!important;border-radius:0!important}
 .cr img{display:block;width:78%;aspect-ratio:1;object-fit:cover;margin:0 auto;border-radius:50%;border:1px solid var(--line);animation:idle 2s ease-in-out infinite}
+.cr img{border-radius:0!important;border:none!important;object-fit:contain!important;image-rendering:pixelated;background:#f4f2ef}
 </style>
 </head>
 <body>
@@ -1256,10 +1257,10 @@ const TEAM = [
 TEAM.forEach((t, i) => SPR['team' + i] = { pal: TEAM_PAL, rows: t.head.concat(SUIT) });
 // 만든 사람들: 직접 그린 그림 (왼쪽부터 예주 · 은빈 · 시현 · 은채)
 const CREDITS = [
-  { name:'예주', role:'긴 생머리 · 블랙 재킷', img:'../img/team-yeju.jpg' },
-  { name:'은빈', role:'앞머리 · 화이트 셔츠', img:'../img/team-eunbin.jpg' },
-  { name:'시현', role:'긴 생머리 · 블랙 수트', img:'../img/team-sihyeon.jpg' },
-  { name:'은채', role:'포니테일 · 리본 블라우스', img:'../img/team-eunchae.jpg' }
+  { name:'예주', role:'긴 생머리 · 블랙 재킷', img:'../img/team-yeju.svg' },
+  { name:'은빈', role:'앞머리 · 화이트 셔츠', img:'../img/team-eunbin.svg' },
+  { name:'시현', role:'긴 생머리 · 블랙 수트', img:'../img/team-sihyeon.svg' },
+  { name:'은채', role:'포니테일 · 리본 블라우스', img:'../img/team-eunchae.svg' }
 ];
 function renderCredits() {
   $('#credits').innerHTML = CREDITS.map((t, i) =>
