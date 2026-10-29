@@ -709,6 +709,30 @@ body{background:#fff;letter-spacing:-.005em}
 .window .sun{z-index:0}.window .stars{z-index:0}
 .room-sign{width:13%;white-space:normal;line-height:1.5;z-index:4;font-size:clamp(7px,1.15vw,12px)!important;letter-spacing:.22em!important}
 .obj-door::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-3%;height:5%;background:rgba(0,0,0,.18);filter:blur(2px);z-index:-1}
+
+/* 📰 최종 신문 (THE NEW YORK MIRROR) */
+.np-ear{display:inline-block;border:1px solid var(--ink);padding:4px 10px;font:700 10.5px/1.4 var(--sans);margin-bottom:6px}
+.np-mast{border-top:none;border-bottom:2px solid #5a0f14}
+.np-mast b{font:900 clamp(26px,5.4vw,44px)/1 'Arial Black','Noto Sans KR',sans-serif;letter-spacing:-.01em;color:#5a0f14}
+.np-mast span{display:flex;justify-content:space-between;gap:10px;width:100%;flex-wrap:wrap;margin-top:6px;padding-top:4px;border-top:1px solid #5a0f14;font:700 11.5px var(--sans);color:var(--ink);letter-spacing:0}
+.np-mast em{font-style:normal}
+.np-mast .date-glow{background:#ffd166;padding:0 6px;animation:hintGlow .6s ease-in-out infinite;outline:3px solid #ffd166}
+.tab{border-radius:0!important;border-width:1px!important;font-size:13px}
+.news h3{font:900 clamp(18px,2.6vw,22px)/1.45 var(--sans);color:#5a0f14;border-bottom:1px solid var(--ink)}
+.news mark{background:linear-gradient(transparent 50%,rgba(255,214,0,.55) 50%);font-weight:700}
+.news th{background:#3a0a0e}
+.news p.q{font-weight:700}
+.news .np-ad{font:700 12.5px var(--sans);color:var(--muted);border:1px dashed var(--line);padding:6px 10px;text-align:center}
+.np-time{border:1px solid var(--line);padding:14px;margin:0 0 14px;font-family:var(--sans)}
+.np-time>b{display:block;font:900 18px var(--sans);color:#1d3557}
+.np-time>small{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}
+.np-time ol{list-style:none;margin:0;padding:0}
+.np-time li{display:grid;grid-template-columns:92px 1fr;column-gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13px;line-height:1.5}
+.np-time li i{grid-row:span 2;font:900 15px var(--sans);font-style:normal;color:#1d3557}
+.np-time li span{color:var(--muted)}
+.np-time>em{display:block;margin-top:8px;background:#1d3557;color:#fff;font:700 12.5px/1.6 var(--sans);font-style:normal;padding:8px 12px}
+.cr{background:#fff!important;border:1px solid var(--gold)!important;border-radius:0!important}
+.cr img{display:block;width:78%;aspect-ratio:1;object-fit:cover;margin:0 auto;border-radius:50%;border:1px solid var(--line);animation:idle 2s ease-in-out infinite}
 </style>
 </head>
 <body>
@@ -734,7 +758,7 @@ body{background:#fff;letter-spacing:-.005em}
     <div class="pick">
       <h3>📰 신문 버전을 골라 주세요</h3>
       <div class="pick-row">
-        <button class="pick-card on" data-np="now"><div class="np-ic">📰</div><div><b>현재 신문</b><small>뉴욕 미러 · 2026년 3월 4일 발행</small></div></button>
+        <button class="pick-card on" data-np="now"><div class="np-ic">📰</div><div><b>현재 신문</b><small>뉴욕 미러 · April 29, 2026 발행</small></div></button>
         <button class="pick-card soon" data-np="past"><div class="np-ic">📜</div><div><b>과거 신문</b><small>COMING SOON · 곧 공개됩니다</small></div><span class="soon-tag">COMING SOON</span></button>
       </div>
     </div>
@@ -822,36 +846,64 @@ body{background:#fff;letter-spacing:-.005em}
 <script>
 /* =====================================================================
    📰 신문기사 내용 (첨부 PDF 원문에서 가져옴)
-   <mark> ... </mark> 로 감싼 문장은 빨간 형광펜으로 강조돼요.
+   <mark> ... </mark> 로 감싼 문장은 노란 형광펜으로 (게임 힌트가 되는 문장에만!) 강조돼요.
    ===================================================================== */
 const ARTICLES = [
-  { tab:'③ 비서의 역할', title:'AI 시대에 비서라는 직업은 어떻게 살아남나?', meta:'RUNWAY DAILY · 특집',
+  { tab:'1면 · 회장 논란', title:'“낡은 방식에 매달리는 조직에는 미래가 없다” 런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', meta:'THE NEW YORK MIRROR · 1면',
     body:`
-    <p>인공지능(AI)이 처음 등장했을 때만 해도, 비서는 가장 먼저 사라질 대표적인 직업으로 꼽혔다. 하지만 실제 현장에서 일어난 변화는 직업이 사라지는 것이 아니라 ‘역할이 바뀌는 과정’이었다. AI가 반복적인 행정 업무를 대신해 주면서, 인간 비서의 역할은 판단과 소통 중심으로 이동했다.</p>
-    <p>실제로 <mark>AI는 일정 관리나 반복 행정, 문서 초안 작성, 회의록 정리, 데이터 통합처럼 정형화된 업무</mark>를 빠르고 정확하게 자동화하는 데 특화되어 있다. 반면 <mark>인간 비서는 조직 내 커뮤니케이션을 조율하고 예외적인 돌발 상황에 유연하게 대응하며, AI가 내놓은 결과물을 검토하고 수정</mark>하는 고차원적 역할을 수행한다.</p>
-    <p>AI가 정형화된 데이터를 빠르게 검색하고 요약하는 ‘기능적 보조자’라면, 인간 비서는 복잡한 맥락을 이해하고 정서를 다루는 ‘관계적·판단적 주체’다. <mark>상사의 미세한 의도를 파악하고 부서 간 감정을 조율하는 일</mark>, 규정만으로는 해결할 수 없는 돌발 상황에 대응하는 것은 오직 인간 비서만이 수행할 수 있는 고유한 영역이다.</p>
+    <p>런웨이 미디어 그룹 신임 회장 제이가 또 논란에 섰다. 그는 지난주 20년 넘게 조직을 지탱해 온 시니어 비서진과 편집 보조 인력 상당수를 해고하며 "낡은 방식에 매달리는 조직에는 미래가 없다"고 말했다. 해당 자리는 생성형 AI 도구로 대체하겠다는 계획도 함께 내놨다.</p>
+    <p>업계에서는 "전형적인 무책임"이라는 비판이 잇따른다. 오랜 신뢰를 쌓아온 인력을 '구시대적'이라는 한마디로 정리하면서도 공백을 메울 구체적 계획은 내놓지 않았기 때문이다. 한 관계자는 비용 절감 명분만 앞세운 결정이라고 지적했다.</p>
+    <p>그러나 현장의 흐름은 다르다. AI를 도입한 조직에서 비서직은 사라지기보다 '조정자'와 '판단 파트너'로 재편되는 추세다. 생성형 AI를 적극 활용하는 직원일수록 자기주도적 학습 역량과 업무 성과가 함께 높아진다는 분석도 있다. AI는 사람을 대체하기보다 숙련도를 끌어올리는 도구로 기능하고 있다.</p>
+    <p>전문가들은 문제의 본질이 AI 도입 자체가 아니라, 신기술을 명분으로 책임을 회피하는 태도에 있다고 지적한다. 체계를 정비하는 일과 검증된 신뢰를 '오래됐다'는 이유만으로 폐기하는 일은 전혀 다른 문제라는 것이다. 논란은 당분간 이어질 전망이다.</p>
+    <p class="np-ad">전 국민 대상 무료 인공지능(AI) 서비스 ‘모두의 AI’, 12월 정식 출시 예정</p>` },
+
+  { tab:'비서의 역할', title:'“반복은 AI가, 판단은 비서가” — 역할이 바뀌며 살아남은 비서직', meta:'THE NEW YORK MIRROR · The Secretary Club',
+    body:`
+    <p>AI가 처음 등장했을 때 비서직은 가장 먼저 사라질 직업으로 꼽혔다. 일정 관리, 문서 작성, 자료 검색, 회의록 요약까지 AI가 순식간에 처리했기 때문이다. 그러나 현장에서 일어난 변화는 직업의 소멸이 아니라 역할이 바뀌는 과정이었다. AI가 반복적인 행정 업무를 맡으면서 인간 비서의 역할은 판단과 소통 중심으로 이동했고, 단순한 사무 보조에서 벗어난 비서직은 기계가 대체할 수 없는 가치에 집중하며 살아남았다.</p>
+    <p><mark>AI는 일정 관리, 반복 행정, 문서 초안, 회의록 정리, 데이터 통합처럼 정형화된 업무를 빠르고 정확하게 자동화</mark>하는 데 특화되어 있다. 반면 <mark>인간 비서는 조직 내 커뮤니케이션을 조율하고, 돌발 상황에 유연하게 대응하며, AI 결과물을 검토하고 수정하는 고차원적 역할</mark>을 맡는다. 반복 업무는 AI에, 맥락과 소통은 사람에게 나뉘는 구조로 일터가 재편되었다.</p>
+    <p>AI가 정형화된 데이터를 빠르게 검색하고 요약하는 ‘기능적 보조자’라면, 인간 비서는 복잡한 맥락을 이해하고 정서를 다루는 ‘관계적·판단적 주체’다. 상사의 미세한 의도를 파악하고 부서 간 감정을 조율하며, 규정으로 해결되지 않는 상황에 대응하는 일은 인간 비서만이 할 수 있는 고유한 영역이다.</p>
+    <p>이 차이는 요구되는 역량도 바꿔 놓았다. 프롬프트 작성 능력과 데이터 리터러시는 물론, AI 결과물의 오류를 검증하고 수정하는 안목이 필수가 되었다. AI의 자료 정리에 무비판적으로 기대기보다 정확한 정보를 가려내고, 리더와 조직을 매끄럽게 잇는 전략적 커뮤니케이션 능력이 핵심 경쟁력으로 떠올랐다.</p>
+    <p>결국 AI 시대의 비서는 단순한 행정 보조자에서 AI를 활용해 최종 판단을 내리는 ‘의사결정 지원 파트너’로 전환했다. AI의 결과를 무작정 믿지 않고 검증하며 최종 책임을 지는 인간의 역할은 대체 불가능하다. AI라는 도구를 지휘하며 판단과 책임의 몫을 지켜낸 비서직은, 기술 변화 속에서 직업의 미래를 스스로 재정의한 대표적 사례다.</p>
     <table><tr><th>AI의 역할</th><th>인간 비서의 역할</th></tr>
-      <tr><td>일정 관리<br>반복적인 행정업무<br>문서 초안 작성<br>자료 검색<br>회의록 작성/요약<br>데이터 처리<br>정보 통합</td>
-          <td>맥락 이해<br>상황 판단<br>감정 조율<br>대인관계 관리<br>조직 내 커뮤니케이션<br>예외적인 상황 대응<br>AI 결과물 검토 및 수정</td></tr></table>
-    <p>이제 비서에게는 AI를 다루는 프롬프트 작성 능력과 데이터 리터러시는 물론, <mark>AI가 제시한 결과물의 오류를 검증하고 수정하는 정교한 안목</mark>이 필수가 되었다. 결국 AI 시대의 비서는 단순한 ‘행정 보조자’에서 최종 판단을 내리는 ‘의사결정 지원 파트너’로 전환을 이루어냈다.</p>` },
-  { tab:'④ 프롬프트·검증', title:'“AI에게 시키면 끝?” … 결과를 걸러내는 사람이 경쟁력을 갖는다', meta:'앤드리아 삭스(Andrea Sachs) · 프리랜스저널리스트',
+    <tr><td>· 일정 관리<br>· 반복적인 행정업무<br>· 문서 초안 작성<br>· 자료 검색<br>· 회의록 작성/요약<br>· 데이터 처리<br>· 정보통합</td>
+    <td>· 맥락 이해<br>· 상황 판단<br>· 감정 조율<br>· 대인관계 관리<br>· 조직 내 커뮤니케이션<br>· 예외적인 상황 대응<br>· AI 결과물 검토 및 수정</td></tr></table>` },
+
+  { tab:'AI 활용법', title:'AI에게 시키면 끝? … 결과를 걸러내는 사람이 경쟁력을 갖는다', meta:'THE NEW YORK MIRROR · The Secretary Club',
     body:`
-    <p>AI를 효과적으로 활용하기 위해서는 먼저 프롬프트를 구체적으로 작성해야 한다. 좋은 프롬프트는 크게 <mark>다섯 가지 요소</mark>로 구성된다.
-    AI에게 어떤 역할을 맡길 것인지 정하는 <mark>‘역할’</mark>, 업무의 상황을 설명하는 <mark>‘배경’</mark>, 원하는 작업을 구체적으로 제시하는 <mark>‘지시’</mark>, 결과물에서 지켜야 할 조건을 정하는 <mark>‘제약’</mark>, 그리고 원하는 결과의 형태를 알려주는 <mark>‘출력 형식’</mark>이다. 단순히 “광고 문구를 만들어줘”라고 하는 것보다 대상과 목적, 글자 수, 결과물의 형식까지 <mark>구체적으로 제시할수록</mark> AI의 결과를 원하는 방향으로 이끌 수 있다.</p>
-    <p>구체적인 프롬프트를 사용해도 AI가 항상 정확한 답을 내놓는 것은 아니다. AI는 사실이 아닌 내용을 사실처럼 제시하는 ‘환각(hallucination)’ 현상을 보일 수 있기 때문이다. 따라서 원문 출처와 수치·정보를 확인해야 한다. <mark>AI에게 같은 질문을 반복하는 것만으로는 검증이 되지 않으며, 최종적으로 1차 출처를 확인해야 한다.</mark></p>
-    <p>또한 AI를 업무에 활용할 때는 <mark>개인정보와 기밀정보를 그대로 입력해서도 안 된다.</mark> 고객의 이름이나 전화번호, 주민등록번호, 내부 계약서, 인사정보, 비밀번호와 같은 정보는 <mark>비식별화한 뒤 활용</mark>해야 한다.</p>
-    <p>최근에는 AI를 업무 도구와 직접 연결해 쓰는 방식이 주목받고 있다. MCP(Model Context Protocol)는 AI가 일정표나 메일함, 사내 문서함 같은 실제 업무 도구에 직접 접근하도록 연결해 주는 ‘공통 규격’이다. 예를 들어 일정표가 연결되어 있으면 <mark>“다음 주 임원 일정 중 겹치는 건을 찾아 대안을 정리해 달라”</mark>는 요청을 한 번에 처리할 수 있다. 다만 <mark>AI의 접근 권한은 업무에 꼭 필요한 범위로만 설정하고, 인사·계약 정보처럼 공개가 제한된 자료는 연결 대상에서 제외</mark>해야 한다. 이 기능은 클로드(Claude)에서는 ‘커넥터’, 챗GPT에서는 ‘플러그인’으로 불린다.</p>
-    <p>가장 중요한 것은 AI가 만들어낸 결과를 그대로 믿지 않는 태도다. 확인되지 않은 내용은 <mark>‘검증되지 않음’으로 표시</mark>하는 방식이다. 결국 AI를 가장 잘 활용하는 사람은 답을 가장 빨리 받아들이는 사람이 아니라, 그 답을 한 번 더 의심하고 확인할 수 있는 사람일 것이다.</p>` },
-  { tab:'② AI 연표', title:'“AI는 하루아침에 오지 않았다”', meta:'— 알고리즘 추천에서 생성형 AI까지, 15년에 걸친 업무 환경의 이동 · 크리스티안 톰슨',
+    <p>AI가 문서 작성, 자료 조사, 정보 정리에 쓰이며 직장인의 업무 방식이 빠르게 바뀌고 있다. 그러나 사용만으로는 원하는 결과를 얻기 어렵다. 정확한 지시와 결과 검토 능력이 중요해지고 있다.</p>
+    <p>AI 활용의 출발점은 구체적인 프롬프트다. <mark>좋은 프롬프트는 ‘역할’, ‘배경’, ‘지시’, ‘제약’, ‘출력 형식’의 다섯 요소</mark>로 이뤄진다. “광고 문구를 만들어줘”보다 대상, 목적, 글자 수, 형식을 제시할수록 결과가 좋아진다.</p>
+    <p>그래도 AI가 항상 정확하지는 않다. 사실이 아닌 내용을 사실처럼 말하는 ‘환각(hallucination)’ 현상이 있다. 출처, 수치, 조사 대상, 연도, 표본을 확인해야 하며, <mark>같은 질문의 반복은 검증이 아니므로 결국 1차 출처를 봐야 한다.</mark> <mark>고객 이름, 주민등록번호, 내부 계약서, 인사정보, 비밀번호 등 개인·기밀정보는 비식별화해 입력</mark>해야 한다.</p>
+    <p>최근엔 AI를 업무 도구와 직접 잇는 방식이 주목받는다. MCP(Model Context Protocol)는 <mark>일정표, 메일함, 사내 문서함 같은 도구에 AI가 직접 접근</mark>하도록 하는 ‘공통 규격’으로, 자료를 일일이 붙여 넣는 수고를 줄인다. 가령 “다음 주 임원 일정 중 겹치는 건을 찾아 대안을 정리해 달라”는 요청을 한 번에 처리할 수 있다. 접근 권한은 필요한 범위로만 두고, <mark>인사·계약 등 공개가 제한된 자료는 연결에서 제외</mark>해야 한다. 클로드는 ‘커넥터’, 챗GPT는 ‘플러그인’이라 부른다.</p>
+    <p>결국 핵심은 AI 결과를 그대로 믿지 않는 태도다. 답변의 사실 주장을 나눠 1차·공식 출처와 비교하고, <mark>확인되지 않은 내용은 ‘검증되지 않음’으로 표시</mark>하는 방식이 제시된다. AI 시대의 업무 능력은 ‘AI를 사용할 줄 아는가’를 넘어 ‘AI의 결과를 판단할 수 있는가’로 확장되고 있다. 가장 잘 활용하는 사람은 답을 빨리 받아들이는 사람이 아니라, 답을 한 번 더 의심하고 확인하는 사람이다.</p>` },
+
+  { tab:'AI 15년 연표', title:'“문제는 AI가 아니라 속도 였다” — 15년 쌓인 흐름, 전문가는 ‘재배치’라 부른다', meta:'THE NEW YORK MIRROR · The Secretary Club',
     body:`
-    <p>기술 도입 연표를 따라가 보면, 현재의 변화는 돌발 사태가 아니라 15년 넘게 축적된 흐름의 결과였다.</p>
-    <p>출발점은 2010년이었다. 알고리즘 기반 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 이어 2017년부터 2022년까지는 기업 단위의 AI 도입이 본격적으로 증가한 시기로 분류된다.</p>
-    <p>분기점은 2022년이었다. 챗지피티(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 일반 대중의 도구로 단숨에 옮겨왔다. 이후 2023년은 생성형 AI가 실제 업무에 본격적으로 진입한 해로 평가되며, 2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로 활용 범위가 빠르게 확대됐다.</p>
-    <p>전문가들은 이 연표가 보여주는 핵심이 ‘대체’가 아닌 ‘재배치’라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다.</p>` },
-  { tab:'⑤ 인터뷰', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다', meta:'마커스 벨(Marcus Bell)',
+    <div class="np-time"><b>AI 기술 도입 15년 연표 및 업무 변화</b><small>기술은 도구를 넘어, 이제는 일하는 방식을 바꾸고 있습니다.</small>
+      <ol>
+        <li><i>2010</i><b>일상 서비스 진입</b><span>추천/음성/이미지 인식 — AI 기술이 일반 소비자 서비스에 본격적으로 적용</span></li>
+        <li><i>2017~2022</i><b>기업 단위 도입</b><span>기업 단위 도입: 배후 기술 — 머신러닝, 딥러닝 기술이 기업 시스템에 본격 도입</span></li>
+        <li><i>2022</i><b>분기점</b><span>ChatGPT 공개 및 대중화 — 생성형 AI가 전 세계적으로 주목받으며 대중이 직접 AI와 상호작용하는 시대 개막</span></li>
+        <li><i>2023</i><b>생성형 AI 실무 진입</b><span>텍스트, 이미지 등 다양한 결과물로 업무에 직접 활용</span></li>
+        <li><i>2024</i><b>사무 전반 확대</b><span>다양한 산업과 직무로 생성형 AI가 확산, 인간의 역할은 판단·맥락 해석으로 이동</span></li>
+      </ol>
+      <em>AI는 업무를 대체하는 것이 아니라, 사람이 더 중요한 일에 집중할 수 있도록 돕는 파트너입니다.</em></div>
+    <p>런웨이 미디어 그룹의 인력 교체 논란이 이어지는 가운데, 주목할 것은 AI의 등장이 아니라 업무에 들어온 속도라는 지적이 나온다. 기술 도입 연표를 보면 현재의 변화는 돌발 사태가 아니라 15년 넘게 쌓인 흐름의 결과다.</p>
+    <p>출발점은 2010년이다. 알고리즘 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 2017년부터 2022년까지는 기업 단위 AI 도입이 본격화된 시기로 분류된다. 다만 이 단계의 AI는 대중이 체감하기 어려운 '배후 기술'에 머물렀다. 분기점은 2022년이다. 챗지피(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 대중의 도구로 단숨에 옮겨왔다. 2023년에는 생성형 AI가 실제 업무에 본격 진입했고, 2024년부터는 문서 작성과 요약, 번역, 자료조사 등 사무 업무 전반으로 활용이 빠르게 확대됐다.</p>
+    <p>전문가들은 이 연표의 핵심이 '대체'가 아닌 '재배치'라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다. 15년의 흐름을 놓친 조직이 기술을 인력 감축의 명분으로만 읽는 순간, 가장 먼저 사라지는 것은 비용이 아니라 축적된 경험이라는 지적이 뒤따른다.</p>` },
+
+  { tab:'인터뷰 · 아마리', title:'[특별 기획 인터뷰] AI시대, 비서의 정체성은 어떻게 변하는가? : AI 도입에 따른 비서 직무의 시사점', meta:'THE NEW YORK MIRROR · 특별 기획 인터뷰',
     body:`
-    <p><b>Q. 비서가 AI시대에 밀려나지 않으려면 무엇을 갖춰야 할까요?</b></p>
-    <p>A. 요즘 상사들이 어떤 비서를 우수하다고 평가하는지 아세요? 하나하나 지시하지 않아도 상사의 니즈에 맞게 능동적으로 움직이는 비서예요. 상사들도 잘 알고 있어요. <mark>전표처리나 계산 같은 단순 복잡 업무는 AI가 훨씬 빠르고 정확하게 처리</mark>한다는 걸요. 하지만 <mark>사람과 직접 대면하고 교감하며 상황을 이해하고 해결하는 건 AI가 할 수 없는 사람만의 영역</mark>이죠. 결국 AI기술을 발판삼아 판단력을 보이는 비서가 되는 것이 중요하죠. AI는 도구일 뿐 본질이 변하지는 않으니까요.</p>` }
+    <p class="q">Q. AI 바람이 거센 요즘, 상사를 보좌하며 업무를 조율하는 비서의 일은 어떻게 달라지고 있나요? 현직 아마리 씨의 솔직한 이야기가 궁금합니다.</p>
+    <p>A. 기대와 걱정이 공존해요. AI는 명령을 이해하고 일을 돕는 시스템이고, 비서는 상사의 일정과 소통을 챙기며 업무 흐름 전체를 조율하는 사람이에요. 가장 먼저 드는 불안은 AI가 일을 맡을수록 비서의 역할이 줄지 않을까 하는 점이에요. 주변 비서들을 보면 AI와 인간 사이에 확실한 역할 분담이 생기고 있어요. 모든 걸 AI에 맡기진 않아요. 쉬운 사무는 AI가, 관계적 역할은 저희가 맡아 서로 보완해요. 자동화가 진행될수록 저희 역할은 행정 보조를 넘어 완전히 확장되는 셈이에요.</p>
+    <p class="q">Q. 자리를 빼앗길까 우려되는데, 현장 분위기는 어떤가요? 앞으로 비서에게 가장 중요한 능력은 무엇일까요?</p>
+    <p>A. 맞아요. AI 협업은 불안을 주지만 동시에 비서 직업의 전문성을 끌어올리기도 해요. 이제는 일처리가 빠른 것만으로 인정받지 못해요. AI를 잘 다루고 윤리적 문제까지 감지하는 민첩성이 새로운 무기예요. 앞으로의 비서는 기술 뒤에 숨기보다 업무의 본질을 상기시키는 자리가 돼야 한다고 생각해요.</p>` },
+
+  { tab:'인터뷰 · 에밀리', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다 : 업무 시 AI사용은 자기주도성의 영향을 미칠까?', meta:'THE NEW YORK MIRROR · 특별 기획 인터뷰',
+    body:`
+    <p class="q">Q. AI와 디지털 업무 환경이 늘면서 성과와 비서의 미래에 영향을 미친다고 보시나요?</p>
+    <p>A. 에밀리: 엄청난 영향을 미친다고 봐요. 현장 경험과 여러 조사로 확인된 사실이라 명쾌하게 답할 수 있어요. 생성형 AI는 목표 설정, 실행, 평가 능력을 끌어올려 일터에서 능동적으로 문제를 해결하게 해요. 이 자기주도성이 발판이 되어 직무 성과로 이어져요. 언제 어디서나 접속해 일하는 환경은 근무를 유연하게 만들었어요. 다만 비대면 텍스트 소통이 늘면서 오프라인 대응이나 환경 적응 같은 문제도 함께 있어요.</p>
+    <p class="q">Q. AI 시대에 밀려나지 않고 경력을 만들려면 비서는 무엇을 갖춰야 할까요? 상사들이 원하는 비서상도 궁금합니다.</p>
+    <p>A. 먼저 자기 일과 행동을 객관적으로 점검하고 변화에 민첩하게 적응해야 해요. 요즘 상사들이 우수하다고 평가하는 비서는 지시가 없어도 상사의 니즈에 맞춰 능동적으로 움직이는 사람이에요. 상사들도 잘 알고 있어요. <mark>전표 처리나 계산 같은 단순 업무는 AI가 훨씬 빠르고 정확하다</mark>는 것을요. 하지만 <mark>사람과 대면해 교감하고 상황을 이해하며 해결하는 일은 AI가 할 수 없는 영역</mark>이에요. 결국 중요한 건 AI가 비서를 대신하는 게 아니라, AI를 발판 삼아 판단력을 보여주는 비서가 되는 거예요. AI는 도구일 뿐 본질은 변하지 않으니까요.</p>` }
 ];
 
 /* =====================================================================
@@ -865,13 +917,13 @@ const CONFIG = {
   coffeeHeal: 15,        // 커피 한 잔으로 회복하는 멘탈
   coffeeRecharge: 25,    // 커피가 다시 채워지는 시간(초)
   coffeeAlertHp: 50,     // 멘탈이 이 숫자 이하가 되면 "커피를 마셔요" 안내
-  issueDate: '2026년 3월 4일',  // 신문(뉴욕 미러) 발행일 — 마지막 금고 숫자 문제의 정답 단서
+  issueDate: 'April 29, 2026',  // 신문(뉴욕 미러) 발행일 — 마지막 금고 숫자 문제의 정답 단서 (4월 → 4)
   autoHomeSeconds: 20,   // 게임이 끝나고 화면이 닫히기(홈페이지로 돌아가기)까지의 시간(초)
   playIdleSeconds: 180,  // 게임 중 이 시간(초) 동안 아무 조작이 없으면 홈페이지로 (자리를 비운 경우)
   idleSeconds: 60        // 시작 화면에서 아무 조작이 없으면 홈페이지로 돌아가는 시간(초)
 };
 
-/* ---------------- 잠금 1: 업무 분배 (기사 ③ 표) ---------------- */
+/* ---------------- 잠금 1: 업무 분배 (기사 ‘비서의 역할’ 표) ---------------- */
 const TASKS = [
   { k:'일정 관리',            d:'다음 주 미팅 일정표 정리',         to:'ai' },
   { k:'문서 초안 작성',        d:'특집호 보도자료 초안 쓰기',         to:'ai' },
@@ -883,7 +935,7 @@ const TASKS = [
   { k:'조직 내 커뮤니케이션',   d:'편집부와 디자인팀 의견 조율',        to:'me' }
 ];
 
-/* ---------------- 잠금 2: 프롬프트 5요소 (기사 ④) ---------------- */
+/* ---------------- 잠금 2: 프롬프트 5요소 (기사 ‘AI 활용법’) ---------------- */
 const P_SLOTS = ['역할','배경','지시','제약','출력 형식'];
 const P_EX = ['예) “너는 ○○이야!”', '예) “지금 ○○ 상황이야.”', '예) “○○을(를) 해 줘.”', '예) “○○은(는) 꼭 지켜 줘.”', '예) “○○ 모양으로 보여 줘.”'];
 const FRAGS = [
@@ -896,7 +948,7 @@ const FRAGS = [
   { t:'고객 명단(이름·전화번호)도 그대로 넣어서 참고해.', slot:-1, why:'개인정보는 그대로 입력하면 안 돼요! 비식별화가 먼저예요' }
 ];
 
-/* ---------------- 잠금 3: AI 초안 검증 (기사 ④) — 인물·연락처는 모두 가상 ---------------- */
+/* ---------------- 잠금 3: AI 초안 검증 (기사 ‘AI 활용법’) — 인물·연락처는 모두 가상 ---------------- */
 const DRAFT = [
   { t:'AI 시대, 비서는 사라지지 않는다', title:true },
   { t:'2022년 챗지피티 공개 이후, AI는 전문가의 도구에서 일반 대중의 도구로 옮겨왔다.' },
@@ -929,28 +981,28 @@ const DMG = {
 const REPORTS = [
   { type:'pick', title:'업무 폭탄 보고', ask:'전표 처리 30건에, 디자이너는 쇼에 안 오겠다고 화를 내고 있어. 어떻게 할 거지?',
     opts:[
-      { t:'전표는 AI 자동화로 처리하고, 디자이너는 제가 직접 만나 감정을 조율하겠습니다.', g:'best', why:'반복 업무는 AI에게, 감정 조율은 사람이! (기사 ③)' },
+      { t:'전표는 AI 자동화로 처리하고, 디자이너는 제가 직접 만나 감정을 조율하겠습니다.', g:'best', why:'반복 업무는 AI에게, 감정 조율은 사람이! (기사 ‘비서의 역할’)' },
       { t:'전표부터 제가 손으로 처리하고, 디자이너는 나중에 연락하겠습니다.', g:'good', why:'일은 하지만 느려요. 반복 업무는 AI에게 맡겨도 돼요.' },
       { t:'둘 다 AI에게 맡겨 두었습니다.', g:'bad', why:'감정 조율·돌발 상황은 AI가 대신할 수 없어요.' }
     ]},
-  { type:'ox', title:'편집장의 OX 질문', ask:'AI에게 같은 질문을 세 번 해서 답이 같으면, 검증은 끝난 거지?', answer:'X', why:'같은 질문 반복은 검증이 아니에요. 1차 출처를 확인해야 해요. (기사 ④)' },
+  { type:'ox', title:'편집장의 OX 질문', ask:'AI에게 같은 질문을 세 번 해서 답이 같으면, 검증은 끝난 거지?', answer:'X', why:'같은 질문 반복은 검증이 아니에요. 1차 출처를 확인해야 해요. (기사 ‘AI 활용법’)' },
   { type:'pick', title:'일정 보고', ask:'다음 주 내 일정이 왜 이렇게 겹쳐 있지?',
     opts:[
-      { t:'일정표를 AI 커넥터로 연결해 겹치는 일정과 대안을 정리했습니다. 최종 결정은 편집장님께 받겠습니다.', g:'best', why:'MCP로 일정표를 연결하고, 최종 판단은 사람이! (기사 ④)' },
+      { t:'일정표를 AI 커넥터로 연결해 겹치는 일정과 대안을 정리했습니다. 최종 결정은 편집장님께 받겠습니다.', g:'best', why:'MCP로 일정표를 연결하고, 최종 판단은 사람이! (기사 ‘AI 활용법’)' },
       { t:'제가 하나하나 비교해서 오늘 밤까지 정리하겠습니다.', g:'good', why:'정성은 좋지만, 도구를 쓰면 훨씬 빨라요.' },
       { t:'인사·계약 폴더까지 전부 AI에 연결해서 한 번에 처리하겠습니다.', g:'bad', why:'공개가 제한된 인사·계약 정보는 연결하면 안 돼요!' }
     ]},
-  { type:'ox', title:'편집장의 OX 질문', ask:'고객 이름과 전화번호는 그대로 AI에 넣어도 괜찮다.', answer:'X', why:'개인정보는 비식별화한 뒤에만 활용해요. (기사 ④)' },
+  { type:'ox', title:'편집장의 OX 질문', ask:'고객 이름과 전화번호는 그대로 AI에 넣어도 괜찮다.', answer:'X', why:'개인정보는 비식별화한 뒤에만 활용해요. (기사 ‘AI 활용법’)' },
   { type:'pick', title:'갑질 모드', ask:'출처? 그런 건 필요 없어. 이 AI 통계 보고서, 지금 당장 제출해!',
     opts:[
       { t:'1차 출처를 확인하고, 확인 안 된 수치는 ‘검증되지 않음’으로 표시해 바로 올리겠습니다.', g:'best', why:'빠르면서도 검증까지! 결과를 걸러내는 사람이 경쟁력이에요.' },
       { t:'제출은 잠시 미루고, 출처부터 알아보겠습니다.', g:'good', why:'검증은 좋지만, 편집장은 기다려 주지 않아요.' },
       { t:'네! 그대로 바로 제출하겠습니다.', g:'bad', why:'출처 없는 AI 결과를 그대로 내면 안 돼요!' }
     ]},
-  { type:'ox', title:'편집장의 OX 질문', ask:'좋은 프롬프트는 역할·배경·지시·제약·출력 형식, 이렇게 다섯 가지 요소로 이루어진다.', answer:'O', why:'맞아요! 좋은 프롬프트의 5요소예요. (기사 ④)' },
+  { type:'ox', title:'편집장의 OX 질문', ask:'좋은 프롬프트는 역할·배경·지시·제약·출력 형식, 이렇게 다섯 가지 요소로 이루어진다.', answer:'O', why:'맞아요! 좋은 프롬프트의 5요소예요. (기사 ‘AI 활용법’)' },
   { type:'pick', title:'마지막 질문', ask:'그렇다면 하나만 묻지. 자네가 AI보다 나은 점이 뭐지?',
     opts:[
-      { t:'AI의 결과를 검증하고, 사람의 마음을 읽고, 최종 판단에 책임을 질 수 있다는 점입니다.', g:'best', why:'AI 시대 비서는 ‘의사결정 지원 파트너’! (기사 ③)' },
+      { t:'AI의 결과를 검증하고, 사람의 마음을 읽고, 최종 판단에 책임을 질 수 있다는 점입니다.', g:'best', why:'AI 시대 비서는 ‘의사결정 지원 파트너’! (기사 ‘비서의 역할’)' },
       { t:'AI를 누구보다 잘 다룰 수 있다는 점입니다.', g:'good', why:'중요한 능력이지만, 그것만으로는 부족해요.' },
       { t:'타자를 AI보다 빨리 칩니다.', g:'bad', why:'…그건 AI가 더 빨라요.' }
     ]}
@@ -958,12 +1010,12 @@ const REPORTS = [
 
 /* ---------------- 힌트 (간접 힌트) ---------------- */
 const HINTS = {
-  1:  '기사 <b>③ 비서의 역할</b> 속 <b>표</b>를 보세요.<br>왼쪽 칸(AI의 역할)은 반복·정형화된 일, 오른쪽 칸(인간 비서)은 <b>사람의 마음과 판단</b>이 필요한 일이에요.',
-  2:  '기사 <b>④</b>에서 좋은 프롬프트의 <b>다섯 가지 요소</b>를 찾아보세요.<br>‘역할’은 AI에게 맡길 역할, ‘배경’은 상황, ‘지시’는 할 일, ‘제약’은 지킬 조건, ‘출력 형식’은 결과의 모양!<br>막연한 말이나 개인정보가 든 문장은 넣으면 안 돼요.',
+  1:  '기사 <b>‘비서의 역할’</b> 속 <b>표</b>를 보세요.<br>왼쪽 칸(AI의 역할)은 반복·정형화된 일, 오른쪽 칸(인간 비서)은 <b>사람의 마음과 판단</b>이 필요한 일이에요.',
+  2:  '기사 <b>‘AI 활용법’</b>에서 좋은 프롬프트의 <b>다섯 가지 요소</b>를 찾아보세요.<br>‘역할’은 AI에게 맡길 역할, ‘배경’은 상황, ‘지시’는 할 일, ‘제약’은 지킬 조건, ‘출력 형식’은 결과의 모양!<br>막연한 말이나 개인정보가 든 문장은 넣으면 안 돼요.',
   3:  '<b style="color:#c8102e">빨간 글씨</b>가 문제 있는 부분이에요. 위에서 도구를 고른 뒤 빨간 글씨를 누르세요.<br>개인정보·기밀 → <b>가리기</b> / 근거 없는 숫자 → <b>검증되지 않음</b> / “같은 질문 반복” → <b>1차 출처 확인</b>!',
-  '3b':'📰 <b>신문기사</b>를 열면 맨 위에 <b>신문 이름과 발행 날짜</b>가 적혀 있어요. 몇 월 <b>며칠</b>에 나온 신문인가요?',
+  '3b':'📰 <b>신문기사</b>를 열면 맨 위에 <b>신문 이름과 발행 날짜</b>가 적혀 있어요. <b>몇 월</b>에 나온 신문인가요? (영어 달 이름을 숫자로!)',
   door:'모든 잠금을 풀었어요! 오른쪽 <b>출구(빨간 문)</b>를 눌러 미란다에게 보고하러 가세요.',
-  4:  '가장 좋은 보고는 <b>AI에게 맡길 일은 맡기고, 판단·소통·검증은 사람이</b> 하는 답이에요.<br>OX 문제의 단서는 📰 <b>기사 ④</b>에 있어요. 멘탈이 낮으면 ☕ <b>커피</b>!'
+  4:  '가장 좋은 보고는 <b>AI에게 맡길 일은 맡기고, 판단·소통·검증은 사람이</b> 하는 답이에요.<br>OX 문제의 단서는 📰 <b>기사 ‘AI 활용법’</b>에 있어요. 멘탈이 낮으면 ☕ <b>커피</b>!'
 };
 
 /* =====================================================================
@@ -1202,9 +1254,16 @@ const TEAM = [
     "KK.SSWESSWESS.KK","KK.SSEESSEESS.KK","KK.SPPSSSSPPS.KK","KK.SSSSMMSSSS.KK",".K..SSSSSSSS..K.","......SSSS......"] }
 ];
 TEAM.forEach((t, i) => SPR['team' + i] = { pal: TEAM_PAL, rows: t.head.concat(SUIT) });
+// 만든 사람들: 직접 그린 그림 (왼쪽부터 예주 · 은빈 · 시현 · 은채)
+const CREDITS = [
+  { name:'예주', role:'긴 생머리 · 블랙 재킷', img:'../img/team-yeju.jpg' },
+  { name:'은빈', role:'앞머리 · 화이트 셔츠', img:'../img/team-eunbin.jpg' },
+  { name:'시현', role:'긴 생머리 · 블랙 수트', img:'../img/team-sihyeon.jpg' },
+  { name:'은채', role:'포니테일 · 리본 블라우스', img:'../img/team-eunchae.jpg' }
+];
 function renderCredits() {
-  $('#credits').innerHTML = TEAM.map((t, i) =>
-    `<div class="cr" style="animation-delay:${2.1 + i * 0.25}s">${spr('team' + i)}<b>${t.name}</b><small>${t.role}</small></div>`).join('');
+  $('#credits').innerHTML = CREDITS.map((t, i) =>
+    `<div class="cr" style="animation-delay:${2.1 + i * 0.25}s"><img src="${t.img}" alt="${t.name}"><b>${t.name}</b><small>${t.role}</small></div>`).join('');
 }
 
 let GENDER = 'f';
@@ -1497,7 +1556,7 @@ function renderL1() {
   if (L.done) return;
   const chips = to => TASKS.map((t, i) => L.placed[i] === to ? `<span class="chip">${t.k}</span>` : '').join('');
   body.innerHTML = `
-    <p class="lead">미란다의 밀린 업무 8건! ${art(0, '기사 ③')} 속 표를 참고해 <b>AI에게 맡길 일</b>과 <b>비서가 직접 할 일</b>로 나누세요.</p>
+    <p class="lead">미란다의 밀린 업무 8건! ${art(1, '기사 ‘비서의 역할’')} 속 표를 참고해 <b>AI에게 맡길 일</b>과 <b>비서가 직접 할 일</b>로 나누세요.</p>
     <div class="trays">
       <div class="tray ai"><h4>🤖 AI에게 맡기기</h4><div class="chips">${chips('ai')}</div></div>
       <div class="tray me"><h4>🙋 비서가 직접</h4><div class="chips">${chips('me')}</div></div>
@@ -1524,7 +1583,7 @@ function renderL2() {
   if (L.done) return;
   const placedFrag = s => L.slots[s] !== null ? FRAGS[L.slots[s]].t : `<em class="ex">${P_EX[s]}</em>${L.sel !== null ? ' <b class="here">👉 여기에 넣기</b>' : ''}`;
   body.innerHTML = `
-    <p class="lead">✏️ 만년필로 AI에게 특집 기사를 맡기자! ${art(1, '기사 ④')}에 나온 <b>좋은 프롬프트 5요소</b>에 맞게 <b>① 아래 문장을 고르고 → ② 알맞은 칸</b>을 누르세요.</p>
+    <p class="lead">✏️ 만년필로 AI에게 특집 기사를 맡기자! ${art(2, '기사 ‘AI 활용법’')}에 나온 <b>좋은 프롬프트 5요소</b>에 맞게 <b>① 아래 문장을 고르고 → ② 알맞은 칸</b>을 누르세요.</p>
     <div class="screen-pc">
       <div class="bar-top"><i></i><i></i><i></i>&nbsp; RUNWAY AI WRITER</div>
       <div class="pslots">${P_SLOTS.map((n, s) => `<button class="pslot ${L.slots[s] !== null ? 'filled' : (L.sel !== null ? 'armed' : '')}" data-s="${s}"><span class="lab">${n}</span><span class="val">${placedFrag(s)}</span></button>`).join('')}</div>
@@ -1541,7 +1600,7 @@ function renderL2() {
     if (L.sel === null) { toast('먼저 아래에서 문장을 골라 주세요 👇'); return; }
     const f = FRAGS[L.sel];
     if (f.slot === -1) { miss(null); L.rejected[L.sel] = true; L.sel = null; renderL2(); shakeEl($(`.pslot[data-s="${s}"]`)); damageMe(8, f.why + ' (멘탈 -8)'); return; }
-    if (f.slot !== s) { shakeEl(b); miss($(`.pslot[data-s="${f.slot}"]`)); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ④의 설명을 확인하세요 (멘탈 -6)`); return; }
+    if (f.slot !== s) { shakeEl(b); miss($(`.pslot[data-s="${f.slot}"]`)); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ‘AI 활용법’을 확인하세요 (멘탈 -6)`); return; }
     L.slots[s] = L.sel; L.sel = null; hitBoss(2); gotIt(); renderL2();
     if (L.slots.every(x => x !== null)) runAI();
   });
@@ -1560,7 +1619,7 @@ function renderL3() {
   if (L.done) return;
   const n = Object.keys(L.fixed).length;
   body.innerHTML = `
-    <p class="lead">AI가 쓴 초안이 나왔다. 하지만 ${art(1, '기사 ④')}는 말한다 — <b>“그대로 믿지 마라.”</b> <b>① 위에서 도구를 고르고 → ② <span style="color:#c8102e">빨간 글씨</span></b>를 누르세요. 빨간 글씨가 문제 있는 부분이에요.</p>
+    <p class="lead">AI가 쓴 초안이 나왔다. 하지만 ${art(2, '기사 ‘AI 활용법’')}은 말한다 — <b>“그대로 믿지 마라.”</b> <b>① 위에서 도구를 고르고 → ② <span style="color:#c8102e">빨간 글씨</span></b>를 누르세요. 빨간 글씨가 문제 있는 부분이에요.</p>
     <div class="tools">${TOOLS.map(t => `<button class="tool ${L.tool === t.k ? 'on' : ''}" data-k="${t.k}"><span>${t.icon}</span>${t.name}<small>${t.sub}</small></button>`).join('')}</div>
     <div class="draft" id="draft">
       <div class="draft-head"><b>RUNWAY DAILY</b><small>AI 작성 초안 · 검토 전</small></div>
@@ -1595,14 +1654,14 @@ function renderCode() {
     <div class="codebox">
       <h3>🔐 기사 보관함 잠금</h3>
       <p>검증된 기사를 보관함에 넣으려면 코드가 필요하다.<br>
-      <b>“우리 신문(뉴욕 미러)이 발행된 날짜는 3월 며칠일까?”</b></p>
-      <p>${art(0, '신문을 열어 발행 날짜 확인하기')}</p>
+      <b>“우리 신문(뉴욕 미러)은 몇 월에 발행됐을까?”</b></p>
+      <p>${art(0, '신문 1면을 열어 발행 날짜 확인하기')}</p>
       <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => `<button class="key" data-n="${n}">${n}</button>`).join('')}</div>
     </div>`;
   $('#code-area').querySelectorAll('.key').forEach(k => k.onclick = () => {
     if (S.l3.done) return;
     if (k.dataset.n === CONFIG.code[2]) { S.l3.done = true; hitBoss(3); gotIt(); lockClear(3); }
-    else { shakeEl(k); if (miss($('#code-area .alink'))) S.dateHint = true; damageMe(8, '코드가 틀렸어요! 신문 맨 위의 발행 날짜를 확인하세요 (멘탈 -8)'); }
+    else { shakeEl(k); if (miss($('#code-area .alink'))) S.dateHint = true; damageMe(8, '코드가 틀렸어요! 신문 맨 위의 발행 날짜(몇 월?)를 확인하세요 (멘탈 -8)'); }
   });
 }
 
@@ -1671,7 +1730,7 @@ function renderBoss() {
       <button class="art-btn" id="art-btn">📰 기사 보기</button>
     </div>`;
   $('#cf-btn').onclick = drinkCoffee;
-  $('#art-btn').onclick = () => openArticles(1);
+  $('#art-btn').onclick = () => openArticles(2);
   updateCoffeeUI();
 }
 function mirandaSay(t) { const b = $('#m-say'); if (b) b.textContent = '“' + t + '”'; }
@@ -1801,18 +1860,19 @@ function openArticles(idx = 0) {
   sfx.click();
   const a = ARTICLES[idx];
   openModal('THE NEW YORK MIRROR', `
-    <div class="np-mast"><b>뉴욕 미러</b><span>THE NEW YORK MIRROR · <i class="${S.dateHint ? 'date-glow' : ''}">${CONFIG.issueDate} 발행</i> · 특집호</span></div>
+    <div class="np-ear">The Devil Wears Prada 2:<br>The Secretary Before &amp; After Using AI</div>
+    <div class="np-mast"><b>THE NEW YORK MIRROR</b><span><em>The Secretary Club</em><em>Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An</em><em class="${S.dateHint ? 'date-glow' : ''}">${CONFIG.issueDate}</em></span></div>
     <div class="tabs">${ARTICLES.map((x, i) => `<button class="tab ${i === idx ? 'on' : ''}" data-t="${i}">${x.tab}</button>`).join('')}</div>
     <article class="news"><h3>${a.title}</h3><div class="meta">${a.meta}</div>${a.body}
-    <div class="src">※ 형광펜은 게임에 필요한 핵심 문장입니다.${S.running ? ' 기사를 읽는 동안에도 시간은 흐릅니다!' : ''}</div></article>`);
+    <div class="src">※ 형광펜은 게임 문제를 푸는 데 필요한 문장입니다. · 기사 속 인물·단체·발언은 전시를 위해 꾸민 가상의 내용입니다.</div></article>`);
   $('#modal-body').querySelectorAll('.tab').forEach(t => t.onclick = () => openArticles(+t.dataset.t));
 }
 function articleForNow() {
-  if (S.phase === 'boss') return 0;
+  if (S.phase === 'boss') return 2;
   const n = S.open || goal();
-  if (n === 1) return 0;
+  if (n === 1) return 1;
   if (n === 3 && S.l3.sub === 'code') return 0;
-  return 1;
+  return 2;
 }
 function hintKey() {
   if (S.phase === 'boss') return 4;
