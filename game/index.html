@@ -734,6 +734,122 @@ body{background:#fff;letter-spacing:-.005em}
 .cr{background:#fff!important;border:1px solid var(--gold)!important;border-radius:0!important}
 .cr img{display:block;width:78%;aspect-ratio:1;object-fit:cover;margin:0 auto;border-radius:50%;border:1px solid var(--line);animation:idle 2s ease-in-out infinite}
 .cr img{border-radius:0!important;border:none!important;object-fit:contain!important;background:#fff}
+
+/* 👑 보스전: 미란다의 편집장실 */
+.office-stage{position:relative;aspect-ratio:16/8;min-height:230px;overflow:hidden;background:#fff;border-bottom:1px solid var(--ink)}
+.os-wall{position:absolute;inset:0 0 26% 0;background:linear-gradient(90deg,transparent 99.3%,rgba(0,0,0,.05) 99.3%) 0 0/10% 100%,linear-gradient(#fdfcfa,#eeeae4)}
+.window.os-win{left:20%!important;top:5%!important;width:58%!important;height:56%!important}
+.os-plaque{position:absolute;left:3%;top:9%;font:400 clamp(9px,1.4vw,15px) 'Bodoni Moda',serif;letter-spacing:.25em;color:var(--ink);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:3px 0;line-height:1.3}
+.os-plaque small{display:block;font:700 clamp(6px,.8vw,9px) var(--sans);letter-spacing:.3em;color:var(--red)}
+.os-door{position:absolute;left:2.5%;bottom:26%;width:10%;height:50%;background:linear-gradient(#e9e6e1,#d9d4cc);border:3px solid var(--ink);border-bottom:none}
+.os-door i{position:absolute;inset:8% 10% 0;background:#20242c;box-shadow:inset 0 0 18px rgba(0,0,0,.6)}
+.os-floor{position:absolute;left:0;right:0;bottom:0;height:26%;background:linear-gradient(#e4e0da,#cbc6bf);border-top:2px solid var(--ink)}
+.os-floor::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px) 0 0/8% 100%}
+.os-carpet{position:absolute;left:3%;width:52%;bottom:5%;height:13%;background:var(--red);clip-path:polygon(0 18%,100% 0,100% 100%,0 100%);box-shadow:inset 0 3px 0 rgba(255,255,255,.4)}
+.os-throne{position:absolute;right:3%;bottom:4%;width:22%;z-index:2;text-align:center}
+.os-throne .say{position:absolute;right:30%;bottom:100%;width:max-content;max-width:210%;margin:0 0 4px;border-left:3px solid var(--red);font-size:clamp(11px,1.5vw,14px);min-height:0;padding:6px 10px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.th-wrap{position:relative}
+.th-wrap .th-b{position:absolute;inset:0}
+.th-wrap .th-a{animation:tapA 1.1s steps(1) infinite}
+.th-wrap .th-b{animation:tapB 1.1s steps(1) infinite}
+@keyframes tapA{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes tapB{0%,49%{opacity:0}50%,100%{opacity:1}}
+.os-throne.approve .th-a{animation:nod 1s ease-in-out 2}
+@keyframes nod{50%{transform:translateY(2%)}}
+.os-desk{position:absolute;right:25%;bottom:7%;width:21%;height:24%;z-index:3}
+.os-desk::before{content:"";position:absolute;left:0;right:0;top:0;height:11%;background:rgba(196,222,240,.6);border:2px solid var(--ink);box-shadow:0 4px 0 rgba(0,0,0,.08)}
+.os-desk::after{content:"";position:absolute;left:6%;right:6%;top:11%;bottom:0;background:linear-gradient(#9a9a9a,#9a9a9a) 0 0/4% 100% no-repeat,linear-gradient(#9a9a9a,#9a9a9a) 100% 0/4% 100% no-repeat}
+.os-flower{position:absolute;left:4%;bottom:89%;width:22%}
+.os-mags{position:absolute;right:6%;bottom:89%;width:26%;display:flex;flex-direction:column-reverse}
+.os-mags i{display:block;height:5px;margin-top:1px;background:var(--ink)}
+.os-mags i:nth-child(2){background:var(--red);margin-left:8%}
+.os-mags i:nth-child(3){background:#fff;border:1px solid var(--ink);margin-right:10%}
+.desk-docs{position:absolute;left:32%;bottom:89%;width:30%;height:40%}
+.desk-docs .dd{position:absolute;left:0;bottom:0;width:60%;animation:dropDoc .35s ease-out}
+.desk-docs .dd:nth-child(2){left:8%;bottom:6%}.desk-docs .dd:nth-child(3){left:16%;bottom:12%}.desk-docs .dd:nth-child(4){left:24%;bottom:18%}.desk-docs .dd:nth-child(5){left:32%;bottom:24%}
+.desk-docs .dd .spr{transform:scaleY(.45);transform-origin:bottom}
+.desk-docs .dd.thrown{animation:throwDoc .9s ease-in forwards}
+@keyframes dropDoc{from{transform:translateY(-60%);opacity:0}to{transform:none;opacity:1}}
+@keyframes throwDoc{to{transform:translate(-260%,-120%) rotate(-200deg);opacity:0}}
+.os-me{position:absolute;left:7%;bottom:5%;width:11.5%;z-index:4;transition:left .9s linear;animation:none!important}
+.os-me.walk-in{animation:walkIn 1.2s ease-out both!important}
+.os-me .me-body{animation:idle 1.6s steps(2) infinite}
+.os-me.walking .me-body{animation:walkBob .22s steps(2) infinite}
+.os-me.back .me-body{scale:-1 1}
+.os-me .folder{position:absolute;width:32%;right:-12%;top:62%;transition:opacity .2s}
+.os-me.walking .folder{animation:walkBob .22s steps(2) infinite}
+.os-me.gave .folder,.os-me.back .folder{opacity:0}
+.os-me.bow .me-body{animation:bow 1s ease-in-out 2}
+@keyframes walkBob{50%{transform:translateY(-7%) rotate(3deg)}}
+@keyframes bow{50%{transform:rotate(12deg) translateY(4%)}}
+.os-me.hurt,.os-throne.hurt{animation:shake .45s!important}
+.intro-throne{width:170px;margin:0 auto}
+.intro-throne .spr{width:100%!important}
+.cam-flash{position:fixed;z-index:9600;width:40vmin;height:40vmin;margin:-20vmin 0 0 -20vmin;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#fff 0,rgba(255,255,255,.85) 18%,rgba(255,255,255,0) 60%);animation:camFlash .6s ease-out forwards}
+@keyframes camFlash{0%{opacity:0;transform:scale(.4)}15%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
+
+/* 🏆 승리 화면: 런웨이 잡지 표지 */
+.result.mag{max-width:760px;text-align:left;border-top:none!important;padding-top:20px}
+.mg-top{display:flex;justify-content:space-between;font:700 11px var(--sans);letter-spacing:.2em;border-bottom:1px solid var(--ink);padding-bottom:6px}
+.mg-mast{margin:4px 0 0!important;font:400 clamp(64px,15vw,128px)/0.95 'Bodoni Moda',serif!important;letter-spacing:.04em;text-align:center;color:var(--ink);background:none!important;-webkit-text-fill-color:currentColor;animation:none!important}
+.mg-cover{display:grid;grid-template-columns:1fr 1.15fr;gap:12px;align-items:end;margin-top:6px;border-bottom:1px solid var(--ink)}
+.mg-k{margin:0;font:700 11px var(--sans);letter-spacing:.3em;color:var(--red)}
+.mg-h{margin:6px 0;font:900 clamp(34px,7vw,56px)/1.05 var(--kserif);letter-spacing:-.04em}
+.mg-h em{font-style:normal;color:var(--red)}
+.mg-s{margin:0 0 12px;font:italic 400 16px 'Bodoni Moda',var(--kserif);color:var(--muted)}
+.mg-list{list-style:none;margin:0 0 14px;padding:0;border-top:1px solid var(--line)}
+.mg-list li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px}
+.mg-list span{color:var(--muted);letter-spacing:.05em}
+.mg-list b{font:400 17px 'Bodoni Moda',serif}
+.mg-fig{position:relative;height:clamp(220px,40vw,320px);background:radial-gradient(ellipse 55% 45% at 45% 40%,#fff,transparent 70%),linear-gradient(#ebe7e1,#d3cdc5);overflow:hidden}
+.mg-fig::after{content:"";position:absolute;left:18%;right:28%;bottom:0;height:12%;background:var(--red);clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
+.wf-me{position:absolute;left:24%;bottom:6%;width:30%;z-index:2;animation:catwalk 3.2s ease-in-out infinite}
+.wf-me .wf-mag{position:absolute;width:40%;right:-14%;top:55%}
+@keyframes catwalk{0%,100%{transform:translateX(-14%)}25%{transform:translateX(0) translateY(-2%)}50%{transform:translateX(14%)}75%{transform:translateX(0) translateY(-2%)}}
+.wf-mir{position:absolute;right:4%;bottom:4%;width:26%;z-index:1;animation:nod 1.6s ease-in-out infinite}
+.wf-say{position:absolute;right:20%;bottom:104%;white-space:nowrap;background:#fff;border-left:3px solid var(--red);padding:3px 8px;font:italic 400 13px 'Bodoni Moda',serif;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.mg-quote{margin:14px 0;font:italic 400 clamp(16px,2.6vw,20px)/1.5 'Bodoni Moda',var(--kserif);text-align:center}
+.mg-quote span{font-style:normal;font-size:13px;color:var(--muted)}
+.mg-code{display:flex;align-items:center;justify-content:center;gap:18px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:10px 0;margin:6px 0 10px}
+.mc-l{text-align:right}.mc-l b{display:block;font:italic 400 26px 'Bodoni Moda',serif}.mc-l span{font:700 11px var(--sans);letter-spacing:.2em;color:var(--red)}
+.mag .bigcode{margin:0}
+.mag .bigcode .n{background:#fff!important;color:var(--ink)!important;border:none!important;border-bottom:5px solid var(--red)!important;box-shadow:none!important;font-family:'Bodoni Moda',serif!important;font-weight:400!important;width:clamp(64px,15vw,104px)!important;height:clamp(84px,19vw,128px)!important}
+.mag .bigcode .sl{color:var(--line)}
+.mag .notice{text-align:center;color:var(--ink);font-weight:500}
+.mag .notice b{color:var(--red)}
+.mag .btns{justify-content:center}
+
+/* 💀 실패 화면: 뉴욕 미러 1면 */
+.result.tabloid{max-width:720px;text-align:left;border-top:none!important}
+.tb-mast{white-space:nowrap;font:900 clamp(22px,5.6vw,46px)/1 'Arial Black','Noto Sans KR',sans-serif;color:#5a0f14;text-align:center;letter-spacing:-.01em}
+.tb-bar{display:flex;justify-content:space-between;border-top:2px solid #5a0f14;border-bottom:1px solid #5a0f14;margin:8px 0 12px;padding:4px 0;font:700 12px var(--sans)}
+.tb-bar span:first-child{color:#fff;background:var(--red);padding:0 8px}
+.tabloid h1{font:900 clamp(26px,5.4vw,40px)/1.2 var(--sans)!important;color:var(--ink)!important;margin:0 0 12px!important;letter-spacing:-.03em}
+.tb-body{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px}
+.tb-photo{position:relative;height:220px;background:linear-gradient(#cfc9c1,#a9a39a);filter:grayscale(1) contrast(1.1);overflow:hidden}
+.tb-mir{position:absolute;right:8%;bottom:6%;width:34%}
+.tb-me{position:absolute;left:14%;bottom:2%;width:24%;transform:rotate(-90deg);transform-origin:50% 60%;animation:slump 1s ease-out both}
+@keyframes slump{from{transform:none}to{transform:rotate(-90deg)}}
+.tb-paper{position:absolute;width:12%;animation:paperFall 1.4s ease-out both}
+.tb-paper.p0{left:8%;top:10%}.tb-paper.p1{left:40%;top:4%;animation-delay:.2s}.tb-paper.p2{left:24%;top:30%;animation-delay:.4s}.tb-paper.p3{left:52%;top:22%;animation-delay:.1s}
+@keyframes paperFall{from{transform:translateY(-120%) rotate(0)}to{transform:translateY(0) rotate(160deg)}}
+.tabloid .quote{background:none;border:none;border-left:3px solid var(--red);font:italic 400 17px/1.6 var(--kserif)}
+.tabloid .btns{justify-content:flex-start}
+
+/* ⏳ 자리 비움 안내 */
+.idle-warn{position:fixed;inset:0;z-index:9800;background:rgba(10,10,10,.72);display:flex;align-items:center;justify-content:center;padding:16px}
+.iw-box{background:#fff;border-top:6px solid var(--red);max-width:440px;width:100%;padding:24px 22px;text-align:center;animation:zoomIn .3s}
+.iw-box small{font:700 12px var(--sans);letter-spacing:.2em;color:var(--muted)}
+.iw-n{font:700 96px/1 'Bodoni Moda',serif;color:var(--red);margin:6px 0}
+.iw-box p{font:600 18px/1.6 var(--kserif);margin:0 0 16px}
+.iw-box p b{color:var(--red);box-shadow:inset 0 -.4em 0 var(--red-soft)}
+.iw-box .btn{min-width:200px;font-size:17px}
+@media (max-width:640px){.mg-cover,.tb-body{grid-template-columns:1fr}.mg-fig{order:-1}}
+.office-stage .spr{width:100%!important;margin:0!important}
+.result.mag .mg-mast{color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important;background:none!important}
+.mag .credits{background:none!important;border-radius:0!important;border-top:1px solid var(--ink);padding:12px 0 6px;color:var(--ink)}
+.mag .cr-title{font:italic 400 22px 'Bodoni Moda',serif;letter-spacing:.02em;color:var(--ink);text-align:center}
+.mag .cr{text-align:center;border:none!important;background:none!important}
 </style>
 </head>
 <body>
@@ -794,38 +910,44 @@ body{background:#fff;letter-spacing:-.005em}
   <main id="game-main"></main>
 </section>
 
-<!-- ================= 실패 화면 ================= -->
+<!-- ================= 실패 화면: 뉴욕 미러 1면 ================= -->
 <section id="scr-fail" class="screen">
-  <div class="result fail-box">
-    <div class="badge">GAME OVER</div>
-    <h1 id="fail-title">야근 확정</h1>
-    <div class="res-chars" id="fail-chars"></div>
-    <div class="quote" id="fail-quote"></div>
-    <p class="stats" id="fail-stats"></p>
+  <div class="result fail-box tabloid">
+    <div class="tb-mast">THE NEW YORK MIRROR</div>
+    <div class="tb-bar"><span>속보 · BREAKING NEWS</span><span>APRIL 29, 2026</span></div>
+    <h1 id="fail-title">신입 비서, 멘탈 붕괴</h1>
+    <div class="tb-body">
+      <div class="tb-photo" id="fail-chars"></div>
+      <div class="tb-text"><div class="quote" id="fail-quote"></div><p class="stats" id="fail-stats"></p></div>
+    </div>
     <div class="btns">
-      <button class="btn btn-red hidden" id="btn-retry-boss">👑 보스전부터 다시 도전</button>
-      <button class="btn btn-red" id="btn-retry">↻ 처음부터 다시 도전</button>
+      <button class="btn btn-red hidden" id="btn-retry-boss">보스전부터 다시 도전</button>
+      <button class="btn btn-red" id="btn-retry">처음부터 다시 도전</button>
       <button class="btn btn-line" id="btn-home1">시작 화면</button>
     </div>
     <div class="auto-home" id="ah-fail"></div>
   </div>
 </section>
 
-<!-- ================= 승리 화면 ================= -->
+<!-- ================= 승리 화면: 런웨이 표지 ================= -->
 <section id="scr-win" class="screen">
-  <div class="result win-box">
-    <div class="badge">BOSS DEFEATED</div>
-    <h1>MIRANDA DEFEATED!</h1>
-    <div class="res-chars" id="win-chars"></div>
-    <div class="quote">“흥미롭군. 자네, 생각보다 쓸 만한 비서였어.”</div>
-    <div class="bigcode" id="bigcode"></div>
-    <p class="notice">탈출 성공! 획득한 비밀번호를 실제 전시회 금고에 입력하고 상품을 획득하세요.</p>
+  <div class="result win-box mag">
+    <div class="mg-top"><span>SPECIAL ISSUE · VOL.2</span><span>APRIL 29, 2026</span></div>
+    <h1 class="mg-mast">RUNWAY</h1>
+    <div class="mg-cover">
+      <div class="mg-lines">
+        <p class="mg-k">THE ASSISTANT ISSUE</p>
+        <h2 class="mg-h">올해의<br><em>비서</em></h2>
+        <p class="mg-s">미란다가 인정한 단 한 사람</p>
+        <ul class="mg-list" id="win-stats"></ul>
+      </div>
+      <div class="mg-fig" id="win-chars"></div>
+    </div>
+    <p class="mg-quote">“흥미롭군. 자네, 생각보다 쓸 만한 비서였어.” <span>— M.</span></p>
+    <div class="mg-code"><div class="mc-l"><b>The Code</b><span>금고 비밀번호</span></div><div class="bigcode" id="bigcode"></div></div>
+    <p class="notice">획득한 비밀번호를 전시장 금고에 입력하고 <b>한정 상품</b>을 받아 가세요.</p>
     <div class="auto-home big" id="ah-win"></div>
     <div class="credits"><div class="cr-title">MADE BY · 만든 사람들</div><div class="cr-row" id="credits"></div></div>
-    <div class="front"><div class="fm">RUNWAY DAILY <small>특집 · 오늘의 1면</small></div>
-      <h4>“AI 시대, 결과를 걸러내는 비서가 살아남는다”</h4>
-      <p>반복 업무는 AI에게, 판단·소통·검증은 사람에게. 당신이 완성한 특집 기사가 내일 아침 1면에 실립니다.</p></div>
-    <p class="stats" id="win-stats"></p>
     <div class="btns"><button class="btn btn-line" id="btn-home2">처음 화면으로 (다음 참가자)</button></div>
   </div>
 </section>
@@ -842,6 +964,7 @@ body{background:#fff;letter-spacing:-.005em}
 <div id="intro" class="intro hidden"></div>
 <div id="toasts"></div>
 <div id="flash"></div>
+<div id="idle-warn" class="idle-warn hidden"><div class="iw-box"><small>잠시 자리를 비우셨나요?</small><div class="iw-n" id="iw-n">5</div><p id="iw-msg"></p><button class="btn btn-red" id="iw-btn"></button></div></div>
 <div id="bigfx"></div>
 
 <script>
@@ -920,8 +1043,9 @@ const CONFIG = {
   coffeeAlertHp: 50,     // 멘탈이 이 숫자 이하가 되면 "커피를 마셔요" 안내
   issueDate: 'April 29, 2026',  // 신문(뉴욕 미러) 발행일 — 마지막 금고 숫자 문제의 정답 단서 (4월 → 4)
   autoHomeSeconds: 20,   // 게임이 끝나고 화면이 닫히기(홈페이지로 돌아가기)까지의 시간(초)
-  playIdleSeconds: 180,  // 게임 중 이 시간(초) 동안 아무 조작이 없으면 홈페이지로 (자리를 비운 경우)
-  idleSeconds: 60        // 시작 화면에서 아무 조작이 없으면 홈페이지로 돌아가는 시간(초)
+  playIdleSeconds: 30,   // 게임 중 이 시간(초) 동안 아무 조작이 없으면 홈페이지로 (자리를 비운 경우)
+  idleSeconds: 30,       // 시작 화면에서 아무 조작이 없으면 홈페이지로 돌아가는 시간(초)
+  idleWarnSeconds: 5     // 홈페이지로 돌아가기 몇 초 전에 안내창을 띄울지
 };
 
 /* ---------------- 잠금 1: 업무 분배 (기사 ‘비서의 역할’ 표) ---------------- */
@@ -1224,6 +1348,42 @@ const CITY_SVG = (() => {
   layer('bf', 18, 40, false); layer('bm', 10, 30, true); layer('bn', 5, 16, true);
   return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
 })();
+/* ---------- 👑 보스전 그림: 의자에 앉아 다리를 꼰 미란다 · 서류철 · 꽃 ---------- */
+SPR.chair = { pal:{ K:'#0d0d0d', k:'#2e2e2e', g:'#a8a8a8' }, rows:[
+  "..KKKKKKKKKKKK..", ".KkkkkkkkkkkkkK.",
+  ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.",
+  ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.", ".KkKKKKKKKKKKkK.",
+  "KKKKKKKKKKKKKKKK", "KkkkkkkkkkkkkkkK", "KKKKKKKKKKKKKKKK",
+  ".......gg.......", ".......gg.......", "...gggggggggg...", "..g....gg....g.."] };
+SPR.folder = { pal:{ k:'#141414', r:'#d0021b', w:'#ffffff', g:'#cfc9c1' }, rows:[
+  "kkkkkkkk", "krrrrrrk", "kwwwwwwk", "kwggggwk", "kwwwwwwk", "kwggwwwk", "kwwwwwwk", "kkkkkkkk"] };
+SPR.flower = { pal:{ w:'#ffffff', p:'#f2bfd0', l:'#5fae6e', L:'#2f6b3f', v:'#d6e8f3', k:'#141414' }, rows:[
+  ".wpw.wpw.", "wpwpwpwpw", ".wpwpwpw.", "..wpwpw..", "...lLl...", "...kvk...", "...kvk...", "...kkk..."] };
+function mirandaRows(boss) {
+  const rows = SPR.miranda.rows.slice();
+  if (boss) { rows[0] = HORNS[0]; rows[1] = HORNS[1]; rows[2] = "..XHHHHHHHHHHX.."; }
+  return rows;
+}
+// 선글라스를 머리 위로 올린 미란다 (인정했다는 뜻)
+function mirandaApproveRows() {
+  const rows = SPR.miranda.rows.slice();
+  rows[4] = ".HHGGGGHHGGGGHH."; rows[7] = ".HSSEESSSSEESSH."; rows[8] = ".HSSSSSSSSSSSSH."; rows[10] = ".HSSSSMMMMSSSSH.";
+  return rows;
+}
+function composeRows(W, H, layers) {
+  const g = Array.from({ length: H }, () => Array(W).fill('.'));
+  layers.forEach(L => L.rows.forEach((row, y) => [...row].forEach((c, x) => {
+    if (c !== '.' && g[y + L.y] && x + L.x < W) g[y + L.y][x + L.x] = c;
+  })));
+  return g.map(r => r.join(''));
+}
+const SEAT_A = ["..CCCCCCCCCCCC..", "CCCCCCCCCCCCCC..", "rLLLLLLLLCCCCC..", ".......LLL......", ".......LLL......", ".......rrr......"];
+const SEAT_B = ["..CCCCCCCCCCCC..", "rCCCCCCCCCCCCC..", ".LLLLLLLLCCCCC..", ".......LLL......", ".......LLL......", ".......rrr......"];
+function throneSpr(boss, tapUp, approve) {
+  const head = (approve ? mirandaApproveRows() : mirandaRows(boss)).slice(0, 17);
+  const rows = composeRows(20, 25, [{ rows: SPR.chair.rows, x: 4, y: 4 }, { rows: head.concat(tapUp ? SEAT_B : SEAT_A), x: 0, y: 1 }]);
+  return spr('miranda', { rows, pal: Object.assign({}, SPR.chair.pal, { X: '#c8102e', E: '#1d1a1c' }) });
+}
 function headOnly(name) { return spr(name, { rows: SPR[name].rows.slice(0, 11) }); }
 /* =====================================================================
    👥 만든 사람들 — 이름(name)과 소개(role)를 바꾸면 승리 화면에 반영돼요
@@ -1410,7 +1570,7 @@ function hitBoss(n) {
   if (S.combo >= 2) bigFx('COMBO ×' + S.combo);
   floatText('미란다 -' + (n + bonus), window.innerWidth / 2 - 50, 120, '#c99a3b');
   renderHUD();
-  if (S.phase === 'boss') { shakeEl($('.fighter.miranda'), 'hurt'); if (S.boss <= 0) { S.roundData = null; S.answered = true; later(win, 900); } }
+  if (S.phase === 'boss') { shakeEl($('.fighter.miranda'), 'hurt'); if (S.boss <= 0) { S.roundData = null; S.answered = true; later(winScene, 1500); } }
 }
 
 /* ---------- 시작 / 초기화 ---------- */
@@ -1702,10 +1862,10 @@ function bossIntro() {
   const it = $('#intro');
   it.innerHTML = `<div class="intro-box">
       <div class="badge" style="background:#c8102e">FINAL BOSS · 보고 시간</div>
-      ${mirandaSpr(true)}
+      <div class="intro-throne">${throneSpr(true)}</div>
       <h2>MIRANDA</h2>
       <div class="say">“자네가 일을 모두 처리했다고? 그렇다면 하나씩 보고해 봐.”</div>
-      <p>완성한 기사를 들고 <b>편집장실로 보고하러</b> 갑니다.<br>미란다의 질문마다 <b>가장 좋은 보고</b>를 고르세요. 고른 답에 따라 <b>데미지가 달라져요</b>.<br>중간중간 <b>OX 퀴즈</b>도 나와요. 멘탈이 낮으면 <b>☕ 커피</b>!</p>
+      <p>미란다가 의자에 앉아 다리를 꼬고 기다리고 있어요. 완성한 서류를 들고 <b>편집장실로 보고하러</b> 갑니다.<br>미란다의 질문마다 <b>가장 좋은 보고</b>를 고르세요. 고른 답에 따라 <b>데미지가 달라져요</b>.<br>중간중간 <b>OX 퀴즈</b>도 나와요. 멘탈이 낮으면 <b>☕ 커피</b>!</p>
       <button class="btn btn-red" id="go-boss">📄 보고하러 가기</button></div>`;
   it.classList.remove('hidden');
   $('#go-boss').onclick = () => { it.classList.add('hidden'); renderBoss(); later(() => startRound(0), 1300); };
@@ -1713,10 +1873,19 @@ function bossIntro() {
 function renderBoss() {
   main.innerHTML = `
     <div class="arena">
-      <div class="stage-top">
-        <div class="fighter me walk-in">${spr(meName())}<span class="doc">📄</span><div class="nm">ME</div></div>
-        <div class="vs">VS</div>
-        <div class="fighter miranda"><div class="say" id="m-say">“들어와.”</div>${mirandaSpr(true)}<div class="nm">MIRANDA</div></div>
+      <div class="office-stage" id="stage">
+        <div class="os-wall"></div>
+        <div class="window night os-win"><div class="sun"></div><div class="stars"></div><div class="city">${CITY_SVG}</div><div class="mullions"></div></div>
+        <div class="os-plaque"><small>EDITOR-IN-CHIEF</small>MIRANDA</div>
+        <div class="os-door"><i></i></div>
+        <div class="os-floor"></div>
+        <div class="os-carpet"></div>
+        <div class="os-throne fighter miranda" id="mir">
+          <div class="say" id="m-say">“들어와.”</div>
+          <div class="th-wrap"><div class="th-a">${throneSpr(true, false)}</div><div class="th-b">${throneSpr(true, true)}</div></div>
+        </div>
+        <div class="os-desk"><span class="os-flower">${spr('flower')}</span><span class="os-mags"><i></i><i></i><i></i></span><div class="desk-docs" id="desk-docs"></div></div>
+        <div class="os-me fighter me walk-in" id="me-walker"><div class="me-body">${spr(meName())}</div><span class="folder">${spr('folder')}</span></div>
       </div>
       <div class="wave-wrap">
         <div class="wave-head"><h3 id="wave-name">편집장실로 가는 중…</h3><small id="wave-no"></small></div>
@@ -1734,12 +1903,28 @@ function renderBoss() {
   $('#art-btn').onclick = () => openArticles(2);
   updateCoffeeUI();
 }
+/* 서류를 들고 미란다에게 걸어가서 책상에 올려 두고 돌아오기 */
+function deliver(kind) {
+  const me = $('#me-walker'); if (!me) return;
+  me.classList.remove('walk-in', 'gave', 'back');
+  me.classList.add('walking'); me.style.left = '50%';
+  later(() => {
+    me.classList.remove('walking'); me.classList.add('gave');
+    const dd = $('#desk-docs');
+    if (dd) {
+      const f = document.createElement('span'); f.className = 'dd'; f.innerHTML = spr('folder');
+      dd.appendChild(f); while (dd.children.length > 5) dd.firstChild.remove();
+      if (kind === 'bad') later(() => f.classList.add('thrown'), 250);      // 마음에 안 들면 서류를 던져 버려요
+    }
+    later(() => { me.classList.add('walking', 'back'); me.style.left = '7%'; }, 650);
+    later(() => { me.classList.remove('walking', 'back', 'gave'); }, 1550);
+  }, 950);
+}
 function mirandaSay(t) { const b = $('#m-say'); if (b) b.textContent = '“' + t + '”'; }
 function startRound(i) {
   if (!S.running || S.boss <= 0) return;
   const r = REPORTS[i % REPORTS.length];
   S.round = i; S.roundData = r; S.answered = false;
-  const me = $('.fighter.me'); if (me) { me.classList.remove('walk-in', 'step'); void me.offsetWidth; me.classList.add('step'); }
   $('#wave-name').textContent = (i >= REPORTS.length ? '추가 보고 · ' : `보고 ${i + 1} · `) + r.title;
   $('#wave-no').textContent = r.type === 'ox' ? 'OX 퀴즈' : '보고 방식을 고르세요';
   const bar = $('#wave-bar'); if (bar) bar.style.width = Math.round((i % REPORTS.length) / REPORTS.length * 100) + '%';
@@ -1780,7 +1965,8 @@ function answer(btn) {
     fb.innerHTML = `<b>${kind === 'best' ? `★ PERFECT · 미란다 -${DMG.best}` : kind === 'good' ? `△ 그럭저럭 · 미란다 -${DMG.good}` : `✕ 잘못된 보고 · 멘탈 -${DMG.bad}`}</b><span>${why}</span>`;
   }
   fb.className = 'feedback ' + (kind === 'bad' ? 'bad' : kind === 'good' ? 'meh' : 'good');
-  if (S.running && S.boss > 0) later(() => startRound(S.round + 1), 2300);
+  deliver(kind);
+  if (S.running && S.boss > 0) later(() => startRound(S.round + 1), 2800);
 }
 /* 보스전부터 다시 도전 (잠금 1~3은 이미 푼 상태로 시작) */
 function retryBoss() {
@@ -1822,8 +2008,8 @@ function endRun() {
 function gameOver(reason) {
   if (!S.running) return;
   endRun();
-  $('#fail-title').textContent = '멘탈 붕괴';
-  $('#fail-chars').innerHTML = `<div>${spr(meName())}</div><div class="mir">${mirandaSpr(true)}</div>`;
+  $('#fail-title').textContent = S.phase === 'boss' ? '신입 비서, 보고 도중 멘탈 붕괴' : '신입 비서, 업무 폭탄에 멘탈 붕괴';
+  $('#fail-chars').innerHTML = `<div class="tb-mir">${mirandaSpr(true)}</div><div class="tb-me">${spr(meName())}</div>${[0, 1, 2, 3].map(i => `<span class="tb-paper p${i}">${spr('folder')}</span>`).join('')}`;
   $('#fail-quote').textContent = reason === 'time' ? '“18시 정각. 자네는 아직 내 사무실에 있군. 내일도 출근하게.”' : '“그 정도로 무너지다니. 내일 아침 7시에 다시 보지.”';
   const where = S.phase === 'boss' ? '보스전' : ['', '잠금 1', '잠금 2', '잠금 3', '출구 앞'][goal()];
   $('#fail-stats').textContent = `도달한 단계: ${where} · 미란다 남은 HP ${S.boss}`;
@@ -1832,24 +2018,37 @@ function gameOver(reason) {
   $('#btn-retry').classList.toggle('btn-red', !atBoss); $('#btn-retry').classList.toggle('btn-line', atBoss);
   sfx.bad(); showScreen('fail'); startAutoHome('ah-fail');
 }
+/* 승리 직전 장면: 미란다가 선글라스를 올리고 “That's all.” → 카메라 플래시 */
+function winScene() {
+  if (!S.running) return;
+  const mir = $('#mir'), me = $('#me-walker');
+  if (!mir) { win(); return; }
+  S.roundData = null;
+  $('#opts').innerHTML = ''; $('#ask').innerHTML = '<span class="q-who">미란다</span>…';
+  mir.querySelector('.th-wrap').innerHTML = `<div class="th-a">${throneSpr(false, false, true)}</div>`;
+  mir.classList.add('approve'); mirandaSay('…좋아. 자네, 내일도 출근하게. That’s all.');
+  if (me) { me.classList.add('bow'); }
+  later(() => cameraFlash(4), 900);
+  later(win, 2600);
+}
+function cameraFlash(n) {
+  for (let i = 0; i < n; i++) setTimeout(() => {
+    const f = document.createElement('div'); f.className = 'cam-flash';
+    f.style.left = (10 + Math.random() * 80) + 'vw'; f.style.top = (10 + Math.random() * 60) + 'vh';
+    document.body.appendChild(f); setTimeout(() => f.remove(), 700);
+  }, i * 260 + Math.random() * 120);
+}
 function win() {
   if (!S.running) return;
   endRun();
-  $('#win-chars').innerHTML = `<div>${spr(meName())}</div><div class="mir">${mirandaSpr(false)}</div>`;
+  $('#win-chars').innerHTML = `<div class="wf-me">${spr(meName())}<span class="wf-mag">${spr('folder')}</span></div><div class="wf-mir"><span class="wf-say">That’s all.</span>${spr('miranda', { rows: mirandaApproveRows(), pal: { E: '#1d1a1c' } })}</div>`;
   $('#bigcode').innerHTML = `<div class="n">${CONFIG.code[0]}</div><span class="sl">/</span><div class="n">${CONFIG.code[1]}</div><span class="sl">/</span><div class="n">${CONFIG.code[2]}</div>`;
   renderCredits();
   stat('rw_wins');
   try { const b = +(localStorage.getItem('rw_best') || 0); if (!b || S.timeLeft < b) stat('rw_best', S.timeLeft); } catch (e) {}
-  $('#win-stats').textContent =`플레이 시간 ${fmt(S.timeLeft)} · 내 멘탈 ${S.hp} · 실수 ${S.mistakes}회 · 힌트 ${S.hintsUsed}회`;
+  $('#win-stats').innerHTML = [['플레이 시간', fmt(S.timeLeft)], ['남은 멘탈', S.hp], ['실수', S.mistakes + '회'], ['힌트', S.hintsUsed + '회']].map(([k, v]) => `<li><span>${k}</span><b>${v}</b></li>`).join('');
   showScreen('win'); sfx.win(); startAutoHome('ah-win');
-  const colors = ['#c8102e', '#3f7fd9', '#c99a3b', '#f7d3da', '#1d1a1c'];
-  for (let i = 0; i < 90; i++) {
-    const c = document.createElement('div'); c.className = 'confetti';
-    c.style.left = Math.random() * 100 + 'vw'; c.style.background = colors[i % colors.length];
-    c.style.animationDuration = 2.5 + Math.random() * 3 + 's'; c.style.animationDelay = Math.random() * 1.5 + 's';
-    c.style.width = 6 + Math.random() * 8 + 'px';
-    document.body.appendChild(c); setTimeout(() => c.remove(), 7500);
-  }
+  cameraFlash(6);   // 런웨이 포토월처럼 카메라 플래시
 }
 
 /* =====================================================================
@@ -1932,15 +2131,37 @@ $('#cu-body').addEventListener('click', e => { const a = e.target.closest('.alin
 
 /* ---------- 자리를 비우면 홈페이지로 (시작 화면에서 아무 조작이 없을 때) ---------- */
 let lastAct = Date.now();
-['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, () => {
+['pointerdown', 'keydown', 'touchstart'].forEach(ev => document.addEventListener(ev, e => {
+  // 안내창이 떠 있을 때는 안내창의 버튼을 눌러야만 계속할 수 있어요
+  if (!$('#idle-warn').classList.contains('hidden') && !(e.target.closest && e.target.closest('#iw-btn'))) return;
   lastAct = Date.now();
-  if (window.parent !== window) try { window.parent.postMessage({ rw: 'activity' }, '*'); } catch (e) {}
+  if (window.parent !== window) try { window.parent.postMessage({ rw: 'activity' }, '*'); } catch (err) {}
 }, { passive: true }));
+const josa = w => { const c = w.charCodeAt(w.length - 1); return c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 ? '을' : '를'; };
+// 지금 게임 상황에 맞는 ‘눌러야 할 것’
+function idleTarget() {
+  if (!S.running) return { name: '게임 시작', act: startGame };
+  if (S.phase === 'boss') return { name: '보고 계속하기', act: () => {} };
+  if (S.open) return { name: { 1: '업무 분배표', 2: 'AI 문서작성기', 3: '검수 데스크' }[S.open] || '업무 계속하기', act: () => {} };
+  const o = OBJECTS.find(x => x.lock === goal());
+  return o ? { name: o.label, act: () => clickObj(o.id, $(`.obj[data-o="${o.id}"]`)) } : { name: '게임 계속하기', act: () => {} };
+}
+function hideIdle() { $('#idle-warn').classList.add('hidden'); }
+$('#iw-btn').onclick = () => { const t = idleTarget(); hideIdle(); lastAct = Date.now(); t.act(); };
 setInterval(() => {
   const onStart = $('#scr-start').classList.contains('active') && !S.running;
-  if (onStart && Date.now() - lastAct > CONFIG.idleSeconds * 1000) { lastAct = Date.now(); goSite(); }
-  if (S.running && Date.now() - lastAct > CONFIG.playIdleSeconds * 1000) { lastAct = Date.now(); goSite(); }
-}, 1000);
+  const limit = onStart ? CONFIG.idleSeconds : S.running ? CONFIG.playIdleSeconds : 0;   // 결과 화면은 따로 20초 뒤에 닫혀요
+  if (!limit) { hideIdle(); return; }
+  const left = Math.ceil((limit * 1000 - (Date.now() - lastAct)) / 1000);
+  if (left <= 0) { lastAct = Date.now(); hideIdle(); goSite(); return; }
+  if (left <= CONFIG.idleWarnSeconds) {
+    const t = idleTarget();
+    $('#iw-n').textContent = left;
+    $('#iw-msg').innerHTML = `<b>${t.name}</b>${josa(t.name)} 클릭하지 않으면<br>홈페이지 화면으로 돌아갑니다`;
+    $('#iw-btn').textContent = t.name;
+    $('#idle-warn').classList.remove('hidden');
+  } else hideIdle();
+}, 250);
 
 resetState(); renderPicks(); renderHUD();
 </script>
