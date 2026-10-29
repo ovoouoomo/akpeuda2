@@ -2112,7 +2112,11 @@ function seatedSVG(t, i) {
   const H = HEADS[i], ink = '#1a1a1a', pants = '#2c2c30', chair = '#efe6d8', chairD = '#ddd0bd', skin = '#fff1ea';
   const dark = H.top === 'jacket' || H.top === 'suit', cloth = dark ? '#2b2b2b' : '#ffffff';
   const limb = (d, w, c) => `<path d="${d}" fill="none" stroke="${ink}" stroke-width="${w + 5}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  const torso = `<path d="M55 128 C55 110 66 101 84 98 L100 104 L116 98 C134 101 145 110 145 128 L139 156 H61 Z" fill="${cloth}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`;
+  // 셔츠·블라우스(은빈·은채)는 어깨선을 일자로: 목 → 어깨 끝까지 거의 수평, 어깨너비는 얼굴의 약 1.5배
+  const flat = !dark;
+  const torso = flat
+    ? `<path d="M56 106 L86 101 L100 106 L114 101 L144 106 L141 156 H59 Z" fill="${cloth}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`
+    : `<path d="M55 128 C55 110 66 101 84 98 L100 104 L116 98 C134 101 145 110 145 128 L139 156 H61 Z" fill="${cloth}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`;
   const neck = H.neck ? `<path d="M92 80 V104 L100 108 L108 104 V80 Z" fill="${skin}" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>` : '';
   const detail = {
     jacket: `<path d="M84 99 L100 105 L116 99 L112 136 H88 Z" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>
@@ -2134,8 +2138,8 @@ function seatedSVG(t, i) {
     <path d="M12 134 Q12 118 30 118 Q48 118 48 134 V210 H12 Z" fill="${chair}" stroke="${ink}" stroke-width="3"/>
     <path d="M152 134 Q152 118 170 118 Q188 118 188 134 V210 H152 Z" fill="${chair}" stroke="${ink}" stroke-width="3"/>
     <path d="M20 128 Q24 122 32 122" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
-    ${limb('M64 116 Q50 120 34 126', 15, cloth)}<ellipse cx="29" cy="127" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
-    ${limb('M136 116 Q150 120 166 126', 15, cloth)}<ellipse cx="171" cy="127" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
+    ${flat ? limb('M62 112 L52 122 Q42 127 34 127', 14, cloth) : limb('M64 116 Q50 120 34 126', 15, cloth)}<ellipse cx="29" cy="127" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
+    ${flat ? limb('M138 112 L148 122 Q158 127 166 127', 14, cloth) : limb('M136 116 Q150 120 166 126', 15, cloth)}<ellipse cx="171" cy="127" rx="8" ry="6.5" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
     ${torso}${neck}${detail}
     <image href="${H.img}" x="${H.x}" y="${H.y}" width="${H.w || 150}" height="${(H.w || 150) * 520 / 420}"/>
     <path d="M66 148 H134 L138 172 Q100 182 62 172 Z" fill="${pants}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
