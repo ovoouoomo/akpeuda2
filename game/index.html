@@ -1654,19 +1654,52 @@ function resetState() {
   });
 }
 function startGame() {
+  if (S.running) logEnd('quit');
   cancelAutoHome(); stopTimer(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
   resetState();
   S.running = true; S.startAt = Date.now();
   showScreen('game');
   S.dialog = '📱 <b>미란다의 메모</b> “내일 아침까지 ‘AI 시대의 비서’ 특집 기사를 완성해 둬. 퇴근은 그다음이야.” …먼저 반짝이는 <b>서류함</b>부터 열어 보자!';
   renderRoom(); renderHUD(); startTimer(); sfx.unlock();
-  stat('rw_plays');
+  stat('rw_plays'); logStart();
 }
-// 플레이 기록 (이 기기에만 저장 — 홈페이지 관리자 화면에서 보여 줘요)
+/* ---------- 📊 플레이 기록 (관리자 리포트용 · 이 기기의 브라우저에만 저장, 개인정보는 저장하지 않아요) ----------
+   한 판이 끝날 때마다 rw_log 에 한 줄씩 쌓여요: 결과 · 걸린 시간 · 단계별 시간/실수 · 틀린 문제 · 힌트 · 커피 · 읽은 기사 · 보스전 답 */
+const LOG_KEY = 'rw_log';
+const STAGE_NAMES = { 1: '잠금 1 · 업무 분배', 2: '잠금 2 · 프롬프트', 3: '잠금 3 · AI 초안 검증', 4: '출구', 5: '보스전 · 미란다 보고' };
+function logStart(extra) {
+  S.rec = Object.assign({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), t0: Date.now(), stage: 1, reached: 1,
+    stageSec: {}, stageErr: {}, errs: [], hints: 0, coffee: 0, news: [], boss: [], result: null }, extra || {});
+  S.stageAt = Date.now();
+}
+function logStage(n) {
+  const r = S.rec; if (!r || r.saved) return;
+  r.stageSec[r.stage] = (r.stageSec[r.stage] || 0) + Math.round((Date.now() - S.stageAt) / 1000);
+  r.stage = n; r.reached = Math.max(r.reached, n); S.stageAt = Date.now();
+}
+function logErr(item) {
+  const r = S.rec; if (!r || r.saved) return;
+  r.stageErr[r.stage] = (r.stageErr[r.stage] || 0) + 1;
+  r.errs.push([r.stage, item]);
+}
+function logEnd(result) {
+  const r = S.rec; if (!r || r.saved) return;
+  logStage(r.stage); r.saved = true;
+  Object.assign(r, { result, sec: Math.round((Date.now() - r.t0) / 1000), hp: S.hp, mistakes: S.mistakes, hints: S.hintsUsed, bossHp: S.boss });
+  delete r.saved; delete r.stage;
+  try {
+    const all = JSON.parse(localStorage.getItem(LOG_KEY) || '[]');
+    all.push(r); while (all.length > 5000) all.shift();
+    localStorage.setItem(LOG_KEY, JSON.stringify(all));
+  } catch (e) {}
+  r.saved = true;
+}
+window.addEventListener('pagehide', () => { if (S.running) logEnd('quit'); });
 function stat(key, val) {
   try { localStorage.setItem(key, val !== undefined ? val : (+(localStorage.getItem(key) || 0) + 1)); } catch (e) {}
 }
 function goHome() {
+  if (S.running) logEnd('quit');
   cancelAutoHome(); stopTimer(); resetState(); closeModal(); closeCU(true); $('#intro').classList.add('hidden');
   document.body.classList.remove('danger', 'critical');
   document.querySelectorAll('.confetti').forEach(c => c.remove());
@@ -1712,6 +1745,7 @@ function coffeePct() { if (coffeeReady()) return 100; return Math.round(100 - (S
 function coffeeDeco() { return `<span class="cf-ring" style="--p:${coffeePct()}"></span><span class="steam"><i></i><i></i><i></i></span><span class="cf-badge">+${CONFIG.coffeeHeal}</span>`; }
 function drinkCoffee() {
   if (!S.running) return;
+  if (coffeeReady() && S.rec) S.rec.coffee++;
   if (!coffeeReady()) {
     const s = Math.ceil((S.coffeeReadyAt - Date.now()) / 1000);
     toast(`☕ 커피를 새로 내리는 중… ${s}초 뒤에 마실 수 있어요`);
@@ -1798,6 +1832,7 @@ function renderL1() {
       if (Object.keys(L.placed).length === TASKS.length) { L.done = true; lockClear(1); }
       else renderL1();
     } else {
+      logErr('업무 분배 · ' + TASKS[i].k);
       shakeEl(card); miss(card.querySelector(`[data-to="${TASKS[i].to}"]`));
       damageMe(7, TASKS[i].to === 'ai' ? `‘${TASKS[i].k}’은(는) 정형화된 업무! AI에게 맡겨도 돼요 (멘탈 -7)` : `‘${TASKS[i].k}’은(는) 사람만 할 수 있는 일이에요! (멘탈 -7)`);
     }
@@ -1836,8 +1871,8 @@ function renderL2() {
     if (L.slots[s] !== null) return;
     if (L.sel === null) { toast('먼저 아래에서 추천 문장을 골라 주세요 👇'); return; }
     const f = FRAGS[L.sel];
-    if (f.slot === -1) { miss(null); L.rejected[L.sel] = true; L.sel = null; renderL2(); shakeEl($(`.pslot[data-s="${s}"]`)); damageMe(8, f.why + ' (멘탈 -8)'); return; }
-    if (f.slot !== s) { shakeEl(b); miss($(`.pslot[data-s="${f.slot}"]`)); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ‘AI 활용법’을 확인하세요 (멘탈 -6)`); return; }
+    if (f.slot === -1) { logErr('프롬프트 · 쓰면 안 되는 문장'); miss(null); L.rejected[L.sel] = true; L.sel = null; renderL2(); shakeEl($(`.pslot[data-s="${s}"]`)); damageMe(8, f.why + ' (멘탈 -8)'); return; }
+    if (f.slot !== s) { logErr('프롬프트 · ‘' + P_SLOTS[f.slot] + '’ 칸 헷갈림'); shakeEl(b); miss($(`.pslot[data-s="${f.slot}"]`)); damageMe(6, `‘${P_SLOTS[s]}’ 칸에 맞는 문장이 아니에요! 기사 ‘AI 활용법’을 확인하세요 (멘탈 -6)`); return; }
     L.slots[s] = L.sel; L.sel = null; hitBoss(2); gotIt(); renderL2();
     if (L.slots.every(x => x !== null)) runAI();
   });
@@ -1894,7 +1929,7 @@ function renderL3() {
 function fixLine(i, d) {
   const L = S.l3, l = DRAFT[i];
   if (L.sub !== 'doc' || L.fixed[i] || !l.ok) return;
-  if (!l.ok.includes(L.tool)) { shakeEl(d); const j = DRAFT.findIndex((x, k) => x.ok && !L.fixed[k] && x.ok.includes(L.tool)); miss(j >= 0 ? $(`.bad-seg[data-i="${j}"]`) : null); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '이 문장에는 다른 도구가 필요해요! (멘탈 -5)'); return; }
+  if (!l.ok.includes(L.tool)) { logErr('AI 초안 검증 · ' + ({ mask: '개인정보·기밀', flag: '근거 없는 통계', source: '같은 질문 반복 검증' }[l.ok[0]] || l.bad)); shakeEl(d); const j = DRAFT.findIndex((x, k) => x.ok && !L.fixed[k] && x.ok.includes(L.tool)); miss(j >= 0 ? $(`.bad-seg[data-i="${j}"]`) : null); damageMe(5, (L.tool === 'flag' && l.whyFlag) ? l.whyFlag + ' (멘탈 -5)' : '이 문장에는 다른 도구가 필요해요! (멘탈 -5)'); return; }
   L.fixed[i] = true; hitBoss(2); gotIt();
   if (Object.keys(L.fixed).length === 4) { L.sub = 'code'; sfx.unlock(); bigFx('PERFECT CHECK'); renderL3(); later(() => { const c = $('#code-area'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300); }
   else renderL3();
@@ -1911,7 +1946,7 @@ function renderCode() {
   $('#code-area').querySelectorAll('.key').forEach(k => k.onclick = () => {
     if (S.l3.done) return;
     if (k.dataset.n === CONFIG.code[2]) { S.l3.done = true; hitBoss(3); gotIt(); lockClear(3); }
-    else { shakeEl(k); if (miss($('#code-area .alink'))) S.dateHint = true; damageMe(8, '코드가 틀렸어요! 신문 맨 위 Written By 줄의 기자 이름을 세어 보세요 (멘탈 -8)'); }
+    else { logErr('금고 숫자 · 기자 수 세기'); shakeEl(k); if (miss($('#code-area .alink'))) S.dateHint = true; damageMe(8, '코드가 틀렸어요! 신문 맨 위 Written By 줄의 기자 이름을 세어 보세요 (멘탈 -8)'); }
   });
 }
 
@@ -1922,7 +1957,7 @@ const REWARD = {
   3: { item:'article', itemTxt:'📰 완성 기사',  skill:'🛡️ 팩트체크 안목', say:'검증을 마친 <b>📰 완성 기사</b>를 손에 넣었다! 이제 <b>출구</b>로 가서 미란다에게 보고하러 가자!' }
 };
 function lockClear(n) {
-  const R = REWARD[n];
+  const R = REWARD[n]; logStage(n + 1);
   S.digits[n - 1] = CONFIG.code[n - 1]; S.inv[R.item] = true;
   hitBoss(5); sfx.unlock();
   S.elapsed = 0; S.nextPile = CONFIG.pileFirst;
@@ -1945,7 +1980,7 @@ function lockClear(n) {
    👑 최종 보스 — 미란다의 갑질 모드
    ===================================================================== */
 function bossIntro() {
-  S.phase = 'boss'; sfx.boss();
+  S.phase = 'boss'; sfx.boss(); logStage(5);
   if (!S.bossEntry) S.bossEntry = { boss: S.boss };   // 보스전부터 다시 할 때 쓰는 기록
   renderHUD();
   const it = $('#intro');
@@ -2082,6 +2117,8 @@ function answer(btn) {
     fb.innerHTML = `<b>${kind === 'best' ? `★ PERFECT · 미란다 -${DMG.best}` : kind === 'good' ? `△ 그럭저럭 · 미란다 -${DMG.good}` : `✕ 잘못된 보고 · 멘탈 -${DMG.bad}`}</b><span>${why}</span>`;
   }
   fb.className = 'feedback ' + (kind === 'bad' ? 'bad' : kind === 'good' ? 'meh' : 'good');
+  if (S.rec) S.rec.boss.push([r.title === '편집장의 OX 질문' ? 'OX · ' + r.ask.slice(0, 18) + '…' : r.title, kind]);
+  if (kind === 'bad') logErr('보스전 · ' + (r.type === 'ox' ? 'OX · ' + r.ask.slice(0, 18) + '…' : r.title));
   deliver(kind);
   if (S.running && S.boss > 0) later(() => startRound(S.round + 1), kind === 'bad' ? 3500 : 2800);
 }
@@ -2090,6 +2127,7 @@ function retryBoss() {
   cancelAutoHome();
   document.querySelectorAll('.confetti').forEach(c => c.remove());
   S.runId++; S.running = true; S.hp = 100; S.combo = 0;
+  logStart({ retry: true, stage: 5, reached: 5 }); S.mistakes = 0; S.hintsUsed = 0;
   S.boss = S.bossEntry ? S.bossEntry.boss : 55;
   S.coffeeReadyAt = 0; S.roundData = null; S.answered = false; S.phase = 'boss';
   showScreen('game'); renderHUD(); startTimer(); sfx.boss();
@@ -2099,6 +2137,7 @@ function retryBoss() {
 /* ---------- 게임이 끝나면 잠시 뒤 홈페이지로 ---------- */
 let autoHomeTimer = null;
 function goSite() {
+  if (S.running) logEnd('quit');
   const url = new URL('../#/', location.href).href;
   try { (window.top || window).location.href = url; } catch (e) { location.href = url; }
 }
@@ -2124,6 +2163,7 @@ function endRun() {
 }
 function gameOver(reason) {
   if (!S.running) return;
+  logEnd('fail');
   endRun();
   $('#fail-title').textContent = S.phase === 'boss' ? '신입 비서, 보고 도중 멘탈 붕괴' : '신입 비서, 업무 폭탄에 멘탈 붕괴';
   $('#fail-chars').innerHTML = `<div class="tb-mir">${mirandaSpr(true)}</div><div class="tb-me">${spr(meName())}</div>${[0, 1, 2, 3].map(i => `<span class="tb-paper p${i}">${spr('folder')}</span>`).join('')}`;
@@ -2157,6 +2197,7 @@ function cameraFlash(n) {
 }
 function win() {
   if (!S.running) return;
+  logEnd('win');
   endRun();
   $('#win-chars').innerHTML = `<div class="wf-me">${spr(meName())}<span class="wf-mag">${spr('folder')}</span></div><div class="wf-mir"><span class="wf-say">That’s all.</span>${spr('miranda', { rows: mirandaApproveRows(), pal: { E: '#1d1a1c' } })}</div>`;
   $('#bigcode').innerHTML = `<div class="n">${CONFIG.code[0]}</div><span class="sl">/</span><div class="n">${CONFIG.code[1]}</div><span class="sl">/</span><div class="n">${CONFIG.code[2]}</div>`;
@@ -2175,6 +2216,7 @@ function openModal(title, html) { $('#modal-title').textContent = title; $('#mod
 function closeModal() { $('#modal').classList.add('hidden'); }
 function openArticles(idx = 0) {
   sfx.click();
+  if (S.running && S.rec && !S.rec.news.includes(idx)) S.rec.news.push(idx);
   const a = ARTICLES[idx];
   openModal('THE NEW YORK MIRROR', `
     <div class="np-ear">The Devil Wears Prada 2:<br>The Secretary Before &amp; After Using AI</div>
