@@ -1051,6 +1051,58 @@ body.past .office-stage .os-floor{background:repeating-linear-gradient(90deg,#a7
 .fax-stand i{position:absolute;left:10%;right:10%;height:2px;background:#3b2d1d}
 .fax-stand i:first-child{top:35%}.fax-stand i:last-child{top:70%}
 .board-shadow{position:absolute;left:69%;top:63.5%;width:9%;height:2.2%;border-radius:50%;background:rgba(0,0,0,.18)}
+
+/* 📞 업무 폭주: 쌓이는 연락 + 올라오는 엘리베이터 */
+.ring-alert small{font-weight:400;color:#f3c9c9;margin-left:4px}
+.ring-alert b.bump{display:inline-block;animation:bumpUp .5s}
+@keyframes bumpUp{40%{transform:scale(1.6);color:#fff}}
+.lift{display:flex;align-items:center;gap:6px;background:#efe3c6;border:1.5px solid #3b2d1d;padding:6px 10px;margin-bottom:12px;font:700 12px var(--sans)}
+.lift-l{margin-right:auto;color:#3b2d1d}
+.lift i{font-style:normal;min-width:38px;text-align:center;padding:3px 0;border:1.5px solid #3b2d1d;background:#fff;color:#9a8b6e}
+.lift i.on{background:#3b2d1d;color:#ffd166}
+.lift i.now{background:var(--red);border-color:var(--red);color:#fff;animation:blink .8s infinite}
+.lift-r{color:var(--red);margin-left:6px}
+/* 📋 회의실: 준비 안 된 곳 찾기 */
+.mroom{position:relative;aspect-ratio:16/9;border:2px solid #3b2d1d;overflow:hidden;background:#f6ecd6;box-shadow:4px 4px 0 #3b2d1d}
+.mr-wall{position:absolute;inset:0 0 40% 0;background:linear-gradient(#f6ecd6,#eadcbd)}
+.mr-floor{position:absolute;left:0;right:0;bottom:0;height:40%;background:repeating-linear-gradient(90deg,#a7865e 0 6%,#9a7a53 6% 12%)}
+.mr-table{position:absolute;left:14%;right:14%;top:63%;height:10%;background:linear-gradient(#a87a4c,#7a5634);border:2px solid #3b2d1d;border-radius:6px}
+.hs{position:absolute;padding:0;display:grid;place-items:center;border:2px dashed transparent!important;transition:border-color .15s,background .15s}
+.hs:hover{border-color:rgba(59,45,29,.45)!important;background:rgba(255,255,255,.18)}
+.hs.fixed{border:2px solid #2e9a5a!important;background:rgba(46,154,90,.08);cursor:default}
+.ok-stamp{position:absolute;top:4px;right:4px;background:#2e9a5a;color:#fff;font:700 10.5px var(--sans);padding:2px 6px}
+.wb{width:100%;height:100%;background:#fff;border:3px solid #6b6b6b;display:flex;flex-direction:column;padding:6% 8%;text-align:left;font:600 clamp(8px,1.3vw,13px)/1.5 var(--sans);color:#1d3557}
+.wb b{font:900 clamp(10px,1.5vw,15px) var(--sans);color:#b3261e;border-bottom:1px solid #ccc;margin-bottom:4px}
+.wb .blank{font-size:clamp(20px,4vw,40px);color:#ccc;text-align:center;margin-top:6%}
+.scr{width:100%;height:100%;border:4px solid #3b2d1d;display:grid;place-items:center;text-align:center;font-family:var(--sans)}
+.scr.on{background:linear-gradient(135deg,#1d3557,#2f6f9f);color:#fff}
+.scr.on b{display:block;font:900 clamp(14px,2.6vw,26px) 'Playfair Display',serif;letter-spacing:.1em}
+.scr.on small{font-size:clamp(8px,1vw,11px);letter-spacing:.2em}
+.scr.off{background:#151515;color:#666;font-size:clamp(8px,1.1vw,12px);letter-spacing:.2em}
+.chairs{width:100%;height:100%;display:flex;justify-content:space-around;align-items:center}
+.chairs span{display:flex;flex-direction:column;align-items:center;font-size:clamp(18px,3.4vw,34px);line-height:1}
+.chairs em{font:700 clamp(7px,.9vw,10px) var(--sans);font-style:normal;background:#fff;border:1px solid #3b2d1d;padding:0 4px;margin-top:2px}
+.chairs .gap{width:clamp(18px,3.4vw,34px)}
+.docs,.tidy{display:flex;flex-direction:column;align-items:center;font-size:clamp(18px,3vw,30px);line-height:1}
+.docs small,.tidy small{font:700 clamp(7px,.9vw,10px) var(--sans);background:#fff;border:1px solid #3b2d1d;padding:1px 4px;margin-top:3px}
+.docs.pile{font-size:clamp(22px,3.8vw,38px)}
+.clk{display:flex;flex-direction:column;align-items:center;font-size:clamp(18px,3vw,30px)}
+.clk small{font:700 10px var(--sans)}
+.win2{width:100%;height:100%;border:4px solid #3b2d1d;background:linear-gradient(#bcd3e6,#e8eef2);box-shadow:inset 0 0 0 2px #fff}
+.vase,.plant2{font-size:clamp(20px,3.6vw,36px)}
+.plant2{font-size:clamp(26px,5vw,52px)}
+.mr-pick{position:absolute;left:8%;right:8%;bottom:6%;z-index:5;background:#fffdf6;border:2px solid #3b2d1d;box-shadow:0 10px 30px rgba(0,0,0,.3);padding:12px 14px;animation:fadeIn .25s}
+.mr-pick p{margin:0;font:600 15px/1.5 var(--kserif)}
+.mr-pick small{display:block;font:700 11px var(--sans);letter-spacing:.1em;color:var(--red);margin:4px 0 8px}
+.mr-pick div{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mr-opt{background:#fff;border:1.5px solid #3b2d1d!important;padding:10px;font:500 14px var(--kserif);text-align:left;box-shadow:2px 2px 0 #3b2d1d}
+.mr-opt:hover:not(:disabled){background:#fff4d6}
+.mr-opt:disabled{opacity:.4;text-decoration:line-through}
+.mr-x{margin-top:8px;font-size:12px;text-decoration:underline;color:#6b5a44}
+.mr-bar{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:13px}
+.mr-bar b{color:var(--red);font-size:16px}
+.mr-tip{color:var(--muted)}
+@media (max-width:600px){.mr-pick div{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -2541,15 +2593,27 @@ const DESK_REQS = [
 ];
 
 /* ---------- 미니게임 3: 회의실 — 한발 앞선 회의 준비 (기획 특집 회의 준비 문단) ---------- */
-const MEET_STEPS = [   // g: 기사에 나온 준비 순서 (같은 숫자끼리는 순서 상관없음) · g:0 은 함정
-  { t:'안건을 미리 확정한다', g:1 },
-  { t:'참석자를 미리 확정한다', g:1 },
-  { t:'핵심 자료를 한 장으로 요약한다', g:2 },
-  { t:'자료와 장비를 미리 점검한다', g:3 },
-  { t:'회의실 환경을 미리 점검한다', g:3 },
-  { t:'안건은 회의를 시작한 뒤에 정한다', g:0 },
-  { t:'자료는 많을수록 좋으니 전부 출력한다', g:0 },
-  { t:'프로젝터 점검은 회의 도중에 한다', g:0 }
+// 회의실 그림 속 다섯 곳 — 매 판 그중 4곳이 ‘준비 안 됨’ 상태로 나와요. 고칠 방법은 기사 ‘기획 특집’ 회의 준비 문단에서!
+const MEET_SPOTS = [
+  { k:'agenda', x:3,  y:8,  w:25, h:38, q:'화이트보드에 오늘 회의 <b>안건</b>이 비어 있어요.', good:'안건을 미리 확정해서 적어 둔다', bad:'회의를 시작한 뒤 다 같이 정한다',
+    ok:'<div class="wb"><b>AGENDA</b><span>1. 파리 패션위크 일정</span><span>2. 12월호 표지</span><span>3. 광고 계약</span></div>',
+    no:'<div class="wb"><b>AGENDA</b><span class="blank">?</span></div>' },
+  { k:'proj',   x:33, y:6,  w:33, h:38, q:'스크린에 아무것도 안 나와요. <b>장비</b>가 점검되지 않았어요.', good:'미리 켜서 연결과 발표 화면을 점검한다', bad:'고장 나면 회의 도중에 기사님을 부른다',
+    ok:'<div class="scr on"><b>RUNWAY</b><small>OCTOBER BRIEFING</small></div>',
+    no:'<div class="scr off"><small>NO SIGNAL</small></div>' },
+  { k:'people', x:17, y:73, w:66, h:20, q:'참석자 명단은 6명인데 자리와 명패가 맞지 않아요. <b>참석자</b>가 확정되지 않았어요.', good:'참석자를 미리 확정하고 자리와 명패를 맞춘다', bad:'오는 사람 순서대로 아무 데나 앉힌다',
+    ok:'<div class="chairs">' + '<span>🪑<em>명패</em></span>'.repeat(6) + '</div>',
+    no:'<div class="chairs">' + '<span>🪑<em>?</em></span>'.repeat(4) + '<span class="gap"></span><span class="gap"></span></div>' },
+  { k:'docs',   x:24, y:52, w:20, h:14, q:'자리마다 <b>두꺼운 서류 뭉치</b>가 놓여 있어요.', good:'핵심 자료를 한 장으로 요약해 둔다', bad:'자료는 많을수록 좋으니 전부 나눠 준다',
+    ok:'<div class="docs one">📄<small>한 장 요약본</small></div>', no:'<div class="docs pile">📚📚<small>200쪽 자료</small></div>' },
+  { k:'room',   x:57, y:52, w:19, h:14, q:'지난 회의의 <b>컵과 쓰레기</b>가 그대로예요. 회의실 환경이 점검되지 않았어요.', good:'회의실을 미리 정돈하고 조명·온도까지 점검한다', bad:'회의가 끝난 뒤 한꺼번에 치운다',
+    ok:'<div class="tidy">💧💧💧<small>물 준비 완료</small></div>', no:'<div class="tidy mess">☕🥤🗑️<small>지난 회의 흔적</small></div>' }
+];
+const MEET_DECOYS = [   // 원래 문제없는 곳 — 막 누르면 멘탈이 깎여요
+  { k:'clock',  x:70, y:6,  w:8,  h:14, html:'<div class="clk">🕘<small>09:00</small></div>', msg:'시계는 제 시간을 잘 가리키고 있어요.' },
+  { k:'window', x:80, y:8,  w:17, h:36, html:'<div class="win2"></div>', msg:'창밖은 문제없어요. 회의실 안을 보세요!' },
+  { k:'vase',   x:46, y:50, w:9,  h:16, html:'<div class="vase">💐</div>', msg:'꽃은 잘 꽂혀 있어요.' },
+  { k:'plant',  x:1,  y:62, w:9,  h:30, html:'<div class="plant2">🪴</div>', msg:'화분은 문제없어요.' }
 ];
 
 const REWARD_PAST = {
@@ -2567,7 +2631,7 @@ const GOAL_TEXT_PAST = {
 const HINTS_PAST = {
   1: '가장 <b>먼저</b> 처리할 일은? 신문 <b>‘현장 인터뷰’</b>와 <b>‘기획 특집’</b>을 보세요.<br><b>시간이 정해진 일</b>(미란다의 지시 · 오늘 마감 · 약속된 손님 · 곧 확정해야 하는 예약)이 일반 문의나 잡무보다 먼저예요.',
   2: '신문 <b>‘에밀리의 책상’</b>의 네 가지 무기를 떠올려 보세요.<br>소통 → <b>전화기와 팩스</b> / 일정·메시지 기록 → <b>다이어리와 펜</b> / 시급한 서류·인맥 → <b>서류와 명함</b> / 정보 처리·이메일·자료 통합 → <b>오피스 컴퓨터</b>',
-  3: '신문 <b>‘기획 특집’</b>의 회의 준비 문단에 <b>순서</b>가 그대로 나와요.<br>① <b>안건과 참석자</b>를 사전에 확정 → ② <b>핵심 자료를 한 장으로 요약</b> → ③ <b>자료·장비·회의실 환경</b>까지 미리 점검. 미루는 준비는 함정이에요!',
+  3: '신문 <b>‘기획 특집’</b>의 회의 준비 문단을 보세요.<br>회의실에서 <b>안건</b>(화이트보드) · <b>참석자</b>(자리·명패) · <b>자료</b>(한 장 요약) · <b>장비</b>(스크린) · <b>회의실 환경</b>(정돈)이 준비됐는지 확인하세요. 시계·창문·꽃·화분은 문제없어요!',
   door: '세 가지 업무를 끝냈어요! 오른쪽 <b>편집장실 문</b>을 눌러 미란다에게 보고하러 가세요.',
   4: '이번 질문의 단서가 있는 기사에 형광펜을 칠해 두었어요. 아래 버튼으로 열어 보세요.'
 };
@@ -2720,43 +2784,31 @@ function renderP1() {
   if (!L.cards) L.cards = shuffle(R.opts.map((_, k) => k));
   body.innerHTML = `
     <p class="lead">에밀리의 전화기와 팩스가 쉴 새 없이 울린다! ${art(2, '기사 ‘현장 인터뷰’')}의 말처럼 <b>동시에 몰려올 때 가장 먼저 처리할 일</b>을 골라 누르세요.</p>
-    <div class="ring-alert"><span class="dot"></span>URGENT · 대기 중인 연락 <b>${4 + (L.rounds.length - L.i) * 3}</b>건 · 미란다 도착까지 <b>${L.rounds.length - L.i}0분</b></div>
-    <div class="ring-press"><i id="p1-bar"></i><span>응답 대기</span></div>
+    <div class="ring-alert"><span class="dot"></span>URGENT · 대기 중인 연락 <b class="${L.bump ? 'bump' : ''}">${L.wait}</b>건 <small>${L.bump ? '— 틀린 사이 연락이 더 쌓였어요!' : '— 맞힐 때마다 줄어들어요'}</small></div>
+    <div class="lift"><span class="lift-l">🛗 미란다가 올라오는 중</span>${LIFT_FLOORS.map((f, k) => `<i class="${k < L.i + 1 ? 'on' : ''} ${k === L.i ? 'now' : ''}">${f}</i>`).join('')}<span class="lift-r">${L.i + 1 >= LIFT_FLOORS.length ? '곧 도착!' : '편집장실 18F'}</span></div>
     <div class="ring-head"><span class="ring-bell">☎</span><b>업무 폭주 ${L.i + 1} / ${L.rounds.length}</b><span class="ring-dots">${L.rounds.map((_, k) => `<i class="${k < L.i ? 'on' : ''}"></i>`).join('')}</span></div>
     <div class="ring-grid">${L.cards.map(k => { const [ic, who, txt] = R.opts[k]; return `<button class="ring" data-k="${k}"><span class="ri">${ic}</span><small>${who}</small><b>${txt}</b></button>`; }).join('')}</div>
     <p class="note">급한 일 = 시간이 정해진 일(미란다의 지시 · 오늘 마감 · 약속된 손님 · 곧 확정해야 하는 예약)</p>`;
-  startP1Pressure();
+  if (!L.bump) beep([1180, 940, 1180, 940], 0.06, 'square', 0.03);   // 새 연락이 들어올 때 벨 소리
+  L.bump = false;
   body.querySelectorAll('.ring').forEach(b => b.onclick = () => {
     const k = +b.dataset.k;
     if (k === 0) {
-      stopP1Pressure();
+      L.wait = Math.max(0, L.wait - 3); L.bump = false;
       gotIt(); sfx.good(); hitBoss(2); b.classList.add('right');
       body.querySelectorAll('.ring').forEach(x => x.disabled = true);
       later(() => { L.i++; L.cards = null; if (L.i >= L.rounds.length) { L.done = true; lockClear(1); } else renderP1(); }, 700);
     } else {
-      logErr('우선순위 · ' + R.opts[k][2].slice(0, 18) + '…'); shakeEl(b); b.classList.add('wrong-pick');
+      logErr('우선순위 · ' + R.opts[k][2].slice(0, 18) + '…');
+      L.wait += 2; L.bump = true; const ra = body.querySelector('.ring-alert b'); if (ra) { ra.textContent = L.wait; ra.classList.remove('bump'); void ra.offsetWidth; ra.classList.add('bump'); }
+      beep([1400, 1100, 1400], 0.05, 'square', 0.04); shakeEl(b); b.classList.add('wrong-pick');
       miss(body.querySelector('.ring[data-k="0"]'));
       damageMe(6, '그것보다 더 급한 일이 있어요! 시간이 정해진 일이 먼저예요 (멘탈 -6)');
     }
   });
 }
 
-// 응답 대기 게이지: 10초 안에 고르지 못하면 전화가 쌓여 멘탈 -3 (시간제한 대신 긴박감)
-let p1Timer = null;
-function stopP1Pressure() { clearInterval(p1Timer); p1Timer = null; }
-function startP1Pressure() {
-  stopP1Pressure();
-  let t0 = Date.now(), lastRing = 0;
-  p1Timer = setInterval(() => {
-    const bar = $('#p1-bar');
-    if (!bar || !S.running || S.open !== 1 || MODE !== 'past' || S.l1.done) { stopP1Pressure(); return; }
-    const p = Math.min(1, (Date.now() - t0) / 10000);
-    bar.style.width = (p * 100) + '%';
-    bar.parentElement.classList.toggle('hot', p > .6);
-    if (Date.now() - lastRing > (p > .6 ? 700 : 1400)) { lastRing = Date.now(); beep([1180, 940], 0.05, 'square', 0.03); }
-    if (p >= 1) { t0 = Date.now(); damageMe(3, '📞 응답이 늦어 전화가 계속 쌓이고 있어요! (멘탈 -3)'); shakeEl($('.ring-grid')); }
-  }, 120);
-}
+const LIFT_FLOORS = ['1F', '6F', '12F', '18F'];   // 한 번 맞힐 때마다 미란다가 올라와요 (시간이 아니라 진행으로 긴박감)
 
 /* ---------- 🗂️ 미니게임 2 · 에밀리의 책상: 이 일엔 어떤 도구? ---------- */
 function renderP2() {
@@ -2784,37 +2836,49 @@ function renderP2() {
 function renderP3() {
   const L = S.l3, body = $('#cu-body');
   if (L.done) return;
-  const left = MEET_STEPS.filter((x, i) => x.g && !L.placed.includes(i));
-  const nextG = left.length ? Math.min(...left.map(x => x.g)) : 0;
+  const found = L.probs.filter(k => L.fixed[k]).length;
+  const spot = k => MEET_SPOTS.find(x => x.k === k);
   body.innerHTML = `
-    <p class="lead">미란다가 회의실에 들어오기 전까지! ${art(0, '기사 ‘기획 특집’')}에 나온 <b>회의 준비를 순서대로</b> 눌러 체크리스트를 완성하세요. 미루는 준비(함정)는 누르면 안 돼요.</p>
-    <div class="mtg2">
-      <div class="mtg-plan"><div class="mtg-top"><b>MEETING PREP</b><small>편집장 회의 · 내일 오전 9시</small></div>
-        ${[0, 1, 2, 3, 4].map(n => { const i = L.placed[n]; return `<div class="slot ${i !== undefined ? 'fill' : ''}"><span>${n + 1}</span>${i !== undefined ? MEET_STEPS[i].t : '<em>다음 준비는?</em>'}</div>`; }).join('')}
-        <div class="mtg-clock">⏱ 미란다 입장까지 <b>${5 - L.placed.length}</b>단계</div></div>
-      <div class="mtg-pool">${L.cards.map(i => `<button class="mcard ${L.placed.includes(i) ? 'used' : ''} ${L.rej[i] ? 'rej' : ''}" data-i="${i}" ${L.placed.includes(i) || L.rej[i] ? 'disabled' : ''}>${MEET_STEPS[i].t}</button>`).join('')}</div>
-    </div>`;
-  body.querySelectorAll('.mcard').forEach(b => b.onclick = () => {
-    const i = +b.dataset.i, st = MEET_STEPS[i];
-    if (!st.g) {
-      L.rej[i] = true; logErr('회의 준비 · ' + st.t); renderP3();
-      damageMe(6, '미루는 준비는 준비가 아니에요! (멘탈 -6)'); return;
-    }
-    if (st.g !== nextG) {
-      logErr('회의 준비 · 순서'); shakeEl(b);
-      const want = L.cards.find(k => MEET_STEPS[k].g === nextG && !L.placed.includes(k));
-      miss(body.querySelector(`.mcard[data-i="${want}"]`));
-      damageMe(5, '순서가 달라요! 기사에 나온 준비 순서를 떠올려 보세요 (멘탈 -5)'); return;
-    }
-    gotIt(); sfx.good(); hitBoss(1); L.placed.push(i);
-    if (L.placed.length === 5) { L.done = true; lockClear(3); } else renderP3();
+    <p class="lead">내일 아침 9시, 미란다의 회의! 회의실을 둘러보고 <b>준비가 안 된 곳</b>을 찾아 누른 뒤, ${art(0, '기사 ‘기획 특집’')}에 맞는 <b>준비 방법</b>을 고르세요. 문제없는 곳을 누르면 멘탈이 깎여요!</p>
+    <div class="mroom">
+      <div class="mr-wall"></div><div class="mr-floor"></div><div class="mr-table"></div>
+      ${MEET_SPOTS.map(x => { const bad = L.probs.includes(x.k) && !L.fixed[x.k];
+        return `<button class="hs ${L.fixed[x.k] ? 'fixed' : ''}" data-s="${x.k}" style="left:${x.x}%;top:${x.y}%;width:${x.w}%;height:${x.h}%">${bad ? x.no : x.ok}${L.fixed[x.k] ? '<span class="ok-stamp">✔ 준비 완료</span>' : ''}</button>`; }).join('')}
+      ${MEET_DECOYS.map(x => `<button class="hs decoy" data-d="${x.k}" style="left:${x.x}%;top:${x.y}%;width:${x.w}%;height:${x.h}%">${x.html}</button>`).join('')}
+      ${L.choose ? (() => { const x = spot(L.choose), opts = L.order[x.k]; return `<div class="mr-pick"><p>${x.q}</p><small>어떻게 준비할까요?</small>
+        <div>${opts.map(o => `<button class="mr-opt" data-o="${o}">${o === 'good' ? x.good : x.bad}</button>`).join('')}</div><button class="mr-x" type="button">다시 둘러보기</button></div>`; })() : ''}
+    </div>
+    <div class="mr-bar"><span>준비 안 된 곳 <b>${found}</b> / ${L.probs.length} 해결</span><span class="mr-tip">힌트: 안건 · 참석자 · 자료 · 장비 · 회의실 환경</span></div>`;
+  body.querySelectorAll('.hs[data-s]').forEach(b => b.onclick = () => {
+    const k = b.dataset.s;
+    if (L.fixed[k] || L.choose) return;
+    if (!L.probs.includes(k)) { logErr('회의실 · 이미 준비된 곳'); shakeEl(b); damageMe(4, '여긴 이미 준비가 잘 돼 있어요! 다른 곳을 보세요 (멘탈 -4)'); hintSpot(); return; }
+    sfx.click(); L.choose = k; L.order[k] = shuffle(['good', 'bad']); renderP3();
   });
+  body.querySelectorAll('.hs.decoy').forEach(b => b.onclick = () => {
+    if (L.choose) return;
+    const d = MEET_DECOYS.find(x => x.k === b.dataset.d);
+    logErr('회의실 · ' + d.k); shakeEl(b); damageMe(4, d.msg + ' (멘탈 -4)'); hintSpot();
+  });
+  body.querySelectorAll('.mr-opt').forEach(b => b.onclick = () => {
+    const k = L.choose, x = spot(k);
+    if (b.dataset.o === 'good') {
+      gotIt(); sfx.good(); hitBoss(2); L.fixed[k] = true; L.choose = null;
+      if (L.probs.every(p => L.fixed[p])) { L.done = true; renderP3Done(); } else renderP3();
+    } else {
+      logErr('회의실 · ' + x.bad); shakeEl(b); b.disabled = true;
+      damageMe(6, '그건 미루는 준비예요! 한발 앞서 준비해야 해요 (멘탈 -6)');
+    }
+  });
+  const mx = body.querySelector('.mr-x'); if (mx) mx.onclick = () => { L.choose = null; renderP3(); };
+  function hintSpot() { const k = L.probs.find(p => !L.fixed[p]); miss(body.querySelector(`.hs[data-s="${k}"]`)); }
 }
+function renderP3Done() { later(() => lockClear(3), 500); }
 function initPastState() {
   Object.assign(S, {
-    l1: { done: false, rounds: shuffle(PRIO_ROUNDS.map((_, i) => i)).slice(0, 4), i: 0, cards: null },
+    l1: { done: false, rounds: shuffle(PRIO_ROUNDS.map((_, i) => i)).slice(0, 4), i: 0, cards: null, wait: 14, bump: false },
     l2: { done: false, reqs: shuffle(DESK_REQS.map((_, i) => i)).slice(0, 5), i: 0, toolPos: shuffle(DESK_TOOLS.map(t => t.k)) },
-    l3: { done: false, cards: shuffle(MEET_STEPS.map((_, i) => i)), placed: [], rej: {} }
+    l3: { done: false, probs: shuffle(MEET_SPOTS.map(x => x.k)).slice(0, 4), fixed: {}, choose: null, order: {} }
   });
 }
 
