@@ -1103,6 +1103,10 @@ body.past .office-stage .os-floor{background:repeating-linear-gradient(90deg,#a7
 .mr-bar b{color:var(--red);font-size:16px}
 .mr-tip{color:var(--muted)}
 @media (max-width:600px){.mr-pick div{grid-template-columns:1fr}}
+.mroom>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.mroom .hs{z-index:2;border-radius:6px}
+.mroom .hs:hover{background:rgba(255,236,170,.18)!important;border-color:rgba(255,236,170,.9)!important}
+.mroom .hs.fixed{background:rgba(46,154,90,.12)!important}
 </style>
 </head>
 <body>
@@ -2594,27 +2598,97 @@ const DESK_REQS = [
 
 /* ---------- 미니게임 3: 회의실 — 한발 앞선 회의 준비 (기획 특집 회의 준비 문단) ---------- */
 // 회의실 그림 속 다섯 곳 — 매 판 그중 4곳이 ‘준비 안 됨’ 상태로 나와요. 고칠 방법은 기사 ‘기획 특집’ 회의 준비 문단에서!
+// x · y · w · h 는 그림(1600×900) 안에서 누를 수 있는 영역을 % 로 적은 거예요.
 const MEET_SPOTS = [
-  { k:'agenda', x:3,  y:8,  w:25, h:38, q:'화이트보드에 오늘 회의 <b>안건</b>이 비어 있어요.', good:'안건을 미리 확정해서 적어 둔다', bad:'회의를 시작한 뒤 다 같이 정한다',
-    ok:'<div class="wb"><b>AGENDA</b><span>1. 파리 패션위크 일정</span><span>2. 12월호 표지</span><span>3. 광고 계약</span></div>',
-    no:'<div class="wb"><b>AGENDA</b><span class="blank">?</span></div>' },
-  { k:'proj',   x:33, y:6,  w:33, h:38, q:'스크린에 아무것도 안 나와요. <b>장비</b>가 점검되지 않았어요.', good:'미리 켜서 연결과 발표 화면을 점검한다', bad:'고장 나면 회의 도중에 기사님을 부른다',
-    ok:'<div class="scr on"><b>RUNWAY</b><small>OCTOBER BRIEFING</small></div>',
-    no:'<div class="scr off"><small>NO SIGNAL</small></div>' },
-  { k:'people', x:17, y:73, w:66, h:20, q:'참석자 명단은 6명인데 자리와 명패가 맞지 않아요. <b>참석자</b>가 확정되지 않았어요.', good:'참석자를 미리 확정하고 자리와 명패를 맞춘다', bad:'오는 사람 순서대로 아무 데나 앉힌다',
-    ok:'<div class="chairs">' + '<span>🪑<em>명패</em></span>'.repeat(6) + '</div>',
-    no:'<div class="chairs">' + '<span>🪑<em>?</em></span>'.repeat(4) + '<span class="gap"></span><span class="gap"></span></div>' },
-  { k:'docs',   x:24, y:52, w:20, h:14, q:'자리마다 <b>두꺼운 서류 뭉치</b>가 놓여 있어요.', good:'핵심 자료를 한 장으로 요약해 둔다', bad:'자료는 많을수록 좋으니 전부 나눠 준다',
-    ok:'<div class="docs one">📄<small>한 장 요약본</small></div>', no:'<div class="docs pile">📚📚<small>200쪽 자료</small></div>' },
-  { k:'room',   x:57, y:52, w:19, h:14, q:'지난 회의의 <b>컵과 쓰레기</b>가 그대로예요. 회의실 환경이 점검되지 않았어요.', good:'회의실을 미리 정돈하고 조명·온도까지 점검한다', bad:'회의가 끝난 뒤 한꺼번에 치운다',
-    ok:'<div class="tidy">💧💧💧<small>물 준비 완료</small></div>', no:'<div class="tidy mess">☕🥤🗑️<small>지난 회의 흔적</small></div>' }
+  { k:'agenda', x:3.5,  y:11.5, w:24.5, h:37,  q:'화이트보드에 오늘 회의 <b>안건</b>이 비어 있어요.', good:'안건을 미리 확정해서 적어 둔다', bad:'회의를 시작한 뒤 다 같이 정한다' },
+  { k:'proj',   x:34.5, y:6,    w:33.5, h:41,  q:'스크린에 아무것도 안 나와요. <b>장비</b>가 점검되지 않았어요.', good:'미리 켜서 연결과 발표 화면을 점검한다', bad:'고장 나면 회의 도중에 기사님을 부른다' },
+  { k:'people', x:27,   y:48.5, w:46,   h:17,  q:'참석자 명단은 6명인데 의자와 명패가 맞지 않아요. <b>참석자</b>가 확정되지 않았어요.', good:'참석자를 미리 확정하고 자리와 명패를 맞춘다', bad:'오는 사람 순서대로 아무 데나 앉힌다' },
+  { k:'docs',   x:26.5, y:66,   w:18,   h:16,  q:'자리마다 <b>두꺼운 서류 뭉치</b>가 쌓여 있어요.', good:'핵심 자료를 한 장으로 요약해 둔다', bad:'자료는 많을수록 좋으니 전부 나눠 준다' },
+  { k:'room',   x:55.5, y:66,   w:18,   h:16,  q:'지난 회의의 <b>컵과 쓰레기</b>가 그대로예요. 회의실 환경이 점검되지 않았어요.', good:'회의실을 미리 정돈하고 조명·온도까지 점검한다', bad:'회의가 끝난 뒤 한꺼번에 치운다' }
 ];
 const MEET_DECOYS = [   // 원래 문제없는 곳 — 막 누르면 멘탈이 깎여요
-  { k:'clock',  x:70, y:6,  w:8,  h:14, html:'<div class="clk">🕘<small>09:00</small></div>', msg:'시계는 제 시간을 잘 가리키고 있어요.' },
-  { k:'window', x:80, y:8,  w:17, h:36, html:'<div class="win2"></div>', msg:'창밖은 문제없어요. 회의실 안을 보세요!' },
-  { k:'vase',   x:46, y:50, w:9,  h:16, html:'<div class="vase">💐</div>', msg:'꽃은 잘 꽂혀 있어요.' },
-  { k:'plant',  x:1,  y:62, w:9,  h:30, html:'<div class="plant2">🪴</div>', msg:'화분은 문제없어요.' }
+  { k:'clock',  x:70.2, y:10.5, w:6.2,  h:11.5, msg:'시계는 제 시간을 잘 가리키고 있어요.' },
+  { k:'window', x:77.5, y:9.5,  w:20,   h:42,   msg:'창밖은 문제없어요. 회의실 안을 보세요!' },
+  { k:'vase',   x:46.3, y:61,   w:7.4,  h:14,   msg:'꽃은 잘 꽂혀 있어요.' },
+  { k:'plant',  x:0.5,  y:56,   w:9,    h:41,   msg:'화분은 문제없어요.' }
 ];
+// 회의실 그림 (bad[k] 가 true 인 곳은 ‘준비 안 됨’ 모습으로 그려요)
+function meetSVG(bad) {
+  const ink = '#2b2118';
+  const chairBack = (x, y, w, h) => `<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${w * .28}" fill="url(#mLeather)" stroke="#000" stroke-width="3"/><path d="M${x + w * .2} ${y + h * .2} Q${x + w / 2} ${y + h * .1} ${x + w * .8} ${y + h * .2}" stroke="#4a4a4a" stroke-width="4" fill="none" stroke-linecap="round"/></g>`;
+  const frontChair = x => `<g><rect x="${x}" y="785" width="170" height="160" rx="48" fill="url(#mLeather)" stroke="#000" stroke-width="4"/><rect x="${x + 22}" y="805" width="126" height="110" rx="34" fill="#232323"/><path d="M${x + 40} 812 Q${x + 85} 798 ${x + 130} 812" stroke="#555" stroke-width="5" fill="none" stroke-linecap="round"/></g>`;
+  const plate = (x, name) => `<g><path d="M${x - 46} 600 L${x + 46} 600 L${x + 40} 578 L${x - 40} 578 Z" fill="#fff" stroke="${ink}" stroke-width="2"/><text x="${x}" y="595" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle" fill="${name === '?' ? '#c43' : ink}" letter-spacing="1">${name}</text></g>`;
+  // ── 화이트보드 (안건)
+  const board = `<g><rect x="56" y="104" width="390" height="330" rx="6" fill="#c9ccd1" stroke="#7d8288" stroke-width="3"/><rect x="70" y="118" width="362" height="290" fill="#fdfdfb"/>
+    <rect x="80" y="414" width="342" height="16" rx="3" fill="#a7abb1"/><rect x="110" y="408" width="44" height="9" rx="3" fill="#b3261e"/><rect x="164" y="408" width="44" height="9" rx="3" fill="#1d3557"/><rect x="330" y="404" width="60" height="14" rx="3" fill="#e5e5e5" stroke="#999"/>
+    <text x="96" y="168" font-family="Arial, sans-serif" font-size="30" font-weight="900" fill="#b3261e" letter-spacing="2">AGENDA</text><line x1="96" y1="182" x2="410" y2="182" stroke="#d2d2d2" stroke-width="2"/>
+    ${bad.agenda
+      ? `<text x="251" y="320" font-family="Arial, sans-serif" font-size="110" font-weight="700" text-anchor="middle" fill="#e2e2e2">?</text><path d="M120 360 q40 -10 90 4" stroke="#eee" stroke-width="10" fill="none" stroke-linecap="round"/>`
+      : `<g font-family="'Malgun Gothic', sans-serif" font-size="24" font-weight="700" fill="#1d3557"><text x="100" y="228">1. 파리 패션위크 일정</text><text x="100" y="278">2. 12월호 표지 확정</text><text x="100" y="328">3. 광고 계약 검토</text></g><path d="M100 350 l10 10 l22 -26" stroke="#2e9a5a" stroke-width="6" fill="none"/>`}</g>`;
+  // ── 스크린 (장비)
+  const screen = `<g><rect x="540" y="56" width="560" height="26" rx="6" fill="#3a3a3a"/><rect x="560" y="82" width="520" height="336" fill="${bad.proj ? '#1b1d21' : 'url(#mSlide)'}" stroke="#d7d7d7" stroke-width="6"/>
+    <rect x="556" y="418" width="528" height="10" rx="3" fill="#555"/><line x1="820" y1="428" x2="820" y2="448" stroke="#555" stroke-width="3"/><circle cx="820" cy="452" r="6" fill="#555"/>
+    ${bad.proj
+      ? `<text x="820" y="250" font-family="Arial, sans-serif" font-size="30" text-anchor="middle" fill="#61666e" letter-spacing="8">NO SIGNAL</text><rect x="740" y="282" width="160" height="34" fill="none" stroke="#3a62a8" stroke-width="2"/><text x="820" y="305" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#3a62a8">INPUT 1</text>`
+      : `<text x="820" y="190" font-family="'Playfair Display', Georgia, serif" font-size="66" font-weight="900" text-anchor="middle" fill="#fff" letter-spacing="10">RUNWAY</text><text x="820" y="226" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#cfe0f5" letter-spacing="6">OCTOBER BRIEFING · 2006</text>
+         <g fill="#ffd166"><rect x="680" y="330" width="40" height="50"/><rect x="740" y="300" width="40" height="80"/><rect x="800" y="315" width="40" height="65"/><rect x="860" y="280" width="40" height="100"/><rect x="920" y="295" width="40" height="85"/></g><line x1="660" y1="381" x2="980" y2="381" stroke="#cfe0f5" stroke-width="2"/>`}</g>`;
+  // ── 시계 · 창문 · 화분
+  const clock = `<g><circle cx="1173" cy="148" r="44" fill="#fff" stroke="#3b2d1d" stroke-width="7"/>${Array.from({ length: 12 }, (_, i) => { const a = i * Math.PI / 6; return `<line x1="${(1173 + 34 * Math.sin(a)).toFixed(1)}" y1="${(148 - 34 * Math.cos(a)).toFixed(1)}" x2="${(1173 + 39 * Math.sin(a)).toFixed(1)}" y2="${(148 - 39 * Math.cos(a)).toFixed(1)}" stroke="#3b2d1d" stroke-width="3"/>`; }).join('')}<line x1="1173" y1="148" x2="1173" y2="118" stroke="#222" stroke-width="5" stroke-linecap="round"/><line x1="1173" y1="148" x2="1147" y2="148" stroke="#222" stroke-width="6" stroke-linecap="round"/><circle cx="1173" cy="148" r="4" fill="#b3261e"/></g>`;
+  const win = `<g><rect x="1240" y="86" width="320" height="378" fill="#3b2d1d"/><rect x="1254" y="100" width="292" height="350" fill="url(#mSky)"/>
+    <g fill="#8d98a6">${[[1254, 300, 38, 150], [1296, 250, 30, 200], [1330, 330, 46, 120], [1380, 220, 34, 230], [1418, 290, 40, 160], [1462, 260, 28, 190], [1494, 320, 52, 130]].map(r => `<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}"/>`).join('')}</g>
+    <g fill="#b6c0cc">${[[1270, 340, 30, 110], [1350, 300, 26, 150], [1440, 330, 30, 120], [1510, 350, 36, 100]].map(r => `<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}"/>`).join('')}</g>
+    <rect x="1396" y="100" width="10" height="350" fill="#3b2d1d"/><rect x="1254" y="270" width="292" height="10" fill="#3b2d1d"/><rect x="1230" y="456" width="340" height="16" fill="#5a4630"/>
+    <path d="M1262 108 L1330 108 L1270 220 Z" fill="#fff" opacity=".25"/></g>`;
+  const plant = `<g><path d="M40 870 L120 870 L132 760 L28 760 Z" fill="#efe6d4" stroke="${ink}" stroke-width="3"/><rect x="24" y="750" width="112" height="16" rx="4" fill="#ddd0b7" stroke="${ink}" stroke-width="3"/>
+    ${[[80, 620, -30], [55, 660, -55], [105, 650, 30], [70, 560, -10], [110, 580, 20], [45, 600, -40]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="26" ry="62" transform="rotate(${r} ${x} ${y})" fill="#3f7d4a" stroke="#22482a" stroke-width="3"/><line x1="80" y1="750" x2="${x}" y2="${y + 30}" stroke="#2d5a35" stroke-width="4"/>`).join('')}</g>`;
+  // ── 뒷줄 의자 + 명패 (참석자)
+  const backChairs = bad.people ? chairBack(750, 450, 120, 128) : [510, 750, 990].map(x => chairBack(x, 450, 120, 128)).join('');
+  const plates = (bad.people ? [['?', 570], ['?', 810], ['?', 1050]] : [['EDITOR', 570], ['ART', 810], ['SALES', 1050]]).map(([n, x]) => plate(x, n)).join('');
+  // ── 자료 (한 장 요약 / 서류 더미)
+  const docs = bad.docs
+    ? `<g>${[0, 1, 2, 3, 4, 5, 6].map(i => `<rect x="${470 - i * 2}" y="${672 - i * 12}" width="130" height="14" fill="${['#f7f3ea', '#e9e2d2', '#f7f3ea', '#d9cfba', '#f7f3ea', '#e9e2d2', '#f7f3ea'][i]}" stroke="#8a7a5c" stroke-width="2"/>`).join('')}
+         ${[0, 1, 2, 3, 4].map(i => `<rect x="${622 + i}" y="${676 - i * 15}" width="96" height="16" fill="${['#1d3557', '#b3261e', '#2e6b47', '#1d3557', '#8a6a3a'][i]}" stroke="#111" stroke-width="2"/>`).join('')}
+         <rect x="498" y="694" width="74" height="22" rx="4" fill="#b3261e"/><text x="535" y="710" font-family="Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#fff">200p</text></g>`
+    : `<g>${[[470, 640, -6], [560, 650, 3], [650, 640, -2]].map(([x, y, r]) => `<g transform="rotate(${r} ${x + 40} ${y + 26})"><rect x="${x}" y="${y}" width="82" height="54" fill="#fff" stroke="#8a7a5c" stroke-width="2"/><rect x="${x + 8}" y="${y + 8}" width="40" height="6" fill="#b3261e"/><g stroke="#bbb" stroke-width="3"><line x1="${x + 8}" y1="${y + 24}" x2="${x + 72}" y2="${y + 24}"/><line x1="${x + 8}" y1="${y + 34}" x2="${x + 66}" y2="${y + 34}"/><line x1="${x + 8}" y1="${y + 44}" x2="${x + 58}" y2="${y + 44}"/></g></g>`).join('')}
+         <text x="608" y="722" font-family="Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#fff" opacity=".9">1-PAGE SUMMARY</text></g>`;
+  // ── 회의실 환경 (물 준비 / 지난 회의 흔적)
+  const tidy = bad.room
+    ? `<g><ellipse cx="1000" cy="700" rx="70" ry="16" fill="#5a3518" opacity=".55"/>
+         <path d="M930 640 L960 640 L956 690 L934 690 Z" fill="#fff" stroke="${ink}" stroke-width="3"/><path d="M960 652 q16 0 14 14 q-2 12 -16 10" fill="none" stroke="${ink}" stroke-width="3"/><rect x="928" y="634" width="34" height="8" fill="#6b4226"/>
+         <g transform="rotate(78 1040 680)"><path d="M1020 650 L1056 650 L1050 712 L1026 712 Z" fill="#e9e1d0" stroke="${ink}" stroke-width="3"/><rect x="1018" y="644" width="40" height="10" fill="#b3261e"/></g>
+         <circle cx="1105" cy="690" r="18" fill="#f1ede4" stroke="#999" stroke-width="2"/><circle cx="1130" cy="665" r="14" fill="#f1ede4" stroke="#999" stroke-width="2"/><path d="M1094 684 l20 10 M1100 698 l14 -16" stroke="#aaa" stroke-width="2"/>
+         <path d="M1080 650 L1098 618 L1110 640 Z" fill="#e8d36a" stroke="#a89430" stroke-width="2"/></g>`
+    : `<g>${[930, 990, 1050].map(x => `<g><rect x="${x}" y="620" width="30" height="72" rx="10" fill="#cfe7f5" stroke="#5b7f99" stroke-width="2.5" opacity=".95"/><rect x="${x + 8}" y="608" width="14" height="14" rx="2" fill="#2f6f9f"/><rect x="${x}" y="645" width="30" height="16" fill="#2f6f9f" opacity=".8"/></g>`).join('')}
+         ${[1100, 1140].map(x => `<path d="M${x} 652 L${x + 26} 652 L${x + 22} 694 L${x + 4} 694 Z" fill="#eef6fb" stroke="#7d9cb3" stroke-width="2.5"/>`).join('')}</g>`;
+  const vase = `<g><path d="M786 662 Q776 640 790 616 L812 616 Q826 640 816 662 Z" fill="#f4f1ea" stroke="${ink}" stroke-width="3"/>
+    ${[[780, 592, '#c43a3a'], [800, 580, '#f4f1ea'], [822, 594, '#c43a3a'], [792, 604, '#e7b6c0'], [812, 606, '#f4f1ea']].map(([x, y, c]) => `<circle cx="${x}" cy="${y}" r="15" fill="${c}" stroke="${ink}" stroke-width="2"/>`).join('')}
+    <path d="M770 612 q10 -6 18 2 M834 612 q-10 -6 -18 2" stroke="#3f7d4a" stroke-width="5" fill="none"/></g>`;
+  const projector = `<g><rect x="760" y="704" width="90" height="34" rx="8" fill="#d8d8d8" stroke="${ink}" stroke-width="3"/><circle cx="782" cy="721" r="11" fill="#333" stroke="#111" stroke-width="2"/><circle cx="782" cy="721" r="5" fill="${bad.proj ? '#555' : '#9fd3ff'}"/><circle cx="836" cy="714" r="4" fill="${bad.proj ? '#b3261e' : '#2e9a5a'}"/></g>`;
+  return `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="mWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4ebd7"/><stop offset="1" stop-color="#e6d6b4"/></linearGradient>
+    <linearGradient id="mFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e5a46"/><stop offset="1" stop-color="#4f3f31"/></linearGradient>
+    <linearGradient id="mWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a6a3f"/><stop offset="1" stop-color="#6b4526"/></linearGradient>
+    <linearGradient id="mLeather" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#121212"/></linearGradient>
+    <linearGradient id="mSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bcd6ea"/><stop offset="1" stop-color="#f1f5f8"/></linearGradient>
+    <linearGradient id="mSlide" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d3557"/><stop offset="1" stop-color="#2f6f9f"/></linearGradient>
+    <radialGradient id="mLight" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="560" fill="url(#mWall)"/>
+  ${Array.from({ length: 10 }, (_, i) => `<line x1="${i * 160 + 80}" y1="40" x2="${i * 160 + 80}" y2="470" stroke="#d9c9a8" stroke-width="2"/>`).join('')}
+  <rect width="1600" height="40" fill="#e3d6bb"/>${[300, 800, 1300].map(x => `<ellipse cx="${x}" cy="40" rx="70" ry="10" fill="#fffbe9" stroke="#cdbf9f"/><ellipse cx="${x}" cy="40" rx="320" ry="200" fill="url(#mLight)"/>`).join('')}
+  <rect y="470" width="1600" height="90" fill="#b99a70"/><rect y="466" width="1600" height="8" fill="#8a6a46"/>
+  <rect y="560" width="1600" height="340" fill="url(#mFloor)"/>
+  ${[-600, -200, 200, 600, 1000, 1400, 1800, 2200].map(x => `<line x1="800" y1="560" x2="${x}" y2="900" stroke="#5e4c3b" stroke-width="2" opacity=".5"/>`).join('')}
+  ${board}${screen}${clock}${win}${plant}
+  ${backChairs}
+  <path d="M430 560 L1170 560 L1370 772 L230 772 Z" fill="url(#mWood)" stroke="#3b2414" stroke-width="4"/>
+  <path d="M430 560 L1170 560 L1180 572 L420 572 Z" fill="#b07f50" opacity=".6"/>
+  <path d="M230 772 L1370 772 L1370 804 L230 804 Z" fill="#4e3019" stroke="#3b2414" stroke-width="4"/>
+  ${plates}${docs}${vase}${tidy}${projector}
+  ${frontChair(330) + frontChair(715) + frontChair(1100)}
+</svg>`;
+}
 
 const REWARD_PAST = {
   1: { item:'pen',     itemTxt:'📒 처리 메모',    skill:'⏱ 우선순위 판단',  say:'울리던 전화를 모두 정리했다! 이제 <b>에밀리의 책상</b>에서 업무 도구를 챙기자.' },
@@ -2841,10 +2915,9 @@ function renderP3() {
   body.innerHTML = `
     <p class="lead">내일 아침 9시, 미란다의 회의! 회의실을 둘러보고 <b>준비가 안 된 곳</b>을 찾아 누른 뒤, ${art(0, '기사 ‘기획 특집’')}에 맞는 <b>준비 방법</b>을 고르세요. 문제없는 곳을 누르면 멘탈이 깎여요!</p>
     <div class="mroom">
-      <div class="mr-wall"></div><div class="mr-floor"></div><div class="mr-table"></div>
-      ${MEET_SPOTS.map(x => { const bad = L.probs.includes(x.k) && !L.fixed[x.k];
-        return `<button class="hs ${L.fixed[x.k] ? 'fixed' : ''}" data-s="${x.k}" style="left:${x.x}%;top:${x.y}%;width:${x.w}%;height:${x.h}%">${bad ? x.no : x.ok}${L.fixed[x.k] ? '<span class="ok-stamp">✔ 준비 완료</span>' : ''}</button>`; }).join('')}
-      ${MEET_DECOYS.map(x => `<button class="hs decoy" data-d="${x.k}" style="left:${x.x}%;top:${x.y}%;width:${x.w}%;height:${x.h}%">${x.html}</button>`).join('')}
+      ${meetSVG(Object.fromEntries(MEET_SPOTS.map(x => [x.k, L.probs.includes(x.k) && !L.fixed[x.k]])))}
+      ${MEET_SPOTS.map(x => `<button class="hs ${L.fixed[x.k] ? 'fixed' : ''}" data-s="${x.k}" aria-label="${x.k}" style="left:${x.x}%;top:${x.y}%;width:${x.w}%;height:${x.h}%">${L.fixed[x.k] ? '<span class="ok-stamp">✔ 준비 완료</span>' : ''}</button>`).join('')}
+      ${MEET_DECOYS.map(x => `<button class="hs decoy" data-d="${x.k}" aria-label="${x.k}" style="left:${x.x}%;top:${x.y}%;width:${x.w}%;height:${x.h}%"></button>`).join('')}
       ${L.choose ? (() => { const x = spot(L.choose), opts = L.order[x.k]; return `<div class="mr-pick"><p>${x.q}</p><small>어떻게 준비할까요?</small>
         <div>${opts.map(o => `<button class="mr-opt" data-o="${o}">${o === 'good' ? x.good : x.bad}</button>`).join('')}</div><button class="mr-x" type="button">다시 둘러보기</button></div>`; })() : ''}
     </div>
