@@ -1914,9 +1914,36 @@ function logEnd(result) {
     all.push(r); while (all.length > 5000) all.shift();
     localStorage.setItem(LOG_KEY, JSON.stringify(all));
   } catch (e) {}
+  syncSend('play', JSON.parse(JSON.stringify(r)));
   r.saved = true;
 }
 window.addEventListener('pagehide', () => { if (S.running) logEnd('quit'); });
+/* ---------- ☁️ 모든 기기 기록 모으기 (구글 시트) ----------
+   DATA_URL 에 구글 Apps Script 웹 앱 주소를 넣으면, 어느 기기에서 하든 기록이 한 시트로 모여요.
+   비어 있으면 지금처럼 이 기기에만 저장해요. 인터넷이 끊기면 보낼 기록을 모아 두었다가 다시 보내요. */
+var DATA_URL = '';
+function syncSend(type, data) {
+  if (!DATA_URL) return;
+  let box = []; try { box = JSON.parse(localStorage.getItem('rw_outbox') || '[]'); } catch (e) {}
+  box.push({ type, data }); while (box.length > 3000) box.shift();
+  try { localStorage.setItem('rw_outbox', JSON.stringify(box)); } catch (e) {}
+  syncFlush();
+}
+function syncFlush() {
+  if (!DATA_URL || syncFlush.busy) return;
+  let box = []; try { box = JSON.parse(localStorage.getItem('rw_outbox') || '[]'); } catch (e) {}
+  if (!box.length) return;
+  syncFlush.busy = true;
+  const item = box[0], txt = JSON.stringify(item);
+  fetch(DATA_URL, { method: 'POST', mode: 'no-cors', body: txt }).then(() => {
+    let b = []; try { b = JSON.parse(localStorage.getItem('rw_outbox') || '[]'); } catch (e) {}
+    const i = b.findIndex(x => JSON.stringify(x) === txt); if (i >= 0) b.splice(i, 1);
+    try { localStorage.setItem('rw_outbox', JSON.stringify(b)); } catch (e) {}
+    syncFlush.busy = false; if (b.length) setTimeout(syncFlush, 400);
+  }).catch(() => { syncFlush.busy = false; });
+}
+setInterval(syncFlush, 30000); window.addEventListener('online', syncFlush); setTimeout(syncFlush, 3000);
+
 function stat(key, val) {
   try { localStorage.setItem(key, val !== undefined ? val : (+(localStorage.getItem(key) || 0) + 1)); } catch (e) {}
 }
@@ -2414,7 +2441,8 @@ function openReview() {
     if (!R.stars && !text && !R.tags.length) { toast('별점이나 한 줄 후기를 남겨 주세요 ✍️'); return; }
     try {
       const all = JSON.parse(localStorage.getItem('rw_reviews') || '[]');
-      all.push({ id: Date.now().toString(36), t: Date.now(), stars: R.stars, tags: R.tags, text, result: S.endEl === 'ah-win' ? 'win' : 'fail', play: S.rec ? S.rec.id : null });
+      const rv = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 5), t: Date.now(), stars: R.stars, tags: R.tags, text, result: S.endEl === 'ah-win' ? 'win' : 'fail', play: S.rec ? S.rec.id : null, mode: MODE };
+      all.push(rv); syncSend('review', rv);
       localStorage.setItem('rw_reviews', JSON.stringify(all.slice(-3000)));
     } catch (e) {}
     stopReviewTimer(); sfx.win();
