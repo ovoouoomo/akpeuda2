@@ -2050,7 +2050,7 @@ setTheme(store.get('rw_theme', 'light'));
 $('#theme').onclick = () => { setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'); toast(document.documentElement.dataset.theme === 'dark' ? '어두운 화면으로 바꿨어요.' : '밝은 화면으로 바꿨어요.'); };
 
 /* 게임을 고칠 때마다 이 숫자를 바꾸면, 브라우저가 기억해 둔 예전 게임 대신 새 게임을 불러와요 */
-var GAME_VER = '20261031-sync2';
+var GAME_VER = '20261031-sync3';
 
 /* ---------- 📚 출처 자세히 보기 (전시용: 외부 사이트로 나가지 않아요) ---------- */
 function openSource() {
@@ -2135,7 +2135,7 @@ async function setDataKey(pw) { try { sessionStorage.setItem('rw_dkey', await sh
 /* ---------- ☁️ 모든 기기 기록 모으기 (구글 시트) ----------
    DATA_URL 에 구글 Apps Script 웹 앱 주소를 넣으면, 어느 기기에서 하든 기록이 한 시트로 모여요.
    비어 있으면 지금처럼 이 기기에만 저장해요. 인터넷이 끊기면 보낼 기록을 모아 두었다가 다시 보내요. */
-var DATA_URL = 'https://script.google.com/macros/s/AKfycbzKQfxlu7HUNrNJsE78W_lV1fgSBj_42luk4dJGgYjvuJLm6VAEriJshYSnrG35Mpo0oA/exec';
+var DATA_URL = 'https://script.google.com/macros/s/AKfycbwFG5OAJ9PnkPHf-4_3S-Owz5niTZpfV-GV38cViiIOKsLFE5fsk36PN1pyjDiAHkR5uw/exec';
 function syncSend(type, data) {
   if (!DATA_URL) return;
   let box = []; try { box = JSON.parse(localStorage.getItem('rw_outbox') || '[]'); } catch (e) {}
