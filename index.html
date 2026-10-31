@@ -874,6 +874,12 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 @media (max-width:860px){.rv-top{grid-template-columns:1fr}}
 .rs-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
 .rs-btns .btn{border-radius:0}
+.lg-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.lg-tabs button{padding:12px 6px;font:700 14px var(--sans);color:var(--grey);border-bottom:3px solid transparent}
+.lg-tabs button small{font-weight:400;font-size:11px;margin-left:3px}
+.lg-tabs button.on{color:var(--ink);border-bottom-color:var(--red)}
+.lg-note{font-size:13.5px;color:var(--grey);margin:0 0 14px;line-height:1.7}
+.lg-note b{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -1869,7 +1875,14 @@ function renderNoticeAdmin() {
 function openModal(html, size) { $('#mbody').innerHTML = html; $('#mbox').className = 'mbox ' + (size || ''); $('#modal').classList.remove('hidden'); }
 function closeModal() { $('#modal').classList.add('hidden'); }
 function openLogin() {
-  openModal(`<div class="lg-top"><div class="logo">RUNWAY</div><p>임직원 로그인</p></div>
+  openModal(`<div class="lg-top"><div class="logo">RUNWAY</div><p>로그인</p></div>
+    <div class="lg-tabs" role="tablist"><button type="button" class="on" data-lt="staff">임직원 로그인 <small>체험용</small></button><button type="button" data-lt="admin">관리자 로그인</button></div>
+    <form class="lg-bd hidden" id="admin-login" autocomplete="off">
+      <p class="lg-note">전시 운영 리포트는 <b>관리자 비밀번호를 아는 제작진만</b> 들어갈 수 있어요.</p>
+      <div class="field"><label for="al-pw">관리자 비밀번호</label><input id="al-pw" class="inp" type="password" inputmode="numeric" maxlength="12" autocomplete="off"></div>
+      <div class="err" id="al-err"></div>
+      <button class="btn btn-ink" style="width:100%" type="submit">관리자로 들어가기</button>
+    </form>
     <form class="lg-bd" id="login-form" autocomplete="off">
       <div class="demo"><b>전시용 체험 계정</b> — 아래 이름을 누르면 자동으로 입력돼요. 실제 아이디·비밀번호는 입력하지 마세요.
         <div class="acc">${Object.entries(ACCOUNTS).map(([k, a]) => `<button type="button" data-u="${k}">${a.name}</button>`).join('')}</div></div>
@@ -1880,6 +1893,27 @@ function openLogin() {
       <p style="text-align:center;font-size:12.5px;color:var(--grey);margin:14px 0 0">비밀번호를 잊으셨나요? <a class="lnk" href="#/" onclick="toast('편집장: “그건 자네 문제야.”');return false">재설정 요청</a></p>
     </form>`);
   $$('.demo [data-u]').forEach(b => b.onclick = () => { $('#lg-id').value = b.dataset.u; $('#lg-pw').value = ACCOUNTS[b.dataset.u].pw; });
+  // 임직원(체험) / 관리자 탭
+  $$('.lg-tabs [data-lt]').forEach(t => t.onclick = () => {
+    $$('.lg-tabs [data-lt]').forEach(x => x.classList.toggle('on', x === t));
+    $('#login-form').classList.toggle('hidden', t.dataset.lt !== 'staff');
+    $('#admin-login').classList.toggle('hidden', t.dataset.lt !== 'admin');
+    if (t.dataset.lt === 'admin') $('#al-pw').focus();
+  });
+  $('#admin-login').onsubmit = async e => {
+    e.preventDefault();
+    const lock = +(sessionStorage.getItem('rw_admin_lock') || 0);
+    if (Date.now() < lock) { $('#al-err').textContent = `너무 많이 틀렸어요. ${Math.ceil((lock - Date.now()) / 1000)}초 뒤에 다시 시도해 주세요.`; return; }
+    let h = ''; try { h = await sha256($('#al-pw').value.trim()); } catch (err) { $('#al-err').textContent = '이 브라우저에서는 관리자 로그인을 할 수 없어요.'; return; }
+    if (h === ADMIN_HASH) { sessionStorage.removeItem('rw_admin_fail'); adminAuth.set(true); closeModal(); toast('관리자로 로그인했어요.'); if (location.hash === '#/admin') route(); else location.hash = '#/admin'; return; }
+    const n = +(sessionStorage.getItem('rw_admin_fail') || 0) + 1;
+    sessionStorage.setItem('rw_admin_fail', n);
+    if (n >= 5) { sessionStorage.setItem('rw_admin_lock', Date.now() + 60000); sessionStorage.setItem('rw_admin_fail', 0); }
+    // 틀리면 관리자 문 앞으로 → 제작진 4명이 한마디
+    closeModal();
+    const scold = () => { const m = $('#adm-msg'); if (m) m.textContent = n >= 5 ? '5번 틀려서 1분 동안 잠겼어요.' : `비밀번호가 맞지 않아요. (${n}/5)`; crewScold(n); };
+    if (location.hash === '#/admin') { route(); scold(); } else { location.hash = '#/admin'; setTimeout(scold, 80); }
+  };
   $('#login-form').onsubmit = e => {
     e.preventDefault();
     const id = $('#lg-id').value.trim().toLowerCase(), a = ACCOUNTS[id];
