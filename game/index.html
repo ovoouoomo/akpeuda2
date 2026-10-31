@@ -933,6 +933,95 @@ body{background:#fff;letter-spacing:-.005em}
 .rv-done{padding:30px 0}
 .rv-done p:last-child{font:italic 400 18px 'Bodoni Moda',serif}
 .rv-open:disabled{opacity:.6;cursor:default}
+
+/* 🖍️ 힌트: 문제가 나온 바로 그 문장 */
+.news .hl-now{background:#ffe14a;box-shadow:0 0 0 3px #ffe14a;font-weight:700;animation:hlPulse 1.2s ease-in-out 3;border-radius:2px}
+@keyframes hlPulse{50%{box-shadow:0 0 0 7px rgba(255,225,74,.55)}}
+.news .src .hl-key{background:#ffe14a;padding:0 4px;color:var(--ink)}
+
+/* 📜 과거 신문 (2006) — 노란 필름 필터 · 옛 종이 */
+body.past::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9990;mix-blend-mode:multiply;
+  background:radial-gradient(ellipse at center,rgba(255,226,150,.16) 40%,rgba(140,95,30,.32)),
+  repeating-linear-gradient(0deg,rgba(80,60,20,.03) 0 1px,transparent 1px 3px)}
+body.past{background:#f4ecd8}
+body.past .cover{background:#fbf5e6}
+body.past .mast h1,body.past .title{font-family:'Playfair Display','Batang',serif}
+body.past .pick-card.on{background:#fff7e2}
+.soon-tag.new{background:var(--red)}
+body.past #hud{background:rgba(250,243,226,.97)}
+body.past .modal-box{background:#f2e8cf;border-color:#3b3226}
+body.past .modal-top{background:#2b241b}
+body.past .cu-box{background:#faf3e1}
+/* 신문 머리 (2006) */
+.np-mast.old{border-top:3px solid #2b241b;border-bottom:3px double #2b241b;align-items:stretch}
+.np-mast.old b{font:900 clamp(30px,6vw,52px)/1 'Playfair Display','Batang',serif;letter-spacing:-.01em;color:#231d16;text-align:center}
+.np-mast.old span{justify-content:space-around;border-top:1px solid #2b241b;font:600 10.5px var(--sans);letter-spacing:.25em;color:#5b5040}
+.np-issue{text-align:right;font:700 13px 'Playfair Display',serif;color:#2b241b;margin:-6px 0 12px}
+.np-issue b{font-size:17px;letter-spacing:.04em}
+.news.old{font-family:'Batang','Noto Serif KR',serif;color:#2b241b}
+.news.old h3{font-family:'Batang','Noto Serif KR',serif;color:#231d16;border-bottom:2px solid #2b241b}
+.news.old mark{background:linear-gradient(transparent 45%,rgba(255,214,0,.6) 45%)}
+.news.old p:first-of-type::first-letter{font:900 2.6em/1 'Batang',serif;float:left;margin:4px 6px 0 0}
+.np-desk{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#5a4630;padding:14px;margin:6px 0 14px;border:4px solid #3b2d1d}
+.np-desk span{background:#efe3c6;text-align:center;font-size:30px;padding:10px 4px;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.np-desk small{display:block;font:700 11.5px var(--sans);color:#3b2d1d}
+
+/* 📜 과거 버전 방: 2006년 런웨이 비서 데스크 */
+.room.past-room{background:linear-gradient(90deg,transparent 0 99.4%,rgba(90,60,20,.06) 99.4%) 0 0/12.5% 100%,linear-gradient(#f6ecd6,#eadcbd)}
+.past-room .wainscot{background:linear-gradient(#c9a77a,#a9845a);border-top:2px solid #6e5233;border-bottom:2px solid #3b2d1d}
+.past-room .floor{background:repeating-linear-gradient(90deg,#a7865e 0 6%,#9a7a53 6% 12%)}
+.past-room .rug{background:#8f1d1d}
+.past-room .desk::before{background:#a87a4c;border-color:#3b2d1d;box-shadow:inset 0 -4px 0 #7a5634}
+.past-room .desk::after{background:linear-gradient(#3b2d1d,#3b2d1d) 0 0/4% 100% no-repeat,linear-gradient(#3b2d1d,#3b2d1d) 100% 0/4% 100% no-repeat}
+.past-room .side::before{background:#7a5634}
+.past-room .window{filter:sepia(.35) saturate(.8)}
+.past-room .room-sign{color:#3b2d1d;border-color:#3b2d1d}
+body.past .office-stage .os-wall{background:linear-gradient(90deg,transparent 99.3%,rgba(90,60,20,.07) 99.3%) 0 0/10% 100%,linear-gradient(#f6ecd6,#e8d9b8)}
+body.past .office-stage .os-floor{background:repeating-linear-gradient(90deg,#a7865e 0 6%,#9a7a53 6% 12%)}
+
+/* 📞 미니게임 1 · 울리는 전화기 */
+.ring-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ring-bell{font-size:26px;animation:bellRing .5s ease-in-out infinite alternate;display:inline-block}
+@keyframes bellRing{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+.ring-head b{font:700 15px var(--sans)}
+.ring-dots{display:flex;gap:5px;margin-left:auto}
+.ring-dots i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink)}
+.ring-dots i.on{background:var(--ink)}
+.ring-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ring{position:relative;text-align:left;background:#fffdf6;border:1.5px solid #3b2d1d!important;padding:14px 14px 14px 62px;min-height:96px;box-shadow:3px 3px 0 #3b2d1d;animation:ringShake 2.4s ease-in-out infinite}
+.ring:nth-child(2){animation-delay:.6s}.ring:nth-child(3){animation-delay:1.2s}.ring:nth-child(4){animation-delay:1.8s}
+@keyframes ringShake{0%,86%,100%{transform:none}88%,92%,96%{transform:translateX(-3px) rotate(-.6deg)}90%,94%,98%{transform:translateX(3px) rotate(.6deg)}}
+.ring .ri{position:absolute;left:12px;top:14px;width:38px;height:38px;border-radius:50%;background:#efe3c6;display:grid;place-items:center;font-size:20px}
+.ring small{display:block;font:700 11px var(--sans);letter-spacing:.12em;color:var(--red)}
+.ring b{display:block;font:500 15px/1.5 var(--kserif)}
+.ring.right{background:#e7f6ec;border-color:var(--green)!important;animation:none}
+.ring.wrong-pick{background:var(--red-soft)}
+.ring:disabled{cursor:default}
+
+/* 🗂️ 미니게임 2 · 에밀리의 책상 */
+.req{background:#fffdf6;border:1.5px solid #3b2d1d;border-left:5px solid var(--red);padding:12px 16px;margin-bottom:12px;animation:fadeIn .3s}
+.req-who{font:700 11px var(--sans);letter-spacing:.18em;color:var(--red)}
+.req p{margin:4px 0 0;font:600 17px/1.55 var(--kserif)}
+.desk-top{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:linear-gradient(#a87a4c,#8c6239);border:4px solid #3b2d1d;padding:16px;box-shadow:inset 0 0 30px rgba(0,0,0,.25)}
+.dtool{background:#f6ecd6;border:1.5px solid #3b2d1d!important;padding:14px 8px;text-align:center;box-shadow:0 4px 0 #3b2d1d;min-height:110px}
+.dtool span{display:block;font-size:34px;line-height:1.1}
+.dtool b{display:block;font:700 15px var(--sans);margin-top:4px}
+.dtool small{font-size:12px;color:#6b5a44}
+.dtool:hover:not(:disabled){transform:translateY(-3px)}
+.dtool.right{background:#e7f6ec;border-color:var(--green)!important}
+
+/* 📋 미니게임 3 · 회의실 체크리스트 */
+.mtg{background:#fbf7ee;border:1.5px solid #3b2d1d;box-shadow:4px 4px 0 #3b2d1d;padding:12px 14px}
+.mtg-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #3b2d1d;padding-bottom:6px;margin-bottom:8px}
+.mtg-top b{font:900 17px 'Playfair Display',serif;letter-spacing:.08em}
+.mtg-top small{font-size:12px;color:#6b5a44}
+.mtg-it{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 6px;border-bottom:1px dashed #cdbf9f;font:500 15px var(--kserif)}
+.mtg-it .box{width:24px;height:24px;flex:none;border:2px solid #3b2d1d;display:grid;place-items:center;font-weight:900;color:var(--green);background:#fff}
+.mtg-it.on{background:#fff4d6}
+.mtg-it.bad{background:var(--red-soft);color:var(--red-d);text-decoration:line-through}
+.mtg-bar{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.mtg-bar span{font-size:13px;color:var(--muted)}
+@media (max-width:600px){.ring-grid,.desk-top{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -959,7 +1048,7 @@ body{background:#fff;letter-spacing:-.005em}
       <h3>📰 신문 버전을 골라 주세요</h3>
       <div class="pick-row">
         <button class="pick-card on" data-np="now"><div class="np-ic">📰</div><div><b>현재 신문</b><small>뉴욕 미러 · August 29, 2026 발행</small></div></button>
-        <button class="pick-card soon" data-np="past"><div class="np-ic">📜</div><div><b>과거 신문</b><small>COMING SOON · 곧 공개됩니다</small></div><span class="soon-tag">COMING SOON</span></button>
+        <button class="pick-card" data-np="past"><div class="np-ic">📜</div><div><b>과거 신문</b><small>뉴욕 미러 · October 25, 2006 발행</small></div><span class="soon-tag new">NEW</span></button>
       </div>
     </div>
     <div class="start-btns">
@@ -1056,7 +1145,7 @@ body{background:#fff;letter-spacing:-.005em}
    📰 신문기사 내용 (첨부 PDF 원문에서 가져옴)
    <mark> ... </mark> 로 감싼 문장은 노란 형광펜으로 (게임 힌트가 되는 문장에만!) 강조돼요.
    ===================================================================== */
-const ARTICLES = [
+const ARTICLES_NOW = [
   { tab:'1면 · 회장 논란', title:'“낡은 방식에 매달리는 조직에는 미래가 없다” 런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', meta:'THE NEW YORK MIRROR · 1면',
     body:`
     <p>런웨이 미디어 그룹 신임 회장 제이가 또 논란에 섰다. 그는 지난주 20년 넘게 조직을 지탱해 온 시니어 비서진과 편집 보조 인력 상당수를 해고하며 "낡은 방식에 매달리는 조직에는 미래가 없다"고 말했다. 해당 자리는 생성형 AI 도구로 대체하겠다는 계획도 함께 내놨다.</p>
@@ -1113,6 +1202,7 @@ const ARTICLES = [
     <p class="q">Q. AI 시대에 밀려나지 않고 경력을 만들려면 비서는 무엇을 갖춰야 할까요? 상사들이 원하는 비서상도 궁금합니다.</p>
     <p>A. 먼저 자기 일과 행동을 객관적으로 점검하고 변화에 민첩하게 적응해야 해요. 요즘 상사들이 우수하다고 평가하는 비서는 지시가 없어도 상사의 니즈에 맞춰 능동적으로 움직이는 사람이에요. 상사들도 잘 알고 있어요. <mark>전표 처리나 계산 같은 단순 업무는 AI가 훨씬 빠르고 정확하다</mark>는 것을요. 하지만 <mark>사람과 대면해 교감하고 상황을 이해하며 해결하는 일은 AI가 할 수 없는 영역</mark>이에요. 결국 중요한 건 AI가 비서를 대신하는 게 아니라, AI를 발판 삼아 판단력을 보여주는 비서가 되는 거예요. AI는 도구일 뿐 본질은 변하지 않으니까요.</p>` }
 ];
+let ARTICLES = ARTICLES_NOW;
 
 /* =====================================================================
    ⚙️ 게임 기본 설정 — 숫자만 바꾸면 난이도를 조절할 수 있어요
@@ -1188,38 +1278,56 @@ const DMG = {
   oxWrong: 12,// OX 오답 → 내 멘탈 감소
 };
 
-const REPORTS = [
-  { type:'pick', title:'업무 폭탄 보고', ask:'전표 처리 30건에, 디자이너는 쇼에 안 오겠다고 화를 내고 있어. 어떻게 할 거지?',
+const REPORTS_NOW = [
+  { type:'pick', title:'업무 폭탄 보고', ask:'전표 처리 30건에, 디자이너는 쇼에 안 오겠다고 화를 내고 있어. 어떻게 할 거지?', src:{ a:5, hl:'전표 처리나 계산 같은 단순 업무는 AI가 훨씬 빠르고 정확하다' },
     opts:[
-      { t:'전표는 AI 자동화로 처리하고, 디자이너는 제가 직접 만나 감정을 조율하겠습니다.', g:'best', why:'반복 업무는 AI에게, 감정 조율은 사람이! (기사 ‘비서의 역할’)' },
+      { t:'전표는 AI 자동화로 처리하고, 디자이너는 제가 직접 만나 감정을 조율하겠습니다.', g:'best', why:'반복 업무는 AI에게, 감정 조율은 사람이! (기사 ‘인터뷰 · 에밀리’)' },
       { t:'전표부터 제가 손으로 처리하고, 디자이너는 나중에 연락하겠습니다.', g:'good', why:'일은 하지만 느려요. 반복 업무는 AI에게 맡겨도 돼요.' },
-      { t:'둘 다 AI에게 맡겨 두었습니다.', g:'bad', why:'감정 조율·돌발 상황은 AI가 대신할 수 없어요.' }
-    ]},
-  { type:'ox', title:'편집장의 OX 질문', ask:'AI에게 같은 질문을 세 번 해서 답이 같으면, 검증은 끝난 거지?', answer:'X', why:'같은 질문 반복은 검증이 아니에요. 1차 출처를 확인해야 해요. (기사 ‘AI 활용법’)' },
-  { type:'pick', title:'일정 보고', ask:'다음 주 내 일정이 왜 이렇게 겹쳐 있지?',
+      { t:'둘 다 AI에게 맡겨 두었습니다.', g:'bad', why:'감정 조율·돌발 상황은 AI가 대신할 수 없어요.' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'AI에게 같은 질문을 세 번 해서 답이 같으면, 검증은 끝난 거지?', answer:'X', why:'같은 질문 반복은 검증이 아니에요. 1차 출처를 확인해야 해요. (기사 ‘AI 활용법’)', src:{ a:2, hl:'같은 질문의 반복은 검증이 아니므로 결국 1차 출처를 봐야 한다.' } },
+  { type:'pick', title:'일정 보고', ask:'다음 주 내 일정이 왜 이렇게 겹쳐 있지?', src:{ a:2, hl:'인사·계약 등 공개가 제한된 자료는 연결에서 제외' },
     opts:[
       { t:'일정표를 AI 커넥터로 연결해 겹치는 일정과 대안을 정리했습니다. 최종 결정은 편집장님께 받겠습니다.', g:'best', why:'MCP로 일정표를 연결하고, 최종 판단은 사람이! (기사 ‘AI 활용법’)' },
       { t:'제가 하나하나 비교해서 오늘 밤까지 정리하겠습니다.', g:'good', why:'정성은 좋지만, 도구를 쓰면 훨씬 빨라요.' },
-      { t:'인사·계약 폴더까지 전부 AI에 연결해서 한 번에 처리하겠습니다.', g:'bad', why:'공개가 제한된 인사·계약 정보는 연결하면 안 돼요!' }
-    ]},
-  { type:'ox', title:'편집장의 OX 질문', ask:'고객 이름과 전화번호는 그대로 AI에 넣어도 괜찮다.', answer:'X', why:'개인정보는 비식별화한 뒤에만 활용해요. (기사 ‘AI 활용법’)' },
-  { type:'pick', title:'갑질 모드', ask:'출처? 그런 건 필요 없어. 이 AI 통계 보고서, 지금 당장 제출해!',
+      { t:'인사·계약 폴더까지 전부 AI에 연결해서 한 번에 처리하겠습니다.', g:'bad', why:'공개가 제한된 인사·계약 정보는 연결하면 안 돼요!' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'고객 이름과 전화번호는 그대로 AI에 넣어도 괜찮다.', answer:'X', why:'개인정보는 비식별화한 뒤에만 활용해요. (기사 ‘AI 활용법’)', src:{ a:2, hl:'고객 이름, 주민등록번호, 내부 계약서, 인사정보, 비밀번호 등 개인·기밀정보는 비식별화해 입력' } },
+  { type:'pick', title:'갑질 모드', ask:'출처? 그런 건 필요 없어. 이 AI 통계 보고서, 지금 당장 제출해!', src:{ a:2, hl:'확인되지 않은 내용은 ‘검증되지 않음’으로 표시' },
     opts:[
-      { t:'1차 출처를 확인하고, 확인 안 된 수치는 ‘검증되지 않음’으로 표시해 바로 올리겠습니다.', g:'best', why:'빠르면서도 검증까지! 결과를 걸러내는 사람이 경쟁력이에요.' },
+      { t:'1차 출처를 확인하고, 확인 안 된 수치는 ‘검증되지 않음’으로 표시해 바로 올리겠습니다.', g:'best', why:'빠르면서도 검증까지! 결과를 걸러내는 사람이 경쟁력이에요. (기사 ‘AI 활용법’)' },
       { t:'제출은 잠시 미루고, 출처부터 알아보겠습니다.', g:'good', why:'검증은 좋지만, 편집장은 기다려 주지 않아요.' },
-      { t:'네! 그대로 바로 제출하겠습니다.', g:'bad', why:'출처 없는 AI 결과를 그대로 내면 안 돼요!' }
-    ]},
-  { type:'ox', title:'편집장의 OX 질문', ask:'좋은 프롬프트는 역할·배경·지시·제약·출력 형식, 이렇게 다섯 가지 요소로 이루어진다.', answer:'O', why:'맞아요! 좋은 프롬프트의 5요소예요. (기사 ‘AI 활용법’)' },
-  { type:'pick', title:'마지막 질문', ask:'그렇다면 하나만 묻지. 자네가 AI보다 나은 점이 뭐지?',
+      { t:'네! 그대로 바로 제출하겠습니다.', g:'bad', why:'출처 없는 AI 결과를 그대로 내면 안 돼요!' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'좋은 프롬프트는 역할·배경·지시·제약·출력 형식, 이렇게 다섯 가지 요소로 이루어진다.', answer:'O', why:'맞아요! 좋은 프롬프트의 5요소예요. (기사 ‘AI 활용법’)', src:{ a:2, hl:'좋은 프롬프트는 ‘역할’, ‘배경’, ‘지시’, ‘제약’, ‘출력 형식’의 다섯 요소' } },
+  { type:'ox', title:'편집장의 OX 질문', ask:'제이 회장의 시니어 비서진 해고에 업계는 ‘전형적인 무책임’이라는 비판을 내놓았다.', answer:'O', why:'맞아요. 공백을 메울 계획 없이 정리했다는 비판이에요. (기사 ‘1면 · 회장 논란’)', src:{ a:0, hl:'"전형적인 무책임"이라는 비판이 잇따른다' } },
+  { type:'pick', title:'회장 논란', ask:'회장이 비서진을 AI로 바꾸겠다는군. 자네 생각은?', src:{ a:0, hl:'문제의 본질이 AI 도입 자체가 아니라, 신기술을 명분으로 책임을 회피하는 태도에 있다' },
+    opts:[
+      { t:'AI 도입 자체보다, 신기술을 명분으로 책임을 회피하는 태도가 문제라고 생각합니다.', g:'best', why:'전문가들이 짚은 문제의 본질이에요. (기사 ‘1면 · 회장 논란’)' },
+      { t:'회장님 결정이니 따르는 수밖에요.', g:'good', why:'판단 없이 따르기만 하면 파트너가 될 수 없어요.' },
+      { t:'AI가 비서를 완전히 대체할 수 있습니다.', g:'bad', why:'AI는 사람을 대체하기보다 숙련도를 끌어올리는 도구예요.' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'생성형 AI가 실제 업무에 본격적으로 들어온 해는 2023년이다.', answer:'O', why:'맞아요. 2023년 실무 진입, 2024년부터 사무 전반으로 확대! (기사 ‘AI 15년 연표’)', src:{ a:3, hl:'2023년에는 생성형 AI가 실제 업무에 본격 진입했고' } },
+  { type:'ox', title:'편집장의 OX 질문', ask:'전문가들은 AI 15년 연표의 핵심을 ‘대체’라고 설명한다.', answer:'X', why:'‘대체’가 아니라 ‘재배치’예요. (기사 ‘AI 15년 연표’)', src:{ a:3, hl:"이 연표의 핵심이 '대체'가 아닌 '재배치'라고 설명한다" } },
+  { type:'pick', title:'자리 걱정', ask:'AI 때문에 비서 자리가 위험하다던데, 자네는 어떻게 버틸 거지?', src:{ a:4, hl:'AI를 잘 다루고 윤리적 문제까지 감지하는 민첩성이 새로운 무기예요.' },
+    opts:[
+      { t:'AI를 잘 다루고, 윤리적 문제까지 감지하는 민첩성을 무기로 삼겠습니다.', g:'best', why:'현직 비서 아마리의 대답이에요. (기사 ‘인터뷰 · 아마리’)' },
+      { t:'AI는 최대한 피해서 제 방식대로 일하겠습니다.', g:'good', why:'피하기보다 잘 다루는 게 무기예요.' },
+      { t:'어차피 AI가 다 하니 준비할 필요 없습니다.', g:'bad', why:'일처리가 빠른 것만으론 인정받지 못해요.' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'생성형 AI는 목표 설정·실행·평가 능력을 끌어올려 비서의 자기주도성을 높인다.', answer:'O', why:'맞아요! 자기주도성이 직무 성과로 이어져요. (기사 ‘인터뷰 · 에밀리’)', src:{ a:5, hl:'생성형 AI는 목표 설정, 실행, 평가 능력을 끌어올려' } },
+  { type:'ox', title:'편집장의 OX 질문', ask:'‘감정 조율’과 ‘상황 판단’은 AI가 맡는 역할이다.', answer:'X', why:'사람만 할 수 있는 인간 비서의 역할이에요. (기사 ‘비서의 역할’)', src:{ a:1, hl:'인간 비서는 조직 내 커뮤니케이션을 조율하고, 돌발 상황에 유연하게 대응하며, AI 결과물을 검토하고 수정하는 고차원적 역할' } },
+  { type:'pick', title:'마지막 질문', last:true, ask:'그렇다면 하나만 묻지. 자네가 AI보다 나은 점이 뭐지?', src:{ a:1, hl:'‘의사결정 지원 파트너’로 전환했다' },
     opts:[
       { t:'AI의 결과를 검증하고, 사람의 마음을 읽고, 최종 판단에 책임을 질 수 있다는 점입니다.', g:'best', why:'AI 시대 비서는 ‘의사결정 지원 파트너’! (기사 ‘비서의 역할’)' },
       { t:'AI를 누구보다 잘 다룰 수 있다는 점입니다.', g:'good', why:'중요한 능력이지만, 그것만으로는 부족해요.' },
-      { t:'타자를 AI보다 빨리 칩니다.', g:'bad', why:'…그건 AI가 더 빨라요.' }
-    ]}
+      { t:'타자를 AI보다 빨리 칩니다.', g:'bad', why:'…그건 AI가 더 빨라요.' } ]}
 ];
+let REPORTS = REPORTS_NOW;
+// 보스전 문제: 매 판 6문제를 랜덤으로 뽑아 순서를 섞고, ‘마지막 질문’은 늘 마지막에
+function pickReports() {
+  const pool = MODE === 'past' ? REPORTS_PAST : REPORTS_NOW;
+  const last = pool.find(r => r.last), rest = shuffle(pool.filter(r => !r.last)).slice(0, 6);
+  return last ? rest.concat(last) : rest;
+}
 
 /* ---------------- 힌트 (간접 힌트) ---------------- */
-const HINTS = {
+const HINTS_NOW = {
   1:  '기사 <b>‘비서의 역할’</b> 속 <b>표</b>를 보세요.<br>왼쪽 칸(AI의 역할)은 반복·정형화된 일, 오른쪽 칸(인간 비서)은 <b>사람의 마음과 판단</b>이 필요한 일이에요.',
   2:  '기사 <b>‘AI 활용법’</b>에서 좋은 프롬프트의 <b>다섯 가지 요소</b>를 찾아보세요.<br>‘역할’은 AI에게 맡길 역할, ‘배경’은 상황, ‘지시’는 할 일, ‘제약’은 지킬 조건, ‘출력 형식’은 결과의 모양!<br>막연한 말이나 개인정보가 든 문장은 넣으면 안 돼요.',
   3:  '<b style="color:#c8102e">빨간 글씨</b>가 문제 있는 부분이에요. 위에서 도구를 고른 뒤 빨간 글씨를 누르세요.<br>개인정보·기밀 → <b>가리기</b> / 근거 없는 숫자 → <b>검증되지 않음</b> / “같은 질문 반복” → <b>1차 출처 확인</b>!',
@@ -1227,6 +1335,7 @@ const HINTS = {
   door:'모든 잠금을 풀었어요! 오른쪽 <b>출구(빨간 문)</b>를 눌러 미란다에게 보고하러 가세요.',
   4:  '가장 좋은 보고는 <b>AI에게 맡길 일은 맡기고, 판단·소통·검증은 사람이</b> 하는 답이에요.<br>OX 문제의 단서는 📰 <b>기사 ‘AI 활용법’</b>에 있어요. 멘탈이 낮으면 ☕ <b>커피</b>!'
 };
+let HINTS = HINTS_NOW;
 
 /* =====================================================================
    🧍 픽셀 캐릭터 그림 — 글자 하나가 네모 한 칸이에요 (. 은 빈칸)
@@ -1560,13 +1669,14 @@ const fmt = sec => String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(
 
 /* ---------- 목표(퀘스트) ---------- */
 function goal() { if (!S.l1.done) return 1; if (!S.l2.done) return 2; if (!S.l3.done) return 3; return 4; }
-const GOAL_TEXT = {
+const GOAL_TEXT_NOW = {
   1: '목표 1/4 · 서류함을 열어 미란다의 업무를 분배하라',
   2: '목표 2/4 · 컴퓨터의 AI 문서작성기에 프롬프트를 입력하라',
   3: '목표 3/4 · 검수 데스크에서 AI 초안을 검증하라',
   4: '목표 4/4 · 출구로 가서 미란다에게 보고하라',
   5: 'BOSS · 미란다에게 보고하고 살아남아라!'
 };
+let GOAL_TEXT = GOAL_TEXT_NOW;
 
 /* ---------- HUD ---------- */
 function renderTime() {
@@ -1582,7 +1692,7 @@ function renderHUD() {
   const all = S.digits.every(d => d !== null);
   $('#h-digits').innerHTML = S.digits.map(d => all ? '<div class="digit sealed" title="봉인됨">★</div>'
     : d === null ? '<div class="digit">🔒</div>' : `<div class="digit got">${d}</div>`).join('');
-  $('#h-inv').innerHTML = [['pen', '✏️', '만년필'], ['draft', '📄', 'AI 초안'], ['article', '📰', '완성 기사']]
+  $('#h-inv').innerHTML = (MODE === 'past' ? [['pen', '📒', '처리 메모'], ['draft', '📇', '업무 도구 세트'], ['article', '📋', '회의 브리핑']] : [['pen', '✏️', '만년필'], ['draft', '📄', 'AI 초안'], ['article', '📰', '완성 기사']])
     .map(([k, i, n]) => `<span class="${S.inv[k] ? 'has' : ''}" title="${n}">${S.inv[k] ? i : ''}</span>`).join('');
   $('#h-stage').textContent = GOAL_TEXT[S.phase === 'boss' ? 5 : goal()];
   $('#combo-tag').textContent = S.combo >= 2 ? `COMBO ×${S.combo}` : (all && S.phase !== 'boss' ? '' : (all ? '🔐 숫자 봉인 중 · 미란다를 이겨라' : ''));
@@ -1668,9 +1778,11 @@ function resetState() {
     inv: { pen: false, draft: false, article: false },
     l1: { done: false, order: shuffle(TASKS.map((_, i) => i)), placed: {} },
     l2: { done: false, order: shuffle(FRAGS.map((_, i) => i)), slots: [null, null, null, null, null], sel: null, rejected: {}, ran: false },
-    l3: { done: false, tool: null, fixed: {}, sub: 'doc' },
+    l3: { done: false, tool: null, fixed: {}, sub: 'doc', order: [0].concat(shuffle(DRAFT.map((_, i) => i).slice(1))) },
+    reports: pickReports(),
     optOrder: [], dialog: ''
   });
+  if (MODE === 'past') initPastState();
 }
 function startGame() {
   if (S.running) logEnd('quit');
@@ -1678,9 +1790,10 @@ function startGame() {
   resetState();
   S.running = true; S.startAt = Date.now();
   showScreen('game');
-  S.dialog = '📱 <b>미란다의 메모</b> “내일 아침까지 ‘AI 시대의 비서’ 특집 기사를 완성해 둬. 퇴근은 그다음이야.” …먼저 반짝이는 <b>서류함</b>부터 열어 보자!';
+  S.dialog = MODE === 'past' ? '📞 <b>2006년 10월 25일</b> · 에밀리의 책상 위 전화기가 쉴 새 없이 울린다! 먼저 반짝이는 <b>전화기·팩스</b>부터 처리하자.'
+    : '📱 <b>미란다의 메모</b> “내일 아침까지 ‘AI 시대의 비서’ 특집 기사를 완성해 둬. 퇴근은 그다음이야.” …먼저 반짝이는 <b>서류함</b>부터 열어 보자!';
   renderRoom(); renderHUD(); startTimer(); sfx.unlock();
-  stat('rw_plays'); logStart();
+  stat('rw_plays'); logStart({ mode: MODE });
 }
 /* ---------- 📊 플레이 기록 (관리자 리포트용 · 이 기기의 브라우저에만 저장, 개인정보는 저장하지 않아요) ----------
    한 판이 끝날 때마다 rw_log 에 한 줄씩 쌓여요: 결과 · 걸린 시간 · 단계별 시간/실수 · 틀린 문제 · 힌트 · 커피 · 읽은 기사 · 보스전 답 */
@@ -1728,7 +1841,7 @@ function goHome() {
 /* =====================================================================
    🏢 미란다의 사무실 (방탈출 메인 화면)
    ===================================================================== */
-const OBJECTS = [
+const OBJECTS_NOW = [
   { id:'cabinet', label:'서류함',       icon:'🗄️', spr:'cabinet',   x:4,    y:40,   w:11,  lock:1 },
   { id:'news',    label:'신문 더미',     icon:'📰', spr:'news',      x:28,   y:48.2, w:11, noTag:true },
   { id:'pc',      label:'AI 문서작성기', icon:'💻', spr:'pc',        x:40,   y:41.6, w:12,  lock:2 },
@@ -1736,6 +1849,7 @@ const OBJECTS = [
   { id:'check',   label:'검수 데스크',   icon:'🔍', spr:'magnifier', x:71.5, y:51,   w:5,   lock:3 },
   { id:'door',    label:'출구',         icon:'🚪', spr:'door',      x:83,   y:35.5, w:11.5, lock:4 }
 ];
+let OBJECTS = OBJECTS_NOW;
 function objState(o) {
   if (!o.lock) return '';
   const g = goal();
@@ -1746,8 +1860,8 @@ function objState(o) {
 function renderRoom() {
   if (S.phase !== 'room') return;
   main.innerHTML = `
-    <div class="room" id="room">
-      <div class="room-sign">MIRANDA'S OFFICE</div>
+    <div class="room ${MODE === 'past' ? 'past-room' : ''}" id="room">
+      <div class="room-sign">${MODE === 'past' ? 'RUNWAY · 2006' : 'MIRANDA&#39;S OFFICE'}</div>
       <div class="window ${skyClass()}" id="win"><div class="sun"></div><div class="stars"></div><div class="city">${CITY_SVG}</div><div class="mullions"></div></div>
       <div class="wainscot"></div><div class="floor"></div><div class="rug"></div>
       <div class="desk"></div><div class="side"></div><div class="paper-sheet"></div>
@@ -1804,7 +1918,8 @@ function clickObj(id, el) {
   if (id === 'coffee') { drinkCoffee(); return; }
   if (o.lock < g) { say(`${o.label}은(는) 이미 해결했다. ✔`); if (o.lock !== 4) return; }
   if (o.lock > g) {
-    const need = { 2: '✏️ <b>만년필</b>이 없어 프롬프트를 쓸 수 없다. 먼저 <b>서류함</b>을 열자.',
+    const need = MODE === 'past' ? { 2: '전화가 아직 울리고 있다! 먼저 <b>전화기·팩스</b>부터 처리하자.', 3: '책상 정리가 먼저다. <b>에밀리의 책상</b>부터!',
+                   4: `편집장실 문이 잠겨 있다. 업무 <b>${S.digits.filter(d => d).length} / 3</b> 완료.` }[o.lock] : { 2: '✏️ <b>만년필</b>이 없어 프롬프트를 쓸 수 없다. 먼저 <b>서류함</b>을 열자.',
                    3: '검증할 <b>📄 AI 초안</b>이 아직 없다. 먼저 <b>컴퓨터</b>를 확인하자.',
                    4: `문이 굳게 잠겨 있다. 잠금장치 <b>${S.digits.filter(d => d).length} / 3</b> 해제됨.` }[o.lock];
     say('🔒 ' + need); shakeEl(el, 'nope'); return;
@@ -1818,7 +1933,8 @@ function clickObj(id, el) {
    ===================================================================== */
 function openLock(n) {
   S.open = n; S.lockMistakes = 0; S.missCount = 0; clearHint();
-  const t = { 1: ['LOCK 01', '서류함 — 업무 분배표'], 2: ['LOCK 02', 'AI 문서작성기 — 프롬프트 입력'], 3: ['LOCK 03', '검수 데스크 — AI 초안 검증'] }[n];
+  const t = (MODE === 'past' ? { 1: ['TASK 01', '전화기·팩스 — 가장 급한 일부터'], 2: ['TASK 02', '에밀리의 책상 — 업무 도구'], 3: ['TASK 03', '회의실 — 한발 앞선 준비'] }
+    : { 1: ['LOCK 01', '서류함 — 업무 분배표'], 2: ['LOCK 02', 'AI 문서작성기 — 프롬프트 입력'], 3: ['LOCK 03', '검수 데스크 — AI 초안 검증'] })[n];
   $('#cu-lt').textContent = t[0]; $('#cu-title').textContent = t[1];
   $('#cu').classList.remove('hidden'); $('#cu-body').scrollTop = 0;
   renderLock();
@@ -1827,7 +1943,7 @@ function closeCU(silent) {
   $('#cu').classList.add('hidden'); S.open = 0;
   if (!silent && S.running) renderRoom();
 }
-function renderLock() { ({ 1: renderL1, 2: renderL2, 3: renderL3 })[S.open](); }
+function renderLock() { (MODE === 'past' ? { 1: renderP1, 2: renderP2, 3: renderP3 } : { 1: renderL1, 2: renderL2, 3: renderL3 })[S.open](); }
 const art = (i, txt) => `<button class="alink" data-art="${i}">📰 ${txt}</button>`;
 
 /* ---------- 잠금 1: 업무 분배 ---------- */
@@ -1927,8 +2043,8 @@ function renderL3() {
     <div class="tools">${TOOLS.map(t => `<button class="tool ${L.tool === t.k ? 'on' : ''}" data-k="${t.k}"><span>${t.icon}</span>${t.name}<small>${t.sub}</small></button>`).join('')}</div>
     <div class="draft" id="draft">
       <div class="draft-head"><b>RUNWAY DAILY</b><small>AI 작성 초안 · 검토 전</small></div>
-      ${DRAFT.map((l, i) => {
-        const f = L.fixed[i];
+      ${L.order.map(i => {
+        const l = DRAFT[i], f = L.fixed[i];
         if (!l.ok) return `<div class="dline ${l.title ? 'title-line' : ''} fixed">${l.t}</div>`;
         if (f) return `<div class="dline fixed">${l.fixed || l.t}<span class="stampmini ${l.stamp[0]}">${l.stamp[1]}</span></div>`;
         const [pre, post] = l.t.split(l.bad);
@@ -1970,11 +2086,12 @@ function renderCode() {
 }
 
 /* ---------- 잠금 해제 보상 ---------- */
-const REWARD = {
+const REWARD_NOW = {
   1: { item:'pen',     itemTxt:'✏️ 만년필',     skill:'🤝 업무 분배 노하우', say:'서랍 속에서 <b>✏️ 만년필</b>을 찾았다! 이제 <b>컴퓨터의 AI 문서작성기</b>에 프롬프트를 써 보자.' },
   2: { item:'draft',   itemTxt:'📄 AI 초안',    skill:'⚙️ 프롬프트 작성법',  say:'프린터에서 <b>📄 AI 기사 초안</b>이 나왔다! 하지만 AI의 결과를 그대로 믿으면 안 돼. <b>검수 데스크</b>로 가자.' },
   3: { item:'article', itemTxt:'📰 완성 기사',  skill:'🛡️ 팩트체크 안목', say:'검증을 마친 <b>📰 완성 기사</b>를 손에 넣었다! 이제 <b>출구</b>로 가서 미란다에게 보고하러 가자!' }
 };
+let REWARD = REWARD_NOW;
 function lockClear(n) {
   const R = REWARD[n]; logStage(n + 1);
   S.digits[n - 1] = CONFIG.code[n - 1]; S.inv[R.item] = true;
@@ -2043,7 +2160,7 @@ function renderBoss() {
       <button class="art-btn" id="art-btn">📰 기사 보기</button>
     </div>`;
   $('#cf-btn').onclick = drinkCoffee;
-  $('#art-btn').onclick = () => openArticles(2);
+  $('#art-btn').onclick = () => openSrc(curSrc());
   updateCoffeeUI();
 }
 /* 미란다가 서류를 집어 플레이어에게 던지고, 종이가 바닥에 흩어져요 */
@@ -2093,12 +2210,12 @@ function deliver(kind) {
 function mirandaSay(t) { const b = $('#m-say'); if (b) b.textContent = '“' + t + '”'; }
 function startRound(i) {
   if (!S.running || S.boss <= 0) return;
-  const r = REPORTS[i % REPORTS.length];
+  const r = S.reports[i % S.reports.length];
   S.round = i; S.roundData = r; S.answered = false;
   document.querySelectorAll('#stage .sheet').forEach(x => x.remove());
-  $('#wave-name').textContent = (i >= REPORTS.length ? '추가 보고 · ' : `보고 ${i + 1} · `) + r.title;
+  $('#wave-name').textContent = (i >= S.reports.length ? '추가 보고 · ' : `보고 ${i + 1} · `) + r.title;
   $('#wave-no').textContent = r.type === 'ox' ? 'OX 퀴즈' : '보고 방식을 고르세요';
-  const bar = $('#wave-bar'); if (bar) bar.style.width = Math.round((i % REPORTS.length) / REPORTS.length * 100) + '%';
+  const bar = $('#wave-bar'); if (bar) bar.style.width = Math.round((i % S.reports.length) / S.reports.length * 100) + '%';
   $('#ask').innerHTML = `<span class="q-who">미란다</span>${r.ask}`;
   $('#fb').innerHTML = ''; $('#fb').className = 'feedback';
   mirandaSay(r.type === 'ox' ? 'O야, X야? 빨리.' : '…그래서?');
@@ -2146,7 +2263,7 @@ function retryBoss() {
   cancelAutoHome();
   document.querySelectorAll('.confetti').forEach(c => c.remove());
   S.runId++; S.running = true; S.hp = 100; S.combo = 0;
-  logStart({ retry: true, stage: 5, reached: 5 }); S.mistakes = 0; S.hintsUsed = 0;
+  logStart({ retry: true, stage: 5, reached: 5, mode: MODE }); S.reports = pickReports(); S.mistakes = 0; S.hintsUsed = 0;
   S.boss = S.bossEntry ? S.bossEntry.boss : 55;
   S.coffeeReadyAt = 0; S.roundData = null; S.answered = false; S.phase = 'boss';
   showScreen('game'); renderHUD(); startTimer(); sfx.boss();
@@ -2282,25 +2399,24 @@ function win() {
    ===================================================================== */
 function openModal(title, html) { $('#modal-title').textContent = title; $('#modal-body').innerHTML = html; $('#modal').classList.remove('hidden'); $('.modal-box').scrollTop = 0; }
 function closeModal() { $('#modal').classList.add('hidden'); if (reviewTimer) { stopReviewTimer(); if (S.endEl) startAutoHome(S.endEl); } }
-function openArticles(idx = 0) {
+function openArticles(idx = 0, hl) {
   sfx.click();
   if (S.running && S.rec && !S.rec.news.includes(idx)) S.rec.news.push(idx);
-  const a = ARTICLES[idx];
-  openModal('THE NEW YORK MIRROR', `
-    <div class="np-ear">The Devil Wears Prada 2:<br>The Secretary Before &amp; After Using AI</div>
-    <div class="np-mast"><b>THE NEW YORK MIRROR</b><span><em>The Secretary Club</em><em class="${S.dateHint ? 'date-glow' : ''}">Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An</em><em>${CONFIG.issueDate}</em></span></div>
+  const a = ARTICLES[idx], past = MODE === 'past';
+  let body = a.body;
+  if (hl && body.includes(hl)) body = body.replace(hl, `<span class="hl-now" id="hl-now">${hl}</span>`);   // 문제가 나온 바로 그 문장
+  const head = past
+    ? `<div class="np-mast old"><b>THE NEW YORK MIRROR</b><span><em>PROFESSIONAL SECRETARY</em><em>RUNWAY HEADQUARTERS, NY</em><em>PARIS FASHION WEEK PREVIEW</em></span></div><div class="np-issue"><b>25 OCTOBER 2006</b> · Issue No. 050</div>`
+    : `<div class="np-ear">The Devil Wears Prada 2:<br>The Secretary Before &amp; After Using AI</div>
+    <div class="np-mast"><b>THE NEW YORK MIRROR</b><span><em>The Secretary Club</em><em class="${S.dateHint ? 'date-glow' : ''}">Written By Yeju Kim | Eunbin Kim | Eunchae Kim | Sihyeon An</em><em>${CONFIG.issueDate}</em></span></div>`;
+  openModal(past ? 'THE NEW YORK MIRROR · 2006' : 'THE NEW YORK MIRROR', `${head}
     <div class="tabs">${ARTICLES.map((x, i) => `<button class="tab ${i === idx ? 'on' : ''}" data-t="${i}">${x.tab}</button>`).join('')}</div>
-    <article class="news"><h3>${a.title}</h3><div class="meta">${a.meta}</div>${a.body}
-    <div class="src">※ 형광펜은 게임 문제를 푸는 데 필요한 문장입니다. · 기사 속 인물·단체·발언은 전시를 위해 꾸민 가상의 내용입니다.</div></article>`);
+    <article class="news ${past ? 'old' : ''}"><h3>${a.title}</h3><div class="meta">${a.meta}</div>${body}
+    <div class="src">※ 형광펜은 게임 문제를 푸는 데 필요한 문장입니다.${hl ? ' · <b class="hl-key">진한 노란 표시</b>가 지금 문제가 나온 문장이에요.' : ''} · 기사 속 인물·단체·발언은 전시를 위해 꾸민 가상의 내용입니다.</div></article>`);
   $('#modal-body').querySelectorAll('.tab').forEach(t => t.onclick = () => openArticles(+t.dataset.t));
+  const h = $('#hl-now'); if (h) setTimeout(() => h.scrollIntoView({ block: 'center', behavior: 'smooth' }), 120);
 }
-function articleForNow() {
-  if (S.phase === 'boss') return 2;
-  const n = S.open || goal();
-  if (n === 1) return 1;
-  if (n === 3 && S.l3.sub === 'code') return 0;
-  return 2;
-}
+function articleForNow() { return curSrc().a; }
 function hintKey() {
   if (S.phase === 'boss') return 4;
   const n = S.open || goal();
@@ -2313,9 +2429,13 @@ function openHint() {
   const key = hintKey();
   S.hp = Math.max(1, S.hp - CONFIG.hintCost); S.hintsUsed++; renderHUD();
   floatText('멘탈 -' + CONFIG.hintCost, 40, 70, '#c8102e'); sfx.bad();
-  openModal('💡 HINT', `<p class="note" style="margin-top:0">힌트 사용 · 멘탈 -${CONFIG.hintCost}</p><div class="hint-box">${HINTS[key]}</div>
-    <p style="margin-top:16px"><button class="btn btn-red" id="hint-art">📰 관련 기사 열기</button></p>`);
-  $('#hint-art').onclick = () => openArticles(articleForNow());
+  const src = curSrc(), tab = ARTICLES[src.a] ? ARTICLES[src.a].tab : '';
+  const text = S.phase === 'boss' && S.roundData
+    ? `미란다의 이번 질문 <b>“${S.roundData.title}”</b>의 단서는 📰 <b>기사 ‘${tab}’</b>에 있어요.<br>아래 버튼을 누르면 문제가 나온 문장에 <b>형광펜</b>이 칠해진 채로 열려요.`
+    : HINTS[key];
+  openModal('💡 HINT', `<p class="note" style="margin-top:0">힌트 사용 · 멘탈 -${CONFIG.hintCost}</p><div class="hint-box">${text}</div>
+    <p style="margin-top:16px"><button class="btn btn-red" id="hint-art">📰 기사 ‘${tab}’ 열기 (형광펜 표시)</button></p>`);
+  $('#hint-art').onclick = () => openSrc(src);
 }
 function openHowto() {
   sfx.click();
@@ -2330,14 +2450,286 @@ function openHowto() {
     <p>💀 멘탈이 0이 되면 실패. 언제든 다시 도전할 수 있어요.</p></div>`);
 }
 
+
+/* =====================================================================
+   📜 과거 신문 버전 (악프다 1 · 2006) — 신문 · 방 · 미니게임 · 보스전 데이터
+   ===================================================================== */
+const ARTICLES_PAST = [
+  { tab:'기획 특집', title:'변화하는 비서직, 핵심은 전문성? … ‘한발 앞서 준비하는 자’들의 세계', meta:'[기획 특집] THE NEW YORK MIRROR · 25 OCTOBER 2006',
+    body:`
+    <p>최근 기업 현장에서 비서의 역할이 급격히 변하고 있다. 단순히 상사의 일정을 챙기거나 기본 문서를 대리 작성하는 지원 업무를 넘어, 조직의 원활한 업무 수행을 다각도로 보조하고 이끄는 전문직으로 자리매김하는 추세다.</p>
+    <p>경영진의 정교한 일정 관리부터 전화 및 방문객 응대, 그리고 기업의 생명인 정보 관리까지 비서가 담당하는 영역은 무궁무진하다. 이처럼 수많은 업무가 동시다발적으로 폭주하는 일터 안에서 유능한 비서를 판가름하는 핵심잣대는 단연 ‘<mark>우선순위를 완벽히 판단하여 한발 앞서 준비하는 능력</mark>’이다. 상사의 업무 스타일과 동선을 사전에 정확히 읽어내고 최적의 환경을 조성하는 것이야말로 조직 전체의 생산성을 결정짓기 때문이다.</p>
+    <p>회의 준비 역시 이 원칙이 가장 잘 드러나는 업무다. <mark>안건과 참석자를 사전에 확정하고 핵심 자료를 한 장으로 요약해 두면</mark>, 상사는 회의실에 들어서는 순간부터 판단에만 집중할 수 있다. <mark>자료와 장비, 회의실 환경까지 미리 점검해두는</mark> 한발 앞선 준비가 회의시간을 아껴주고 결정의 질을 높이는 데 도움을 준다.</p>
+    <p>그렇다면 세계 패션의 중심이자 가장 치열한 오피스로 꼽히는 ‘런웨이(Runway)’ 매거진에서 비서 업무는 과연 어떻게 이루어질까? 런웨이 편집장 미란다 프리슬리의 철두철미한 수석 비서 에밀리를 만나 현장의 일상과 필수 역량에 대해 들어보았다. 그녀의 치열한 하루의 뒷이야기를 지금 공개한다.</p>` },
+  { tab:'에밀리의 책상', title:'[WHAT’S IN MY BAG & DESK] 에밀리의 책상과 가방 속 무기들', meta:'THE NEW YORK MIRROR · 25 OCTOBER 2006',
+    body:`
+    <p>에밀리의 책상과 가방 속에는 치열한 일터에서 완벽한 업무 처리를 가능하게 만드는 도구들로 가득 차 있다.</p>
+    <div class="np-desk"><span>📞<small>전화기·팩스</small></span><span>📒<small>다이어리·펜</small></span><span>📇<small>서류·명함</small></span><span>🖥️<small>오피스 컴퓨터</small></span></div>
+    <p><mark>① 전화기와 팩스</mark>: 외부 귀빈 및 관련 부서와 신속하고 정확하게 소통하기 위해 필요한 기본 통신기기다.</p>
+    <p><mark>② 다이어리와 펜</mark>: 시시각각 변동되는 미란다 편집장의 일정과 긴급한 메시지를 기록하는 비서의 생명줄. 빼곡한 페이지가 곧 편집장의 하루를 담은 지도이다.</p>
+    <p><mark>③ 시급한 서류 및 인맥 관리용 명함</mark>: 결재가 시급한 비즈니스 문서와 패션계 인사 네트워크를 관리하는 데이터베이스이자 패션계를 움직이는 인맥의 지도이다.</p>
+    <p><mark>④ 오피스 컴퓨터</mark>: 실시간 정보 처리와 이메일 수발신, 자료 통합을 책임지는 디지털 작업의 중심이 된다.</p>
+    <p>단 1초의 방심도 허용하지 않는 에밀리의 데스크는, 2000년대 오피스 현장에서 인간 비서가 왜 조직의 가장 미세하고도 강력한 컨트롤 타워로 기능하는지 명확히 보여준다. 조직의 성패와 리스크 차단은 화려한 기획보다 주요 인사 정보 파악 및 서류 선별 같은 디테일의 정교함에 달렸다. 에밀리는 철저한 업무 정리와 디테일한 노하우를 바탕으로 자신의 존재 가치를 입증하고 있다.</p>` },
+  { tab:'현장 인터뷰', title:'[현장 인터뷰] ‘런웨이’ 편집장 미란다의 수석 비서 에밀리', meta:'THE NEW YORK MIRROR · 25 OCTOBER 2006',
+    body:`
+    <p class="q">Q. 비서로서 가장 필요한 능력은 무엇이라고 생각하시나요?</p>
+    <p>A. 단연코 철저한 일정 관리와 정보 보안이죠. 미란다 편집장님의 하루는 정말 세세하게 쪼개져 있어요. 당장 다가오는 파리 패션위크 일정부터 비행기 예약, 미팅 조정은 물론, 아직 세상에 공개되지 않은 미공개 원고와 컬렉션 정보 관리까지 전부 제 손을 거칩니다. 특히나 다수의 업무가 <mark>동시에 몰려올 때 어떤 것을 최우선으로 처리해야 하는지 빠르게 가려내는 정확성과 신속성이 곧 비서 업무의 핵심이라고 할 수 있죠.</mark> 사실 하루가 어떻게 지나가는지 모를 때도 많아요. (웃음) 그래도 정말 한 치의 오차도 허용되지 않는 현장이기 때문에 저는 항상 모든 것을 한발 앞서 준비해야 해요. 작은 부분까지 미리 챙겨두어야 하루가 흔들리지 않으니까요.</p>
+    <p class="q">Q. 그렇다면 패션계 최고 리더의 비서로서 갖춰야 할 태도는 무엇인가요?</p>
+    <p>A. 아무래도 커뮤니케이션 능력과 기밀 유지, 그리고 상황에 대처하는 순발력이죠. 방문객이나 전화 응대를 할 때는 상대에게 항상 단정하고 전문적인 태도를 유지해야 하고, 내부 정보에 대한 엄격한 보안 의식이 필수적이에요. 무엇보다 중요한 건 상사의 업무 스타일을 파악하고 필요한 걸 미리 제시하는 센스라고 생각해요. 준비되지 않은 자에게는 자리를 허락하지 않습니다. 그만큼 여기서는 준비가 곧 실력이고, 실력이 곧 신뢰니까요.</p>` }
+];
+
+/* ---------- 미니게임 1: 울리는 전화기 — 가장 급한 일부터 (기획 특집 · 현장 인터뷰 형광펜) ---------- */
+const PRIO_ROUNDS = [
+  { opts:[['💬', '미란다', '“10분 뒤 출발한다. 차 대기시키고 오늘 일정표 가져와.”'], ['📞', '전화', '홍보 대행사의 다음 달 행사 일반 문의'], ['📠', '팩스', '사무용품 신상품 카탈로그'], ['🚪', '방문객', '택배 기사 — 접수대에 맡겨도 되는 소포'] ] },
+  { opts:[['📞', '전화', '인쇄소: “표지 최종본 승인, 오늘 오후 5시 마감이에요!”'], ['💬', '동료', '“점심 같이 먹을래?”'], ['📠', '팩스', '지난달 행사 감사 인사장'], ['🚪', '방문객', '화분 교체 업체 — 다음 주 일정 상의'] ] },
+  { opts:[['📠', '팩스', '파리 호텔: 편집장 객실 예약 확인서 — 1시간 안에 회신 필요'], ['📞', '전화', '독자 엽서 이벤트 당첨 문의'], ['💬', '공지', '다음 주 사내 체육대회 참가 신청'], ['🚪', '방문객', '사진가 포트폴리오 전달 — 다음 주 검토 예정'] ] },
+  { opts:[['🚪', '방문객', '약속된 VIP 디자이너가 로비에 도착했어요'], ['📞', '전화', '인턴의 복사기 사용법 문의'], ['📠', '팩스', '잡지 정기구독 연장 안내'], ['💬', '동료', '회의실 꽃 색깔 같이 골라 줘'] ] },
+  { opts:[['💬', '미란다', '“내일 회의 자료, 핵심만 한 장으로 지금 가져와.”'], ['📞', '전화', '지난 호 잡지 재고 문의'], ['📠', '팩스', '광고 견적서 — 다음 주 회의 안건'], ['🚪', '방문객', '청소 업체의 다음 달 일정 문의'] ] },
+  { opts:[['📞', '전화', '항공사: “파리행 항공편 변경 — 30분 안에 좌석을 확정해 주세요.”'], ['💬', '공지', '사무실 냉장고 정리 안내'], ['📠', '팩스', '패션 뉴스레터 정기 발송본'], ['🚪', '방문객', '꽃 배달 — 접수대 보관 가능'] ] }
+];   // 각 라운드의 첫 번째(opts[0])가 정답이에요. 화면에는 섞어서 보여 줘요.
+
+/* ---------- 미니게임 2: 에밀리의 책상 — 알맞은 업무 도구 (에밀리의 책상 형광펜) ---------- */
+const DESK_TOOLS = [
+  { k:'tel',   icon:'📞', name:'전화기와 팩스',      sub:'신속·정확한 소통' },
+  { k:'diary', icon:'📒', name:'다이어리와 펜',      sub:'일정·긴급 메시지 기록' },
+  { k:'card',  icon:'📇', name:'서류와 명함',        sub:'시급한 서류·인맥 관리' },
+  { k:'pc',    icon:'🖥️', name:'오피스 컴퓨터',      sub:'정보 처리·이메일·자료 통합' }
+];
+const DESK_REQS = [
+  { t:'외부 귀빈에게 미팅 장소가 바뀌었다고 지금 바로 알려야 해!', k:'tel' },
+  { t:'계약 서류를 관련 부서에 즉시 보내야 해.', k:'tel' },
+  { t:'방금 바뀐 미란다의 오후 일정을 잊기 전에 적어 둬.', k:'diary' },
+  { t:'“디자이너가 3시에 다시 전화한대요” — 긴급 메시지를 받아 적어!', k:'diary' },
+  { t:'결재가 급한 비즈니스 문서를 지금 챙겨야 해.', k:'card' },
+  { t:'패션위크에서 만날 디자이너의 연락처를 찾아 줘.', k:'card' },
+  { t:'파리 지사에서 온 이메일에 바로 답장해야 해.', k:'pc' },
+  { t:'흩어진 자료들을 하나의 보고서로 통합해 정리해.', k:'pc' }
+];
+
+/* ---------- 미니게임 3: 회의실 — 한발 앞선 회의 준비 (기획 특집 회의 준비 문단) ---------- */
+const MEET_ITEMS = [
+  { t:'안건을 미리 확정한다', ok:true },
+  { t:'참석자를 미리 확정한다', ok:true },
+  { t:'핵심 자료를 한 장으로 요약한다', ok:true },
+  { t:'자료 · 장비 · 회의실 환경을 미리 점검한다', ok:true },
+  { t:'안건은 회의를 시작한 뒤에 정한다', ok:false },
+  { t:'자료는 많을수록 좋으니 전부 출력해 둔다', ok:false },
+  { t:'프로젝터 점검은 회의 도중에 한다', ok:false },
+  { t:'참석자에게는 당일 아침에 연락한다', ok:false }
+];
+
+const REWARD_PAST = {
+  1: { item:'pen',     itemTxt:'📒 처리 메모',    skill:'⏱ 우선순위 판단',  say:'울리던 전화를 모두 정리했다! 이제 <b>에밀리의 책상</b>에서 업무 도구를 챙기자.' },
+  2: { item:'draft',   itemTxt:'📇 업무 도구 세트', skill:'🧰 도구 활용',     say:'책상 위 도구를 완벽하게 다뤘다! 마지막으로 <b>회의실</b>을 준비하자.' },
+  3: { item:'article', itemTxt:'📋 회의 브리핑',  skill:'🧭 한발 앞선 준비', say:'회의 준비까지 끝! 이제 <b>편집장실 문</b>으로 가서 미란다에게 보고하자.' }
+};
+const GOAL_TEXT_PAST = {
+  1: '목표 1/4 · 울리는 전화기 — 가장 급한 일부터 처리하라',
+  2: '목표 2/4 · 에밀리의 책상 — 알맞은 업무 도구를 골라라',
+  3: '목표 3/4 · 회의실 — 한발 앞서 회의를 준비하라',
+  4: '목표 4/4 · 편집장실로 가서 미란다에게 보고하라',
+  5: 'BOSS · 미란다에게 보고하고 살아남아라!'
+};
+const HINTS_PAST = {
+  1: '가장 <b>먼저</b> 처리할 일은? 신문 <b>‘현장 인터뷰’</b>와 <b>‘기획 특집’</b>을 보세요.<br><b>시간이 정해진 일</b>(미란다의 지시 · 오늘 마감 · 약속된 손님 · 곧 확정해야 하는 예약)이 일반 문의나 잡무보다 먼저예요.',
+  2: '신문 <b>‘에밀리의 책상’</b>의 네 가지 무기를 떠올려 보세요.<br>소통 → <b>전화기와 팩스</b> / 일정·메시지 기록 → <b>다이어리와 펜</b> / 시급한 서류·인맥 → <b>서류와 명함</b> / 정보 처리·이메일·자료 통합 → <b>오피스 컴퓨터</b>',
+  3: '신문 <b>‘기획 특집’</b>의 회의 준비 문단을 보세요.<br><b>안건과 참석자를 미리 확정</b>하고, <b>핵심 자료를 한 장으로 요약</b>하고, <b>자료·장비·회의실 환경</b>까지 미리 점검! 미루는 건 모두 오답이에요.',
+  door: '세 가지 업무를 끝냈어요! 오른쪽 <b>편집장실 문</b>을 눌러 미란다에게 보고하러 가세요.',
+  4: '이번 질문의 단서가 있는 기사에 형광펜을 칠해 두었어요. 아래 버튼으로 열어 보세요.'
+};
+const LOCK_SRC = {
+  now:  { 1: { a:1, hl:'AI는 일정 관리, 반복 행정, 문서 초안, 회의록 정리, 데이터 통합처럼 정형화된 업무를 빠르고 정확하게 자동화' },
+          2: { a:2, hl:'좋은 프롬프트는 ‘역할’, ‘배경’, ‘지시’, ‘제약’, ‘출력 형식’의 다섯 요소' },
+          3: { a:2, hl:'같은 질문의 반복은 검증이 아니므로 결국 1차 출처를 봐야 한다.' },
+          '3b': { a:0, writer:true }, door: { a:0 } },
+  past: { 1: { a:2, hl:'동시에 몰려올 때 어떤 것을 최우선으로 처리해야 하는지 빠르게 가려내는 정확성과 신속성이 곧 비서 업무의 핵심이라고 할 수 있죠.' },
+          2: { a:1, hl:'① 전화기와 팩스' },
+          3: { a:0, hl:'안건과 참석자를 사전에 확정하고 핵심 자료를 한 장으로 요약해 두면' },
+          door: { a:0 } }
+};
+
+/* ---------- 과거 신문 보스전 (매 판 6문제 랜덤 + 마지막 질문) ---------- */
+const REPORTS_PAST = [
+  { type:'pick', title:'업무 폭주 보고', ask:'파리 항공편이 바뀌었고, 인쇄소는 5시 마감이고, 로비엔 손님이 기다려. 어떻게 할 거지?', src:{ a:2, hl:'동시에 몰려올 때 어떤 것을 최우선으로 처리해야 하는지 빠르게 가려내는 정확성과 신속성이 곧 비서 업무의 핵심이라고 할 수 있죠.' },
+    opts:[
+      { t:'마감과 확정 시간이 가장 촉박한 일부터 우선순위를 정해 바로 처리하겠습니다.', g:'best', why:'동시에 몰려올 땐 최우선부터! (기사 ‘현장 인터뷰’)' },
+      { t:'들어온 순서대로 하나씩 처리하겠습니다.', g:'good', why:'성실하지만, 급한 일이 밀릴 수 있어요.' },
+      { t:'일단 커피부터 사 오겠습니다.', g:'bad', why:'…지금은 아니에요.' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'회의 안건은 회의를 시작한 뒤에 정해도 충분하다.', answer:'X', why:'안건과 참석자는 사전에 확정해야 해요. (기사 ‘기획 특집’)', src:{ a:0, hl:'안건과 참석자를 사전에 확정하고 핵심 자료를 한 장으로 요약해 두면' } },
+  { type:'pick', title:'회의 준비 보고', ask:'내일 아침 회의, 준비는 끝났나?', src:{ a:0, hl:'자료와 장비, 회의실 환경까지 미리 점검해두는' },
+    opts:[
+      { t:'안건과 참석자를 확정하고 핵심 자료를 한 장으로 요약했습니다. 장비와 회의실도 점검했습니다.', g:'best', why:'한발 앞선 준비! (기사 ‘기획 특집’)' },
+      { t:'자료는 전부 출력해 두었습니다. 회의실은 내일 아침에 보겠습니다.', g:'good', why:'반쯤 준비됐어요. 점검은 미리!' },
+      { t:'회의에 들어가서 필요한 걸 그때그때 찾겠습니다.', g:'bad', why:'준비되지 않은 자에게는 자리를 허락하지 않아요.' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'다이어리와 펜은 편집장의 일정과 긴급한 메시지를 기록하는 비서의 생명줄이다.', answer:'O', why:'맞아요! 빼곡한 페이지가 곧 편집장의 하루를 담은 지도예요. (기사 ‘에밀리의 책상’)', src:{ a:1, hl:'시시각각 변동되는 미란다 편집장의 일정과 긴급한 메시지를 기록하는 비서의 생명줄' } },
+  { type:'pick', title:'기밀 유지', ask:'기자가 전화로 다음 시즌 컬렉션을 물어보는군. 어떻게 응대할 거지?', src:{ a:2, hl:'내부 정보에 대한 엄격한 보안 의식이 필수적이에요' },
+    opts:[
+      { t:'단정하고 전문적으로 응대하되, 미공개 정보는 알려 드릴 수 없다고 정중히 말씀드립니다.', g:'best', why:'응대는 단정하게, 기밀은 철저하게! (기사 ‘현장 인터뷰’)' },
+      { t:'편집장님께 직접 여쭤 보시라고 전화를 바로 돌립니다.', g:'good', why:'상사의 시간을 아껴 드려야 해요.' },
+      { t:'살짝 힌트만 드립니다.', g:'bad', why:'미공개 정보는 절대 안 돼요!' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'외부 귀빈·관련 부서와 신속하고 정확하게 소통하는 기본 통신기기는 ‘오피스 컴퓨터’다.', answer:'X', why:'정답은 ‘전화기와 팩스’예요. (기사 ‘에밀리의 책상’)', src:{ a:1, hl:'외부 귀빈 및 관련 부서와 신속하고 정확하게 소통하기 위해 필요한 기본 통신기기다.' } },
+  { type:'pick', title:'센스 테스트', ask:'내가 지금 뭘 원할 것 같나?', src:{ a:2, hl:'상사의 업무 스타일을 파악하고 필요한 걸 미리 제시하는 센스' },
+    opts:[
+      { t:'편집장님의 업무 스타일에 맞춰, 필요하실 자료를 미리 준비해 두었습니다.', g:'best', why:'필요한 걸 미리 제시하는 센스! (기사 ‘현장 인터뷰’)' },
+      { t:'말씀만 하시면 바로 하겠습니다.', g:'good', why:'성실하지만 한발 늦어요.' },
+      { t:'말씀을 안 하시면 저는 모르죠.', g:'bad', why:'…그게 최선인가?' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'조직의 성패와 리스크 차단은 화려한 기획보다 디테일의 정교함에 달렸다.', answer:'O', why:'주요 인사 정보 파악, 서류 선별 같은 디테일! (기사 ‘에밀리의 책상’)', src:{ a:1, hl:'조직의 성패와 리스크 차단은 화려한 기획보다 주요 인사 정보 파악 및 서류 선별 같은 디테일의 정교함에 달렸다.' } },
+  { type:'pick', title:'방문객 응대', ask:'로비에 약속 없는 손님이 나를 찾아왔다는군.', src:{ a:2, hl:'방문객이나 전화 응대를 할 때는 상대에게 항상 단정하고 전문적인 태도를 유지해야 하고' },
+    opts:[
+      { t:'단정하고 전문적인 태도로 신분과 용건을 확인한 뒤, 일정을 조율해 말씀드리겠습니다.', g:'best', why:'단정한 응대 + 확인! (기사 ‘현장 인터뷰’)' },
+      { t:'용건만 메모해 두고 돌려보내겠습니다.', g:'good', why:'나쁘진 않지만 확인과 조율이 빠졌어요.' },
+      { t:'편집장실로 바로 모시겠습니다.', g:'bad', why:'확인 없이 들이면 안 돼요!' } ]},
+  { type:'ox', title:'편집장의 OX 질문', ask:'유능한 비서를 판가름하는 핵심 잣대는 ‘우선순위를 판단하여 한발 앞서 준비하는 능력’이다.', answer:'O', why:'기사 ‘기획 특집’의 핵심 문장이에요.', src:{ a:0, hl:'우선순위를 완벽히 판단하여 한발 앞서 준비하는 능력' } },
+  { type:'pick', title:'인맥 관리', ask:'패션위크에서 만날 디자이너 연락처, 지금 당장.', src:{ a:1, hl:'패션계 인사 네트워크를 관리하는 데이터베이스' },
+    opts:[
+      { t:'명함과 인맥 관리 파일에서 바로 찾아 드리겠습니다.', g:'best', why:'명함은 패션계를 움직이는 인맥의 지도! (기사 ‘에밀리의 책상’)' },
+      { t:'잡지 뒤편 광고에서 찾아보겠습니다.', g:'good', why:'느려요. 평소에 정리해 두세요.' },
+      { t:'처음 듣는 분인데요.', g:'bad', why:'…자네, 내일도 출근하고 싶나?' } ]},
+  { type:'pick', title:'마지막 질문', last:true, ask:'그래서, 자네가 이 자리에 있어야 하는 이유는 뭐지?', src:{ a:2, hl:'준비가 곧 실력이고, 실력이 곧 신뢰니까요.' },
+    opts:[
+      { t:'한발 앞서 준비하니까요. 준비가 곧 실력이고, 실력이 곧 신뢰입니다.', g:'best', why:'정답! (기사 ‘현장 인터뷰’)' },
+      { t:'누구보다 열심히 하겠습니다.', g:'good', why:'열심히만으론 부족해요.' },
+      { t:'다른 일을 구하기 전까지만 있겠습니다.', g:'bad', why:'That’s all.' } ]}
+];
+
+/* ---------- 과거 버전 방: 2006년 런웨이 비서 데스크 ---------- */
+const OBJECTS_PAST = [
+  { id:'phone',   label:'전화기·팩스',    icon:'📞', spr:'fax',    x:5,    y:44,   w:12,  lock:1 },
+  { id:'news',    label:'신문 더미',      icon:'📰', spr:'news',   x:28,   y:48.2, w:11, noTag:true },
+  { id:'desk',    label:'에밀리의 책상',   icon:'🗂️', spr:'crt',    x:40,   y:40.5, w:12,  lock:2 },
+  { id:'coffee',  label:'커피',          icon:'☕', spr:'coffee', x:54.5, y:49.6, w:6,  noTag:true },
+  { id:'meeting', label:'회의실',         icon:'📋', spr:'board',  x:69.5, y:36,   w:8,   lock:3 },
+  { id:'door',    label:'편집장실',       icon:'🚪', spr:'door',   x:83,   y:35.5, w:11.5, lock:4 }
+];
+
+
+/* =====================================================================
+   🔀 신문 버전 고르기 (현재 신문 2026 / 과거 신문 2006)
+   ===================================================================== */
+let MODE = 'now';
+const STORY_NOW = document.querySelector('.story') ? document.querySelector('.story').innerHTML : '';
+const STORY_PAST = `2006년 10월 25일, 파리 패션위크를 앞둔 <b>런웨이</b>.<br>
+  수석 비서 에밀리가 자리를 비운 사이, 신입 비서인 당신이 그녀의 책상을 맡았다.<br>
+  전화는 쉴 새 없이 울리고, 미란다는 곧 돌아온다. <b>세 가지 업무</b>를 해내고 미란다에게 보고해 비밀번호를 완성하라.<br>
+  단, <b>멘탈</b>이 0이 되면 내일도 출근이다.`;
+function setMode(m) {
+  MODE = m === 'past' ? 'past' : 'now';
+  const past = MODE === 'past';
+  document.body.classList.toggle('past', past);
+  ARTICLES = past ? ARTICLES_PAST : ARTICLES_NOW;
+  OBJECTS = past ? OBJECTS_PAST : OBJECTS_NOW;
+  HINTS = past ? HINTS_PAST : HINTS_NOW;
+  REWARD = past ? REWARD_PAST : REWARD_NOW;
+  GOAL_TEXT = past ? GOAL_TEXT_PAST : GOAL_TEXT_NOW;
+  const st = document.querySelector('.story'); if (st) st.innerHTML = past ? STORY_PAST : STORY_NOW;
+  document.querySelectorAll('.pick-card').forEach(c => c.classList.toggle('on', c.dataset.np === MODE));
+  const date = past ? 'OCTOBER 25, 2006' : 'AUGUST 29, 2026';
+  document.querySelectorAll('.mg-top span:last-child, .tb-bar span:last-child').forEach(e => e.textContent = date);
+}
+
+/* ---------- 📜 과거 버전 방 · 미니게임 그림 ---------- */
+SPR.fax = { pal:{ k:'#2a2622', b:'#e8dcc0', d:'#b9a988', r:'#b3261e', w:'#ffffff', g:'#7a7468' }, rows:[
+  "....wwwwww....", "...wwkkkkww...", "kkkkkkkkkkkkkk", "kbbbbbbbbbbddk", "kbkkkbbbgggbdk",
+  "kbkrkbbbgggbdk", "kbkkkbbbgggbdk", "kbbbbbbbbbbbdk", "kddddddddddddk", "kkkkkkkkkkkkkk"] };
+SPR.crt = { pal:{ k:'#2a2622', b:'#e3d7bd', d:'#b8aa8c', s:'#2f6f9f', w:'#cfe6f2' }, rows:[
+  "kkkkkkkkkkkkkk", "kbbbbbbbbbbbbk", "kbkkkkkkkkkkbk", "kbksssssssskbk", "kbkswwssssskbk", "kbksssswwsskbk",
+  "kbksssssssskbk", "kbkkkkkkkkkkbk", "kbbbbbbbbbbbbk", "kddddddddddddk", "kkkkkkkkkkkkkk", "....kddddk....", "..kkddddddkk..", "..kkkkkkkkkk.."] };
+SPR.board = { pal:{ k:'#2a2622', w:'#fbf7ee', l:'#9aa6ad', r:'#b3261e', g:'#8a6a3a' }, rows:[
+  "kkkkkkkkkk", "kwwwwwwwwk", "kwrrrrrwwk", "kwwwwwwwwk", "kwlllllwwk", "kwwwwwwwwk", "kwllllwwwk",
+  "kwwwwwwwwk", "kwlllllwwk", "kkkkkkkkkk", "..g....g..", ".g......g.", "g........g", "g........g"] };
+
+/* ---------- 📞 미니게임 1 · 울리는 전화기: 지금 가장 먼저 처리할 일은? ---------- */
+function renderP1() {
+  const L = S.l1, body = $('#cu-body');
+  if (L.done) return;
+  const R = PRIO_ROUNDS[L.rounds[L.i]];
+  if (!L.cards) L.cards = shuffle(R.opts.map((_, k) => k));
+  body.innerHTML = `
+    <p class="lead">에밀리의 전화기와 팩스가 쉴 새 없이 울린다! ${art(2, '기사 ‘현장 인터뷰’')}의 말처럼 <b>동시에 몰려올 때 가장 먼저 처리할 일</b>을 골라 누르세요.</p>
+    <div class="ring-head"><span class="ring-bell">☎</span><b>업무 폭주 ${L.i + 1} / ${L.rounds.length}</b><span class="ring-dots">${L.rounds.map((_, k) => `<i class="${k < L.i ? 'on' : ''}"></i>`).join('')}</span></div>
+    <div class="ring-grid">${L.cards.map(k => { const [ic, who, txt] = R.opts[k]; return `<button class="ring" data-k="${k}"><span class="ri">${ic}</span><small>${who}</small><b>${txt}</b></button>`; }).join('')}</div>
+    <p class="note">급한 일 = 시간이 정해진 일(미란다의 지시 · 오늘 마감 · 약속된 손님 · 곧 확정해야 하는 예약)</p>`;
+  body.querySelectorAll('.ring').forEach(b => b.onclick = () => {
+    const k = +b.dataset.k;
+    if (k === 0) {
+      gotIt(); sfx.good(); hitBoss(2); b.classList.add('right');
+      body.querySelectorAll('.ring').forEach(x => x.disabled = true);
+      later(() => { L.i++; L.cards = null; if (L.i >= L.rounds.length) { L.done = true; lockClear(1); } else renderP1(); }, 700);
+    } else {
+      logErr('우선순위 · ' + R.opts[k][2].slice(0, 18) + '…'); shakeEl(b); b.classList.add('wrong-pick');
+      miss(body.querySelector('.ring[data-k="0"]'));
+      damageMe(6, '그것보다 더 급한 일이 있어요! 시간이 정해진 일이 먼저예요 (멘탈 -6)');
+    }
+  });
+}
+
+/* ---------- 🗂️ 미니게임 2 · 에밀리의 책상: 이 일엔 어떤 도구? ---------- */
+function renderP2() {
+  const L = S.l2, body = $('#cu-body');
+  if (L.done) return;
+  const R = DESK_REQS[L.reqs[L.i]];
+  body.innerHTML = `
+    <p class="lead">${art(1, '기사 ‘에밀리의 책상’')} 속 <b>네 가지 무기</b>! 들어온 요청에 맞는 <b>업무 도구</b>를 책상 위에서 골라 누르세요.</p>
+    <div class="req"><span class="req-who">REQUEST ${L.i + 1} / ${L.reqs.length}</span><p>${R.t}</p></div>
+    <div class="desk-top">${L.toolPos.map(k => { const t = DESK_TOOLS.find(x => x.k === k); return `<button class="dtool" data-k="${t.k}"><span>${t.icon}</span><b>${t.name}</b><small>${t.sub}</small></button>`; }).join('')}</div>`;
+  body.querySelectorAll('.dtool').forEach(b => b.onclick = () => {
+    if (b.dataset.k === R.k) {
+      gotIt(); sfx.good(); hitBoss(2); b.classList.add('right');
+      body.querySelectorAll('.dtool').forEach(x => x.disabled = true);
+      later(() => { L.i++; if (L.i >= L.reqs.length) { L.done = true; lockClear(2); } else renderP2(); }, 650);
+    } else {
+      logErr('업무 도구 · ' + R.t.slice(0, 16) + '…'); shakeEl(b);
+      miss(body.querySelector(`.dtool[data-k="${R.k}"]`));
+      damageMe(6, '이 일엔 다른 도구가 필요해요! 기사 ‘에밀리의 책상’을 확인하세요 (멘탈 -6)');
+    }
+  });
+}
+
+/* ---------- 📋 미니게임 3 · 회의실: 한발 앞선 준비 체크리스트 ---------- */
+function renderP3() {
+  const L = S.l3, body = $('#cu-body');
+  if (L.done) return;
+  body.innerHTML = `
+    <p class="lead">내일 아침 미란다의 회의! ${art(0, '기사 ‘기획 특집’')}에 나온 <b>한발 앞선 회의 준비</b>만 골라 체크한 뒤 <b>“준비 완료”</b>를 누르세요. (정답 4개)</p>
+    <div class="mtg"><div class="mtg-top"><b>MEETING PREP</b><small>편집장 회의 · 내일 오전 9시</small></div>
+      ${L.items.map(i => `<button class="mtg-it ${L.sel[i] ? 'on' : ''} ${L.bad[i] ? 'bad' : ''}" data-i="${i}"><span class="box">${L.sel[i] ? '✔' : ''}</span>${MEET_ITEMS[i].t}</button>`).join('')}
+    </div>
+    <div class="mtg-bar"><span>${Object.values(L.sel).filter(Boolean).length}개 선택</span><button class="btn btn-red" id="mtg-go">준비 완료</button></div>`;
+  body.querySelectorAll('.mtg-it').forEach(b => b.onclick = () => { const i = +b.dataset.i; L.sel[i] = !L.sel[i]; L.bad[i] = false; sfx.click(); renderP3(); });
+  $('#mtg-go').onclick = () => {
+    const wrong = L.items.filter(i => L.sel[i] && !MEET_ITEMS[i].ok), missing = L.items.filter(i => !L.sel[i] && MEET_ITEMS[i].ok);
+    if (!wrong.length && !missing.length) { gotIt(); hitBoss(4); L.done = true; lockClear(3); return; }
+    wrong.forEach(i => { L.bad[i] = true; L.sel[i] = false; logErr('회의 준비 · ' + MEET_ITEMS[i].t); });
+    renderP3();
+    if (wrong.length) damageMe(5 * wrong.length, `미루는 준비는 준비가 아니에요! 빨간 항목을 뺐어요 (멘탈 -${5 * wrong.length})`);
+    else { damageMe(4, `아직 빠진 준비가 ${missing.length}개 있어요! (멘탈 -4)`); logErr('회의 준비 · 빠진 항목'); }
+    if (missing.length) miss(body.querySelector(`.mtg-it[data-i="${missing[0]}"]`));
+  };
+}
+function initPastState() {
+  Object.assign(S, {
+    l1: { done: false, rounds: shuffle(PRIO_ROUNDS.map((_, i) => i)).slice(0, 4), i: 0, cards: null },
+    l2: { done: false, reqs: shuffle(DESK_REQS.map((_, i) => i)).slice(0, 5), i: 0, toolPos: shuffle(DESK_TOOLS.map(t => t.k)) },
+    l3: { done: false, items: shuffle(MEET_ITEMS.map((_, i) => i)), sel: {}, bad: {} }
+  });
+}
+
+/* ---------- 🖍️ 힌트 · 기사: 문제가 나온 문장에 형광펜 ---------- */
+function curSrc() {
+  if (S.phase === 'boss') return (S.roundData && S.roundData.src) || { a: MODE === 'past' ? 2 : 2 };
+  const k = hintKey();
+  return LOCK_SRC[MODE][k] || { a: 0 };
+}
+function openSrc(src) { if (src && src.writer) S.dateHint = true; openArticles(src ? src.a : 0, src && src.hl); }
+
 /* ---------- 버튼 연결 ---------- */
 function renderPicks() {
   $('#hero').innerHTML = `<div class="clock">17:57</div><div class="who">${spr(meName())}</div><div class="who big">${mirandaSpr(false)}</div>`;
   $('#face-me').innerHTML = headOnly(meName()); $('#face-mir').innerHTML = headOnly('miranda');
 }
 document.querySelectorAll('.pick-card').forEach(c => c.onclick = () => {
-  if (c.dataset.np === 'past') { sfx.bad(); toast('📜 과거 신문 버전은 곧 공개돼요! (COMING SOON)'); return; }
-  sfx.click();
+  sfx.click(); setMode(c.dataset.np);
+  toast(MODE === 'past' ? '📜 과거 신문(2006) 버전으로 플레이해요!' : '📰 현재 신문(2026) 버전으로 플레이해요!');
 });
 $('#btn-start').onclick = startGame;
 $('#btn-howto').onclick = openHowto;
@@ -2346,7 +2738,7 @@ $('#btn-retry').onclick = startGame;
 $('#btn-retry-boss').onclick = retryBoss;
 $('#btn-home1').onclick = goHome;
 $('#btn-home2').onclick = goHome;
-$('#b-article').onclick = () => openArticles(articleForNow());
+$('#b-article').onclick = () => openSrc(curSrc());
 $('#b-hint').onclick = openHint;
 $('#b-sound').onclick = () => { soundOn = !soundOn; $('#b-sound').textContent = soundOn ? '🔊' : '🔇'; };
 $('#modal-x').onclick = closeModal;
@@ -2354,7 +2746,7 @@ $('#modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
 $('#cu-x').onclick = () => closeCU();
 $('#cu-hint').onclick = openHint;
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-$('#cu-body').addEventListener('click', e => { const a = e.target.closest('.alink'); if (a) openArticles(+a.dataset.art); });
+$('#cu-body').addEventListener('click', e => { const a = e.target.closest('.alink'); if (!a) return; const src = curSrc(); openArticles(+a.dataset.art, src.a === +a.dataset.art ? src.hl : undefined); });
 
 /* ---------- 자리를 비우면 홈페이지로 (시작 화면에서 아무 조작이 없을 때) ---------- */
 let lastAct = Date.now();
@@ -2370,7 +2762,7 @@ function idleTarget() {
   if (!S.running) return { name: '게임 시작', act: startGame };
   if (!$('#modal').classList.contains('hidden')) return { name: '신문 계속 읽기', act: () => {} };
   if (S.phase === 'boss') return { name: '보고 계속하기', act: () => {} };
-  if (S.open) return { name: { 1: '업무 분배표', 2: 'AI 문서작성기', 3: '검수 데스크' }[S.open] || '업무 계속하기', act: () => {} };
+  if (S.open) return { name: (MODE === 'past' ? { 1: '전화기·팩스', 2: '에밀리의 책상', 3: '회의실' } : { 1: '업무 분배표', 2: 'AI 문서작성기', 3: '검수 데스크' })[S.open] || '업무 계속하기', act: () => {} };
   const o = OBJECTS.find(x => x.lock === goal());
   return o ? { name: o.label, act: () => clickObj(o.id, $(`.obj[data-o="${o.id}"]`)) } : { name: '게임 계속하기', act: () => {} };
 }
