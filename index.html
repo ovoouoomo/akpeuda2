@@ -897,6 +897,12 @@ nav.gnb a.nav-play .pi{border-radius:0;background:transparent;color:#fff}
 [data-theme="dark"] .clip.old,[data-theme="dark"] .paper.old{color:#2b241b}
 .clip .rule::before{content:none!important;display:none!important}
 .paper.old .body p.q::first-letter{font:inherit;float:none;margin:0;color:inherit}
+
+.adm-src{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--grey);padding:10px 14px;margin-bottom:14px;font-size:14px}
+.adm-src.on{border-left-color:var(--green)}
+.adm-src.off{border-left-color:#e3b23c}
+.adm-src span{margin-left:auto;display:flex;gap:6px}
+.adm-src .btn{border-radius:0;min-height:34px}
 </style>
 </head>
 <body>
@@ -1931,7 +1937,7 @@ function openLogin() {
     const lock = +(sessionStorage.getItem('rw_admin_lock') || 0);
     if (Date.now() < lock) { $('#al-err').textContent = `너무 많이 틀렸어요. ${Math.ceil((lock - Date.now()) / 1000)}초 뒤에 다시 시도해 주세요.`; return; }
     let h = ''; try { h = await sha256($('#al-pw').value.trim()); } catch (err) { $('#al-err').textContent = '이 브라우저에서는 관리자 로그인을 할 수 없어요.'; return; }
-    if (h === ADMIN_HASH) { sessionStorage.removeItem('rw_admin_fail'); adminAuth.set(true); closeModal(); toast('관리자로 로그인했어요.'); if (location.hash === '#/admin') route(); else location.hash = '#/admin'; return; }
+    if (h === ADMIN_HASH) { await setDataKey($('#al-pw').value.trim()); sessionStorage.removeItem('rw_admin_fail'); adminAuth.set(true); closeModal(); toast('관리자로 로그인했어요.'); if (location.hash === '#/admin') route(); else location.hash = '#/admin'; return; }
     const n = +(sessionStorage.getItem('rw_admin_fail') || 0) + 1;
     sessionStorage.setItem('rw_admin_fail', n);
     if (n >= 5) { sessionStorage.setItem('rw_admin_lock', Date.now() + 60000); sessionStorage.setItem('rw_admin_fail', 0); }
@@ -2044,7 +2050,7 @@ setTheme(store.get('rw_theme', 'light'));
 $('#theme').onclick = () => { setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'); toast(document.documentElement.dataset.theme === 'dark' ? '어두운 화면으로 바꿨어요.' : '밝은 화면으로 바꿨어요.'); };
 
 /* 게임을 고칠 때마다 이 숫자를 바꾸면, 브라우저가 기억해 둔 예전 게임 대신 새 게임을 불러와요 */
-var GAME_VER = '20261031-past5';
+var GAME_VER = '20261031-sync1';
 
 /* ---------- 📚 출처 자세히 보기 (전시용: 외부 사이트로 나가지 않아요) ---------- */
 function openSource() {
@@ -2112,7 +2118,7 @@ if (!seen) playAd(); else if (store.get('rw_cookie', null) === null) $('#cookie'
 var ADMIN_HASH = '86b700fab5db37977a73700b53a0654b21bdad0896914cc19ad70dee5f5fb3f6';
 var adminAuth = {
   ok() { try { return sessionStorage.getItem('rw_admin') === ADMIN_HASH.slice(0, 20); } catch (e) { return false; } },
-  set(v) { try { v ? sessionStorage.setItem('rw_admin', ADMIN_HASH.slice(0, 20)) : sessionStorage.removeItem('rw_admin'); } catch (e) {} }
+  set(v) { try { if (v) sessionStorage.setItem('rw_admin', ADMIN_HASH.slice(0, 20)); else { sessionStorage.removeItem('rw_admin'); sessionStorage.removeItem('rw_dkey'); } } catch (e) {} }
 };
 async function sha256(t) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
@@ -2123,7 +2129,35 @@ function siteBump(key, sub) {
   const d = store.get('rw_site', { views: {}, ad: 0, idle: 0, since: Date.now() });
   if (sub !== undefined) d[key][sub] = (d[key][sub] || 0) + 1; else d[key] = (d[key] || 0) + 1;
   store.set('rw_site', d);
+  syncSend('site', { key: sub !== undefined ? key + '_' + sub : key });
 }
+async function setDataKey(pw) { try { sessionStorage.setItem('rw_dkey', await sha256('rw-data:' + pw)); } catch (e) {} }
+/* ---------- ☁️ 모든 기기 기록 모으기 (구글 시트) ----------
+   DATA_URL 에 구글 Apps Script 웹 앱 주소를 넣으면, 어느 기기에서 하든 기록이 한 시트로 모여요.
+   비어 있으면 지금처럼 이 기기에만 저장해요. 인터넷이 끊기면 보낼 기록을 모아 두었다가 다시 보내요. */
+var DATA_URL = '';
+function syncSend(type, data) {
+  if (!DATA_URL) return;
+  let box = []; try { box = JSON.parse(localStorage.getItem('rw_outbox') || '[]'); } catch (e) {}
+  box.push({ type, data }); while (box.length > 3000) box.shift();
+  try { localStorage.setItem('rw_outbox', JSON.stringify(box)); } catch (e) {}
+  syncFlush();
+}
+function syncFlush() {
+  if (!DATA_URL || syncFlush.busy) return;
+  let box = []; try { box = JSON.parse(localStorage.getItem('rw_outbox') || '[]'); } catch (e) {}
+  if (!box.length) return;
+  syncFlush.busy = true;
+  const item = box[0], txt = JSON.stringify(item);
+  fetch(DATA_URL, { method: 'POST', mode: 'no-cors', body: txt }).then(() => {
+    let b = []; try { b = JSON.parse(localStorage.getItem('rw_outbox') || '[]'); } catch (e) {}
+    const i = b.findIndex(x => JSON.stringify(x) === txt); if (i >= 0) b.splice(i, 1);
+    try { localStorage.setItem('rw_outbox', JSON.stringify(b)); } catch (e) {}
+    syncFlush.busy = false; if (b.length) setTimeout(syncFlush, 400);
+  }).catch(() => { syncFlush.busy = false; });
+}
+setInterval(syncFlush, 30000); window.addEventListener('online', syncFlush); setTimeout(syncFlush, 3000);
+
 
 function pAdmin() {
   if (!adminAuth.ok()) return `
@@ -2247,7 +2281,7 @@ function initAdmin() {
       if (Date.now() < lock) { $('#adm-msg').textContent = `너무 많이 틀렸어요. ${Math.ceil((lock - Date.now()) / 1000)}초 뒤에 다시 시도해 주세요.`; return; }
       let h = '';
       try { h = await sha256($('#adm-pw').value.trim()); } catch (err) { $('#adm-msg').textContent = '이 브라우저에서는 로그인할 수 없어요. (보안 연결 https 필요)'; return; }
-      if (h === ADMIN_HASH) { sessionStorage.removeItem('rw_admin_fail'); adminAuth.set(true); route(); return; }
+      if (h === ADMIN_HASH) { await setDataKey($('#adm-pw').value.trim()); sessionStorage.removeItem('rw_admin_fail'); adminAuth.set(true); route(); return; }
       const n = +(sessionStorage.getItem('rw_admin_fail') || 0) + 1;
       sessionStorage.setItem('rw_admin_fail', n);
       if (n >= 5) { sessionStorage.setItem('rw_admin_lock', Date.now() + 60000); sessionStorage.setItem('rw_admin_fail', 0); }
@@ -2257,21 +2291,41 @@ function initAdmin() {
     };
     return;
   }
-  let sample = false;
+  let sample = false, remote = null, loading = !!DATA_URL;
+  // 보여 줄 기록: 샘플 / 구글 시트(모든 기기 합산) / 이 기기
+  const cur = () => sample ? { recs: SAMPLE_LOG(), site: SAMPLE_SITE(), revs: SAMPLE_REVIEWS() }
+    : remote ? { recs: remote.plays.slice().sort((a, b) => a.t0 - b.t0), site: remote.site || { views: {} }, revs: remote.reviews.slice().sort((a, b) => a.t - b.t) }
+    : { recs: store.get('rw_log', []), site: store.get('rw_site', { views: {}, ad: 0, idle: 0 }), revs: store.get('rw_reviews', []) };
+  const loadRemote = async () => {
+    const k = sessionStorage.getItem('rw_dkey');
+    if (!DATA_URL || !k) { loading = false; return; }
+    loading = true; draw();
+    try { const r = await fetch(DATA_URL + '?key=' + encodeURIComponent(k)); const d = await r.json(); remote = d && d.ok && d.plays ? d : null; } catch (e) { remote = null; }
+    loading = false; draw();
+  };
+  const srcBar = () => sample ? '' : !DATA_URL ? '<div class="adm-src off">💻 이 기기 기록만 보여요 · 구글 시트가 아직 연결되지 않았어요.</div>'
+    : loading ? '<div class="adm-src">☁️ 구글 시트에서 모든 기기의 기록을 불러오는 중…</div>'
+    : remote ? `<div class="adm-src on">☁️ <b>모든 기기 합산</b> · 구글 시트 기록 (게임 ${remote.plays.length}판 · 후기 ${remote.reviews.length}개)<span><button class="btn btn-out btn-sm" id="adm-refresh" type="button">새로고침</button><button class="btn btn-out btn-sm" id="adm-upload" type="button">이 기기 기록 올리기</button></span></div>`
+    : '<div class="adm-src off">⚠️ 구글 시트에 연결하지 못해 이 기기 기록만 보여요. 관리자 비밀번호로 다시 로그인하거나 잠시 뒤 새로고침해 주세요. <button class="btn btn-out btn-sm" id="adm-refresh" type="button">다시 시도</button></div>';
   const draw = () => {
-    const recs = sample ? SAMPLE_LOG() : store.get('rw_log', []);
-    const site = sample ? SAMPLE_SITE() : store.get('rw_site', { views: {}, ad: 0, idle: 0 });
-    const revs = sample ? SAMPLE_REVIEWS() : store.get('rw_reviews', []);
-    $('#report').innerHTML = renderReport(recs, site, sample, revs);
+    const { recs, site, revs } = cur();
+    $('#report').innerHTML = srcBar() + renderReport(recs, site, sample, revs);
+    const rf = $('#adm-refresh'); if (rf) rf.onclick = loadRemote;
+    const up = $('#adm-upload'); if (up) up.onclick = () => {
+      const L = store.get('rw_log', []), V = store.get('rw_reviews', []);
+      L.forEach(r => syncSend('play', r)); V.forEach(r => syncSend('review', r));
+      toast(`이 기기 기록 ${L.length}판 · 후기 ${V.length}개를 올리는 중이에요. 잠시 뒤 새로고침해 보세요.`);
+    };
     $('#adm-sample').textContent = sample ? '실제 데이터로 돌아가기' : '샘플 데이터 미리보기';
     $('#adm-sample').classList.toggle('on', sample);
     requestAnimationFrame(() => $$('#report .hb i, #report .cb i').forEach(i => i.style.setProperty('--on', 1)));
   };
   $('#adm-sample').onclick = () => { sample = !sample; draw(); };
+  setTimeout(loadRemote, 0);
   $('#adm-out').onclick = () => { adminAuth.set(false); location.hash = '#/'; toast('로그아웃했어요.'); };
   $('#adm-print').onclick = () => window.print();
   $('#adm-csv').onclick = () => {
-    const recs = sample ? SAMPLE_LOG() : store.get('rw_log', []);
+    const recs = cur().recs;
     const head = ['시작 시각', '결과', '보스전 재도전', '플레이 시간(초)', '도달 단계', '남은 멘탈', '실수', '힌트', '커피', '읽은 기사 수', '틀린 문제'];
     const rows = recs.map(r => [new Date(r.t0).toLocaleString('ko-KR'), RESULT_KO[r.result] || r.result, r.retry ? 'Y' : '', r.sec, STAGE_KO[r.reached] || r.reached, r.hp, r.mistakes, r.hints, r.coffee, (r.news || []).length, (r.errs || []).map(e => e[1]).join(' / ')]);
     download('runway-game-log.csv', '﻿' + [head, ...rows].map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n'), 'text/csv');
@@ -2293,7 +2347,7 @@ function initAdmin() {
   $('#adm-reset').onclick = () => {
     const recs = store.get('rw_log', []).length, revs = store.get('rw_reviews', []).length;
     openModal(`<div class="src-box"><div class="eyebrow">Reset · 1 / 2</div><h2>정말 기록을 지울까요?</h2>
-      <p class="muted">이 기기의 <b>게임 기록 ${recs}건</b>, <b>관람객 후기 ${revs}개</b>, 홈페이지 이용 기록이 모두 지워져요.<br>남겨 두고 싶다면 먼저 “백업 저장”을 해 주세요.</p>
+      <p class="muted">${DATA_URL ? '<b>구글 시트에 모인 모든 기기의 기록</b>과 ' : ''}이 기기의 <b>게임 기록 ${recs}건</b>, <b>관람객 후기 ${revs}개</b>, 홈페이지 이용 기록이 모두 지워져요.<br>남겨 두고 싶다면 먼저 “백업 저장”을 해 주세요.</p>
       <div class="rs-btns"><button class="btn btn-out" type="button" id="rs-no">취소</button><button class="btn btn-red" type="button" id="rs-yes">네, 지울게요</button></div></div>`);
     $('#rs-no').onclick = closeModal;
     $('#rs-yes').onclick = () => {
@@ -2308,6 +2362,8 @@ function initAdmin() {
         let h = ''; try { h = await sha256($('#rs-pw').value.trim()); } catch (err) {}
         if (h !== ADMIN_HASH) { $('#rs-msg').textContent = '비밀번호가 맞지 않아 초기화하지 않았어요.'; $('#rs-pw').value = ''; return; }
         store.set('rw_log', []); store.set('rw_reviews', []); store.set('rw_site', { views: {}, ad: 0, idle: 0, since: Date.now() });
+        try { localStorage.removeItem('rw_outbox'); } catch (err) {}
+        if (DATA_URL) { try { await fetch(DATA_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ type: 'reset', key: await sha256('rw-data:' + $('#rs-pw').value.trim()) }) }); } catch (err) {} remote = null; setTimeout(loadRemote, 1500); }
         ['rw_plays', 'rw_wins', 'rw_best'].forEach(k => { try { localStorage.removeItem(k); } catch (err) {} });
         sample = false; draw();
         $('#mbody').innerHTML = '<div class="src-box"><div class="eyebrow">Done</div><h2>초기화했어요</h2><p class="muted">게임 기록 · 관람객 후기 · 홈페이지 이용 기록이 모두 지워졌어요.</p><div class="rs-btns"><button class="btn btn-ink" type="button" id="rs-ok">확인</button></div></div>';
