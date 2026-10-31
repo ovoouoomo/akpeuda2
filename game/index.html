@@ -2597,7 +2597,7 @@ const DESK_REQS = [
 ];
 
 /* ---------- 미니게임 3: 회의실 — 한발 앞선 회의 준비 (기획 특집 회의 준비 문단) ---------- */
-// 회의실 그림 속 다섯 곳 — 매 판 그중 4곳이 ‘준비 안 됨’ 상태로 나와요. 고칠 방법은 기사 ‘기획 특집’ 회의 준비 문단에서!
+// 회의실 그림 속 다섯 곳 — 매 판 다섯 곳 모두 ‘준비 안 됨’ 상태로 나와요. 고칠 방법은 기사 ‘기획 특집’ 회의 준비 문단에서!
 // x · y · w · h 는 그림(1600×900) 안에서 누를 수 있는 영역을 % 로 적은 거예요.
 const MEET_SPOTS = [
   { k:'agenda', x:3.5,  y:11.5, w:24.5, h:37,  q:'화이트보드에 오늘 회의 <b>안건</b>이 비어 있어요.', good:'안건을 미리 확정해서 적어 둔다', bad:'회의를 시작한 뒤 다 같이 정한다' },
@@ -2951,7 +2951,7 @@ function initPastState() {
   Object.assign(S, {
     l1: { done: false, rounds: shuffle(PRIO_ROUNDS.map((_, i) => i)).slice(0, 4), i: 0, cards: null, wait: 14, bump: false },
     l2: { done: false, reqs: shuffle(DESK_REQS.map((_, i) => i)).slice(0, 5), i: 0, toolPos: shuffle(DESK_TOOLS.map(t => t.k)) },
-    l3: { done: false, probs: shuffle(MEET_SPOTS.map(x => x.k)).slice(0, 4), fixed: {}, choose: null, order: {} }
+    l3: { done: false, probs: MEET_SPOTS.map(x => x.k), fixed: {}, choose: null, order: {} }   // 안건 · 장비 · 참석자 · 자료 · 회의실 환경 — 다섯 곳 모두 매 판 등장
   });
 }
 
