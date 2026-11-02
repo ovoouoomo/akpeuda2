@@ -1287,8 +1287,7 @@ const ARTICLES_NOW = [
       <dl><dt>역할</dt><dd>“너는 10년 차 IT 서비스 마케팅 팀장이야.”</dd><dt>배경</dt><dd>“2030 세대 대상 다이어트 관리 앱을 출시하려고 해.”</dd><dt>지시</dt><dd>“소셜 미디어용 카피 아이디어 5개를 제안해줘.”</dd><dt>제약</dt><dd>“입증되지 않은 과장 표현은 빼고, 한 줄 30자 이내로 써줘.”</dd><dt>출력 형식</dt><dd>“표(제목/헤드카피/강조점)로 정리해줘.”</dd></dl>
       <h5>2. 검증의 3단계</h5>
       <ol><li><i>1단계</i>원문 출처 찾기</li><li><i>2단계</i>실제 수치인지 확인</li><li><i>3단계</i>조사 대상·연도·표본 확인</li></ol>
-      <ul><li>숫자, 날짜, 인용, 논문, 법률, 가격, 의학 정보는 그대로 쓰면 안 됨</li><li>AI에게 다시 물어보는 건 교차 검증이 아님. 확인은 반드시 1차 출처에서</li></ul>
-      <small>신문 속 ‘AI 활용 가이드’ 인포그래픽을 다시 그렸습니다.</small></div>
+      <ul><li>숫자, 날짜, 인용, 논문, 법률, 가격, 의학 정보는 그대로 쓰면 안 됨</li><li>AI에게 다시 물어보는 건 교차 검증이 아님. 확인은 반드시 1차 출처에서</li></ul></div>
     <p class="np-by">기사 작성: 김예주 <span>yesjesuskim@the.newyork.mirror</span></p>` },
 
   { tab:'AI 15년 연표', title:'“문제는 AI가 아니라 속도 였다” — 15년 쌓인 흐름, 전문가는 ‘재배치’라 부른다', meta:'THE NEW YORK MIRROR · The Secretary Club',
@@ -1741,10 +1740,10 @@ const TEAM = [
 TEAM.forEach((t, i) => SPR['team' + i] = { pal: TEAM_PAL, rows: t.head.concat(SUIT) });
 // 만든 사람들: 직접 그린 그림 (왼쪽부터 예주 · 은빈 · 시현 · 은채)
 const CREDITS = [
-  { name:'예주', role:'긴 생머리 · 블랙 재킷', img:'../img/team-yeju.png' },
-  { name:'은빈', role:'앞머리 · 화이트 셔츠', img:'../img/team-eunbin.png' },
-  { name:'시현', role:'긴 생머리 · 블랙 수트', img:'../img/team-sihyeon.png' },
-  { name:'은채', role:'포니테일 · 리본 블라우스', img:'../img/team-eunchae.png' }
+  { name:'예주', role:'앞장서서 길을 여는 팀의 엔진 · 일할 때 가장 빛나는 사람', img:'../img/team-yeju.png' },
+  { name:'은빈', role:'어디서 튈지 모르는 아이디어가 가득한 팀의 비타민', img:'../img/team-eunbin.png' },
+  { name:'시현', role:'보기만 해도 웃음이 나는 팀의 귀염둥이', img:'../img/team-sihyeon.png' },
+  { name:'은채', role:'반응 하나로 분위기를 살리는 센스쟁이 · 작은 선물 배달부', img:'../img/team-eunchae.png' }
 ];
 function renderCredits() {
   $('#credits').innerHTML = CREDITS.map((t, i) =>
