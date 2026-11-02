@@ -1020,7 +1020,7 @@ const TEAM = [   // 왼쪽부터 예주 · 은빈 · 시현 · 은채 (직접 �
   { name:'예주', desc:'앞장서서 길을 여는 팀의 엔진 · 일할 때 가장 빛나는 사람',     say:'That’s all!',      img:'img/team-yeju.png' },
   { name:'은빈', desc:'어디서 튈지 모르는 아이디어가 가득한 팀의 비타민',      say:'커피 주문 완료!',   img:'img/team-eunbin.png' },
   { name:'시현', desc:'보기만 해도 웃음이 나는 팀의 귀염둥이',     say:'팩트체크 끝!',      img:'img/team-sihyeon.png' },
-  { name:'은채', desc:'반응 하나로 분위기를 살리는 센스쟁이 · 함께 있으면 마음이 따뜻해지는 사람',  say:'오늘도 출근 완료!', img:'img/team-eunchae.png' }
+  { name:'은채', desc:'반응 하나로 분위기를 바꾸는 따뜻한 센스쟁이',  say:'오늘도 출근 완료!', img:'img/team-eunchae.png' }
 ];
 
 /* ---------- 읽을거리 (짧게) ---------- */
@@ -2077,7 +2077,7 @@ setTheme(store.get('rw_theme', 'light'));
 $('#theme').onclick = () => { setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'); toast(document.documentElement.dataset.theme === 'dark' ? '어두운 화면으로 바꿨어요.' : '밝은 화면으로 바꿨어요.'); };
 
 /* 게임을 고칠 때마다 이 숫자를 바꾸면, 브라우저가 기억해 둔 예전 게임 대신 새 게임을 불러와요 */
-var GAME_VER = '20261103-np7';
+var GAME_VER = '20261103-np8';
 
 /* ---------- 📚 출처 자세히 보기 (전시용: 외부 사이트로 나가지 않아요) ---------- */
 function openSource() {
