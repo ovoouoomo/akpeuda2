@@ -1128,6 +1128,8 @@ body.past .office-stage .os-floor{background:repeating-linear-gradient(90deg,#a7
 .keypad .key.del{grid-column:1/-1;font-size:17px;min-height:44px}
 .howto-past{font-family:var(--kserif)}
 .howto-past .memo-head{border-bottom:1px dashed #8a7a5c;padding-bottom:8px}
+.news .np-by{font:12.5px var(--sans);color:var(--muted);text-align:right;margin:14px 0 0;border-top:1px solid var(--line);padding-top:8px}
+.news .np-by span{margin-left:6px;opacity:.8}
 </style>
 </head>
 <body>
@@ -1153,7 +1155,7 @@ body.past .office-stage .os-floor{background:repeating-linear-gradient(90deg,#a7
     <div class="pick">
       <h3>📰 신문 버전을 골라 주세요</h3>
       <div class="pick-row">
-        <button class="pick-card on" data-np="now"><div class="np-ic">📰</div><div><b>현재 신문</b><small>뉴욕 미러 · April 29, 2026 발행</small></div></button>
+        <button class="pick-card on" data-np="now"><div class="np-ic">📰</div><div><b>현재 신문</b><small>뉴욕 미러 · August 29, 2026 발행</small></div></button>
         <button class="pick-card" data-np="past"><div class="np-ic">📜</div><div><b>과거 신문</b><small>뉴욕 미러 · October 25, 2006 발행</small></div><span class="soon-tag new">NEW</span></button>
       </div>
     </div>
@@ -1192,7 +1194,7 @@ body.past .office-stage .os-floor{background:repeating-linear-gradient(90deg,#a7
 <section id="scr-fail" class="screen">
   <div class="result fail-box tabloid">
     <div class="tb-mast">THE NEW YORK MIRROR</div>
-    <div class="tb-bar"><span>속보 · BREAKING NEWS</span><span>APRIL 29, 2026</span></div>
+    <div class="tb-bar"><span>속보 · BREAKING NEWS</span><span>AUGUST 29, 2026</span></div>
     <h1 id="fail-title">신입 비서, 멘탈 붕괴</h1>
     <div class="tb-body">
       <div class="tb-photo" id="fail-chars"></div>
@@ -1211,7 +1213,7 @@ body.past .office-stage .os-floor{background:repeating-linear-gradient(90deg,#a7
 <!-- ================= 승리 화면: 런웨이 표지 ================= -->
 <section id="scr-win" class="screen">
   <div class="result win-box mag">
-    <div class="mg-top"><span>SPECIAL ISSUE · VOL.2</span><span>APRIL 29, 2026</span></div>
+    <div class="mg-top"><span>SPECIAL ISSUE · VOL.2</span><span>AUGUST 29, 2026</span></div>
     <h1 class="mg-mast">RUNWAY</h1>
     <div class="mg-cover">
       <div class="mg-lines">
@@ -1252,15 +1254,16 @@ body.past .office-stage .os-floor{background:repeating-linear-gradient(90deg,#a7
    <mark> ... </mark> 로 감싼 문장은 노란 형광펜으로 (게임 힌트가 되는 문장에만!) 강조돼요.
    ===================================================================== */
 const ARTICLES_NOW = [
-  { tab:'1면 · 회장 논란', title:'“낡은 방식에 매달리는 조직에는 미래가 없다” 런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', meta:'THE NEW YORK MIRROR · 1면 · 기사 작성: 김은빈',
+  { tab:'1면 · 회장 논란', title:'“낡은 방식에 매달리는 조직에는 미래가 없다” 런웨이 회장 제이, 시니어 비서진 대규모 교체… “무책임한 결정” 비판 확산', meta:'THE NEW YORK MIRROR · 1면',
     body:`
     <p>런웨이 미디어 그룹 신임 회장 제이가 또 논란에 섰다. 그는 지난주 20년 넘게 조직을 지탱해 온 시니어 비서진과 편집 보조 인력 상당수를 해고하며 "낡은 방식에 매달리는 조직에는 미래가 없다"고 말했다. 해당 자리는 생성형 AI 도구로 대체하겠다는 계획도 함께 내놨다.</p>
     <p>업계에서는 "전형적인 무책임"이라는 비판이 잇따른다. 오랜 신뢰를 쌓아온 인력을 '구시대적'이라는 한마디로 정리하면서도 공백을 메울 구체적 계획은 내놓지 않았기 때문이다. 한 관계자는 비용 절감 명분만 앞세운 결정이라고 지적했다.</p>
     <p>그러나 현장의 흐름은 다르다. AI를 도입한 조직에서 비서직은 사라지기보다 '조정자'와 '판단 파트너'로 재편되는 추세다. 생성형 AI를 적극 활용하는 직원일수록 자기주도적 학습 역량과 업무 성과가 함께 높아진다는 분석도 있다. AI는 사람을 대체하기보다 숙련도를 끌어올리는 도구로 기능하고 있다.</p>
     <p>전문가들은 문제의 본질이 AI 도입 자체가 아니라, 신기술을 명분으로 책임을 회피하는 태도에 있다고 지적한다. 체계를 정비하는 일과 검증된 신뢰를 '오래됐다'는 이유만으로 폐기하는 일은 전혀 다른 문제라는 것이다. 논란은 당분간 이어질 전망이다.</p>
-    <p class="np-ad">전 국민 대상 무료 인공지능(AI) 서비스 ‘모두의 AI’, 12월 정식 출시 예정</p>` },
+    <p class="np-ad">전 국민 대상 무료 인공지능(AI) 서비스 ‘모두의 AI’, 12월 정식 출시 예정</p>
+    <p class="np-by">기사 작성: 김은빈 <span>kimeun.beeeean@the.newyork.mirror</span></p>` },
 
-  { tab:'비서의 역할', title:'“반복은 AI가, 판단은 비서가” — 역할이 바뀌며 살아남은 비서직', meta:'THE NEW YORK MIRROR · 기사 작성: 안시현',
+  { tab:'비서의 역할', title:'“반복은 AI가, 판단은 비서가” — 역할이 바뀌며 살아남은 비서직', meta:'THE NEW YORK MIRROR · The Secretary Club',
     body:`
     <p>AI가 처음 등장했을 때 비서직은 가장 먼저 사라질 직업으로 꼽혔다. 일정 관리, 문서 작성, 자료 검색, 회의록 요약까지 AI가 순식간에 처리했기 때문이다. 그러나 현장에서 일어난 변화는 직업의 소멸이 아니라 역할이 바뀌는 과정이었다. AI가 반복적인 행정 업무를 맡으면서 인간 비서의 역할은 판단과 소통 중심으로 이동했고, 단순한 사무 보조에서 벗어난 비서직은 기계가 대체할 수 없는 가치에 집중하며 살아남았다.</p>
     <p><mark>AI는 일정 관리, 반복 행정, 문서 초안, 회의록 정리, 데이터 통합처럼 정형화된 업무를 빠르고 정확하게 자동화</mark>하는 데 특화되어 있다. 반면 <mark>인간 비서는 조직 내 커뮤니케이션을 조율하고, 돌발 상황에 유연하게 대응하며, AI 결과물을 검토하고 수정하는 고차원적 역할</mark>을 맡는다. 반복 업무는 AI에, 맥락과 소통은 사람에게 나뉘는 구조로 일터가 재편되었다.</p>
@@ -1270,9 +1273,10 @@ const ARTICLES_NOW = [
     <p class="np-src">자료 출처: 「AI 어시스턴트와 인간 비서의 협업에 대한 탐색적 연구」-강준수(2025)</p>
     <table><tr><th>AI의 역할</th><th>인간 비서의 역할</th></tr>
     <tr><td>· 일정 관리<br>· 반복적인 행정업무<br>· 문서 초안 작성<br>· 자료 검색<br>· 회의록 작성/요약<br>· 데이터 처리<br>· 정보통합</td>
-    <td>· 맥락 이해<br>· 상황 판단<br>· 감정 조율<br>· 대인관계 관리<br>· 조직 내 커뮤니케이션<br>· 예외적인 상황 대응<br>· AI 결과물 검토 및 수정</td></tr></table>` },
+    <td>· 맥락 이해<br>· 상황 판단<br>· 감정 조율<br>· 대인관계 관리<br>· 조직 내 커뮤니케이션<br>· 예외적인 상황 대응<br>· AI 결과물 검토 및 수정</td></tr></table>
+    <p class="np-by">기사 작성: 안시현 <span>notsihyeon@the.newyork.mirror</span></p>` },
 
-  { tab:'AI 활용법', title:'AI에게 시키면 끝? … 결과를 걸러내는 사람이 경쟁력을 갖는다', meta:'THE NEW YORK MIRROR · 기사 작성: 김예주',
+  { tab:'AI 활용법', title:'AI에게 시키면 끝? … 결과를 걸러내는 사람이 경쟁력을 갖는다', meta:'THE NEW YORK MIRROR · The Secretary Club',
     body:`
     <p>AI가 문서 작성, 자료 조사, 정보 정리에 쓰이며 직장인의 업무 방식이 빠르게 바뀌고 있다. 그러나 사용만으로는 원하는 결과를 얻기 어렵다. 정확한 지시와 결과 검토 능력이 중요해지고 있다.</p>
     <p>AI 활용의 출발점은 구체적인 프롬프트다. <mark>좋은 프롬프트는 ‘역할’, ‘배경’, ‘지시’, ‘제약’, ‘출력 형식’의 다섯 요소</mark>로 이뤄진다. “광고 문구를 만들어줘”보다 대상, 목적, 글자 수, 형식을 제시할수록 결과가 좋아진다.</p>
@@ -1280,13 +1284,14 @@ const ARTICLES_NOW = [
     <p>결국 핵심은 AI의 결과를 그대로 믿지 않는 태도다. AI 시대의 업무 능력은 ‘AI를 사용할 줄 아는가’를 넘어 ‘AI의 결과를 판단하고 검증할 수 있는가’로 확장되고 있다. 가장 잘 활용하는 사람은 답을 빨리 받아들이는 사람이 아니라, 답을 한 번 더 의심하고 확인하는 사람이다.</p>
     <div class="np-guide"><b>AI 활용 가이드</b>
       <h5>1. 프롬프트의 기본 5요소</h5>
-      <dl><dt>역할</dt><dd>“너는 10년 차 IT 서비스 마케팅 팀장이야.”</dd><dt>배경</dt><dd>“2030 세대 대상 다이어트 관리 앱을 출시하려고 해.”</dd><dt>지시</dt><dd>“소셜 미디어용 카피 아이디어 5개를 제안해줘.”</dd><dt>제약</dt><dd>“검증되지 않은 과장 표현은 빼고, 한 줄 30자 이내로 써줘.”</dd><dt>출력 형식</dt><dd>“표(제목/헤드카피/강조점)로 정리해줘.”</dd></dl>
+      <dl><dt>역할</dt><dd>“너는 10년 차 IT 서비스 마케팅 팀장이야.”</dd><dt>배경</dt><dd>“2030 세대 대상 다이어트 관리 앱을 출시하려고 해.”</dd><dt>지시</dt><dd>“소셜 미디어용 카피 아이디어 5개를 제안해줘.”</dd><dt>제약</dt><dd>“입증되지 않은 과장 표현은 빼고, 한 줄 30자 이내로 써줘.”</dd><dt>출력 형식</dt><dd>“표(제목/헤드카피/강조점)로 정리해줘.”</dd></dl>
       <h5>2. 검증의 3단계</h5>
       <ol><li><i>1단계</i>원문 출처 찾기</li><li><i>2단계</i>실제 수치인지 확인</li><li><i>3단계</i>조사 대상·연도·표본 확인</li></ol>
       <ul><li>숫자, 날짜, 인용, 논문, 법률, 가격, 의학 정보는 그대로 쓰면 안 됨</li><li>AI에게 다시 물어보는 건 교차 검증이 아님. 확인은 반드시 1차 출처에서</li></ul>
-      <small>신문 속 ‘AI 활용 가이드’ 인포그래픽을 다시 그렸습니다.</small></div>` },
+      <small>신문 속 ‘AI 활용 가이드’ 인포그래픽을 다시 그렸습니다.</small></div>
+    <p class="np-by">기사 작성: 김예주 <span>yesjesuskim@the.newyork.mirror</span></p>` },
 
-  { tab:'AI 15년 연표', title:'“문제는 AI가 아니라 속도 였다” — 15년 쌓인 흐름, 전문가는 ‘재배치’라 부른다', meta:'THE NEW YORK MIRROR · 기사 작성: 김은빈',
+  { tab:'AI 15년 연표', title:'“문제는 AI가 아니라 속도 였다” — 15년 쌓인 흐름, 전문가는 ‘재배치’라 부른다', meta:'THE NEW YORK MIRROR · The Secretary Club',
     body:`
     <div class="np-time"><b>AI 기술 도입 15년 연표 및 업무 변화</b><small>기술은 도구를 넘어, 이제는 일하는 방식을 바꾸고 있습니다.</small>
       <ol>
@@ -1300,23 +1305,26 @@ const ARTICLES_NOW = [
     <p>런웨이 미디어 그룹의 인력 교체 논란이 이어지는 가운데, 주목할 것은 AI의 등장이 아니라 ‘업무에 들어온 속도’라는 지적이 나온다. 기술 도입 연표를 보면 현재의 변화는 돌발 사태가 아니라 15년 넘게 쌓인 흐름의 결과다.</p>
     <p>출발점은 2010년이다. 알고리즘 추천, 음성인식, 이미지 인식 기술이 상용화되며 AI는 일상 서비스 안으로 먼저 들어왔다. 2017년부터는 기업 단위 AI 도입이 본격화된 시기로 분류된다. 다만 이 단계의 AI는 대중이 체감하기 어려운 ‘배후 기술’에 머물렀다.</p>
     <p>분기점은 2022년이다. 챗지피티(ChatGPT)가 공개되면서 AI는 전문가의 도구에서 대중의 도구로 단숨에 옮겨왔다. 2023년에는 생성형 AI가 실제 업무에 본격 진입했고, 2024년부터는 문서 작성과 요약·번역·자료조사 등 사무 업무 전반으로 역할이 빠르게 확대됐다.</p>
-    <p>전문가들은 이 연표의 핵심이 '대체'가 아닌 '재배치'라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다. 15년의 흐름을 놓친 조직이 기술을 인력 감축의 명분으로만 읽는 순간, 가장 먼저 사라지는 것은 비용이 아니라 축적된 경험이라는 지적이 뒤따른다.</p>` },
+    <p>전문가들은 이 연표의 핵심이 '대체'가 아닌 '재배치'라고 설명한다. AI가 맡은 영역은 반복적 처리 업무였고, 사람에게 남은 영역은 판단과 조정, 맥락 해석으로 이동했다는 것이다. 15년의 흐름을 놓친 조직이 기술을 인력 감축의 명분으로만 읽는 순간, 가장 먼저 사라지는 것은 비용이 아니라 축적된 경험이라는 지적이 뒤따른다.</p>
+    <p class="np-by">기사 작성: 김은빈 <span>kimeun.beeeean@the.newyork.mirror</span></p>` },
 
-  { tab:'인터뷰 · 아마리', title:'[특별 기획 인터뷰] AI시대, 비서의 정체성은 어떻게 변하는가? : AI 도입에 따른 비서 직무의 시사점', meta:'THE NEW YORK MIRROR · 특별 기획 INTERVIEW · 인터뷰어: 김은채',
+  { tab:'인터뷰 · 아마리', title:'[특별 기획 인터뷰] AI시대, 비서의 정체성은 어떻게 변하는가? : AI 도입에 따른 비서 직무의 시사점', meta:'THE NEW YORK MIRROR · 특별 기획 INTERVIEW',
     body:`
     <p class="np-who">▶ Interviewee | 런웨이 편집장 미란다의 비서 ‘아마리(Amari)’</p>
     <p class="q">Q. AI 기술의 발전으로 비서의 업무는 어떻게 달라지고 있나요? 현직 비서로 근무 중이신 아마리 씨의 생생한 이야기가 궁금합니다.</p>
     <p>A. (아마리) 기대와 걱정이 공존해요. AI는 명령을 이해하고 업무를 돕는 시스템이지만, 비서는 상사의 일정과 소통을 관리하며 전체적인 업무 흐름을 조율하는 사람이에요. AI가 업무를 대신하면서 비서의 역할이 줄어들지 않을까 하는 걱정도 있어요. 하지만 실제로는 AI와 인간의 역할이 구분되고 있어요. 단순 사무 업무는 AI가, 소통과 관계 형성 등은 비서가 맡으며 서로 보완하고 있죠. 결국 자동화가 진행될수록 비서의 역할은 단순 행정 보조를 넘어 더욱 확장되고 있어요.</p>
     <p class="q">Q. 자리를 빼앗길까 우려되는데, 현장 분위기는 어떤가요? 앞으로 비서에게 가장 중요한 능력은 무엇일까요?</p>
-    <p>A. (아마리) 맞아요. AI와의 협업은 불안을 주지만, 동시에 비서 직업의 전문성을 끌어올리기도 해요. 이제는 일처리가 빠른 것만으로 인정받지 못해요. AI를 잘 다루고 윤리적 문제까지 감지하는 민첩성이 새로운 무기예요. 앞으로의 비서는 기술 뒤에 숨기보다 업무의 본질을 상기시키는 자리가 돼야 한다고 생각해요.</p>` },
+    <p>A. (아마리) 맞아요. AI와의 협업은 불안을 주지만, 동시에 비서 직업의 전문성을 끌어올리기도 해요. 이제는 일처리가 빠른 것만으로 인정받지 못해요. AI를 잘 다루고 윤리적 문제까지 감지하는 민첩성이 새로운 무기예요. 앞으로의 비서는 기술 뒤에 숨기보다 업무의 본질을 상기시키는 자리가 돼야 한다고 생각해요.</p>
+    <p class="np-by">인터뷰어: 김은채 <span>silverchekim@the.newyork.mirror</span></p>` },
 
-  { tab:'인터뷰 · 에밀리', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다 : 업무 시 AI사용은 자기주도성의 영향을 미칠까?', meta:'THE NEW YORK MIRROR · 특별 기획 INTERVIEW · 인터뷰어: 김은채',
+  { tab:'인터뷰 · 에밀리', title:'[특별 기획 인터뷰] AI시대, 비서의 자기주도성을 깨우다 : 업무 시 AI사용은 자기주도성의 영향을 미칠까?', meta:'THE NEW YORK MIRROR · 특별 기획 INTERVIEW',
     body:`
     <p class="np-who">▶ Interviewee | 전 미란다 비서, 현 디올 임원 ‘에밀리 찰튼(Emily Charlton)’</p>
     <p class="q">Q. AI와 디지털 업무 환경의 확산이 업무 성과와 비서의 미래에 어떤 영향을 미친다고 생각하시나요?</p>
     <p>A. (에밀리) 매우 큰 영향을 미친다고 생각해요. 생성형 AI는 목표 설정부터 실행, 평가까지 업무 전반의 역량을 높이고, 구성원들이 주도적으로 문제를 해결하도록 도와요. 이러한 자기주도성은 업무 효율성을 높이고 직무 성과 향상으로도 이어지죠. 또한 언제 어디서나 업무에 접속할 수 있는 환경은 근무의 유연성을 높였어요. 다만 비대면 텍스트 소통이 늘어나면서 대면 상황에서의 대응력이나 새로운 업무 환경에 적응하는 능력도 더욱 중요해지고 있어요.</p>
     <p class="q">Q. AI 시대에 경쟁력을 갖추기 위해서 비서는 어떤 역량을 갖춰야 할까요? 상사들이 기대하는 비서의 모습도 궁금합니다.</p>
-    <p>A. (에밀리) 먼저 자신의 업무와 행동을 객관적으로 돌아보고, 변화에 민첩하게 적응하는 자세가 필요해요. 요즘 상사들이 높이 평가하는 비서는 지시를 기다리기보다 상사의 니즈를 파악하고 능동적으로 움직이는 사람이에요. <mark>전표 처리나 계산과 같은 단순 업무는 AI가 더 빠르고 정확하게 수행할 수 있지만</mark>, <mark>사람과 소통하고 상황을 이해하며 문제를 해결하는 일은 여전히 사람의 역할</mark>이죠. 결국 AI를 경쟁 상대로 보기보다 업무의 도구로 활용하고, 그 과정에서 자신만의 판단력과 전문성을 보여주는 비서가 되어야 해요.</p>` }
+    <p>A. (에밀리) 먼저 자신의 업무와 행동을 객관적으로 돌아보고, 변화에 민첩하게 적응하는 자세가 필요해요. 요즘 상사들이 높이 평가하는 비서는 지시를 기다리기보다 상사의 니즈를 파악하고 능동적으로 움직이는 사람이에요. <mark>전표 처리나 계산과 같은 단순 업무는 AI가 더 빠르고 정확하게 수행할 수 있지만</mark>, <mark>사람과 소통하고 상황을 이해하며 문제를 해결하는 일은 여전히 사람의 역할</mark>이죠. 결국 AI를 경쟁 상대로 보기보다 업무의 도구로 활용하고, 그 과정에서 자신만의 판단력과 전문성을 보여주는 비서가 되어야 해요.</p>
+    <p class="np-by">인터뷰어: 김은채 <span>silverchekim@the.newyork.mirror</span></p>` }
 ];
 let ARTICLES = ARTICLES_NOW;
 
@@ -1331,8 +1339,8 @@ const CONFIG = {
   coffeeHeal: 15,        // 커피 한 잔으로 회복하는 멘탈
   coffeeRecharge: 25,    // 커피가 다시 채워지는 시간(초)
   coffeeAlertHp: 50,     // 멘탈이 이 숫자 이하가 되면 "커피를 마셔요" 안내
-  issueDate: 'April 29, 2026',   // 신문(뉴욕 미러) 발행일
-  issueCode: '0429',             // 잠금 3 마지막 코드 = 발행일 (월 2자리 + 일 2자리)
+  issueDate: 'August 29, 2026',  // 신문(뉴욕 미러) 발행일
+  issueCode: '0829',             // 잠금 3 마지막 코드 = 발행일 (월 2자리 + 일 2자리)
   autoHomeSeconds: 20,   // 게임이 끝나고 화면이 닫히기(홈페이지로 돌아가기)까지의 시간(초)
   playIdleSeconds: 30,   // 게임 중 이 시간(초) 동안 아무 조작이 없으면 홈페이지로 (자리를 비운 경우)
   newsIdleSeconds: 30,   // 신문기사를 읽는 중일 때도 30초
@@ -1354,7 +1362,7 @@ const TASKS = [
 
 /* ---------------- 잠금 2: 프롬프트 5요소 (기사 ‘AI 활용법’) ---------------- */
 const P_SLOTS = ['역할','배경','지시','제약','출력 형식'];
-const P_EX = ['예) “너는 ○○이야!”', '예) “지금 ○○ 상황이야.”', '예) “○○을(를) 해 줘.”', '예) “○○은(는) 꼭 지켜 줘.”', '예) “○○ 모양으로 보여 줘.”'];
+const P_EX = ['예) “너는 10년 차 IT 서비스 마케팅 팀장이야.”', '예) “2030 세대 대상 다이어트 관리 앱을 출시하려고 해.”', '예) “소셜 미디어용 카피 아이디어 5개를 제안해줘.”', '예) “입증되지 않은 과장 표현은 빼고, 한 줄 30자 이내로 써줘.”', '예) “표(제목/헤드카피/강조점)로 정리해줘.”'];   // 신문 ‘AI 활용 가이드’ 예시
 const FRAGS = [
   { t:'너는 패션 매거진의 베테랑 편집 기자야.', slot:0 },
   { t:'런웨이가 ‘AI 시대의 비서’ 특집호를 준비하고 있어.', slot:1 },
@@ -2224,7 +2232,7 @@ function renderCode() {
     <div class="codebox">
       <h3>🔐 기사 보관함 잠금</h3>
       <p>검증된 기사를 보관함에 넣으려면 코드가 필요하다.<br>
-      <b>“우리 신문(뉴욕 미러)은 몇 월 며칠에 발행됐을까?”</b><br><small>월 2자리 + 일 2자리, 숫자 4개를 눌러요</small></p>
+      <b>“이 특집 기사가 실린 뉴욕 미러, 발행일은 몇 월 며칠일까?”</b><br><small>월 2자리 + 일 2자리, 숫자 4개를 눌러요</small></p>
       <p>${art(0, '신문 1면을 열어 발행일 확인하기')}</p>
       <div class="date-code" id="date-code"></div>
       <div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => `<button class="key" data-n="${n}">${n}</button>`).join('')}<button class="key del" data-n="del">⌫ 지우기</button></div>
@@ -2913,7 +2921,7 @@ function setMode(m) {
   GOAL_TEXT = past ? GOAL_TEXT_PAST : GOAL_TEXT_NOW;
   const st = document.querySelector('.story'); if (st) st.innerHTML = past ? STORY_PAST : STORY_NOW;
   document.querySelectorAll('.pick-card').forEach(c => c.classList.toggle('on', c.dataset.np === MODE));
-  const date = past ? 'OCTOBER 25, 2006' : 'APRIL 29, 2026';
+  const date = past ? 'OCTOBER 25, 2006' : 'AUGUST 29, 2026';
   document.querySelectorAll('.mg-top span:last-child, .tb-bar span:last-child').forEach(e => e.textContent = date);
 }
 
